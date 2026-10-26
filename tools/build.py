@@ -1,7 +1,13 @@
-"""Builds the static portfolio pages from content/*.html fragments.
+"""Builds the static portfolio from content/*.html fragments, in three languages.
 
-Each page shares the same head, nav and footer. Output is plain HTML in the
-site root, ready for GitHub Pages. Run: python3 tools/build.py
+Output is plain HTML ready for GitHub Pages:
+
+    index.html, work/*.html          English, at the root
+    ar/index.html, ar/work/*.html    Arabic, right to left
+    ru/index.html, ru/work/*.html    Russian
+
+Each page shares the same head, nav and footer, and carries hreflang links to
+its siblings. Run: python3 tools/build.py
 """
 import base64
 import hashlib
@@ -10,11 +16,11 @@ from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
 CONTENT = SITE / "content"
+ORIGIN = "https://elkushi.github.io"
 
 EMAIL = "moustafa.elkoushy7@gmail.com"
 GITHUB = "https://github.com/elkushi"
-# Set to the t.me username (no phone number: CLAUDE.md keeps that off public
-# pages). Empty means the Telegram links are simply left out.
+# The t.me username. No phone number: CLAUDE.md keeps that off public pages.
 TELEGRAM = "Elkushi99"
 TG_URL = f"https://t.me/{TELEGRAM}" if TELEGRAM else ""
 
@@ -37,19 +43,76 @@ CSP = (
     "form-action 'none'"
 )
 
-PAGES = {
-    "index.html": ("Moustafa Elkoushy · AI Product Engineer",
-                   "AI product engineer. I build AI products from design to production, and I make the AI check its own work."),
-    "work/ritorica.html": ("ritorica.com: from a blank page to production · Moustafa Elkoushy",
-                           "How I designed, built, deployed and secured a company website on Django CMS, alone."),
-    "work/video-generator.html": ("AI video and image generator · Moustafa Elkoushy",
-                                  "A Claude Code app that turns a brand kit and a topic into short videos and image posts."),
-    "work/seo-audit.html": ("Website audit for Google and AI search · Moustafa Elkoushy",
-                            "A web app that audits a website for Google, answer engines and AI search, and gives copy-paste fixes."),
-    "work/research-workflow.html": ("A market report where every claim has a source · Moustafa Elkoushy",
-                                    "A Claude Code research workflow with a validator that blocks unsourced claims and dead links."),
+# The four work pages, in the order they appear on the home page.
+WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow"]
+
+LOCALES = {
+    "en": {
+        "lang": "en", "rtl": False, "name": "English", "short": "EN",
+        "nav": ["Work", "Security", "About", "Contact"],
+        "connect": "Let's connect",
+        "theme": "Switch between light and dark theme",
+        "lang_label": "Language",
+        "footer": "Plain HTML and CSS. No framework, no tracking.",
+        "font_preload": ["Outfit.woff2", "JetBrainsMono-500.woff2"],
+        "titles": {
+            "index.html": ("Moustafa Elkoushy · AI Product Engineer",
+                           "AI product engineer. I turn bold AI ideas into real-world products, and I make the AI check its own work."),
+            "work/ritorica.html": ("ritorica.com: rebuilt from scratch, and kept running · Moustafa Elkoushy",
+                                   "How I redesigned and rebuilt a company website on Django CMS, deployed it and secured it, alone."),
+            "work/video-generator.html": ("AI video and image generator · Moustafa Elkoushy",
+                                          "A Claude Code app that turns a brand kit and a topic into short videos and image posts."),
+            "work/seo-audit.html": ("Website audit for Google and AI search · Moustafa Elkoushy",
+                                    "A web app that audits a website for Google, answer engines and AI search, and gives copy-paste fixes."),
+            "work/research-workflow.html": ("A market report where every claim has a source · Moustafa Elkoushy",
+                                            "A Claude Code research workflow with a validator that blocks unsourced claims and dead links."),
+        },
+    },
+    "ar": {
+        "lang": "ar", "rtl": True, "name": "العربية", "short": "ع",
+        "nav": ["الأعمال", "الأمان", "نبذة", "تواصل"],
+        "connect": "لنتواصل",
+        "theme": "التبديل بين الوضع الفاتح والداكن",
+        "lang_label": "اللغة",
+        "footer": "HTML و CSS فقط. بلا إطار عمل وبلا تتبّع.",
+        "font_preload": ["Cairo-arabic.woff2", "Cairo-latin.woff2"],
+        "titles": {
+            "index.html": ("مصطفى القوشي · مهندس منتجات ذكاء اصطناعي",
+                           "مهندس منتجات ذكاء اصطناعي. أحوّل أفكار الذكاء الاصطناعي الجريئة إلى منتجات حقيقية، وأجعل النموذج يراجع عمله بنفسه."),
+            "work/ritorica.html": ("ritorica.com: إعادة بناء كاملة، وتشغيل مستمر · مصطفى القوشي",
+                                   "كيف أعدت تصميم موقع شركة وبنيته على Django CMS، ثم نشرته وأمّنته، بمفردي."),
+            "work/video-generator.html": ("مولّد الفيديو والصور بالذكاء الاصطناعي · مصطفى القوشي",
+                                          "تطبيق على Claude Code يحوّل هوية علامة وموضوعًا إلى فيديوهات قصيرة ومنشورات مصوّرة."),
+            "work/seo-audit.html": ("فحص المواقع لمحركات البحث والذكاء الاصطناعي · مصطفى القوشي",
+                                    "تطبيق ويب يفحص الموقع لجوجل ومحركات الإجابة والبحث بالذكاء الاصطناعي، ويعطي إصلاحات جاهزة للّصق."),
+            "work/research-workflow.html": ("تقرير سوق كل ادعاء فيه له مصدر · مصطفى القوشي",
+                                            "مسار بحث على Claude Code مع مدقّق يمنع أي ادعاء بلا مصدر أو رابط معطّل."),
+        },
+    },
+    "ru": {
+        "lang": "ru", "rtl": False, "name": "Русский", "short": "RU",
+        "nav": ["Работы", "Безопасность", "Обо мне", "Контакты"],
+        "connect": "Связаться",
+        "theme": "Переключить светлую и тёмную тему",
+        "lang_label": "Язык",
+        "footer": "Чистый HTML и CSS. Без фреймворков и без трекинга.",
+        "font_preload": ["Manrope-cyrillic.woff2", "Manrope-latin.woff2"],
+        "titles": {
+            "index.html": ("Мустафа Элькуши · AI product engineer",
+                           "AI product engineer. Превращаю смелые идеи с ИИ в работающие продукты и заставляю модель проверять саму себя."),
+            "work/ritorica.html": ("ritorica.com: полная пересборка и поддержка · Мустафа Элькуши",
+                                   "Как я в одиночку переработал и заново собрал сайт компании на Django CMS, развернул и защитил его."),
+            "work/video-generator.html": ("Генератор видео и картинок на ИИ · Мустафа Элькуши",
+                                          "Приложение на Claude Code: из брендбука и темы получаются короткие видео и посты."),
+            "work/seo-audit.html": ("Аудит сайта для Google и ИИ-поиска · Мустафа Элькуши",
+                                    "Веб-приложение, которое проверяет сайт для Google, ответных движков и ИИ-поиска и выдаёт готовые правки."),
+            "work/research-workflow.html": ("Отчёт о рынке, где у каждого утверждения есть источник · Мустафа Элькуши",
+                                            "Исследовательский процесс на Claude Code с валидатором, который блокирует утверждения без источника и битые ссылки."),
+        },
+    },
 }
 
+PAGE_PATHS = ["index.html"] + [f"work/{w}.html" for w in WORK]
 
 EXTERNAL = re.compile(r'<a href="(https?://[^"]+)"(?![^>]*target=)')
 
@@ -63,17 +126,56 @@ def external_new_tab(html: str) -> str:
     return EXTERNAL.sub(r'<a href="\1" target="_blank" rel="noopener noreferrer"', html)
 
 
-def page(path, title, desc, body):
+def out_path(code: str, page: str) -> str:
+    """Where a page lands. English sits at the root; the rest under /ar, /ru."""
+    return page if code == "en" else f"{code}/{page}"
+
+
+def page(code: str, page_path: str, body: str) -> str:
+    loc = LOCALES[code]
+    title, desc = loc["titles"][page_path]
+    rel = out_path(code, page_path)
+    up = "../" * rel.count("/")
+    dir_attr = ' dir="rtl"' if loc["rtl"] else ""
+    current = ' aria-current="page"' if page_path == "index.html" else ""
+    home = f"{up}index.html"
+
     body = external_new_tab(body)
-    tg_footer = (f' · <a href="{TG_URL}" target="_blank" rel="noopener noreferrer">Telegram</a>'
-                 if TG_URL else "")
-    # The contact section asks for a Telegram button by name; fill it or drop it.
+    # Fragments write asset paths relative to the English page they were
+    # authored for; re-point them at the single copy under /assets.
+    body = re.sub(r'(?:\.\./)*assets/', f"{up}assets/", body)
     body = body.replace("<!--TELEGRAM-->",
                         f'<a class="btn btn-secondary" href="{TG_URL}">Telegram</a>' if TG_URL else "")
-    up = "../" * path.count("/")
-    current = lambda target: ' aria-current="page"' if path == target else ""
+
+    tg_foot = f' · <a href="{TG_URL}" target="_blank" rel="noopener noreferrer">Telegram</a>' if TG_URL else ""
+    preload = "\n".join(
+        f'<link rel="preload" href="{up}assets/fonts/{f}" as="font" type="font/woff2" crossorigin>'
+        for f in loc["font_preload"])
+    # Only point hreflang at pages that actually exist, so the tags never
+    # promise a translation that has not been written yet.
+    have = [c for c in LOCALES if fragment(c, page_path).exists()]
+    alts = "\n".join(
+        f'<link rel="alternate" hreflang="{c}" href="{ORIGIN}/{out_path(c, page_path)}">'
+        for c in have)
+    alts += f'\n<link rel="alternate" hreflang="x-default" href="{ORIGIN}/{page_path}">'
+
+    # Language switcher: the same page in the other languages, or that
+    # language's home page when this page is not translated yet.
+    def target(c):
+        wanted = page_path if fragment(c, page_path).exists() else "index.html"
+        return f"{up}{out_path(c, wanted)}"
+
+    switch = "".join(
+        f'<a class="lang-link{" is-on" if c == code else ""}" hreflang="{c}" lang="{c}" '
+        f'href="{target(c)}">{LOCALES[c]["short"]}</a>'
+        for c in LOCALES)
+
+    nav = "".join(
+        f'<a href="{home}#{anchor}"{current if anchor == "work" else ""}>{label}</a>'
+        for anchor, label in zip(["work", "security", "about", "contact"], loc["nav"]))
+
     return f"""<!doctype html>
-<html lang="en">
+<html lang="{loc['lang']}"{dir_attr}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,10 +183,10 @@ def page(path, title, desc, body):
 <meta name="description" content="{desc}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta name="color-scheme" content="light dark">
-<meta property="og:image" content="https://elkushi.github.io/assets/portrait-900.webp">
-<link rel="preload" href="{up}assets/fonts/Outfit.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{up}assets/fonts/JetBrainsMono-500.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:image" content="{ORIGIN}/assets/portrait-900.webp">
+<meta name="color-scheme" content="dark light">
+{alts}
+{preload}
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="{up}assets/favicon.svg" type="image/svg+xml">
@@ -94,16 +196,12 @@ def page(path, title, desc, body):
 <body>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="{up}index.html"><span class="mark" aria-hidden="true"></span><span>Moustafa Elkoushy</span></a>
-    <nav class="links" aria-label="Main">
-      <a href="{up}index.html#work"{current("index.html")}>Work</a>
-      <a href="{up}index.html#security">Security</a>
-      <a href="{up}index.html#about">About</a>
-      <a href="{up}index.html#contact">Contact</a>
-    </nav>
+    <a class="brand" href="{home}"><span class="mark" aria-hidden="true"></span><span>Moustafa Elkoushy</span></a>
+    <nav class="links" aria-label="Main">{nav}</nav>
     <div class="nav-end">
-      <button class="theme-toggle cta" type="button" aria-label="Switch between light and dark theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-      <a class="cta" href="{up}index.html#contact">Let's connect <span aria-hidden="true">&#8599;</span></a>
+      <nav class="langs" aria-label="{loc['lang_label']}">{switch}</nav>
+      <button class="theme-toggle cta" type="button" aria-label="{loc['theme']}"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <a class="cta" href="{home}#contact">{loc['connect']} <span aria-hidden="true">&#8599;</span></a>
     </div>
   </div>
 </header>
@@ -112,8 +210,8 @@ def page(path, title, desc, body):
 </main>
 <footer>
   <div class="wrap">
-    <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub</a>{tg_footer}</span>
-    <span>Plain HTML and CSS. No framework, no tracking.</span>
+    <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub</a>{tg_foot}</span>
+    <span>{loc['footer']}</span>
   </div>
 </footer>
 <script src="{up}reveal.js" defer></script>
@@ -122,10 +220,23 @@ def page(path, title, desc, body):
 """
 
 
+def fragment(code: str, page_path: str) -> Path:
+    """content/index.html for English, content/ar/index.html for Arabic, etc."""
+    name = page_path.replace("/", "__")
+    return CONTENT / name if code == "en" else CONTENT / code / name
+
+
 if __name__ == "__main__":
-    for path, (title, desc) in PAGES.items():
-        src = CONTENT / path.replace("/", "__")
-        out = SITE / path
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(page(path, title, desc, src.read_text(encoding="utf-8")), encoding="utf-8")
-        print("built", path)
+    built = missing = 0
+    for code in LOCALES:
+        for page_path in PAGE_PATHS:
+            src = fragment(code, page_path)
+            if not src.exists():
+                print(f"  skipped {code}/{page_path}: no fragment yet")
+                missing += 1
+                continue
+            out = SITE / out_path(code, page_path)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(page(code, page_path, src.read_text(encoding="utf-8")), encoding="utf-8")
+            built += 1
+    print(f"built {built} pages" + (f", {missing} still untranslated" if missing else ""))
