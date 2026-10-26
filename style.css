@@ -32,13 +32,17 @@
 
 /* Light tokens, applied when the reader's system asks for light and they have
    not picked dark by hand, and whenever they pick light by hand. */
+/* Light mode is Moustafa's own palette, from
+   my_work_ritorica/moustafa-portfolio-design-system.html: warm cream paper,
+   maroon and violet. Dark stays plum. */
 :root[data-theme="light"] {
-  --surface-000: #ffffff; --surface-100: #f8f6fb; --surface-200: #ffffff; --surface-300: #ece7f3;
-  --ink: #130c1b; --ink-muted: #5a5066;
-  --accent-violet: #7e22ce; --accent-violet-text: #7e22ce;
-  --accent-glow: #c084fc; --line: #d6cde0; --focus: #7e22ce;
-  --shadow-card: 0 0 0 1px rgba(126, 34, 206, .10), 0 20px 50px -30px rgba(40, 20, 60, .35);
-  --shadow-glow: 0 12px 36px -10px rgba(126, 34, 206, .45);
+  --surface-000: #fbf7f1; --surface-100: #f6efe6; --surface-200: #ffffff; --surface-300: #ebe0d2;
+  --ink: #140d14; --ink-muted: #5a4a55;
+  --accent-violet: #7a2fd1; --accent-violet-text: #6321ad;
+  --accent-glow: #7a2fd1; --line: #c9b8a6; --focus: #7a2fd1;
+  --brand-maroon: #6b1f2a; --accent-amber: #c46a1c; --accent-gold: #e3a53c;
+  --shadow-card: 0 1px 0 rgba(20, 13, 20, .08), 0 16px 40px -20px rgba(107, 31, 42, .35);
+  --shadow-glow: 0 12px 40px -8px rgba(122, 47, 209, .45);
   color-scheme: light;
 }
 
@@ -140,7 +144,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 
 .stack { display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; padding: var(--space-8) 0 0; color: var(--ink-muted); }
 .stack .item { display: flex; flex-direction: column; align-items: center; gap: 10px; font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
-.stack svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+/* Real brand marks now, so no stroke/fill override: each symbol carries its
+   own colours, and the monochrome ones inherit currentColor. */
+.stack svg { width: 28px; height: 28px; }
+.stack { gap: 28px 32px; }
+.stack .item { gap: 8px; }
 
 /* --- cards ------------------------------------------------------------ */
 .cards { display: grid; gap: var(--space-6); grid-template-columns: 1fr; }
@@ -170,6 +178,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .lang-levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
 .lang { border-top: 1px solid var(--line); padding-top: var(--space-3); }
 .lang b { display: block; font-size: 24px; font-weight: 600; line-height: 1.25; }
+.lang b:lang(ar) { font-family: "Cairo", system-ui, sans-serif; font-size: 26px; }
 .lang span { color: var(--ink-muted); font-size: 14px; }
 
 /* --- experience timeline ------------------------------------------------ */
@@ -243,8 +252,19 @@ footer a { color: var(--ink-muted); }
 /* Rule 5: motion a person triggers lasts 200-400ms; the ambient ring and sway
    are deliberately slow. */
 @media (prefers-reduced-motion: no-preference) {
-  .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .35s ease, transform .35s ease; }
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .35s ease, transform .35s cubic-bezier(.22, 1, .36, 1); }
   .js .reveal.in { opacity: 1; transform: none; }
+  /* Children arrive one after another, so a section assembles instead of
+     snapping in all at once. */
+  .js .reveal .pcard, .js .reveal .skill, .js .reveal .tl li, .js .reveal .fact, .js .reveal .checks li {
+    opacity: 0; transform: translateY(12px); transition: opacity .3s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
+  }
+  .js .reveal.in .pcard, .js .reveal.in .skill, .js .reveal.in .tl li, .js .reveal.in .fact, .js .reveal.in .checks li { opacity: 1; transform: none; }
+  .js .reveal.in > * > :nth-child(2), .js .reveal.in .skill:nth-child(2), .js .reveal.in .tl li:nth-child(2) { transition-delay: .06s; }
+  .js .reveal.in .skill:nth-child(3), .js .reveal.in .tl li:nth-child(3) { transition-delay: .12s; }
+  .js .reveal.in .skill:nth-child(4), .js .reveal.in .tl li:nth-child(4) { transition-delay: .18s; }
+  .js .reveal.in .skill:nth-child(5) { transition-delay: .24s; }
+  .js .reveal.in .skill:nth-child(6) { transition-delay: .3s; }
 }
 /* Rule 5 again: under reduced motion the rotation and the tilt stop; the glow
    stays, because it is colour rather than movement. */
@@ -252,6 +272,7 @@ footer a { color: var(--ink-muted); }
   .cube, .ring { animation: none; }
   .pcard, .btn { transition: none; }
   .pcard:hover { transform: none; }
+  .reveal .pcard, .reveal .skill, .reveal .tl li, .reveal .fact, .reveal .checks li { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
 

@@ -1,11 +1,12 @@
 <div class="wrap">
   <header class="case-hero">
     <p class="eyebrow">Case study · AI product</p>
-    <h1>AI video and image generator</h1>
-    <p class="lead">My own app. Give it a brand kit and a topic, and it plans, writes, voices, renders and checks short videos and image posts for LinkedIn, Reels, TikTok and the web.</p>
+    <h1>An AI studio that writes, voices and renders a branded video for nothing per video</h1>
+    <p class="lead">My own app, built alone. One brief goes in; a finished post comes out in English, Arabic or Russian, with three options to choose from. A 26-second preview renders in about 50 seconds on my laptop, and no step costs a cent: every paid API has a free or local fallback.</p>
     <ul class="meta">
       <li><b>Role:</b> sole developer</li>
       <li><b>Stack:</b> Claude Code, Python, FastAPI, React + TypeScript, Remotion, Docker</li>
+      <li><b>Proof:</b> one real delivered video, 24 seconds, 9:16, plus a 4:5 cut, no human edits</li>
       <li><b>Code:</b> <a href="https://github.com/elkushi/ai-video-image-generator">github.com/elkushi/ai-video-image-generator</a></li>
     </ul>
   </header>
@@ -16,6 +17,15 @@
   </figure>
 
   <article>
+    <div class="note"><b>What this proves:</b> I can build an AI system that does a marketing team's work end to end and checks its own output before a person ever sees it.</div>
+
+    <div class="facts reveal">
+      <div class="fact"><b>0 €</b><span>paid APIs: every AI step has a free online option and a local fallback</span></div>
+      <div class="fact"><b>~50 s</b><span>to render a 26-second preview on a normal laptop</span></div>
+      <div class="fact"><b>3 options</b><span>per brief, each with its own design and its own copy</span></div>
+      <div class="fact"><b>3 languages</b><span>English, Arabic and Russian, with Arabic captions right to left</span></div>
+    </div>
+
     <section class="reveal">
       <h2>The idea</h2>
       <p>I wanted short videos that stay on brand, cost nothing per video, and still get made when an online AI service is down or out of quota.</p>
@@ -31,7 +41,7 @@
         <li>Python tools make the voice, fetch or generate the visuals and pick music.</li>
         <li>Remotion, a React video framework, renders every aspect ratio.</li>
         <li>QA checks length, audio levels and black frames, and transcribes the voice with Whisper to compare it with the script.</li>
-        <li>A reviewer agent reads the QA report and returns SHIP or a fix list. At most two fix rounds.</li>
+        <li>A reviewer agent reads the QA report and returns SHIP or a fix list. At most two fix rounds, then the run stops.</li>
       </ol>
       <p>The same pipeline makes image posts and carousels. Videos come out in English, Arabic or Russian. Arabic captions run right to left.</p>
     </section>

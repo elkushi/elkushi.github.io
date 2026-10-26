@@ -21,17 +21,24 @@
   </header>
 
   <div class="stack">
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-3 0-4 1-4 3v2h4v1H6c-2 0-3 1-3 4s1 4 3 4h2v-2c0-2 1-3 3-3h4c2 0 3-1 3-3V6c0-2-1-3-4-3z"/></svg>Python</div>
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v15.5a9 9 0 01-3 .5c-3 0-5-2-5-5.5S8 8 11 8a6 6 0 013 .8"/></svg>Django</div>
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(-60 12 12)"/></svg>React</div>
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h14v-3H3zM6 10V7h3v3M10 10V7h3v3M14 10V7h3v3"/><path d="M3 13c0 4 3 6 7 6s8-2 9-6"/></svg>Docker</div>
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2 0 3 2 3 5 0 2 3 5 3 8s-2 5-6 5-6-2-6-5 3-6 3-8c0-3 1-5 3-5z"/><circle cx="10.5" cy="9" r=".6" fill="currentColor"/><circle cx="13.5" cy="9" r=".6" fill="currentColor"/></svg>Linux</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-python"/></svg>Python</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-typescript"/></svg>TypeScript</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-react"/></svg>React</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-django"/></svg>Django</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-fastapi"/></svg>FastAPI</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-postgresql"/></svg>PostgreSQL</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-docker"/></svg>Docker</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-linux"/></svg>Linux</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-git"/></svg>Git</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-figma"/></svg>Figma</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-playwright"/></svg>Playwright</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-claude"/></svg>Claude Code</div>
   </div>
 
   <section id="work" class="reveal">
     <span class="label">01 &middot; Selected work</span>
     <h2>Work</h2>
-    <p class="section-lede">Five projects, each taken all the way to something that runs.</p>
+    <p class="section-lede">Each one taken all the way to something that runs in production. Two here, five in total.</p>
     <div class="cards">
       <a class="pcard" href="work/ritorica.html">
         <div class="art"><img src="assets/ritorica-home.webp" width="1200" height="750" alt="The ritorica.com home page: business messaging platform, with a Request Demo button." loading="lazy"></div>
@@ -47,32 +54,8 @@
         <p>My own app. A brand kit and a topic go in; short videos and image posts come out. Claude agents plan and write, Python tools render, and a QA step checks the result against the script. You watch the whole team work live.</p>
         <p class="more">Read the case study &#8599;</p>
       </a>
-      <a class="pcard" href="work/seo-audit.html">
-        <div class="art"><img src="assets/seo-report.webp" width="1600" height="1000" alt="An audit report for djangoproject.com: overall score 76, with separate SEO, AEO and GEO scores." loading="lazy"></div>
-        <div class="chips"><span class="badge chip">FastAPI</span><span class="badge chip">Playwright</span><span class="badge chip">Claude Code</span></div>
-        <h3>Website audit for Google and AI search</h3>
-        <p>Paste a website, get a scored report in under a minute: what to fix for Google, answer engines and AI search like ChatGPT, ranked by impact, with code to paste in.</p>
-        <p class="more">Read the case study &#8599;</p>
-      </a>
-      <a class="pcard" href="work/research-workflow.html">
-        <div class="art diagram"><img class="only-dark" src="assets/pipeline-dark.svg" width="880" height="230" alt="Diagram: claims without a source or with a dead link are blocked at the validator." loading="lazy"><img class="only-light" src="assets/pipeline-light.svg" width="880" height="230" alt="Diagram: claims without a source or with a dead link are blocked at the validator." loading="lazy"></div>
-        <div class="chips"><span class="badge chip">JSON Schema</span><span class="badge chip">WeasyPrint</span><span class="badge chip">Python</span></div>
-        <h3>Research workflow with a validator</h3>
-        <p>A Claude Code workflow that writes a branded market report. The PDF won't render if any claim has no source or any link is dead. First run: 61 pages, about 190 sources, more than 400 cited claims.</p>
-        <p class="more">Read the case study &#8599;</p>
-      </a>
-      <a class="pcard" href="work/design-system.html">
-        <div class="art"><img src="assets/ds-logo-ar.webp" width="1200" height="860" alt="The Arabic Ritorica wordmark set in three typefaces, light and dark, with the speech bubble mirrored." loading="lazy"></div>
-        <div class="chips"><span class="badge chip">Design system</span><span class="badge chip">Figma</span><span class="badge chip">Print</span></div>
-        <h3>A design system for a messaging company</h3>
-        <p>Ritorica's decks, banners, emails and website each looked like a different company. I wrote the brand and UI system that put them back together &mdash; colour, type, shape, voice and components &mdash; then built the collateral on it, down to the Arabic logo and the print files.</p>
-        <p class="more">Read the case study &#8599;</p>
-      </a>
     </div>
-    <ul class="checks" style="margin-top:24px">
-      <li><a href="https://github.com/elkushi/system-audit">system-audit</a>, a Bash tool that checks a Linux server for common security misconfigurations.</li>
-      <li><a href="https://elkushi.github.io/alisa-obby/">A Roblox-style obby you can play</a>, built as a birthday present: one HTML file, no dependencies, canvas 2D with fixed-timestep physics and a soundtrack generated in the browser. <a href="https://github.com/elkushi/alisa-obby">Code</a>.</li>
-    </ul>
+    <p style="margin-top:28px"><a class="btn btn-secondary" href="work/index.html">See all five projects <span aria-hidden="true">&#8599;</span></a></p>
   </section>
 
   <section id="skills" class="reveal">
@@ -81,31 +64,33 @@
     <p class="section-lede">Six areas, and the overlap between them is the point: I can build the thing, design it, and explain it to the people who buy it.</p>
     <div class="skills">
       <div class="skill"><h3>Development</h3><p>Python, FastAPI, Django, React, TypeScript, HTML, CSS, PostgreSQL, Docker, Linux, Bash, Git</p></div>
-      <div class="skill"><h3>AI and automation</h3><p>Claude Code, agent and prompt design, JSON Schema contracts, LangChain, n8n, UiPath, chatbots</p></div>
+      <div class="skill"><h3>AI and automation</h3><p>Claude Code, OpenAI Codex, Gemini, Manus, agent and prompt design, JSON Schema contracts, LangChain, n8n, UiPath, chatbots</p></div>
       <div class="skill"><h3>Design</h3><p>Figma, Canva, design systems, brand, print production</p></div>
       <div class="skill"><h3>Marketing</h3><p>SEO and GEO, Search Console, whitepapers and lead generation, market research, amoCRM, event marketing</p></div>
       <div class="skill"><h3>Engineering</h3><p>STM32, Arduino, ArduPilot, MATLAB and Simulink, SolidWorks and CAD, aircraft systems</p></div>
       <div class="skill"><h3>Security</h3><p>nmap, Wireshark, Burp Suite, OWASP testing, TryHackMe</p></div>
     </div>
     <div class="lang-levels">
-      <div class="lang"><b lang="ar" dir="rtl">العربية</b><span>Arabic, native</span></div>
-      <div class="lang"><b lang="ru">Русский</b><span>Russian, C2</span></div>
+      <div class="lang"><b lang="ar">العربية</b><span>Arabic, native</span></div>
       <div class="lang"><b>English</b><span>C1 to C2</span></div>
+      <div class="lang"><b lang="ru">Русский</b><span>Russian, C1</span></div>
       <div class="lang"><b lang="es">Español</b><span>Spanish, A2 and learning</span></div>
     </div>
   </section>
 
   <section id="security" class="reveal">
     <span class="label">03 &middot; How I build</span>
-    <h2>Security basics</h2>
-    <p class="section-lede">An AI app that can run commands needs limits. These are in the code, not just in a policy.</p>
+    <h2>I break things for work, so I build them locked down</h2>
+    <p class="section-lede">I do part-time penetration testing of my company's websites and SMS platform against an OWASP checklist. That work is why the apps below start closed and open only where they have to. Every line here is enforced in code, not promised in a policy.</p>
     <ul class="checks">
-      <li>AI agents get an allowlist of tools, never open shell access.</li>
-      <li>Uploads and file paths are checked, so nobody can read files outside the app. Tests try <code>/etc/passwd</code> and <code>../</code> and expect a refusal.</li>
-      <li>Servers run HTTPS, key-only SSH and logins with hashed passwords.</li>
-      <li>Keys stay in <code>.env</code>, and every repo is scanned for secrets before it goes public.</li>
-      <li>Containers run as a normal user, not root.</li>
+      <li><b>AI agents get an allowlist of tools</b>, never open shell access. An agent that can run commands is the attack surface.</li>
+      <li><b>Uploads and file paths are checked</b>, so nobody can read files outside the app. Tests try <code>/etc/passwd</code> and <code>../</code> and expect a refusal.</li>
+      <li><b>The audit app refuses private and internal addresses</b> and re-checks after every redirect, so a stranger cannot make my server fetch my own network.</li>
+      <li><b>Servers run HTTPS and key-only SSH</b>, with hashed passwords and rate-limited sign-in.</li>
+      <li><b>Containers run as a normal user</b>, not root, with Linux capabilities dropped.</li>
+      <li><b>Keys stay in <code>.env</code></b>, and every repository is scanned for secrets before it goes public.</li>
     </ul>
+    <p style="margin-top:24px">Tools: nmap, Wireshark, Burp Suite, OWASP testing, TryHackMe. I also wrote <a href="https://github.com/elkushi/system-audit">system-audit</a>, a Bash tool that checks a Linux server for the misconfigurations I keep finding.</p>
   </section>
 
   <section id="about" class="reveal">

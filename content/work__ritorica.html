@@ -1,11 +1,11 @@
 <div class="wrap">
   <header class="case-hero">
     <p class="eyebrow">Case study · Web development</p>
-    <h1>ritorica.com: rebuilt from scratch, and kept running</h1>
-    <p class="lead">Ritorica, a B2B messaging company, had an older site. I redesigned it, rebuilt it from scratch on a new stack on my own, and I keep it running in production.</p>
+    <h1>I rebuilt a messaging company's main website on my own, and I still run it</h1>
+    <p class="lead">Sole designer and developer on ritorica.com: Figma file, Django CMS build, launch, server and everything since. First commit June 2026, in production ever since. It is now the company's single main site, and it carries the Arabic and Bengali versions.</p>
     <ul class="meta">
-      <li><b>Role:</b> the only designer and developer</li>
-      <li><b>Stack:</b> Figma, Django CMS, PostgreSQL, HTML/CSS/JS, Gemini API, GitHub Actions</li>
+      <li><b>Role:</b> the only designer and developer, from the Figma file to the production server</li>
+      <li><b>Stack:</b> Figma, Django CMS, PostgreSQL, HTML/CSS/JS, Gemini API, GitHub Actions, Linux, key-only SSH</li>
       <li><b>Timeline:</b> first commit June 2026, maintained since</li>
       <li><b>Live:</b> <a href="https://www.ritorica.com">ritorica.com</a></li>
     </ul>
@@ -17,6 +17,15 @@
   </figure>
 
   <article>
+    <div class="note"><b>What this proves:</b> I can own a company's public website end to end on my own. Design, build, launch, security, and the unglamorous fixes afterwards.</div>
+
+    <div class="facts reveal">
+      <div class="fact"><b>6.4/10</b><span>my own UX audit score for the live site, before I fixed what it found</span></div>
+      <div class="fact"><b>8 weeks</b><span>SEO and GEO checklist, tracked in Search Console</span></div>
+      <div class="fact"><b>1 per country</b><span>pages in the coverage catalogue</span></div>
+      <div class="fact"><b>~3 weeks</b><span>of deploys that reported success and shipped nothing, until I caught it</span></div>
+    </div>
+
     <section class="reveal">
       <h2>The job</h2>
       <p>Ritorica sells business messaging: SMS, WhatsApp, Viber, Telegram and push. The website has to explain that to buyers, let the team edit pages without a developer, and turn visitors into leads.</p>
@@ -29,7 +38,7 @@
         <li><b>Content management</b> on Django CMS, so pages can be edited in the browser. PostgreSQL in production.</li>
         <li><b>Lead capture:</b> contact forms, demo requests and newsletter sign-up.</li>
         <li><b>An AI chatbot</b> on the Google Gemini API that answers visitors' questions.</li>
-        <li><b>A coverage catalog</b> with one page per country, at <a href="https://www.ritorica.com/messaging/">/messaging/</a>.</li>
+        <li><b>A coverage catalogue</b> with one page per country, at <a href="https://www.ritorica.com/messaging/">/messaging/</a>.</li>
       </ul>
       <p>I build with Claude Code as a pair programmer. I make the decisions, review every change and own what ships.</p>
     </section>
@@ -38,7 +47,7 @@
       <h2>After launch</h2>
       <ul>
         <li>It is now the company's single main site, and it carries the Arabic and Bengali versions.</li>
-        <li>I ran a UX audit on the live site and scored it 6.4 out of 10, then fixed what it found: dead buttons, leftover placeholder text, and statistics that contradicted each other between pages.</li>
+        <li>I audited the UX of my own live site and scored it 6.4 out of 10. Then I fixed what the score exposed: dead buttons, leftover placeholder text, and statistics that contradicted each other between pages.</li>
         <li>The site was close to invisible in AI search, so I wrote an SEO and GEO strategy with an eight-week checklist and reported progress through Search Console.</li>
         <li>I added an events section covering the company's past events.</li>
       </ul>

@@ -21,17 +21,24 @@
   </header>
 
   <div class="stack">
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-3 0-4 1-4 3v2h4v1H6c-2 0-3 1-3 4s1 4 3 4h2v-2c0-2 1-3 3-3h4c2 0 3-1 3-3V6c0-2-1-3-4-3z"/></svg>Python</div>
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v15.5a9 9 0 01-3 .5c-3 0-5-2-5-5.5S8 8 11 8a6 6 0 013 .8"/></svg>Django</div>
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(-60 12 12)"/></svg>React</div>
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h14v-3H3zM6 10V7h3v3M10 10V7h3v3M14 10V7h3v3"/><path d="M3 13c0 4 3 6 7 6s8-2 9-6"/></svg>Docker</div>
-    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2 0 3 2 3 5 0 2 3 5 3 8s-2 5-6 5-6-2-6-5 3-6 3-8c0-3 1-5 3-5z"/><circle cx="10.5" cy="9" r=".6" fill="currentColor"/><circle cx="13.5" cy="9" r=".6" fill="currentColor"/></svg>Linux</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-python"/></svg>Python</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-typescript"/></svg>TypeScript</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-react"/></svg>React</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-django"/></svg>Django</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-fastapi"/></svg>FastAPI</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-postgresql"/></svg>PostgreSQL</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-docker"/></svg>Docker</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-linux"/></svg>Linux</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-git"/></svg>Git</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-figma"/></svg>Figma</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-playwright"/></svg>Playwright</div>
+    <div class="item"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-claude"/></svg>Claude Code</div>
   </div>
 
   <section id="work" class="reveal">
     <span class="label">01 &middot; أعمال مختارة</span>
     <h2>الأعمال</h2>
-    <p class="section-lede">خمسة مشاريع، كلٌّ منها وصل إلى شيء يعمل فعلًا.</p>
+    <p class="section-lede">كلٌّ منها وصل إلى شيء يعمل فعلًا في الإنتاج. اثنان هنا، وخمسة في المجموع.</p>
     <div class="cards">
       <a class="pcard" href="work/ritorica.html">
         <div class="art"><img src="assets/ritorica-home.webp" width="1200" height="750" alt="الصفحة الرئيسية لموقع ritorica.com: منصة مراسلات للأعمال مع زر طلب عرض توضيحي." loading="lazy"></div>
@@ -47,32 +54,8 @@
         <p>تطبيقي الخاص. تُدخل هوية علامة وموضوعًا، فتخرج فيديوهات قصيرة ومنشورات مصوّرة. وكلاء Claude يخطّطون ويكتبون، وأدوات Python تنفّذ، وخطوة مراجعة تقارن الناتج بالنص. وتشاهد الفريق كله يعمل مباشرة.</p>
         <p class="more">اقرأ دراسة الحالة &#8599;</p>
       </a>
-      <a class="pcard" href="work/seo-audit.html">
-        <div class="art"><img src="assets/seo-report.webp" width="1600" height="1000" alt="تقرير فحص لموقع djangoproject.com: النتيجة الإجمالية 76، مع نتائج منفصلة لـ SEO و AEO و GEO." loading="lazy"></div>
-        <div class="chips"><span class="badge chip">FastAPI</span><span class="badge chip">Playwright</span><span class="badge chip">Claude Code</span></div>
-        <h3>فحص المواقع لمحركات البحث والذكاء الاصطناعي</h3>
-        <p>الصق رابط موقع، واحصل خلال أقل من دقيقة على تقرير بدرجات: ما الذي يجب إصلاحه لجوجل ولمحركات الإجابة وللبحث بالذكاء الاصطناعي مثل ChatGPT، مرتّبًا حسب الأثر، مع كود جاهز للّصق.</p>
-        <p class="more">اقرأ دراسة الحالة &#8599;</p>
-      </a>
-      <a class="pcard" href="work/research-workflow.html">
-        <div class="art diagram"><img class="only-dark" src="assets/pipeline-dark.svg" width="880" height="230" alt="مخطّط: الادعاءات بلا مصدر أو ذات الروابط المعطّلة تُوقَف عند المدقّق." loading="lazy"><img class="only-light" src="assets/pipeline-light.svg" width="880" height="230" alt="مخطّط: الادعاءات بلا مصدر أو ذات الروابط المعطّلة تُوقَف عند المدقّق." loading="lazy"></div>
-        <div class="chips"><span class="badge chip">JSON Schema</span><span class="badge chip">WeasyPrint</span><span class="badge chip">Python</span></div>
-        <h3>مسار بحث مع مدقّق</h3>
-        <p>مسار على Claude Code يكتب تقرير سوق بهوية العلامة. لا يُنتَج ملف PDF إن وُجد ادعاء بلا مصدر أو رابط معطّل. في أول تشغيل: 61 صفحة، نحو 190 مصدرًا، وأكثر من 400 ادعاء موثّق.</p>
-        <p class="more">اقرأ دراسة الحالة &#8599;</p>
-      </a>
-      <a class="pcard" href="work/design-system.html">
-        <div class="art"><img src="assets/ds-logo-ar.webp" width="1200" height="860" alt="اسم Ritorica بالعربية بثلاثة خطوط، على خلفية فاتحة وداكنة، مع فقاعة حوار معكوسة." loading="lazy"></div>
-        <div class="chips"><span class="badge chip">نظام تصميم</span><span class="badge chip">Figma</span><span class="badge chip">طباعة</span></div>
-        <h3>نظام تصميم لشركة مراسلات</h3>
-        <p>عروض Ritorica ولافتاتها ورسائلها وموقعها كان كلٌّ منها يبدو كأنه شركة مختلفة. كتبت نظام الهوية والواجهة الذي أعادها إلى صوت واحد &mdash; اللون والخط والشكل والصوت والمكوّنات &mdash; ثم بنيت المواد عليه، حتى الشعار العربي وملفات الطباعة.</p>
-        <p class="more">اقرأ دراسة الحالة &#8599;</p>
-      </a>
     </div>
-    <ul class="checks" style="margin-top:24px">
-      <li><a href="https://github.com/elkushi/system-audit">system-audit</a>، أداة Bash تفحص خادم Linux بحثًا عن أخطاء الإعداد الأمنية الشائعة.</li>
-      <li><a href="https://elkushi.github.io/alisa-obby/">لعبة عقبات بأسلوب Roblox يمكنك لعبها</a>، صنعتها هدية عيد ميلاد: ملف HTML واحد بلا أي اعتماديات، رسم على canvas مع فيزياء بخطوة زمنية ثابتة وموسيقى تُولَّد في المتصفح. <a href="https://github.com/elkushi/alisa-obby">الكود</a>.</li>
-    </ul>
+    <p style="margin-top:28px"><a class="btn btn-secondary" href="work/index.html">شاهد المشاريع الخمسة <span aria-hidden="true">&#8599;</span></a></p>
   </section>
 
   <section id="skills" class="reveal">
@@ -81,7 +64,7 @@
     <p class="section-lede">ستة مجالات، والتقاطع بينها هو المقصود: أستطيع بناء الشيء وتصميمه وشرحه لمن سيشتريه.</p>
     <div class="skills">
       <div class="skill"><h3>التطوير</h3><p>Python و FastAPI و Django و React و TypeScript و HTML و CSS و PostgreSQL و Docker و Linux و Bash و Git</p></div>
-      <div class="skill"><h3>الذكاء الاصطناعي والأتمتة</h3><p>Claude Code، وتصميم الوكلاء والمطالبات، وعقود JSON Schema، و LangChain، و n8n، و UiPath، وروبوتات المحادثة</p></div>
+      <div class="skill"><h3>الذكاء الاصطناعي والأتمتة</h3><p>Claude Code و OpenAI Codex و Gemini و Manus، وتصميم الوكلاء والمطالبات، وعقود JSON Schema، و LangChain، و n8n، و UiPath، وروبوتات المحادثة</p></div>
       <div class="skill"><h3>التصميم</h3><p>Figma و Canva وأنظمة التصميم والهوية وإنتاج المطبوعات</p></div>
       <div class="skill"><h3>التسويق</h3><p>SEO و GEO، و Search Console، والأوراق البيضاء وجذب العملاء، وأبحاث السوق، و amoCRM، وتسويق الفعاليات</p></div>
       <div class="skill"><h3>الهندسة</h3><p>STM32 و Arduino و ArduPilot و MATLAB و Simulink و SolidWorks والتصميم بالحاسوب وأنظمة الطائرات</p></div>
@@ -89,23 +72,25 @@
     </div>
     <div class="lang-levels">
       <div class="lang"><b lang="ar">العربية</b><span>اللغة الأم</span></div>
-      <div class="lang"><b lang="ru">Русский</b><span>الروسية، C2</span></div>
       <div class="lang"><b lang="en" dir="ltr">English</b><span>الإنجليزية، C1 إلى C2</span></div>
+      <div class="lang"><b lang="ru" dir="ltr">Русский</b><span>الروسية، C1</span></div>
       <div class="lang"><b lang="es" dir="ltr">Español</b><span>الإسبانية، A2 وأتعلّمها</span></div>
     </div>
   </section>
 
   <section id="security" class="reveal">
     <span class="label">03 &middot; كيف أبني</span>
-    <h2>أساسيات الأمان</h2>
-    <p class="section-lede">أي تطبيق ذكاء اصطناعي قادر على تنفيذ أوامر يحتاج إلى حدود. هذه الحدود مكتوبة في الكود، لا في سياسة فقط.</p>
+    <h2>أكسر الأنظمة بحكم عملي، لذلك أبنيها مغلقة</h2>
+    <p class="section-lede">أقوم باختبارات اختراق بدوام جزئي لمواقع شركتي ومنصّة الرسائل لديها، وفق قائمة OWASP. هذا العمل هو سبب أن التطبيقات أدناه تبدأ مغلقة ولا تُفتح إلا حيث يلزم. وكل سطر هنا مفروض في الكود، لا موعود به في سياسة.</p>
     <ul class="checks">
-      <li>وكلاء الذكاء الاصطناعي يحصلون على قائمة أدوات مسموح بها، ولا يحصلون أبدًا على وصول مفتوح للطرفية.</li>
-      <li>تُفحص الملفات المرفوعة والمسارات، فلا يستطيع أحد قراءة ملفات خارج التطبيق. الاختبارات تجرّب <code>/etc/passwd</code> و <code>../</code> وتتوقع الرفض.</li>
-      <li>الخوادم تعمل على HTTPS، ودخول SSH بالمفاتيح فقط، وكلمات مرور مخزّنة بالتجزئة.</li>
-      <li>المفاتيح تبقى في <code>.env</code>، وكل مستودع يُفحص بحثًا عن الأسرار قبل نشره علنًا.</li>
-      <li>الحاويات تعمل بمستخدم عادي، لا بصلاحيات الجذر.</li>
+      <li><b>وكلاء الذكاء الاصطناعي يحصلون على قائمة أدوات مسموح بها</b>، ولا يحصلون أبدًا على وصول مفتوح للطرفية. الوكيل القادر على تنفيذ الأوامر هو سطح الهجوم نفسه.</li>
+      <li><b>تُفحص الملفات المرفوعة والمسارات</b>، فلا يستطيع أحد قراءة ملفات خارج التطبيق. والاختبارات تجرّب <code>/etc/passwd</code> و <code>../</code> وتتوقع الرفض.</li>
+      <li><b>تطبيق الفحص يرفض العناوين الخاصة والداخلية</b> ويعيد التحقق بعد كل تحويل، فلا يستطيع غريب أن يجعل خادمي يجلب من شبكتي أنا.</li>
+      <li><b>الخوادم تعمل على HTTPS ودخول SSH بالمفاتيح فقط</b>، مع كلمات مرور مخزّنة بالتجزئة وتسجيل دخول محدود المعدّل.</li>
+      <li><b>الحاويات تعمل بمستخدم عادي</b>، لا بصلاحيات الجذر، مع إسقاط صلاحيات Linux.</li>
+      <li><b>المفاتيح تبقى في <code>.env</code></b>، وكل مستودع يُفحص بحثًا عن الأسرار قبل نشره علنًا.</li>
     </ul>
+    <p style="margin-top:24px">الأدوات: nmap و Wireshark و Burp Suite واختبارات OWASP و TryHackMe. وكتبت أيضًا <a href="https://github.com/elkushi/system-audit">system-audit</a>، أداة Bash تفحص خادم Linux بحثًا عن أخطاء الإعداد التي أصادفها باستمرار.</p>
   </section>
 
   <section id="about" class="reveal">

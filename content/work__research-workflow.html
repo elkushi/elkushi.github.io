@@ -1,11 +1,12 @@
 <div class="wrap">
   <header class="case-hero">
     <p class="eyebrow">Case study · AI workflow</p>
-    <h1>A market report where every claim has a source</h1>
-    <p class="lead">A Claude Code workflow that researches competitors and produces a branded PDF report. A validator refuses to render the report if any claim has no source or any link is dead.</p>
+    <h1>A 61-page competitor report with a source behind every claim</h1>
+    <p class="lead">I designed and built a Claude Code workflow that ran nine research agents in parallel, one per competitor, and produced a branded 61-page PDF: about 190 sources, each with a URL and an access date, and more than 400 claims, every one tied to one of them. A validator refuses to render the report if a claim has no source or a link is dead.</p>
     <ul class="meta">
       <li><b>Role:</b> designed and built it</li>
       <li><b>Stack:</b> Claude Code, Python, JSON Schema, Jinja2, WeasyPrint</li>
+      <li><b>First run:</b> nine competitors in depth, 30 more in an overview table</li>
       <li><b>Code:</b> <a href="https://github.com/elkushi/claude_vibe_coding_projects">github.com/elkushi/claude_vibe_coding_projects</a></li>
     </ul>
   </header>
@@ -15,9 +16,13 @@
     <div class="fact"><b>~190</b><span>sources, each with a URL and access date</span></div>
     <div class="fact"><b>400+</b><span>claims, every one linked to a source</span></div>
     <div class="fact"><b>0</b><span>unsourced claims allowed</span></div>
+    <div class="fact"><b>9</b><span>research agents in parallel, one per competitor</span></div>
+    <div class="fact"><b>15</b><span>of about 50 inherited claims corrected or dropped after re-checking</span></div>
   </div>
 
   <article>
+    <div class="note"><b>What this proves:</b> I can make AI research safe to put in front of a decision-maker. Nothing reaches the page unless code can trace it to a live source.</div>
+
     <section class="reveal">
       <h2>Why "just ask the AI" doesn't work for research</h2>
       <ul>
@@ -50,7 +55,7 @@
 
     <section class="reveal">
       <h2>The first run</h2>
-      <p>A competitor and market analysis for a company in the A2P SMS market. Nine research agents ran at once, one per competitor, with 30 more companies in an overview table. Before research started, about 50 claims from older internal files were checked against live sources, and 15 were corrected or dropped.</p>
+      <p>A competitor and market analysis for a company in the A2P SMS market. Nine research agents ran at once, one per competitor, with 30 more companies in an overview table. Before research started, about 50 claims from older internal files were checked against live sources, and 15 were corrected or dropped. Those corrections landed before a single new page was written.</p>
     </section>
 
     <section class="reveal">

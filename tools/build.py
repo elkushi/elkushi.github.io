@@ -44,6 +44,10 @@ CSP = (
 )
 
 # The work pages, in the order they appear on the home page.
+# The tool logos. Inlined into every page rather than referenced as a file:
+# browsers refuse cross-document <use> for SVG, and the CSP forbids it anyway.
+SPRITE = (SITE / "assets" / "logos.svg").read_text(encoding="utf-8")
+
 WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system"]
 
 LOCALES = {
@@ -53,20 +57,22 @@ LOCALES = {
         "connect": "Let's connect",
         "theme": "Switch between light and dark theme",
         "lang_label": "Language",
-        "footer": "Plain HTML and CSS. No framework, no tracking.",
+        "footer": "Hand-written HTML, CSS and a little JavaScript. No framework, no tracking.",
         "font_preload": ["Outfit.woff2", "JetBrainsMono-500.woff2"],
         "titles": {
             "index.html": ("Moustafa Elkoushy · AI Product Engineer",
                            "AI product engineer. I turn bold AI ideas into real-world products, and I make the AI check its own work."),
-            "work/ritorica.html": ("ritorica.com: rebuilt from scratch, and kept running · Moustafa Elkoushy",
-                                   "How I redesigned and rebuilt a company website on Django CMS, deployed it and secured it, alone."),
-            "work/video-generator.html": ("AI video and image generator · Moustafa Elkoushy",
-                                          "A Claude Code app that turns a brand kit and a topic into short videos and image posts."),
-            "work/seo-audit.html": ("Website audit for Google and AI search · Moustafa Elkoushy",
-                                    "A web app that audits a website for Google, answer engines and AI search, and gives copy-paste fixes."),
-            "work/research-workflow.html": ("A market report where every claim has a source · Moustafa Elkoushy",
-                                            "A Claude Code research workflow with a validator that blocks unsourced claims and dead links."),
-            "work/design-system.html": ("A design system for a messaging company · Moustafa Elkoushy",
+            "work/index.html": ("All work · Moustafa Elkoushy",
+                                "Every project, grouped: AI products, web development, design and security."),
+            "work/ritorica.html": ("ritorica.com: rebuilt alone, and still running · Moustafa Elkoushy",
+                                   "Sole designer and developer: Figma file, Django CMS build, launch, server and everything since."),
+            "work/video-generator.html": ("An AI studio that makes a branded video for nothing per video · Moustafa Elkoushy",
+                                          "One brief in; a finished video or image post out, in English, Arabic or Russian. Every paid API has a free or local fallback."),
+            "work/seo-audit.html": ("Audits a 25-page site in under a minute, for Google and AI search · Moustafa Elkoushy",
+                                    "Three scores, a to-do list ranked by impact, and code to paste in. A real run: 25 pages in 57 seconds, scored 76 out of 100."),
+            "work/research-workflow.html": ("A 61-page competitor report with a source behind every claim · Moustafa Elkoushy",
+                                            "Nine research agents in parallel, about 190 sources, 400+ cited claims, and a validator that blocks the rest."),
+            "work/design-system.html": ("One brand system, replacing three blues and four button shapes · Moustafa Elkoushy",
                                         "The brand and UI system behind Ritorica's website, decks, emails, events and print work."),
         },
     },
@@ -76,11 +82,13 @@ LOCALES = {
         "connect": "لنتواصل",
         "theme": "التبديل بين الوضع الفاتح والداكن",
         "lang_label": "اللغة",
-        "footer": "HTML و CSS فقط. بلا إطار عمل وبلا تتبّع.",
+        "footer": "HTML و CSS وقليل من JavaScript، مكتوبة يدويًا. بلا إطار عمل وبلا تتبّع.",
         "font_preload": ["Cairo-arabic.woff2", "Cairo-latin.woff2"],
         "titles": {
             "index.html": ("مصطفى القوشي · مهندس منتجات ذكاء اصطناعي",
                            "مهندس منتجات ذكاء اصطناعي. أحوّل أفكار الذكاء الاصطناعي الجريئة إلى منتجات حقيقية، وأجعل النموذج يراجع عمله بنفسه."),
+            "work/index.html": ("كل الأعمال · مصطفى القوشي",
+                                "كل المشاريع مرتّبة: منتجات ذكاء اصطناعي، وتطوير ويب، وتصميم، وأمان."),
             "work/ritorica.html": ("إعادة بناء موقع ritorica.com من الصفر، وتشغيله منذ ذلك الحين · مصطفى القوشي",
                                    "كيف أعدت تصميم موقع شركة وبنيته على Django CMS، ثم نشرته وأمّنته، بمفردي."),
             "work/video-generator.html": ("مولّد الفيديو والصور بالذكاء الاصطناعي · مصطفى القوشي",
@@ -99,11 +107,13 @@ LOCALES = {
         "connect": "Связаться",
         "theme": "Переключить светлую и тёмную тему",
         "lang_label": "Язык",
-        "footer": "Чистый HTML и CSS. Без фреймворков и без трекинга.",
+        "footer": "HTML, CSS и немного JavaScript, написанные вручную. Без фреймворков и без трекинга.",
         "font_preload": ["Manrope-cyrillic.woff2", "Manrope-latin.woff2"],
         "titles": {
             "index.html": ("Мустафа Элькуши · AI product engineer",
                            "AI product engineer. Превращаю смелые идеи с ИИ в работающие продукты и заставляю модель проверять саму себя."),
+            "work/index.html": ("Все работы · Мустафа Элькуши",
+                                "Все проекты по группам: ИИ-продукты, веб-разработка, дизайн и безопасность."),
             "work/ritorica.html": ("ritorica.com: полная пересборка и поддержка · Мустафа Элькуши",
                                    "Как я в одиночку переработал и заново собрал сайт компании на Django CMS, развернул и защитил его."),
             "work/video-generator.html": ("Генератор видео и картинок на ИИ · Мустафа Элькуши",
@@ -118,7 +128,7 @@ LOCALES = {
     },
 }
 
-PAGE_PATHS = ["index.html"] + [f"work/{w}.html" for w in WORK]
+PAGE_PATHS = ["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
 
 EXTERNAL = re.compile(r'<a href="(https?://[^"]+)"(?![^>]*target=)')
 
@@ -200,6 +210,7 @@ def page(code: str, page_path: str, body: str) -> str:
 <script>{BOOT_JS}</script>
 </head>
 <body>
+{SPRITE}
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="{home}"><span class="mark" aria-hidden="true"></span><span>Moustafa Elkoushy</span></a>

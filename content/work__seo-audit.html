@@ -1,11 +1,12 @@
 <div class="wrap">
   <header class="case-hero">
     <p class="eyebrow">Case study · AI product</p>
-    <h1>Website audit for Google and AI search</h1>
-    <p class="lead">Paste a website address. In under a minute you get a scored report with a to-do list ranked by impact, and code you can paste in to fix each issue. It checks Google, answer engines and AI search like ChatGPT.</p>
+    <h1>A free tool that audits a 25-page site in under a minute, for Google and for AI search</h1>
+    <p class="lead">I built it alone. Paste a web address and you get three scores, a to-do list ranked by impact, and code you can paste in to fix each issue. On a real run it checked 25 pages of djangoproject.com in 57 seconds and scored the site 76 out of 100. Data costs: €0.</p>
     <ul class="meta">
       <li><b>Role:</b> sole developer</li>
       <li><b>Stack:</b> Python, FastAPI, Playwright, Claude Code agents, Docker, GitHub Actions</li>
+      <li><b>Checks:</b> Google and Bing, answer engines, and 14 AI crawlers including ChatGPT, Claude, Perplexity and Gemini</li>
       <li><b>Code:</b> <a href="https://github.com/elkushi/elkoushy_seo_geo_aeo">github.com/elkushi/elkoushy_seo_geo_aeo</a></li>
       <li><b>Where it runs:</b> on my own machine and in Docker. I don't host it publicly, so every screenshot here is from a real run.</li>
     </ul>
@@ -17,6 +18,8 @@
   </figure>
 
   <article>
+    <div class="note"><b>What this proves:</b> I can turn a vague marketing question, "is this site visible?", into a tool that answers it the same way every time and hands over the fix.</div>
+
     <section class="reveal">
       <h2>The problem</h2>
       <p>People don't only search Google any more. They ask ChatGPT, Perplexity or Google's AI answers, and those tools quote some websites and ignore others. Most audit tools still check only for Google, and the good ones are paid.</p>
@@ -32,12 +35,13 @@
       <h2>What you get</h2>
       <div class="facts">
         <div class="fact"><b>&lt; 1 min</b><span>for a 25-page audit</span></div>
+        <div class="fact"><b>76/100</b><span>the score it gave djangoproject.com: 25 pages in 57 seconds</span></div>
         <div class="fact"><b>3 scores</b><span>SEO, AEO and GEO, plus an overall score</span></div>
         <div class="fact"><b>14</b><span>AI crawlers checked: ChatGPT, Claude, Perplexity, Gemini and others</span></div>
         <div class="fact"><b>0 €</b><span>free data sources only; the AI step is optional</span></div>
       </div>
       <ul>
-        <li>A plan in three steps: <b>Week 1</b> quick wins, then <b>30 days</b>, then <b>90 days</b>. The biggest, cheapest fixes come first.</li>
+        <li>A plan in three stages: <b>Week 1</b> quick wins, then <b>30 days</b>, then <b>90 days</b>. The biggest, cheapest fixes come first.</li>
         <li>Ready-made code for each fix: structured data (JSON-LD), robots.txt rules and an llms.txt draft.</li>
         <li>The report as a web page, a PDF and a Markdown checklist.</li>
       </ul>
@@ -59,7 +63,7 @@
       <ol>
         <li>A Python crawler reads the homepage, robots.txt, the sitemap and up to 25 pages.</li>
         <li>Rule-based checks score each area. Every issue gets a priority and a place in the plan.</li>
-        <li>The app requests the homepage as each main AI crawler, to see whether the server lets it in. A site can allow a bot in robots.txt and still block it at the firewall.</li>
+        <li>The app requests the homepage as each of the 14 main AI crawlers, to see whether the server lets it in. A site can allow a bot in robots.txt and still block it at the firewall.</li>
         <li>A template turns the findings into the report, and headless Chromium prints the PDF.</li>
       </ol>
       <p>The same pipeline runs from the command line. There, five Claude Code agents can take the findings further: an SEO auditor, an AEO analyst, a GEO analyst, a competitor researcher and a report writer.</p>
@@ -79,7 +83,7 @@
         <li>The crawler refuses private and internal addresses, and checks again after every redirect. A user can't make the server fetch its own network.</li>
         <li>One site can't be audited over and over in a day, so the crawler stays polite.</li>
         <li>The container runs as a normal user with every Linux capability dropped. Keys live in <code>.env</code>, outside git.</li>
-        <li>Automated tests cover parsing, robots rules, the address guard, sign-in and quotas. GitHub Actions runs them on every push.</li>
+        <li>Automated tests cover parsing, robots rules, the address guard, sign-in, quotas and cross-user isolation. GitHub Actions runs them on every push, against both SQLite and Postgres.</li>
       </ul>
     </section>
 
