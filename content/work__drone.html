@@ -1,0 +1,54 @@
+<div class="wrap">
+  <header class="case-hero">
+    <p class="eyebrow">Case study &middot; Engineering</p>
+    <h1>A drone you can take apart in the browser</h1>
+    <p class="lead">I spent a year on UAV work at Moscow Aviation Institute's university factories. This is that knowledge made clickable: eight named assemblies, drag to turn it, slide to pull it apart. Every part is generated in code &mdash; there is no CAD file behind it and nothing to download.</p>
+    <ul class="meta">
+      <li><b>Role:</b> designed and built it</li>
+      <li><b>Stack:</b> three.js, WebGL, procedural geometry, one HTML file</li>
+      <li><b>Where it comes from:</b> UAV engineering at MAI, 2023 &mdash; STM32, Arduino, ArduPilot</li>
+      <li><b>Try it:</b> <a href="drone/">open the viewer full screen</a></li>
+    </ul>
+  </header>
+
+  <figure class="bleed">
+    <iframe src="drone/" title="Interactive 3D exploded view of a drone" width="1600" height="900" loading="lazy" style="width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface-200)"></iframe>
+    <figcaption>The viewer, running here. Drag to turn it, scroll to zoom, and use the slider to take it apart.</figcaption>
+  </figure>
+
+  <article>
+    <section class="reveal">
+      <h2>Why build it</h2>
+      <p>A drone is easy to describe and hard to picture. A photograph shows you a shell. An exploded diagram on paper shows you one angle, chosen by whoever drew it. I wanted the thing you can turn over in your hands.</p>
+      <p>It is also the clearest proof I have of the engineering half of my background. The avionics degree and the year in the factory are two lines on a CV; this is what they actually mean.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Eight assemblies, and what each one does</h2>
+      <ul class="checks">
+        <li><b>Main frame</b> &mdash; the lower shell that carries the arms, the boards and the battery bay.</li>
+        <li><b>ESC board</b> &mdash; the electronic speed controllers that drive the four brushless motors.</li>
+        <li><b>Flight controller</b> &mdash; the processor with the IMU, gyro and barometer that keeps the drone level.</li>
+        <li><b>GPS and compass</b> &mdash; satellite positioning for hover hold and return-to-home.</li>
+        <li><b>Battery</b> &mdash; a swappable LiPo pack that slides into the rear bay.</li>
+        <li><b>Gimbal camera</b> &mdash; three-axis stabilised, so the footage stays level while the airframe does not.</li>
+        <li><b>Folding arms and brushless motors</b> &mdash; four outrunners on arms that fold flat for transport.</li>
+        <li><b>Propellers</b> &mdash; quick-release, pitched for quieter flight.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>How it is built</h2>
+      <p>No model was imported. Every shell, arm, board and propeller is built at runtime from primitives and extruded shapes, which is why the whole thing is one 20&nbsp;KB HTML file instead of a multi-megabyte mesh.</p>
+      <p>The explode slider interpolates each assembly along its own axis, so parts move the way they would come off the airframe rather than scattering from a single centre point. Hovering highlights a part and names it.</p>
+      <div class="note"><b>Worth knowing:</b> three.js and its orbit controls are served from this site, not from a CDN. The page keeps a content security policy with <code>default-src 'none'</code>, and its one inline script is allowed by hash.</div>
+    </section>
+
+    <section class="reveal">
+      <h2>What I'd do differently</h2>
+      <p>The component descriptions live in the same file as the geometry. Splitting them into data would make the viewer reusable for a second machine without touching the rendering code.</p>
+    </section>
+
+    <p><a href="../index.html#work">&larr; All work</a></p>
+  </article>
+</div>

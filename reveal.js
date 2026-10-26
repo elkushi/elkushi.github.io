@@ -41,3 +41,10 @@ if (filterBar) {
     cards.forEach((c) => { c.hidden = !(f === "all" || c.dataset.tags.split(" ").includes(f)); });
   });
 }
+
+// The tool row drifts only while it is visible, so it costs nothing once you
+// scroll past it. Without JS it stays still, which is fine.
+const stackRow = document.querySelector(".stack");
+if (stackRow) {
+  new IntersectionObserver(([e]) => stackRow.classList.toggle("on-screen", e.isIntersecting)).observe(stackRow);
+}

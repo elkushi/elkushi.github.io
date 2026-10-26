@@ -39,6 +39,7 @@ CSP = (
     "img-src 'self' data:; "
     "font-src 'self'; "
     "media-src 'self'; "
+    "frame-src 'self'; "
     "base-uri 'none'; "
     "form-action 'none'"
 )
@@ -48,7 +49,22 @@ CSP = (
 # browsers refuse cross-document <use> for SVG, and the CSP forbids it anyway.
 SPRITE = (SITE / "assets" / "logos.svg").read_text(encoding="utf-8")
 
-WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system"]
+
+def minify_css(css: str) -> str:
+    """Strip comments and spare whitespace. Safe for this stylesheet: no strings
+    contain braces, colons or semicolons that matter."""
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    css = re.sub(r"\s+", " ", css)
+    css = re.sub(r"\s*([{};,>])\s*", r"\1", css)
+    return css.replace(";}", "}").strip()
+
+
+# The stylesheet goes inline in every page, so the first paint does not wait
+# for a second request. Its url()s are written relative to /style.css, so each
+# page re-points them at /assets with the right number of ../.
+CSS = minify_css((SITE / "style.css").read_text(encoding="utf-8"))
+
+WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system", "drone"]
 
 LOCALES = {
     "en": {
@@ -74,6 +90,8 @@ LOCALES = {
                                             "Nine research agents in parallel, about 190 sources, 400+ cited claims, and a validator that blocks the rest."),
             "work/design-system.html": ("One brand system, replacing three blues and four button shapes · Moustafa Elkoushy",
                                         "The brand and UI system behind Ritorica's website, decks, emails, events and print work."),
+            "work/drone.html": ("A drone you can take apart in the browser · Moustafa Elkoushy",
+                                "An interactive 3D breakdown of how a drone fits together. Eight assemblies, generated in code, no CAD import."),
         },
     },
     "ar": {
@@ -99,6 +117,8 @@ LOCALES = {
                                             "تسعة وكلاء بحث بالتوازي، ونحو 190 مصدرًا، وأكثر من 400 ادعاء موثّق، ومدقّق يوقف كل ما عدا ذلك."),
             "work/design-system.html": ("نظام هوية واحد بدل ثلاث درجات من الأزرق وأربعة أشكال للأزرار · مصطفى القوشي",
                                         "نظام الهوية والواجهة الذي بُني عليه موقع Ritorica وعروضها ورسائلها البريدية وفعالياتها ومطبوعاتها."),
+            "work/drone.html": ("طائرة مسيّرة يمكنك تفكيكها في المتصفح · مصطفى القوشي",
+                                "عرض ثلاثي الأبعاد تفاعلي لكيفية تركيب طائرة مسيّرة. ثماني مجموعات، مولّدة بالكود، بلا استيراد من برامج التصميم."),
         },
     },
     "ru": {
@@ -124,6 +144,8 @@ LOCALES = {
                                             "Девять исследовательских агентов параллельно, около 190 источников, больше 400 утверждений со ссылками и валидатор, который отсекает всё остальное."),
             "work/design-system.html": ("Одна бренд-система вместо трёх синих и четырёх форм кнопок · Мустафа Элькуши",
                                         "Бренд- и UI-система, на которой построены сайт, презентации, письма, мероприятия и печатные материалы Ritorica."),
+            "work/drone.html": ("Дрон, который можно разобрать в браузере · Мустафа Элькуши",
+                                "Интерактивная 3D-разборка дрона. Восемь узлов, построенных кодом, без импорта из CAD."),
         },
     },
 }
@@ -163,6 +185,10 @@ def page(code: str, page_path: str, body: str) -> str:
     body = body.replace("<!--TELEGRAM-->",
                         f'<a class="btn btn-secondary" href="{TG_URL}">Telegram</a>' if TG_URL else "")
 
+    css = CSS.replace('url("assets/', f'url("{up}assets/')
+    # The logo sprite is only needed where the tool row is; elsewhere it is
+    # 47 KB of markup for nothing.
+    sprite = SPRITE + "\n" if "#logo-" in body else ""
     tg_foot = f' · <a href="{TG_URL}" target="_blank" rel="noopener noreferrer">Telegram</a>' if TG_URL else ""
     preload = "\n".join(
         f'<link rel="preload" href="{up}assets/fonts/{f}" as="font" type="font/woff2" crossorigin>'
@@ -206,12 +232,11 @@ def page(code: str, page_path: str, body: str) -> str:
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="{up}assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="{up}style.css">
+<style>{css}</style>
 <script>{BOOT_JS}</script>
 </head>
 <body>
-{SPRITE}
-<header class="nav">
+{sprite}<header class="nav">
   <div class="wrap">
     <a class="brand" href="{home}"><span class="mark" aria-hidden="true"></span><span>Moustafa Elkoushy</span></a>
     <nav class="links" aria-label="{loc['main_nav']}">{nav}</nav>

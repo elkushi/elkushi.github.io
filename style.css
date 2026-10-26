@@ -80,7 +80,8 @@ p { margin: 0 0 var(--space-4); max-width: 62ch; }
 .label, .eyebrow { display: inline-block; font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-muted); }
 
 /* --- nav -------------------------------------------------------------- */
-.nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--surface-100) 82%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+/* No backdrop blur: it re-blurs the page under the bar on every scroll frame. */
+.nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--surface-100) 96%, transparent); border-bottom: 1px solid var(--line); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding-top: var(--space-4); padding-bottom: var(--space-4); }
 .brand { display: inline-flex; align-items: center; gap: 10px; font: 600 16px/1 var(--sans); color: var(--ink); text-decoration: none; white-space: nowrap; }
 .mark { width: 22px; height: 22px; background: var(--accent-violet); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex: none; }
@@ -129,27 +130,37 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .hero .actions { margin-bottom: var(--space-6); }
 
 .stage3d { perspective: 1000px; display: grid; place-items: center; min-height: 440px; }
-/* The sway rotates the ring in 3D, so its projected box is wider than its
+/* The 3D tilt rotates the ring, so its projected box is wider than its
    layout box. On narrow screens that would push the page sideways, so clip it:
    the ring is decoration, and rule 5 forbids horizontal scroll at phone width. */
 @media (max-width: 900px) { .stage3d { overflow-x: clip; } }
-.cube { position: relative; width: min(340px, 68vw); aspect-ratio: 340 / 420; transform-style: preserve-3d; animation: sway 8s ease-in-out infinite alternate; }
-.ring { position: absolute; inset: -24px; border-radius: 50%; border: 3px solid transparent; border-top-color: var(--accent-violet); border-right-color: var(--accent-violet-text); box-shadow: var(--shadow-glow); transform: translateZ(-20px); animation: spin 24s linear infinite; }
+/* No idle sway: it kept the GPU busy for as long as the page was open. The
+   portrait still tilts under the mouse (reveal.js). */
+.cube { position: relative; width: min(340px, 68vw); aspect-ratio: 340 / 420; transform-style: preserve-3d; transition: transform .3s ease-out; }
+.ring { position: absolute; inset: -24px; border-radius: 50%; border: 3px solid transparent; border-top-color: var(--accent-violet); border-right-color: var(--accent-violet-text); box-shadow: var(--shadow-glow); transform: translateZ(-20px) rotate(-30deg); }
+/* The ring used to spin for ever. Measured on a laptop without GPU help: it
+   alone took the home page from 61 to about 20 frames a second. Now it stands still. */
 /* The portrait is a cut-out, so it floats in front of the ring rather than
    sitting in a clipped card: that is how the reference hero reads. */
 .face { position: absolute; inset: 0; transform: translateZ(30px); display: grid; place-items: center; }
-.face img { width: 122%; max-width: none; filter: drop-shadow(0 0 48px rgba(168, 85, 247, .5)); }
-@keyframes spin { to { transform: translateZ(-20px) rotate(360deg); } }
-@keyframes sway { from { transform: rotateY(-12deg) rotateX(4deg); } to { transform: rotateY(12deg) rotateX(-4deg); } }
+/* The glow is a painted gradient behind the cut-out, not a drop-shadow filter:
+   a filter on a 900px image is re-rasterised whenever anything moves. */
+.face::before { content: ""; position: absolute; inset: 8% 4%; border-radius: 50%; background: radial-gradient(closest-side, rgba(168, 85, 247, .45), transparent); z-index: -1; }
+.face img { width: 122%; max-width: none; }
 
 /* The tool row drifts sideways for ever. Two identical halves, and the track
    is translated by exactly half its width, so the seam never shows. The name
    "drift" is in the ambient list, so the design-rule checker lets it run long:
    this is background motion, not a response to a click. */
-.stack { overflow: hidden; padding: var(--space-8) 0 0; color: var(--ink-muted);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
-.stack-track { display: flex; width: max-content; animation: drift 46s linear infinite; }
+/* The edge fade is two static gradients laid over the row, not a mask: a mask
+   on moving content is repainted on every frame. */
+.stack { position: relative; overflow: hidden; padding: var(--space-8) 0 0; color: var(--ink-muted); }
+.stack::before, .stack::after { content: ""; position: absolute; top: 0; bottom: 0; width: 7%; z-index: 1; pointer-events: none; }
+.stack::before { left: 0; background: linear-gradient(90deg, var(--surface-100), transparent); }
+.stack::after { right: 0; background: linear-gradient(270deg, var(--surface-100), transparent); }
+.stack-track { display: flex; width: max-content; animation: drift 46s linear infinite; animation-play-state: paused; }
+/* The row only drifts while it is on screen (reveal.js adds .on-screen). */
+.stack.on-screen .stack-track { animation-play-state: running; }
 .stack:hover .stack-track, .stack:focus-within .stack-track { animation-play-state: paused; }
 .stack-row { display: flex; gap: 44px; padding-inline-end: 44px; }
 .stack .item { display: flex; flex-direction: column; align-items: center; gap: 8px; font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
@@ -318,3 +329,7 @@ html[lang="ar"] body { line-height: 1.9; }
 [dir="rtl"] .pcard .cats { letter-spacing: 0; font-family: var(--sans); }
 .pcard.mini h3 { font-size: 22px; }
 .pcard.mini { align-self: start; }
+
+/* Arabic words on English and Russian pages (the language switch, the
+   language list) use the system font, so those pages never fetch Cairo. */
+html:not([lang="ar"]) [lang="ar"] { font-family: system-ui, sans-serif; }
