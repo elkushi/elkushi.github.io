@@ -5,6 +5,7 @@ site root, ready for GitHub Pages. Run: python3 tools/build.py
 """
 import base64
 import hashlib
+import re
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
@@ -41,7 +42,20 @@ PAGES = {
 }
 
 
+EXTERNAL = re.compile(r'<a href="(https?://[^"]+)"(?![^>]*target=)')
+
+
+def external_new_tab(html: str) -> str:
+    """Every link that leaves the site opens in a new tab.
+
+    rel="noopener" stops the new page reaching back through window.opener;
+    noreferrer keeps the referring URL out of the request.
+    """
+    return EXTERNAL.sub(r'<a href="\1" target="_blank" rel="noopener noreferrer"', html)
+
+
 def page(path, title, desc, body):
+    body = external_new_tab(body)
     up = "../" * path.count("/")
     current = lambda target: ' aria-current="page"' if path == target else ""
     return f"""<!doctype html>
@@ -79,7 +93,7 @@ def page(path, title, desc, body):
 </main>
 <footer>
   <div class="wrap">
-    <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}">GitHub</a></span>
+    <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub</a></span>
     <span>Plain HTML and CSS. No framework.</span>
   </div>
 </footer>
