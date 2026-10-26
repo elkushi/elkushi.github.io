@@ -43,8 +43,8 @@ CSP = (
     "form-action 'none'"
 )
 
-# The four work pages, in the order they appear on the home page.
-WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow"]
+# The work pages, in the order they appear on the home page.
+WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system"]
 
 LOCALES = {
     "en": {
@@ -66,6 +66,8 @@ LOCALES = {
                                     "A web app that audits a website for Google, answer engines and AI search, and gives copy-paste fixes."),
             "work/research-workflow.html": ("A market report where every claim has a source · Moustafa Elkoushy",
                                             "A Claude Code research workflow with a validator that blocks unsourced claims and dead links."),
+            "work/design-system.html": ("A design system for a messaging company · Moustafa Elkoushy",
+                                        "The brand and UI system behind Ritorica's website, decks, emails, events and print work."),
         },
     },
     "ar": {
@@ -87,6 +89,8 @@ LOCALES = {
                                     "تطبيق ويب يفحص الموقع لجوجل ومحركات الإجابة والبحث بالذكاء الاصطناعي، ويعطي إصلاحات جاهزة للّصق."),
             "work/research-workflow.html": ("تقرير سوق كل ادعاء فيه له مصدر · مصطفى القوشي",
                                             "مسار بحث على Claude Code مع مدقّق يمنع أي ادعاء بلا مصدر أو رابط معطّل."),
+            "work/design-system.html": ("نظام تصميم لشركة مراسلات · مصطفى القوشي",
+                                        "نظام الهوية والواجهة الذي بُني عليه موقع Ritorica وعروضها ورسائلها وموادّ فعالياتها ومطبوعاتها."),
         },
     },
     "ru": {
@@ -108,6 +112,8 @@ LOCALES = {
                                     "Веб-приложение, которое проверяет сайт для Google, ответных движков и ИИ-поиска и выдаёт готовые правки."),
             "work/research-workflow.html": ("Отчёт о рынке, где у каждого утверждения есть источник · Мустафа Элькуши",
                                             "Исследовательский процесс на Claude Code с валидатором, который блокирует утверждения без источника и битые ссылки."),
+            "work/design-system.html": ("Дизайн-система для мессенджинговой компании · Мустафа Элькуши",
+                                        "Бренд- и UI-система, на которой построены сайт, презентации, письма, события и печать Ritorica."),
         },
     },
 }
