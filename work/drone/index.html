@@ -3,7 +3,7 @@
 <head>
 <style>@font-face{font-family:"Outfit";src:url("../../assets/fonts/Outfit.woff2") format("woff2");font-weight:100 900;font-display:swap}</style>
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-fmOcfEW6nV/zz8TQJ0Zh+x8Gq2Un8Z3zwm+tcmMWtWI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-HavgweuPsWHD0yjivoBYXSQN4whj+n4zbq6IPGzTzJ0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -163,18 +163,18 @@ floor.rotation.x = -Math.PI/2; floor.position.y = -0.62; floor.receiveShadow = t
 
 /* materials */
 const M = {
-  shell:new THREE.MeshStandardMaterial({color:0xd9dcdf,roughness:.55,metalness:.05}),
-  shellDark:new THREE.MeshStandardMaterial({color:0xbfc4c8,roughness:.6}),
+  shell:new THREE.MeshStandardMaterial({color:0x343a42,roughness:.45,metalness:.15}),
+  shellDark:new THREE.MeshStandardMaterial({color:0x23272d,roughness:.55}),
   black:new THREE.MeshStandardMaterial({color:0x202326,roughness:.5,metalness:.2}),
-  metal:new THREE.MeshStandardMaterial({color:0x9ea6ad,roughness:.3,metalness:.85}),
+  metal:new THREE.MeshStandardMaterial({color:0xb9c1c9,roughness:.25,metalness:.9}),
   copper:new THREE.MeshStandardMaterial({color:0xb87333,roughness:.35,metalness:.9}),
   pcb:new THREE.MeshStandardMaterial({color:0x1d4f3a,roughness:.55}),
   pcbBlue:new THREE.MeshStandardMaterial({color:0x1d3550,roughness:.55}),
   chip:new THREE.MeshStandardMaterial({color:0x151719,roughness:.4}),
   gold:new THREE.MeshStandardMaterial({color:0xd4a64a,roughness:.3,metalness:.9}),
-  orange:new THREE.MeshStandardMaterial({color:0xe8641a,roughness:.45}),
+  orange:new THREE.MeshStandardMaterial({color:0xa855f7,roughness:.4}),
   lens:new THREE.MeshStandardMaterial({color:0x0b1a2a,roughness:.05,metalness:.6}),
-  battery:new THREE.MeshStandardMaterial({color:0xcfd3d6,roughness:.5}),
+  battery:new THREE.MeshStandardMaterial({color:0x4a515b,roughness:.45}),
   led:new THREE.MeshStandardMaterial({color:0x58d68d,emissive:0x2ecc71,emissiveIntensity:.8}),
   wire:new THREE.MeshStandardMaterial({color:0xc0392b,roughness:.6}),
   wire2:new THREE.MeshStandardMaterial({color:0x222222,roughness:.6})
@@ -323,7 +323,7 @@ function setHot(name){
     const on = name && groupKey(p.group)===name;
     p.group.traverse(o=>{ if(o.isMesh){
       if(!o.userData.baseEm){o.userData.baseEm=o.material;}
-      if(on){ if(!o.userData.hotMat){o.userData.hotMat=o.userData.baseEm.clone();o.userData.hotMat.emissive=new THREE.Color(0xe8641a);o.userData.hotMat.emissiveIntensity=.35;} o.material=o.userData.hotMat; }
+      if(on){ if(!o.userData.hotMat){o.userData.hotMat=o.userData.baseEm.clone();o.userData.hotMat.emissive=new THREE.Color(0xc084fc);o.userData.hotMat.emissiveIntensity=.35;} o.material=o.userData.hotMat; }
       else o.material=o.userData.baseEm;
     }});
   });
