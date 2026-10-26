@@ -1,0 +1,86 @@
+<div class="wrap">
+  <section class="hero" style="border-top:0">
+    <p class="eyebrow">AI Product Engineer</p>
+    <h1>Moustafa Elkoushy</h1>
+    <p class="typed">I build AI products, and I make the AI check its own work.</p>
+    <p class="lede">I take products from design to production: web apps, AI agents and the automation around them. I'm an AI Marketing Engineer at Ritorica, a B2B messaging company, where I designed and built <a href="https://www.ritorica.com">ritorica.com</a>.</p>
+    <div class="actions">
+      <a class="btn primary" href="#work">See my work</a>
+      <a class="btn" href="https://github.com/elkushi">GitHub</a>
+      <a class="btn" href="mailto:moustafa.elkoushy7@gmail.com">Email me</a>
+    </div>
+  </section>
+
+  <section id="work" class="reveal">
+    <h2>Work</h2>
+    <p class="section-lede">Three projects, each taken all the way to something that runs.</p>
+    <div class="cards">
+      <a class="card wide" href="work/ritorica.html">
+        <div class="shot"><img src="assets/ritorica-home.webp" width="1200" height="750" alt="The ritorica.com home page: business messaging platform, with a Request Demo button." loading="lazy"></div>
+        <div class="body">
+          <h3>ritorica.com</h3>
+          <p>A company website, from a blank page to production, built alone. Designed in Figma, built on Django CMS and PostgreSQL, deployed to a Linux server with automatic deploys and an AI chatbot.</p>
+          <ul class="tags"><li>Django CMS</li><li>PostgreSQL</li><li>Gemini API</li><li>GitHub Actions</li><li>Figma</li></ul>
+          <p class="more">Read the case study →</p>
+        </div>
+      </a>
+      <a class="card" href="work/video-generator.html">
+        <div class="shot"><img src="assets/video-pipeline.svg" width="880" height="230" alt="Diagram: brief, agents, schema check, voice and visuals, Remotion render, QA." loading="lazy"></div>
+        <div class="body">
+          <h3>AI video and image generator</h3>
+          <p>My own app. A brand kit and a topic go in; short videos and image posts come out. Claude agents plan and write, Python tools render, and a QA step checks the result against the script.</p>
+          <ul class="tags"><li>Claude Code</li><li>FastAPI</li><li>React</li><li>Remotion</li><li>Docker</li></ul>
+          <p class="more">Read the case study →</p>
+        </div>
+      </a>
+      <a class="card" href="work/research-workflow.html">
+        <div class="shot"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pipeline-dark.svg"><img src="assets/pipeline-light.svg" width="880" height="230" alt="Animated diagram: claims without a source or with a dead link are blocked at the validator." loading="lazy"></picture></div>
+        <div class="body">
+          <h3>Research workflow with a validator</h3>
+          <p>A Claude Code workflow that writes a branded market report. The PDF won't render if any claim has no source or any link is dead. First run: 61 pages, about 190 sources, more than 400 cited claims.</p>
+          <ul class="tags"><li>Claude Code</li><li>Python</li><li>JSON Schema</li><li>WeasyPrint</li></ul>
+          <p class="more">Read the case study →</p>
+        </div>
+      </a>
+    </div>
+    <p style="margin-top:22px">Also: <a href="https://github.com/elkushi/system-audit">system-audit</a>, a Bash tool that checks a Linux server for common security misconfigurations.</p>
+  </section>
+
+  <section id="security" class="reveal">
+    <h2>Security basics</h2>
+    <p class="section-lede">An AI app that can run commands needs limits. These are in the code, not just in a policy.</p>
+    <ul class="checks">
+      <li>AI agents get an allowlist of tools, never open shell access.</li>
+      <li>Uploads and file paths are checked, so nobody can read files outside the app. Tests try <code>/etc/passwd</code> and <code>../</code> and expect a refusal.</li>
+      <li>Servers run HTTPS, key-only SSH and logins with hashed passwords.</li>
+      <li>Keys stay in <code>.env</code>, and every repo is scanned for secrets before it goes public.</li>
+      <li>Containers run as a normal user, not root.</li>
+    </ul>
+  </section>
+
+  <section id="about" class="reveal">
+    <h2>About</h2>
+    <p class="section-lede">Engineer by training. I like work where the technical side and the people side meet.</p>
+    <dl class="cv">
+      <dt>Now</dt>
+      <dd><b>AI Marketing Engineer, Ritorica</b> (since Sept 2024). Website, AI and automation for a B2B messaging platform: SMS, WhatsApp, Viber, Telegram. I also write technical specs and whitepapers, and speak with clients and partners at industry events.</dd>
+      <dt>Before</dt>
+      <dd><b>AI Content Specialist, Yandex</b> (2024). Reviewed and corrected the Arabic answers of the Alice voice assistant, and reported accuracy problems to the product team.</dd>
+      <dt>Education</dt>
+      <dd>MSc Software Engineering (2025) and BSc Avionics Engineering (2023), Moscow Aviation Institute.</dd>
+      <dt>Languages</dt>
+      <dd>Arabic (native), English and Russian (C1).</dd>
+      <dt>Tools</dt>
+      <dd>Python, Claude Code, Django, FastAPI, React, TypeScript, PostgreSQL, Docker, Linux, Bash, Git, Figma.</dd>
+    </dl>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>Contact</h2>
+    <p class="section-lede">The fastest way to reach me is email.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:moustafa.elkoushy7@gmail.com">moustafa.elkoushy7@gmail.com</a>
+      <a class="btn" href="https://github.com/elkushi">github.com/elkushi</a>
+    </div>
+  </section>
+</div>

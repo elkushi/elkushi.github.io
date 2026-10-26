@@ -1,0 +1,71 @@
+<div class="wrap">
+  <header class="case-hero">
+    <p class="eyebrow">Case study · AI product</p>
+    <h1>AI video and image generator</h1>
+    <p class="lede">My own app. Give it a brand kit and a topic, and it plans, writes, voices, renders and checks short videos and image posts for LinkedIn, Reels, TikTok and the web.</p>
+    <ul class="meta">
+      <li><b>Role:</b> sole developer</li>
+      <li><b>Stack:</b> Claude Code, Python, FastAPI, React + TypeScript, Remotion, Docker</li>
+      <li><b>Code:</b> <a href="https://github.com/elkushi/ai-video-image-generator">github.com/elkushi/ai-video-image-generator</a></li>
+    </ul>
+  </header>
+
+  <figure>
+    <img src="../assets/video-pipeline.svg" width="880" height="230" alt="Diagram: brief, agents, schema check, voice and visuals, Remotion render, QA. QA can send a fix list back, at most twice.">
+    <figcaption>One video, start to finish. Blue boxes are checks that can stop the run.</figcaption>
+  </figure>
+
+  <article>
+    <section class="reveal">
+      <h2>The idea</h2>
+      <p>I wanted short videos that stay on brand, cost nothing per video, and still get made when an online AI service is down or out of quota.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>How it works</h2>
+      <p>Claude makes the decisions. Python scripts do the work.</p>
+      <ol>
+        <li>A strategist agent picks the audience, angle, hook and call to action.</li>
+        <li>A scriptwriter agent writes the storyboard: voiceover, on-screen text and scene types.</li>
+        <li>The storyboard is checked against a JSON schema before anything slow runs.</li>
+        <li>Python tools make the voice, fetch or generate the visuals and pick music.</li>
+        <li>Remotion, a React video framework, renders every aspect ratio.</li>
+        <li>QA checks length, audio levels and black frames, and transcribes the voice with Whisper to compare it with the script.</li>
+        <li>A reviewer agent reads the QA report and returns SHIP or a fix list. At most two fix rounds.</li>
+      </ol>
+      <p>The same pipeline makes image posts and carousels. Videos come out in English, Arabic or Russian. Arabic captions run right to left.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Constraints I set</h2>
+      <ul>
+        <li><b>No paid APIs.</b> Every AI step has a free online option and a local fallback: Piper voices, local Stable Diffusion, a built-in mascot instead of a talking head.</li>
+        <li><b>Runs on a normal laptop.</b> On mine, a 26-second preview renders in about 50 seconds. A local AI image takes about 9 minutes on the CPU, so online options come first.</li>
+        <li><b>Nothing ships unchecked.</b> The schema check and the QA step can stop a run.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>The web app</h2>
+      <p>A FastAPI backend runs Claude Code in headless mode, and a React + TypeScript front end streams each agent and tool live as it works. It runs in Docker, with tests and GitHub Actions CI.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Security</h2>
+      <p>The app runs an AI agent on a server, so it is locked down by default:</p>
+      <ul class="checks">
+        <li>The agent can only use an allowlist of tools: the project's own scripts, ffmpeg and a few read-only commands. Other integrations are blocked.</li>
+        <li>Every uploaded file must sit inside the uploads folder. Tests try <code>/etc/passwd</code>, <code>../../etc/passwd</code> and <code>.env</code>.</li>
+        <li>The public mode sits behind HTTPS and a per-person login with hashed passwords, plus security headers and an upload size limit.</li>
+        <li>The container runs as its own user, not root. Keys live in <code>.env</code>, outside git.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>What's next</h2>
+      <p>I haven't measured the Claude cost per video yet. The web app already records the tokens each job uses, so the next step is to turn that into a cost per video.</p>
+    </section>
+
+    <p><a href="../index.html#work">← All work</a></p>
+  </article>
+</div>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="230" viewBox="0 0 880 230" role="img" aria-label="Pipeline: research agents, JSON schema, validator, branded PDF. Claims without a source or with a dead link are blocked at the validator.">
+<style>
+  .box { fill: #151b23; stroke: #3d444d; stroke-width: 1.5; }
+  .gate { stroke: #4493f8; stroke-width: 2; animation: flash 8s linear infinite 2s; }
+  .title { font: 600 15px -apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif; fill: #f0f6fc; text-anchor: middle; }
+  .sub { font: 12px -apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif; fill: #9198a1; text-anchor: middle; }
+  .edge { stroke: #3d444d; stroke-width: 2; }
+  .arrow { fill: #3d444d; }
+  .good, .bad { opacity: 0; animation: 8s linear infinite both; }
+  .good { animation-name: pass; }
+  .bad { animation-name: block; }
+  .goodc, .badc { fill: #4493f8; animation: 8s linear infinite both; }
+  .goodc { animation-name: turn-green; }
+  .badc { animation-name: turn-red; }
+  .tray { font: 600 13px ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace; fill: #f85149; text-anchor: middle; opacity: 0; animation: tray 8s linear infinite both; }
+  .ok { font: 600 13px ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace; fill: #3fb950; text-anchor: middle; opacity: 0; animation: tray-ok 8s linear infinite both; }
+  @keyframes pass {
+    0% { opacity: 0; transform: translate(188px, 0); }
+    3% { opacity: 1; }
+    20% { transform: translate(556.0px, 0); }
+    37% { opacity: 1; transform: translate(697px, 0); }
+    40%, 100% { opacity: 0; transform: translate(705px, 0); }
+  }
+  @keyframes block {
+    0% { opacity: 0; transform: translate(188px, 0); }
+    3% { opacity: 1; }
+    20% { transform: translate(556.0px, 0); }
+    30% { opacity: 1; transform: translate(556.0px, 104px); }
+    44%, 100% { opacity: 0; transform: translate(556.0px, 104px); }
+  }
+  @keyframes turn-green { 0%, 19% { fill: #4493f8; } 21%, 100% { fill: #3fb950; } }
+  @keyframes turn-red { 0%, 19% { fill: #4493f8; } 21%, 100% { fill: #f85149; } }
+  @keyframes flash { 0%, 19%, 30%, 100% { stroke: #4493f8; } 21%, 27% { stroke: #f85149; } }
+  @keyframes tray { 0%, 24% { opacity: 0; } 28%, 44% { opacity: 1; } 48%, 100% { opacity: 0; } }
+  @keyframes tray-ok { 0%, 34% { opacity: 0; } 37%, 46% { opacity: 1; } 50%, 100% { opacity: 0; } }
+</style>
+<line class="edge" x1="188" y1="73.0" x2="237" y2="73.0"/><path class="arrow" d="M236,69.0 L242,73.0 L236,77.0 Z"/><line class="edge" x1="415" y1="73.0" x2="464" y2="73.0"/><path class="arrow" d="M463,69.0 L469,73.0 L463,77.0 Z"/><line class="edge" x1="642" y1="73.0" x2="691" y2="73.0"/><path class="arrow" d="M690,69.0 L696,73.0 L690,77.0 Z"/>
+<g class="good" style="animation-delay:0s"><circle class="goodc" cx="0" cy="73.0" r="6" style="animation-delay:0s"/></g><g class="bad" style="animation-delay:2s"><circle class="badc" cx="0" cy="73.0" r="6" style="animation-delay:2s"/></g><g class="good" style="animation-delay:4s"><circle class="goodc" cx="0" cy="73.0" r="6" style="animation-delay:4s"/></g><g class="bad" style="animation-delay:6s"><circle class="badc" cx="0" cy="73.0" r="6" style="animation-delay:6s"/></g>
+<rect class="box" x="16" y="40" width="172" height="66" rx="8"/><text class="title" x="102.0" y="69">Research agents</text><text class="sub" x="102.0" y="89">parallel, one per competitor</text><rect class="box" x="243" y="40" width="172" height="66" rx="8"/><text class="title" x="329.0" y="69">JSON Schema</text><text class="sub" x="329.0" y="89">every claim has a source id</text><rect class="box gate" x="470" y="40" width="172" height="66" rx="8"/><text class="title" x="556.0" y="69">Validator</text><text class="sub" x="556.0" y="89">the gate</text><rect class="box" x="697" y="40" width="172" height="66" rx="8"/><text class="title" x="783.0" y="69">Branded PDF</text><text class="sub" x="783.0" y="89">rendered only if it passes</text>
+<text class="tray" x="556.0" y="213.0" style="animation-delay:2s">✗ blocked: no source</text>
+<text class="tray" x="556.0" y="213.0" style="animation-delay:6s">✗ blocked: dead link</text>
+<text class="ok" x="783.0" y="135.0" style="animation-delay:0s">✓ cited claim</text>
+<text class="ok" x="783.0" y="135.0" style="animation-delay:4s">✓ cited claim</text>
+</svg>

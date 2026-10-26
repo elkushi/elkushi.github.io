@@ -1,0 +1,63 @@
+<div class="wrap">
+  <header class="case-hero">
+    <p class="eyebrow">Case study · AI workflow</p>
+    <h1>A market report where every claim has a source</h1>
+    <p class="lede">A Claude Code workflow that researches competitors and produces a branded PDF report. A validator refuses to render the report if any claim has no source or any link is dead.</p>
+    <ul class="meta">
+      <li><b>Role:</b> designed and built it</li>
+      <li><b>Stack:</b> Claude Code, Python, JSON Schema, Jinja2, WeasyPrint</li>
+      <li><b>Code:</b> <a href="https://github.com/elkushi/claude_vibe_coding_projects">github.com/elkushi/claude_vibe_coding_projects</a></li>
+    </ul>
+  </header>
+
+  <div class="facts reveal">
+    <div class="fact"><b>61</b><span>pages in the first report</span></div>
+    <div class="fact"><b>~190</b><span>sources, each with a URL and access date</span></div>
+    <div class="fact"><b>400+</b><span>claims, every one linked to a source</span></div>
+    <div class="fact"><b>0</b><span>unsourced claims allowed</span></div>
+  </div>
+
+  <article>
+    <section class="reveal">
+      <h2>Why "just ask the AI" doesn't work for research</h2>
+      <ul>
+        <li><b>Errors add up.</b> If each step is 90% right, five steps in a row are right only 59% of the time.</li>
+        <li><b>Plausible isn't verified.</b> A language model writes confident text. Without a hard rule, facts, company claims and guesses get mixed together.</li>
+        <li><b>Nothing repeats.</b> A chat answer can't be re-run next quarter with the same structure and quality bar.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>The design</h2>
+      <p>Split the work by what each part is good at. The AI decides and writes: which competitors matter, what the evidence means. Code executes: fetching sites, checking citations, merging data, drawing charts, laying out the PDF. A person approves at four fixed checkpoints.</p>
+      <figure>
+        <picture><source media="(prefers-color-scheme: dark)" srcset="../assets/pipeline-dark.svg"><img src="../assets/pipeline-light.svg" width="880" height="230" alt="Animated diagram: research agents, JSON schema, validator, branded PDF. Claims with no source or a dead link are blocked."></picture>
+        <figcaption>Research runs in parallel, one agent per competitor. Everything funnels through one gate before the PDF.</figcaption>
+      </figure>
+    </section>
+
+    <section class="reveal">
+      <h2>What the validator checks</h2>
+      <ul class="checks">
+        <li>Every field matches the JSON schema, and every claim carries at least one source id.</li>
+        <li>Every cited id exists, with a URL and an access date.</li>
+        <li>No placeholder text and no example URLs in a real run.</li>
+        <li>No forbidden names.</li>
+        <li>No dead links. Pages that block bots are flagged for a person to check.</li>
+      </ul>
+      <p>The AI is told the rules. The code enforces them.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>The first run</h2>
+      <p>A competitor and market analysis for a company in the A2P SMS market. Nine research agents ran at once, one per competitor, with 30 more companies in an overview table. Before research started, about 50 claims from older internal files were checked against live sources, and 15 were corrected or dropped.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>What I'd do differently</h2>
+      <p>Count sources and claims with one tool. The research files and the final report counted slightly differently (192 vs 189 sources), which is why this page rounds the numbers.</p>
+    </section>
+
+    <p><a href="../index.html#work">← All work</a></p>
+  </article>
+</div>

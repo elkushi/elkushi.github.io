@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ritorica.com: from a blank page to production · Moustafa Elkoushy</title>
+<meta name="description" content="How I designed, built, deployed and secured a company website on Django CMS, alone.">
+<meta property="og:title" content="ritorica.com: from a blank page to production · Moustafa Elkoushy">
+<meta property="og:description" content="How I designed, built, deployed and secured a company website on Django CMS, alone.">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-qOhFsq0QMV2REqNwk5hGH5bZE9SkX6gt6yeyKdYPv+U='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Moustafa Elkoushy</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="../index.html#work">Work</a></li>
+        <li><a href="../index.html#security">Security</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="wrap">
+  <header class="case-hero">
+    <p class="eyebrow">Case study · Web development</p>
+    <h1>ritorica.com: from a blank page to production</h1>
+    <p class="lede">I designed and built the website of Ritorica, a B2B messaging company, on my own, and I keep it running in production.</p>
+    <ul class="meta">
+      <li><b>Role:</b> the only designer and developer</li>
+      <li><b>Stack:</b> Figma, Django CMS, PostgreSQL, HTML/CSS/JS, Gemini API, GitHub Actions</li>
+      <li><b>Timeline:</b> first commit June 2026, maintained since</li>
+      <li><b>Live:</b> <a href="https://www.ritorica.com">ritorica.com</a></li>
+    </ul>
+  </header>
+
+  <figure>
+    <img src="../assets/ritorica-home.webp" width="1200" height="750" alt="The ritorica.com home page on desktop.">
+    <figcaption>The home page today. The source code is private: it belongs to the company.</figcaption>
+  </figure>
+
+  <article>
+    <section class="reveal">
+      <h2>The job</h2>
+      <p>Ritorica sells business messaging: SMS, WhatsApp, Viber, Telegram and push. The website has to explain that to buyers, let the team edit pages without a developer, and turn visitors into leads.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>What I built</h2>
+      <ul>
+        <li><b>Design</b> in Figma, then turned into HTML, CSS and JavaScript templates.</li>
+        <li><b>Content management</b> on Django CMS, so pages can be edited in the browser. PostgreSQL in production.</li>
+        <li><b>Lead capture:</b> contact forms, demo requests and newsletter sign-up.</li>
+        <li><b>An AI chatbot</b> on the Google Gemini API that answers visitors' questions.</li>
+        <li><b>A coverage catalog</b> with one page per country, at <a href="https://www.ritorica.com/messaging/">/messaging/</a>.</li>
+      </ul>
+      <p>I build with Claude Code as a pair programmer. I make the decisions, review every change and own what ships.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Shipping and running it</h2>
+      <ul>
+        <li>Deployed to a Linux server. Changes go live automatically through GitHub Actions, with a systemd timer as a second route.</li>
+        <li>The server only accepts SSH keys, and deploys use their own key.</li>
+        <li>I wrote the production runbook: what is configured, how to deploy, how to check it worked.</li>
+        <li>I worked with the company's system administrator on server access and DNS.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>The bug that taught me the most</h2>
+      <p>For almost three weeks the deploy pipeline showed a green tick on every run. Nothing was actually deploying.</p>
+      <p>The deploy script didn't stop on errors, so each failing step was skipped quietly and the run still reported success. Underneath, the deploy key was broken, an old firewall step timed out for GitHub's servers, and the restart command couldn't run without a password.</p>
+      <p>I found it by comparing the commit running on the server with the last one I had pushed. Then I replaced the key, removed the step that timed out, gave the deploy user only the permissions it needs, and made the script fail loudly.</p>
+      <div class="note"><b>Lesson:</b> a green pipeline is a claim, not proof. Check what is actually live.</div>
+    </section>
+
+    <section class="reveal">
+      <h2>What I'd do differently</h2>
+      <p>Add a check at the end of every deploy that compares the live commit with the pushed one, from day one. It's a few lines, and it would have caught the silent failures on the first run.</p>
+    </section>
+
+    <figure class="reveal" style="max-width:320px">
+      <img src="../assets/ritorica-mobile.webp" width="390" height="844" alt="The ritorica.com home page on a phone." loading="lazy">
+      <figcaption>The same page on a phone.</figcaption>
+    </figure>
+
+    <p><a href="../index.html#work">← All work</a></p>
+  </article>
+</div>
+
+</main>
+<footer>
+  <div class="wrap">
+    <span>Moustafa Elkoushy · <a href="mailto:moustafa.elkoushy7@gmail.com">moustafa.elkoushy7@gmail.com</a> · <a href="https://github.com/elkushi">GitHub</a></span>
+    <span>Plain HTML and CSS. No framework.</span>
+  </div>
+</footer>
+<script src="../reveal.js" defer></script>
+</body>
+</html>
