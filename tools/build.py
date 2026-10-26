@@ -64,7 +64,7 @@ def minify_css(css: str) -> str:
 # page re-points them at /assets with the right number of ../.
 CSS = minify_css((SITE / "style.css").read_text(encoding="utf-8"))
 
-WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system", "drone"]
+WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system", "whitepapers", "drone"]
 
 LOCALES = {
     "en": {
@@ -90,6 +90,8 @@ LOCALES = {
                                             "Nine research agents in parallel, about 190 sources, 400+ cited claims, and a validator that blocks the rest."),
             "work/design-system.html": ("One brand system, replacing three blues and four button shapes · Moustafa Elkoushy",
                                         "The brand and UI system behind Ritorica's website, decks, emails, events and print work."),
+            "work/whitepapers.html": ("Four industry guides, 87 pages, written, designed and published · Moustafa Elkoushy",
+                                      "Research, writing, layout, covers, landing pages and the delivery email for four guides on business messaging, live on ritorica.com."),
             "work/drone.html": ("A drone you can take apart in the browser · Moustafa Elkoushy",
                                 "An interactive 3D breakdown of how a drone fits together. Eight assemblies, generated in code, no CAD import."),
         },
@@ -117,6 +119,8 @@ LOCALES = {
                                             "تسعة وكلاء بحث بالتوازي، ونحو 190 مصدرًا، وأكثر من 400 ادعاء موثّق، ومدقّق يوقف كل ما عدا ذلك."),
             "work/design-system.html": ("نظام هوية واحد بدل ثلاث درجات من الأزرق وأربعة أشكال للأزرار · مصطفى القوشي",
                                         "نظام الهوية والواجهة الذي بُني عليه موقع Ritorica وعروضها ورسائلها البريدية وفعالياتها ومطبوعاتها."),
+            "work/whitepapers.html": ("أربعة أدلة متخصصة في 87 صفحة، كتابةً وتصميمًا ونشرًا · مصطفى القوشي",
+                                      "البحث والكتابة والتنسيق والأغلفة وصفحات الهبوط والرسالة البريدية لأربعة أدلة عن مراسلات الأعمال، منشورة على ritorica.com."),
             "work/drone.html": ("طائرة مسيّرة يمكنك تفكيكها في المتصفح · مصطفى القوشي",
                                 "عرض ثلاثي الأبعاد تفاعلي لكيفية تركيب طائرة مسيّرة. ثماني مجموعات، مولّدة بالكود، بلا استيراد من برامج التصميم."),
         },
@@ -144,6 +148,8 @@ LOCALES = {
                                             "Девять исследовательских агентов параллельно, около 190 источников, больше 400 утверждений со ссылками и валидатор, который отсекает всё остальное."),
             "work/design-system.html": ("Одна бренд-система вместо трёх синих и четырёх форм кнопок · Мустафа Элькуши",
                                         "Бренд- и UI-система, на которой построены сайт, презентации, письма, мероприятия и печатные материалы Ritorica."),
+            "work/whitepapers.html": ("Четыре отраслевых руководства на 87 страниц: текст, дизайн и публикация · Мустафа Элькуши",
+                                      "Исследование, текст, вёрстка, обложки, лендинги и письмо для четырёх руководств по деловым рассылкам, опубликованных на ritorica.com."),
             "work/drone.html": ("Дрон, который можно разобрать в браузере · Мустафа Элькуши",
                                 "Интерактивная 3D-разборка дрона. Восемь узлов, построенных кодом, без импорта из CAD."),
         },
