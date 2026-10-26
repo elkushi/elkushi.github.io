@@ -13,6 +13,10 @@ CONTENT = SITE / "content"
 
 EMAIL = "moustafa.elkoushy7@gmail.com"
 GITHUB = "https://github.com/elkushi"
+# Set to the t.me username (no phone number: CLAUDE.md keeps that off public
+# pages). Empty means the Telegram links are simply left out.
+TELEGRAM = "Elkushi99"
+TG_URL = f"https://t.me/{TELEGRAM}" if TELEGRAM else ""
 
 # The one inline script on the site. Its hash goes in the CSP, so the policy can
 # refuse every other inline script without needing 'unsafe-inline'.
@@ -61,6 +65,11 @@ def external_new_tab(html: str) -> str:
 
 def page(path, title, desc, body):
     body = external_new_tab(body)
+    tg_footer = (f' · <a href="{TG_URL}" target="_blank" rel="noopener noreferrer">Telegram</a>'
+                 if TG_URL else "")
+    # The contact section asks for a Telegram button by name; fill it or drop it.
+    body = body.replace("<!--TELEGRAM-->",
+                        f'<a class="btn btn-secondary" href="{TG_URL}">Telegram</a>' if TG_URL else "")
     up = "../" * path.count("/")
     current = lambda target: ' aria-current="page"' if path == target else ""
     return f"""<!doctype html>
@@ -74,8 +83,8 @@ def page(path, title, desc, body):
 <meta property="og:description" content="{desc}">
 <meta name="color-scheme" content="light dark">
 <meta property="og:image" content="https://elkushi.github.io/assets/portrait-900.webp">
-<link rel="preload" href="{up}assets/fonts/Unbounded.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{up}assets/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{up}assets/fonts/Outfit.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{up}assets/fonts/JetBrainsMono-500.woff2" as="font" type="font/woff2" crossorigin>
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="{up}assets/favicon.svg" type="image/svg+xml">
@@ -85,16 +94,17 @@ def page(path, title, desc, body):
 <body>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="{up}index.html"><img src="{up}assets/portrait-520.webp" width="30" height="30" alt=""><span>Moustafa Elkoushy</span></a>
-    <nav aria-label="Main">
-      <ul>
-        <li><a href="{up}index.html#work"{current("index.html")}>Work</a></li>
-        <li class="hide-sm"><a href="{up}index.html#security">Security</a></li>
-        <li><a href="{up}index.html#about">About</a></li>
-        <li><a href="{up}index.html#contact">Contact</a></li>
-        <li><button class="theme-toggle" type="button" aria-label="Switch between light and dark theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></li>
-      </ul>
+    <a class="brand" href="{up}index.html"><span class="mark" aria-hidden="true"></span><span>Moustafa Elkoushy</span></a>
+    <nav class="links" aria-label="Main">
+      <a href="{up}index.html#work"{current("index.html")}>Work</a>
+      <a href="{up}index.html#security">Security</a>
+      <a href="{up}index.html#about">About</a>
+      <a href="{up}index.html#contact">Contact</a>
     </nav>
+    <div class="nav-end">
+      <button class="theme-toggle cta" type="button" aria-label="Switch between light and dark theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <a class="cta" href="{up}index.html#contact">Let's connect <span aria-hidden="true">&#8599;</span></a>
+    </div>
   </div>
 </header>
 <main>
@@ -102,7 +112,7 @@ def page(path, title, desc, body):
 </main>
 <footer>
   <div class="wrap">
-    <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+    <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub</a>{tg_footer}</span>
     <span>Plain HTML and CSS. No framework, no tracking.</span>
   </div>
 </footer>
