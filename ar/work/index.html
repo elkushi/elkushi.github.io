@@ -119,78 +119,74 @@
   <header class="case-hero">
     <p class="eyebrow">الأعمال &middot; كل المشاريع</p>
     <h1>كل الأعمال</h1>
-    <p class="lead">خمسة مشاريع وأداتان أصغر، مصنّفة حسب المجال. وكل دراسة حالة توضّح ما الذي يفعله المشروع، وكم كلّف بناؤه، والرقم الذي يثبت أنه يعمل.</p>
+    <p class="lead">خمسة مشاريع وأداتان أصغر. وكل دراسة حالة توضّح ما الذي يفعله المشروع، وكم كلّف بناؤه، والرقم الذي يثبت أنه يعمل. اختر فئة لتصفية القائمة.</p>
   </header>
 
   <section class="reveal">
-    <h2>منتجات الذكاء الاصطناعي</h2>
-    <p class="section-lede">تطبيقات يؤدي فيها النموذج عملًا حقيقيًا، ويتحقق منه شيء آخر قبل أن يصل إلى المستخدم.</p>
-    <div class="cards">
-      <a class="pcard" href="video-generator.html">
+    <div class="filters" role="group" aria-label="تصفية المشاريع حسب الفئة">
+      <button type="button" aria-pressed="true" data-filter="all">الكل</button>
+      <button type="button" aria-pressed="false" data-filter="ai">الذكاء الاصطناعي</button>
+      <button type="button" aria-pressed="false" data-filter="dev">التطوير</button>
+      <button type="button" aria-pressed="false" data-filter="design">التصميم</button>
+      <button type="button" aria-pressed="false" data-filter="marketing">التسويق</button>
+      <button type="button" aria-pressed="false" data-filter="security">الأمان</button>
+    </div>
+    <div class="cards" data-filter-grid>
+      <a class="pcard" href="video-generator.html" data-tags="ai dev marketing">
         <div class="art"><img src="../../assets/vf-live.webp" width="1600" height="1000" alt="العرض المباشر لمولّد الفيديو: أرضية مصنع كرتونية يعمل فيها كاتب محتوى ومصمّم ومدير جودة على منشور، وأسفلها خط زمني وسجلّ مباشر للأحداث." loading="lazy"></div>
+        <p class="cats">الذكاء الاصطناعي &middot; التطوير &middot; التسويق</p>
         <div class="chips"><span class="badge chip">Claude Code</span><span class="badge chip">FastAPI</span><span class="badge chip">Remotion</span></div>
         <h3>مولّد الفيديو والصور بالذكاء الاصطناعي</h3>
         <p>تطبيقي الخاص. تُدخل الهوية البصرية للعلامة وموضوعًا، فتحصل على فيديوهات قصيرة ومنشورات مصوّرة. وكلاء Claude يخطّطون ويكتبون، وأدوات Python تُنتج المحتوى، وخطوة لمراقبة الجودة تطابق النتيجة مع السيناريو. وتشاهد الفريق كله وهو يعمل مباشرة.</p>
         <p class="more">اقرأ دراسة الحالة &#8599;</p>
       </a>
-      <a class="pcard" href="seo-audit.html">
+      <a class="pcard" href="seo-audit.html" data-tags="ai dev marketing">
         <div class="art"><img src="../../assets/seo-report.webp" width="1600" height="1000" alt="تقرير فحص لموقع djangoproject.com: نتيجة إجمالية 76، ونتائج منفصلة لـ SEO وAEO وGEO." loading="lazy"></div>
+        <p class="cats">الذكاء الاصطناعي &middot; التطوير &middot; التسويق</p>
         <div class="chips"><span class="badge chip">FastAPI</span><span class="badge chip">Playwright</span><span class="badge chip">Claude Code</span></div>
         <h3>فحص المواقع لجوجل وللبحث بالذكاء الاصطناعي</h3>
         <p>ألصق عنوان موقع، واحصل في أقل من دقيقة على تقرير بالنتائج: ما الذي يجب إصلاحه لجوجل ولمحركات الإجابة وللبحث بالذكاء الاصطناعي مثل ChatGPT، مرتّبًا حسب الأثر، ومعه كود جاهز للّصق.</p>
         <p class="more">اقرأ دراسة الحالة &#8599;</p>
       </a>
-      <a class="pcard" href="research-workflow.html">
+      <a class="pcard" href="research-workflow.html" data-tags="ai marketing">
         <div class="art diagram"><img class="only-dark" src="../../assets/pipeline-dark.svg" width="880" height="230" alt="مخطط: الادعاءات التي بلا مصدر أو برابط معطّل يوقفها المدقّق." loading="lazy"><img class="only-light" src="../../assets/pipeline-light.svg" width="880" height="230" alt="مخطط: الادعاءات التي بلا مصدر أو برابط معطّل يوقفها المدقّق." loading="lazy"></div>
+        <p class="cats">الذكاء الاصطناعي &middot; التسويق</p>
         <div class="chips"><span class="badge chip">JSON Schema</span><span class="badge chip">WeasyPrint</span><span class="badge chip">Python</span></div>
         <h3>مسار بحث مع مدقّق</h3>
         <p>مسار عمل على Claude Code يكتب تقرير سوق يحمل هوية الشركة. ولا يُنشأ ملف PDF إذا كان أي ادعاء بلا مصدر أو أي رابط معطّلًا. أول تشغيل: 61 صفحة، ونحو 190 مصدرًا، وأكثر من 400 ادعاء موثّق.</p>
         <p class="more">اقرأ دراسة الحالة &#8599;</p>
       </a>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <h2>تطوير الويب</h2>
-    <p class="section-lede">مواقع وتطبيقات صمّمتها وبنيتها، وما زلت أتولّى تشغيلها.</p>
-    <div class="cards">
-      <a class="pcard" href="ritorica.html">
+      <a class="pcard" href="ritorica.html" data-tags="dev design marketing ai">
         <div class="art"><img src="../../assets/ritorica-home.webp" width="1200" height="750" alt="الصفحة الرئيسية لموقع ritorica.com: منصة مراسلات للأعمال، وفيها زر «اطلب عرضًا توضيحيًا»." loading="lazy"></div>
+        <p class="cats">الذكاء الاصطناعي &middot; التطوير &middot; التصميم &middot; التسويق</p>
         <div class="chips"><span class="badge chip">Django CMS</span><span class="badge chip">PostgreSQL</span><span class="badge chip">Gemini API</span></div>
         <h3>ritorica.com</h3>
         <p>أعدت تصميم موقع الشركة وبناءه من الصفر بمفردي، وما زلت أتولّى تشغيله. صمّمته في Figma، وبنيته على Django CMS وPostgreSQL، ونشرته على خادم Linux مع نشر تلقائي وروبوت محادثة بالذكاء الاصطناعي.</p>
         <p class="more">اقرأ دراسة الحالة &#8599;</p>
       </a>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <h2>التصميم</h2>
-    <p class="section-lede">أنظمة للهوية والواجهات، والمواد التي بُنيت عليها.</p>
-    <div class="cards">
-      <a class="pcard" href="design-system.html">
+      <a class="pcard" href="design-system.html" data-tags="design marketing">
         <div class="art"><img src="../../assets/ds-logo-ar.webp" width="1200" height="860" alt="شعار Ritorica بالعربية بثلاثة خطوط، على خلفية فاتحة وأخرى داكنة، مع فقاعة الحديث معكوسة." loading="lazy"></div>
+        <p class="cats">التصميم &middot; التسويق</p>
         <div class="chips"><span class="badge chip">نظام تصميم</span><span class="badge chip">Figma</span><span class="badge chip">طباعة</span></div>
         <h3>نظام تصميم لشركة مراسلات</h3>
         <p>كانت عروض Ritorica ولافتاتها ورسائلها البريدية وموقعها تبدو كأنها لشركات مختلفة. كتبت نظام الهوية والواجهة الذي وحّدها، من الألوان والخطوط والأشكال إلى أسلوب الكتابة والمكوّنات، ثم أنتجت المواد عليه، وصولًا إلى الشعار العربي وملفات الطباعة.</p>
         <p class="more">اقرأ دراسة الحالة &#8599;</p>
       </a>
+      <a href="https://github.com/elkushi/system-audit" target="_blank" rel="noopener noreferrer" class="pcard mini" data-tags="security dev">
+        <p class="cats">التطوير &middot; الأمان</p>
+        <div class="chips"><span class="badge chip">Bash</span><span class="badge chip">Linux</span></div>
+        <h3>system-audit</h3>
+        <p>أداة Bash تفحص خادم Linux بحثًا عن أخطاء الإعداد الأمنية الشائعة، وتكتب تقريرًا مؤرّخًا.</p>
+        <p class="more">شاهد الكود &#8599;</p>
+      </a>
+      <a href="https://elkushi.github.io/alisa-obby/" target="_blank" rel="noopener noreferrer" class="pcard mini" data-tags="dev">
+        <p class="cats">التطوير</p>
+        <div class="chips"><span class="badge chip">HTML</span><span class="badge chip">Canvas 2D</span><span class="badge chip">JavaScript</span></div>
+        <h3>لعبة «أوبي» على طريقة Roblox</h3>
+        <p>لعبة يمكنك لعبها، صنعتها هدية عيد ميلاد: ملف HTML واحد بلا أي مكتبات خارجية، برسوم canvas ثنائية الأبعاد، وفيزياء بخطوة زمنية ثابتة، وموسيقى تُولَّد داخل المتصفح.</p>
+        <p class="more">جرّب اللعبة &#8599;</p>
+      </a>
     </div>
-  </section>
-
-  <section class="reveal">
-    <h2>الأمان</h2>
-    <p class="section-lede">أدوات وعادات تمنع ما أبنيه من أن يتحوّل إلى نقطة ضعف.</p>
-    <ul class="checks">
-      <li><a href="https://github.com/elkushi/system-audit" target="_blank" rel="noopener noreferrer">system-audit: أداة Bash تفحص خادم Linux بحثًا عن أخطاء الإعداد الأمنية الشائعة.</a></li>
-    </ul>
-  </section>
-
-  <section class="reveal">
-    <h2>أعمال أصغر</h2>
-    <ul class="checks">
-      <li><a href="https://elkushi.github.io/alisa-obby/" target="_blank" rel="noopener noreferrer">لعبة «أوبي» على طريقة Roblox يمكنك لعبها، صنعتها هدية عيد ميلاد: ملف HTML واحد بلا أي مكتبات خارجية، برسوم canvas ثنائية الأبعاد، وفيزياء بخطوة زمنية ثابتة، وموسيقى تُولَّد داخل المتصفح.</a> <a href="https://github.com/elkushi/alisa-obby" target="_blank" rel="noopener noreferrer">الكود</a>.</li>
-    </ul>
   </section>
 
   <p><a href="../index.html#work">&rarr; العودة إلى الرئيسية</a></p>

@@ -27,3 +27,17 @@ if (matchMedia("(pointer: fine)").matches && !matchMedia("(prefers-reduced-motio
     el.addEventListener("pointerleave", () => { el.style.transform = ""; });
   });
 }
+
+// All-work page: category filter. Each card lists its categories in data-tags.
+const filterBar = document.querySelector(".filters");
+if (filterBar) {
+  const buttons = filterBar.querySelectorAll("button");
+  const cards = document.querySelectorAll("[data-filter-grid] .pcard");
+  filterBar.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const f = btn.dataset.filter;
+    buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+    cards.forEach((c) => { c.hidden = !(f === "all" || c.dataset.tags.split(" ").includes(f)); });
+  });
+}
