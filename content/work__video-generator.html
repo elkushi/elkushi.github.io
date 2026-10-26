@@ -10,9 +10,9 @@
     </ul>
   </header>
 
-  <figure>
-    <img src="../assets/video-pipeline.svg" width="880" height="230" alt="Diagram: brief, agents, schema check, voice and visuals, Remotion render, QA. QA can send a fix list back, at most twice.">
-    <figcaption>One video, start to finish. Blue boxes are checks that can stop the run.</figcaption>
+  <figure class="bleed">
+    <img src="../assets/vf-live.webp" width="1600" height="1000" alt="The app's live view while it makes a post: a cartoon factory floor with a copywriter, a designer, a validator, the renderer and a QA director, a timeline with real durations and a live feed of what each agent says.">
+    <figcaption>The live view while the app makes an image post. Each station is a Claude agent or a Python tool, and the timeline shows real durations.</figcaption>
   </figure>
 
   <article>
@@ -35,6 +35,44 @@
       </ol>
       <p>The same pipeline makes image posts and carousels. Videos come out in English, Arabic or Russian. Arabic captions run right to left.</p>
     </section>
+
+    <figure class="reveal">
+      <img src="../assets/video-pipeline.svg" width="880" height="230" alt="Diagram: brief, agents, schema check, voice and visuals, Remotion render, QA. QA can send a fix list back, at most twice." loading="lazy">
+      <figcaption>One video, start to finish. Blue boxes are checks that can stop the run.</figcaption>
+    </figure>
+
+    <section class="reveal">
+      <h2>Three options, you pick one</h2>
+      <p>For an image post, the app makes three different angles, each with its own design and its own copy for LinkedIn and Instagram. You pick one, edit the text if you want, and it delivers the slides, a carousel PDF and the post copy.</p>
+    </section>
+
+    <figure class="bleed reveal">
+      <img src="../assets/vf-variants.webp" width="1600" height="1111" alt="Three post options for a demo brand, side by side: a single before-and-after image, a four-slide carousel and a single statement card, each with its own LinkedIn copy and hashtags." loading="lazy">
+      <figcaption>Three options for one brief: a single image, a four-slide carousel and a statement card. Made for a fictional demo brand.</figcaption>
+    </figure>
+
+    <div class="shots reveal">
+      <figure>
+        <img src="../assets/vf-create.webp" width="1600" height="1000" alt="The Create page: pick a brand, describe the video in plain words, then choose the goal, platforms, language, length and style." loading="lazy">
+        <figcaption>Start: pick a brand and describe what you want in plain words.</figcaption>
+      </figure>
+      <figure>
+        <img src="../assets/vf-post.webp" width="1600" height="1000" alt="A delivered carousel in the gallery: the first slide, thumbnails of all four slides, the LinkedIn post copy with a Copy button and a Carousel PDF download." loading="lazy">
+        <figcaption>Finish: slides, a carousel PDF and ready-to-post copy.</figcaption>
+      </figure>
+    </div>
+
+    <div class="video-feature reveal">
+      <figure>
+        <video src="../assets/vf-video.mp4" poster="../assets/vf-video-poster.webp" width="540" height="960" controls muted playsinline preload="none"></video>
+      </figure>
+      <div>
+        <span class="label">Real output · 24 seconds · 9:16</span>
+        <h3>A finished video, made by the app</h3>
+        <p>One brief for a fictional notebook brand. The agents wrote the script, the voice is a free neural voice, Remotion rendered it, and the QA step passed it. No human edits.</p>
+        <p>The same run also delivered a 4:5 version for the LinkedIn and Instagram feeds.</p>
+      </div>
+    </div>
 
     <section class="reveal">
       <h2>Constraints I set</h2>

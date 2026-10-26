@@ -8,45 +8,61 @@
 <meta property="og:title" content="Moustafa Elkoushy · AI Product Engineer">
 <meta property="og:description" content="AI product engineer. I build AI products from design to production, and I make the AI check its own work.">
 <meta name="color-scheme" content="light dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-qOhFsq0QMV2REqNwk5hGH5bZE9SkX6gt6yeyKdYPv+U='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta property="og:image" content="https://elkushi.github.io/assets/portrait-900.webp">
+<link rel="preload" href="assets/fonts/Unbounded.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-Cb3oqRftnYnr64qeXegh28h1GKTrDOBk/IHA5wXHP3I='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
-<script>document.documentElement.classList.add("js")</script>
+<script>var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t)d.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="index.html">Moustafa Elkoushy</a>
+    <a class="brand" href="index.html"><img src="assets/portrait-520.webp" width="30" height="30" alt=""><span>Moustafa Elkoushy</span></a>
     <nav aria-label="Main">
       <ul>
         <li><a href="index.html#work" aria-current="page">Work</a></li>
-        <li><a href="index.html#security">Security</a></li>
+        <li class="hide-sm"><a href="index.html#security">Security</a></li>
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#contact">Contact</a></li>
+        <li><button class="theme-toggle" type="button" aria-label="Switch between light and dark theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></li>
       </ul>
     </nav>
   </div>
 </header>
 <main>
 <div class="wrap">
-  <section class="hero" style="border-top:0">
-    <p class="eyebrow">AI Product Engineer</p>
-    <h1>Moustafa Elkoushy</h1>
-    <p class="typed">I build AI products, and I make the AI check its own work.</p>
-    <p class="lede">I take products from design to production: web apps, AI agents and the automation around them. I'm an AI Marketing Engineer at Ritorica, a B2B messaging company, where I designed and built <a href="https://www.ritorica.com" target="_blank" rel="noopener noreferrer">ritorica.com</a>.</p>
-    <div class="actions">
-      <a class="btn primary" href="#work">See my work</a>
-      <a class="btn" href="https://github.com/elkushi">GitHub</a>
-      <a class="btn" href="mailto:moustafa.elkoushy7@gmail.com">Email me</a>
+  <header class="hero">
+    <div>
+      <span class="eyebrow">AI Product Engineer · Latvia</span>
+      <h1>Moustafa <span>Elkoushy</span></h1>
+      <p class="typed">I build AI products, and I make the AI check its own work.</p>
+      <p class="lede">I take products from design to production: web apps, AI agents and the automation around them. I'm an AI Marketing Engineer at Ritorica, a B2B messaging company, where I designed and built <a href="https://www.ritorica.com" target="_blank" rel="noopener noreferrer">ritorica.com</a>.</p>
+      <div class="actions">
+        <a class="btn primary" href="#work">See my work <span aria-hidden="true">→</span></a>
+        <a class="btn" href="https://github.com/elkushi">GitHub</a>
+        <a class="btn" href="mailto:moustafa.elkoushy7@gmail.com">Email me</a>
+      </div>
+      <ul class="quick">
+        <li><b>4</b> projects shipped end to end</li>
+        <li>Arabic · English · Russian</li>
+      </ul>
     </div>
-  </section>
+    <div class="portrait">
+      <div class="ring" aria-hidden="true"></div>
+      <div class="frame" data-tilt><img src="assets/portrait-900.webp" srcset="assets/portrait-520.webp 520w, assets/portrait-900.webp 900w" sizes="(min-width: 860px) 400px, 82vw" width="900" height="920" alt="Anime-style portrait of Moustafa, smiling, with a wolverine wrapped in violet lightning behind him."></div>
+      <p class="badge">Favourite animal <b>The wolverine</b></p>
+    </div>
+  </header>
 
   <section id="work" class="reveal">
+    <span class="label">01 · Selected work</span>
     <h2>Work</h2>
-    <p class="section-lede">Three projects, each taken all the way to something that runs.</p>
+    <p class="section-lede">Four projects, each taken all the way to something that runs.</p>
     <div class="cards">
-      <a class="card wide" href="work/ritorica.html">
+      <a class="card wide" data-tilt href="work/ritorica.html">
         <div class="shot"><img src="assets/ritorica-home.webp" width="1200" height="750" alt="The ritorica.com home page: business messaging platform, with a Request Demo button." loading="lazy"></div>
         <div class="body">
           <h3>ritorica.com</h3>
@@ -55,16 +71,25 @@
           <p class="more">Read the case study →</p>
         </div>
       </a>
-      <a class="card" href="work/video-generator.html">
-        <div class="shot"><img src="assets/video-pipeline.svg" width="880" height="230" alt="Diagram: brief, agents, schema check, voice and visuals, Remotion render, QA." loading="lazy"></div>
+      <a class="card wide" data-tilt href="work/video-generator.html">
+        <div class="shot photo"><img src="assets/vf-live.webp" width="1600" height="1000" alt="The video generator's live view: a cartoon factory floor where a copywriter, a designer and a QA director work on a post, with a timeline and a live feed below." loading="lazy"></div>
         <div class="body">
           <h3>AI video and image generator</h3>
-          <p>My own app. A brand kit and a topic go in; short videos and image posts come out. Claude agents plan and write, Python tools render, and a QA step checks the result against the script.</p>
+          <p>My own app. A brand kit and a topic go in; short videos and image posts come out. Claude agents plan and write, Python tools render, and a QA step checks the result against the script. You watch the whole team work live.</p>
           <ul class="tags"><li>Claude Code</li><li>FastAPI</li><li>React</li><li>Remotion</li><li>Docker</li></ul>
           <p class="more">Read the case study →</p>
         </div>
       </a>
-      <a class="card" href="work/research-workflow.html">
+      <a class="card" data-tilt href="work/seo-audit.html">
+        <div class="shot photo"><img src="assets/seo-report.webp" width="1600" height="1000" alt="An audit report for djangoproject.com: overall score 76, with separate SEO, AEO and GEO scores." loading="lazy"></div>
+        <div class="body">
+          <h3>Website audit for Google and AI search</h3>
+          <p>Paste a website, get a scored report in under a minute: what to fix for Google, answer engines and AI search like ChatGPT, ranked by impact, with code to paste in.</p>
+          <ul class="tags"><li>Python</li><li>FastAPI</li><li>Claude Code</li><li>Playwright</li></ul>
+          <p class="more">Read the case study →</p>
+        </div>
+      </a>
+      <a class="card" data-tilt href="work/research-workflow.html">
         <div class="shot"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pipeline-dark.svg"><img src="assets/pipeline-light.svg" width="880" height="230" alt="Animated diagram: claims without a source or with a dead link are blocked at the validator." loading="lazy"></picture></div>
         <div class="body">
           <h3>Research workflow with a validator</h3>
@@ -78,6 +103,7 @@
   </section>
 
   <section id="security" class="reveal">
+    <span class="label">02 · How I build</span>
     <h2>Security basics</h2>
     <p class="section-lede">An AI app that can run commands needs limits. These are in the code, not just in a policy.</p>
     <ul class="checks">
@@ -90,6 +116,7 @@
   </section>
 
   <section id="about" class="reveal">
+    <span class="label">03 · Background</span>
     <h2>About</h2>
     <p class="section-lede">Engineer by training. I like work where the technical side and the people side meet.</p>
     <dl class="cv">
@@ -106,8 +133,9 @@
     </dl>
   </section>
 
-  <section id="contact" class="reveal">
-    <h2>Contact</h2>
+  <section id="contact" class="band reveal">
+    <span class="label">04 · Contact</span>
+    <h2>Let's talk</h2>
     <p class="section-lede">The fastest way to reach me is email.</p>
     <div class="actions">
       <a class="btn primary" href="mailto:moustafa.elkoushy7@gmail.com">moustafa.elkoushy7@gmail.com</a>
@@ -120,7 +148,7 @@
 <footer>
   <div class="wrap">
     <span>Moustafa Elkoushy · <a href="mailto:moustafa.elkoushy7@gmail.com">moustafa.elkoushy7@gmail.com</a> · <a href="https://github.com/elkushi" target="_blank" rel="noopener noreferrer">GitHub</a></span>
-    <span>Plain HTML and CSS. No framework.</span>
+    <span>Plain HTML and CSS. No framework, no tracking.</span>
   </div>
 </footer>
 <script src="reveal.js" defer></script>
