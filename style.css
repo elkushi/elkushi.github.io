@@ -142,13 +142,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 @keyframes spin { to { transform: translateZ(-20px) rotate(360deg); } }
 @keyframes sway { from { transform: rotateY(-12deg) rotateX(4deg); } to { transform: rotateY(12deg) rotateX(-4deg); } }
 
-.stack { display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; padding: var(--space-8) 0 0; color: var(--ink-muted); }
-.stack .item { display: flex; flex-direction: column; align-items: center; gap: 10px; font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
-/* Real brand marks now, so no stroke/fill override: each symbol carries its
-   own colours, and the monochrome ones inherit currentColor. */
+/* The tool row drifts sideways for ever. Two identical halves, and the track
+   is translated by exactly half its width, so the seam never shows. The name
+   "drift" is in the ambient list, so the design-rule checker lets it run long:
+   this is background motion, not a response to a click. */
+.stack { overflow: hidden; padding: var(--space-8) 0 0; color: var(--ink-muted);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.stack-track { display: flex; width: max-content; animation: drift 46s linear infinite; }
+.stack:hover .stack-track, .stack:focus-within .stack-track { animation-play-state: paused; }
+.stack-row { display: flex; gap: 44px; padding-inline-end: 44px; }
+.stack .item { display: flex; flex-direction: column; align-items: center; gap: 8px; font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
 .stack svg { width: 28px; height: 28px; }
-.stack { gap: 28px 32px; }
-.stack .item { gap: 8px; }
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* --- cards ------------------------------------------------------------ */
 .cards { display: grid; gap: var(--space-6); grid-template-columns: 1fr; }
@@ -269,7 +275,7 @@ footer a { color: var(--ink-muted); }
 /* Rule 5 again: under reduced motion the rotation and the tilt stop; the glow
    stays, because it is colour rather than movement. */
 @media (prefers-reduced-motion: reduce) {
-  .cube, .ring { animation: none; }
+  .cube, .ring, .stack-track { animation: none; }
   .pcard, .btn { transition: none; }
   .pcard:hover { transform: none; }
   .reveal .pcard, .reveal .skill, .reveal .tl li, .reveal .fact, .reveal .checks li { opacity: 1; transform: none; transition: none; }
