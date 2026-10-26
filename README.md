@@ -16,10 +16,15 @@ style.css     one stylesheet
 reveal.js     fades sections in on scroll; without JS everything is visible
 ```
 
-## Rebuild
+## Rebuild and deploy
+
+Deploys are automatic. Every push to `main` runs `.github/workflows/deploy.yml`: it builds the
+pages from `content/`, checks every link, asset and the CSP (`tools/check.py`), and publishes to
+GitHub Pages. A broken link stops the deploy.
 
 ```bash
-python3 tools/build.py
+python3 tools/build.py    # build locally
+python3 tools/check.py    # same check the deploy runs
 ```
 
 ## Security
