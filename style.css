@@ -21,7 +21,7 @@
   --ink: #f7f5fa; --ink-muted: #aaa2b8;
   --accent-violet: #a855f7; --accent-violet-text: #c084fc; --on-accent: #ffffff;
   --accent-glow: #7c3aed; --line: #2e2540; --focus: #e9d5ff;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 56px; --space-16: 104px;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-12: 56px; --space-16: 104px;
   --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
   --shadow-card: 0 0 0 1px rgba(168, 85, 247, .12), 0 24px 60px -28px rgba(0, 0, 0, .85);
   --shadow-glow: 0 0 44px -6px rgba(168, 85, 247, .6);
@@ -161,6 +161,32 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .pcard h3 { font-size: 28px; line-height: 1.15; margin: var(--space-3) 0 var(--space-2); }
 .pcard p { color: var(--ink-muted); font-size: 15px; margin-bottom: var(--space-4); max-width: none; }
 .pcard .more { color: var(--accent-violet-text); font-weight: 600; margin: auto 0 0; padding-top: var(--space-2); }
+
+/* --- skills ------------------------------------------------------------ */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); }
+.skill { background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-5, 20px); }
+.skill h3 { font-size: 17px; margin: 0 0 var(--space-2); }
+.skill p { color: var(--ink-muted); font-size: 15px; margin: 0; max-width: none; }
+.lang-levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
+.lang { border-top: 1px solid var(--line); padding-top: var(--space-3); }
+.lang b { display: block; font-size: 24px; font-weight: 600; line-height: 1.25; }
+.lang span { color: var(--ink-muted); font-size: 14px; }
+
+/* --- experience timeline ------------------------------------------------ */
+/* Two tracks side by side, each hung off one line. Logical properties, so
+   the Arabic page mirrors it without a second rule set. */
+.cols { display: grid; grid-template-columns: 1fr; gap: var(--space-8); }
+@media (min-width: 860px) { .cols { grid-template-columns: 1fr 1fr; gap: var(--space-12); } }
+.cols > div > h3 { font-size: 22px; margin: 0 0 var(--space-6); }
+.tl { list-style: none; margin: 0; padding: 0; border-inline-start: 1px solid var(--line); }
+.tl li { position: relative; padding-block: 0 var(--space-8); padding-inline: var(--space-6) 0; }
+.tl li:last-child { padding-bottom: 0; }
+.tl li::before { content: ""; position: absolute; inset-inline-start: -5px; top: 7px; width: 9px; height: 9px; background: var(--line); transform: rotate(45deg); }
+.tl li.now::before { background: var(--accent-violet); box-shadow: 0 0 10px var(--accent-glow); }
+.tl .when { font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-muted); }
+.tl h4 { font-size: 20px; line-height: 1.3; margin: var(--space-2) 0 2px; font-weight: 600; }
+.tl .org { color: var(--accent-violet-text); font-weight: 500; }
+.tl p { margin: var(--space-2) 0 0; color: var(--ink-muted); font-size: 15px; max-width: 52ch; }
 
 /* --- case studies ----------------------------------------------------- */
 .case-hero { padding: var(--space-12) 0 var(--space-8); }

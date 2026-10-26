@@ -49,7 +49,7 @@ WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design
 LOCALES = {
     "en": {
         "lang": "en", "rtl": False, "name": "English", "short": "EN",
-        "nav": ["Work", "Security", "About", "Contact"],
+        "nav": ["Work", "Skills", "Security", "Experience", "Contact"],
         "connect": "Let's connect",
         "theme": "Switch between light and dark theme",
         "lang_label": "Language",
@@ -72,7 +72,7 @@ LOCALES = {
     },
     "ar": {
         "lang": "ar", "rtl": True, "name": "العربية", "short": "ع",
-        "nav": ["الأعمال", "الأمان", "نبذة", "تواصل"],
+        "nav": ["الأعمال", "الأدوات", "الأمان", "المسيرة", "تواصل"],
         "connect": "لنتواصل",
         "theme": "التبديل بين الوضع الفاتح والداكن",
         "lang_label": "اللغة",
@@ -95,7 +95,7 @@ LOCALES = {
     },
     "ru": {
         "lang": "ru", "rtl": False, "name": "Русский", "short": "RU",
-        "nav": ["Работы", "Безопасность", "Обо мне", "Контакты"],
+        "nav": ["Работы", "Инструменты", "Безопасность", "Опыт", "Контакты"],
         "connect": "Связаться",
         "theme": "Переключить светлую и тёмную тему",
         "lang_label": "Язык",
@@ -178,7 +178,7 @@ def page(code: str, page_path: str, body: str) -> str:
 
     nav = "".join(
         f'<a href="{home}#{anchor}"{current if anchor == "work" else ""}>{label}</a>'
-        for anchor, label in zip(["work", "security", "about", "contact"], loc["nav"]))
+        for anchor, label in zip(["work", "skills", "security", "about", "contact"], loc["nav"]))
 
     return f"""<!doctype html>
 <html lang="{loc['lang']}"{dir_attr}>
