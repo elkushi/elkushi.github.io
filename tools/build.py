@@ -87,7 +87,6 @@ LOCALES = {
         "connect": "Let's connect",
         "theme": "Switch between light and dark theme",
         "lang_label": "Language", "main_nav": "Main",
-        "footer": "Hand-written HTML, CSS and a little JavaScript. No framework, no tracking.",
         "font_preload": ["Outfit.woff2", "JetBrainsMono-500.woff2"],
         "titles": {
             "index.html": ("Moustafa Elkoushy · AI Product Engineer",
@@ -116,7 +115,6 @@ LOCALES = {
         "connect": "لنتواصل",
         "theme": "التبديل بين الوضع الفاتح والداكن",
         "lang_label": "اللغة", "main_nav": "القائمة الرئيسية",
-        "footer": "HTML وCSS وقليل من JavaScript، مكتوبة يدويًا. بلا إطار عمل، وبلا تتبّع.",
         "font_preload": ["Cairo-arabic.woff2", "Cairo-latin.woff2"],
         "titles": {
             "index.html": ("مصطفى القوشي · مهندس منتجات ذكاء اصطناعي",
@@ -145,7 +143,6 @@ LOCALES = {
         "connect": "Связаться",
         "theme": "Переключить светлую и тёмную тему",
         "lang_label": "Язык", "main_nav": "Главное меню",
-        "footer": "HTML, CSS и немного JavaScript, написанные вручную. Без фреймворков и без трекинга.",
         "font_preload": ["Manrope-cyrillic.woff2", "Manrope-latin.woff2"],
         "titles": {
             "index.html": ("Мустафа Элькуши · AI Product Engineer",
@@ -175,6 +172,35 @@ PAGE_PATHS = ["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK
 EXTERNAL = re.compile(r'<a href="(https?://[^"]+)"(?![^>]*target=)')
 
 
+IMG = re.compile(r'<img ([^>]*?)src="((?:\.\./)*assets/)([\w-]+)\.webp"([^>]*)>')
+
+
+def responsive_images(body: str) -> str:
+    """Give every large image a 640px version to choose from.
+
+    A card or a half-width screenshot shows at about 560px on a laptop, so a
+    phone or laptop downloads the small file (a quarter of the bytes) and only a
+    wide, sharp screen takes the full one. Runs only where NAME-640.webp exists.
+    """
+    def fix(m, sizes):
+        pre, base, name, post = m.groups()
+        attrs = pre + post
+        small = SITE / "assets" / f"{name}-640.webp"
+        w = re.search(r'width="(\d+)"', attrs)
+        if "srcset=" in attrs or not small.exists() or not w:
+            return m.group(0)
+        return (f'<img {pre}src="{base}{name}.webp" srcset="{base}{name}-640.webp 640w, '
+                f'{base}{name}.webp {w.group(1)}w" sizes="{sizes}"{post}>')
+
+    half = "(min-width: 1240px) 560px, (min-width: 760px) 46vw, 100vw"
+    # cards and side-by-side screenshots are half width on a laptop
+    body = re.sub(r'<div class="art[^"]*">.*?</div>|<div class="shots[^"]*">.*?</div>',
+                  lambda blk: IMG.sub(lambda m: fix(m, half), blk.group(0)), body, flags=re.S)
+    body = re.sub(r'<figure class="bleed[^"]*">.*?</figure>',
+                  lambda blk: IMG.sub(lambda m: fix(m, "(min-width: 1240px) 1200px, 100vw"), blk.group(0)), body, flags=re.S)
+    return IMG.sub(lambda m: fix(m, "(min-width: 900px) 760px, 100vw"), body)
+
+
 def external_new_tab(html: str) -> str:
     """Every link that leaves the site opens in a new tab.
 
@@ -199,6 +225,7 @@ def page(code: str, page_path: str, body: str) -> str:
     home = f"{up}index.html"
 
     body = external_new_tab(body)
+    body = responsive_images(body)
     # Fragments write asset paths relative to the English page they were
     # authored for; re-point them at the single copy under /assets.
     body = re.sub(r'(?:\.\./)*assets/', f"{up}assets/", body)
@@ -274,7 +301,6 @@ def page(code: str, page_path: str, body: str) -> str:
 <footer>
   <div class="wrap">
     <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub</a>{tg_foot}</span>
-    <span>{loc['footer']}</span>
   </div>
 </footer>
 <script src="{up}reveal.js" defer></script>
