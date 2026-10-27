@@ -377,6 +377,57 @@ footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; 
 .offer .meta span { display: inline-flex; align-items: center; padding: 7px 14px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--accent-violet) 14%, transparent); border: 1px solid color-mix(in srgb, var(--accent-violet) 36%, transparent); color: var(--accent-violet-text); font: 600 13px/1 var(--sans); white-space: nowrap; }
 .offer .go { margin: 0; }
 .btn-sm { min-height: 44px; padding: 8px 18px; font-size: 14px; margin: 0; }
+/* --- service illustrations ------------------------------------------------ */
+/* Drawn by hand in tools/art/*.svg and inlined by build.py, so they take the
+   theme tokens and switch with light and dark like the rest of the page. */
+.offer-art { margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-6)) var(--space-5); padding: var(--space-5) var(--space-5) var(--space-3); border-bottom: 1px solid var(--line); border-radius: var(--radius-lg) var(--radius-lg) 0 0; overflow: hidden; background: radial-gradient(120% 100% at 75% 0%, color-mix(in srgb, var(--accent-glow) 22%, transparent), transparent 65%), var(--surface-100); }
+.offer-art svg { display: block; width: 100%; height: auto; overflow: visible; transition: transform .3s ease-out; }
+.offer:hover .offer-art svg { transform: translateY(-3px) scale(1.02); }
+.art .p { fill: var(--surface-300); stroke: var(--line); stroke-width: 1.2; }
+.art .p2 { fill: var(--surface-200); stroke: var(--line); stroke-width: 1.2; }
+.art .bg { fill: var(--surface-100); }
+.art .ln-s { stroke: var(--line); stroke-width: 1.2; }
+.art .bar { fill: var(--ink-muted); opacity: .32; }
+.art .bar-i { fill: var(--ink); opacity: .8; }
+.art .ln { fill: none; stroke: var(--line); stroke-width: 2.5; }
+.art .wf { fill: none; stroke: var(--ink-muted); stroke-width: 1.4; opacity: .55; }
+.art .hdl { fill: var(--surface-100); stroke: var(--accent-violet); stroke-width: 1.5; }
+.art .cursor { fill: var(--ink); stroke: var(--surface-100); stroke-width: 1.5; stroke-linejoin: round; }
+.art .ac { fill: var(--accent-violet); }
+.art .ac-b { stroke: var(--accent-violet); stroke-width: 1.8; }
+.art .ac-soft { fill: color-mix(in srgb, var(--accent-violet) 20%, transparent); stroke: color-mix(in srgb, var(--accent-violet) 45%, transparent); }
+.art .stop-a { stop-color: var(--accent-glow); }
+.art .stop-b { stop-color: var(--accent-gold, #e3a53c); }
+.art .warm { fill: var(--accent-gold, #e3a53c); }
+.art .ok { fill: #22c55e; }
+.art .bad { fill: #f43f5e; }
+.art .warm-soft { fill: color-mix(in srgb, var(--accent-gold, #e3a53c) 22%, transparent); }
+.art .ok-soft { fill: color-mix(in srgb, #22c55e 22%, transparent); }
+.art .bad-soft { fill: color-mix(in srgb, #f43f5e 18%, transparent); stroke: #f43f5e; stroke-width: 1.2; }
+.art .ac-s, .art .ink-s, .art .ok-s, .art .bad-s, .art .warm-s { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.art .ac-s { stroke: var(--accent-violet); }
+.art .ink-s { stroke: var(--ink); }
+.art .ok-s { stroke: #22c55e; stroke-width: 2.4; }
+.art .bad-s { stroke: #f43f5e; }
+.art .warm-s { stroke: var(--accent-gold, #e3a53c); }
+.art .thin { stroke-width: 1.5; }
+.art .glow { filter: drop-shadow(0 6px 14px color-mix(in srgb, var(--accent-glow) 45%, transparent)); }
+@media (prefers-reduced-motion: no-preference) {
+  .art .float { animation: art-float 4s ease-in-out infinite; }
+  .art .pulse { animation: art-pulse 1.2s ease-in-out infinite; }
+  .art .pulse.slow { animation-duration: 2.6s; }
+  .art .drift { animation: art-drift 1.2s linear infinite; }
+  .art .spin { animation: art-spin 9s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .art .scan { animation: art-sway 3.4s ease-in-out infinite alternate; }
+  .art .d1 { animation-delay: .2s; }
+  .art .d2 { animation-delay: .4s; }
+}
+@keyframes art-float { 50% { transform: translateY(-6px); } }
+@keyframes art-pulse { 50% { opacity: .3; } }
+@keyframes art-drift { to { stroke-dashoffset: -24; } }
+@keyframes art-spin { to { transform: rotate(360deg); } }
+@keyframes art-sway { to { transform: translateY(138px); } }
+
 .offers-note { margin-top: var(--space-6); font-size: 15px; }
 
 /* --- the compact half of the toolkit ----------------------------------- */

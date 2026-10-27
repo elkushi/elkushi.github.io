@@ -96,6 +96,19 @@ def minify_css(css: str) -> str:
 # page re-points them at /assets with the right number of ../.
 CSS = minify_css((SITE / "style.css").read_text(encoding="utf-8"))
 
+# Scripts carry a short hash of their contents in the URL. The service worker
+# serves assets from its saved copy first, so without this a returning visitor
+# runs last week's script for one visit after every change.
+def version(*names: str) -> str:
+    h = hashlib.sha256()
+    for n in names:
+        h.update((SITE / n).read_bytes())
+    return "?v=" + h.hexdigest()[:8]
+
+REVEAL_V = version("reveal.js")
+# drone-escort.js passes its own ?v= on to drone-model.js, so one hash covers both.
+DRONE_V = version("assets/drone-escort.js", "assets/drone-model.js")
+
 WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system", "whitepapers", "drone"]
 
 LOCALES = {
@@ -255,8 +268,13 @@ def page(code: str, page_path: str, body: str) -> str:
     up = "../" * rel.count("/")
     dir_attr = ' dir="rtl"' if loc["rtl"] else ""
     current = ' aria-current="page"' if page_path == "index.html" else ""
-    home = f"{up}index.html"
+    # This language's own home page. "{up}index.html" alone is the English one,
+    # which sent Arabic and Russian readers to English from every nav link.
+    home = f"{up}{out_path(code, 'index.html')}"
 
+    # Service illustrations live in tools/art/ and are inlined, so their colours
+    # come from the page's theme tokens.
+    body = re.sub(r"@@ART:([a-z-]+)@@", lambda m: (SITE / "tools" / "art" / f"{m.group(1)}.svg").read_text().strip(), body)
     body = body.replace("@@TG@@", TG_URL).replace("@@WA@@", WA_URL).replace("@@WA_SHOWN@@", WA_SHOWN)
     body = external_new_tab(body)
     body = responsive_images(body)
@@ -290,7 +308,7 @@ def page(code: str, page_path: str, body: str) -> str:
         }, ensure_ascii=False) + "</script>"
     # The home page gets the drone that flies down it. The script decides on
     # the visitor's device whether three.js is worth loading at all.
-    drone = f'\n<script src="{up}assets/drone-escort.js" defer></script>' if page_path == "index.html" else ""
+    drone = f'\n<script src="{up}assets/drone-escort.js{DRONE_V}" defer></script>' if page_path == "index.html" else ""
     tg_foot = f' · <a href="{TG_URL}" target="_blank" rel="noopener noreferrer">Telegram</a>' if TG_URL else ""
     preload = "\n".join(
         f'<link rel="preload" href="{up}assets/fonts/{f}" as="font" type="font/woff2" crossorigin>'
@@ -323,7 +341,7 @@ def page(code: str, page_path: str, body: str) -> str:
     # its own page and is marked current while you are reading it.
     on_blog = ' aria-current="page"' if page_path.startswith("blog/") else ""
     nav = "".join(
-        f'<a href="{up}blog/index.html"{on_blog}>{label}</a>' if anchor == "blog" else
+        f'<a href="{up}{out_path(code, "blog/index.html")}"{on_blog}>{label}</a>' if anchor == "blog" else
         f'<a href="{home}#{anchor}"{current if anchor == "work" else ""}>{label}</a>'
         for anchor, label in zip(["work", "services", "skills", "security", "about", "blog", "contact"], loc["nav"]))
 
@@ -379,7 +397,7 @@ def page(code: str, page_path: str, body: str) -> str:
   </div>
 </footer>
 <a class="to-top" href="#" aria-label="{TOP_LABEL[code]}" title="{TOP_LABEL[code]}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
-<script src="{up}reveal.js" defer></script>{drone}
+<script src="{up}reveal.js{REVEAL_V}" defer></script>{drone}
 </body>
 </html>
 """

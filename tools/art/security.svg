@@ -1,0 +1,43 @@
+<svg class="art" viewBox="0 0 520 200" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="art-sec-clip"><rect x="16" y="46" width="262" height="140" rx="12"/></clipPath>
+    <linearGradient id="art-sec-beam" x1="0" y1="0" x2="0" y2="1"><stop class="stop-a" offset="0" stop-opacity="0"/><stop class="stop-a" offset="1" stop-opacity=".35"/></linearGradient>
+  </defs>
+
+  <!-- The web app under test. -->
+  <rect class="p2" x="16" y="18" width="262" height="168" rx="12"/>
+  <circle class="bar" cx="32" cy="32" r="4"/><circle class="bar" cx="45" cy="32" r="4"/><circle class="bar" cx="58" cy="32" r="4"/>
+  <path class="ln" d="M16 46h262"/>
+  <rect class="bar" x="36" y="60" width="60" height="6" rx="3"/>
+  <rect class="bg ln-s" x="36" y="72" width="150" height="20" rx="6"/>
+  <rect class="bar" x="36" y="100" width="48" height="6" rx="3"/>
+  <rect class="bg ln-s" x="36" y="112" width="150" height="20" rx="6"/>
+  <rect class="ac-soft" x="36" y="144" width="72" height="22" rx="11"/>
+  <rect class="bar" x="202" y="60" width="58" height="58" rx="8"/>
+  <rect class="bar" x="202" y="128" width="58" height="6" rx="3"/><rect class="bar" x="202" y="140" width="42" height="6" rx="3"/>
+  <!-- What the scan found. -->
+  <rect class="bad-s pulse slow" x="31" y="67" width="160" height="30" rx="9" stroke-dasharray="4 4"/>
+  <rect class="warm-s pulse slow d1" x="197" y="55" width="68" height="68" rx="11" stroke-dasharray="4 4"/>
+  <!-- The scan line. -->
+  <g clip-path="url(#art-sec-clip)">
+    <g class="scan">
+      <rect x="16" y="24" width="262" height="24" fill="url(#art-sec-beam)"/>
+      <path class="ac-s thin" d="M16 48h262"/>
+    </g>
+  </g>
+
+  <!-- The shield between the app and the report. -->
+  <circle class="ac-s pulse slow" cx="296" cy="102" r="34" stroke-width="1.5"/>
+  <circle class="ac glow" cx="296" cy="102" r="25"/>
+  <path d="M296 89l10 4.3v7.2c0 6.4-4.3 11.4-10 13.6-5.7-2.2-10-7.2-10-13.6v-7.2z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M291.5 101.5l3.2 3.2 6-6.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- The report: what to fix first. -->
+  <rect class="p glow" x="330" y="26" width="176" height="152" rx="14"/>
+  <rect class="bar-i" x="346" y="42" width="84" height="8" rx="4"/>
+  <rect class="bar" x="346" y="56" width="56" height="6" rx="3"/>
+  <path class="ln" d="M330 74h176"/>
+  <circle class="bad" cx="350" cy="94" r="6"/><rect class="bar-i" x="364" y="91" width="78" height="6" rx="3"/><rect class="bad-soft" x="456" y="87" width="36" height="14" rx="7"/>
+  <circle class="warm" cx="350" cy="122" r="6"/><rect class="bar-i" x="364" y="119" width="64" height="6" rx="3"/><rect class="warm-soft" x="456" y="115" width="36" height="14" rx="7"/>
+  <circle class="ok" cx="350" cy="150" r="6"/><rect class="bar-i" x="364" y="147" width="86" height="6" rx="3"/><rect class="ok-soft" x="456" y="143" width="36" height="14" rx="7"/>
+</svg>

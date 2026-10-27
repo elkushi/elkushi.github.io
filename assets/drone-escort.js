@@ -27,7 +27,7 @@
     document.head.appendChild(s);
   });
   const start = () => load(url("vendor/three.min.js"))
-    .then(() => load(url("drone-model.js")))
+    .then(() => load(url("drone-model.js") + (me ? new URL(me.src).search : "")))
     .then(fly)
     .catch(() => { /* no drone, the page is unchanged */ });
   const idle = window.requestIdleCallback || ((f) => setTimeout(f, 800));
@@ -125,8 +125,9 @@
       const sy = scrollY, H = innerHeight;
       const maxS = Math.max(0, root.scrollHeight - H);
       stops = [];
-      const img = document.querySelector(".hero .stage3d img") || document.querySelector(".hero");
-      const r = img.getBoundingClientRect();
+      // The hero art if it is shown, otherwise the hero block itself.
+      const img = document.querySelector(".hero .stage3d img");
+      const r = (img && img.offsetWidth ? img : document.querySelector(".hero")).getBoundingClientRect();
       // Hover over the empty top corner of the hero image, body clear of the nav.
       stops.push({ x: rtl ? r.left + SIZE * 0.36 : r.right - SIZE * 0.36, y: r.top + sy + 70 + lift, land: "hero" });
       ids.forEach((id, i) => {
@@ -224,9 +225,12 @@
       // Too fast? A flick of the wheel reads at 3,000+ px/s; reading is under 1,500.
       speed += (Math.abs(scrollY - lastY) / Math.max(dt, 1e-3) - speed) * Math.min(1, dt * 6);
       lastY = scrollY;
+      // A link jump stays exempt until the page has actually stopped moving.
+      if (now < jumpUntil && speed > 150) jumpUntil = now + 400;
       if (speed > 3000 && !jumping() && now - saidAt > 12000 && said < 4) shout(now);
       if (bubble.classList.contains("on")) {
-        if (now - saidAt > 3400) bubble.classList.remove("on");
+        // Long enough to read: 5 s, plus a little per character for the long lines.
+        if (now - saidAt > Math.max(5000, 2500 + words.textContent.length * 60)) bubble.classList.remove("on");
         // Above the body, kept below the sticky nav.
         const top = Math.max(96 + words.offsetHeight, sy - lift - SIZE * 0.16);
         bubble.style.transform = `translate(${sx.toFixed(1)}px, ${top.toFixed(1)}px)`;

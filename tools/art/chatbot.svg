@@ -1,0 +1,56 @@
+<svg class="art" viewBox="0 0 520 200" aria-hidden="true" focusable="false">
+  <!-- The client's website, behind the chat. -->
+  <g opacity=".7">
+    <rect class="p2" x="14" y="22" width="262" height="170" rx="12"/>
+    <circle class="bar" cx="30" cy="38" r="4"/><circle class="bar" cx="43" cy="38" r="4"/><circle class="bar" cx="56" cy="38" r="4"/>
+    <path class="ln" d="M14 52h262"/>
+    <rect class="bar-i" x="34" y="70" width="150" height="12" rx="6"/>
+    <rect class="bar" x="34" y="90" width="190" height="7" rx="3.5"/>
+    <rect class="bar" x="34" y="103" width="160" height="7" rx="3.5"/>
+    <rect class="ac-soft" x="34" y="120" width="76" height="22" rx="11"/>
+    <rect class="bar" x="34" y="156" width="64" height="24" rx="6"/>
+    <rect class="bar" x="106" y="156" width="64" height="24" rx="6"/>
+    <rect class="bar" x="178" y="156" width="64" height="24" rx="6"/>
+  </g>
+
+  <!-- The chat widget. -->
+  <rect class="p glow" x="226" y="8" width="226" height="186" rx="16"/>
+  <circle class="ac" cx="252" cy="30" r="13"/>
+  <circle cx="247.5" cy="28.5" r="2.2" fill="#fff"/><circle cx="256.5" cy="28.5" r="2.2" fill="#fff"/>
+  <path d="M247 34q5 4 10 0" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+  <circle class="ok" cx="262" cy="40" r="4"/>
+  <rect class="bar-i" x="274" y="22" width="72" height="7" rx="3.5"/>
+  <rect class="bar" x="274" y="34" width="46" height="6" rx="3"/>
+  <path class="ac spin" d="M426 18c1 7 3 9 10 10-7 1-9 3-10 10-1-7-3-9-10-10 7-1 9-3 10-10z"/>
+  <path class="ln" d="M226 52h226"/>
+
+  <!-- Customer asks. -->
+  <rect class="p2" x="334" y="62" width="104" height="24" rx="12"/>
+  <rect class="bar" x="346" y="71" width="80" height="6" rx="3"/>
+  <!-- Bot answers… -->
+  <rect class="ac-soft" x="240" y="94" width="162" height="42" rx="12"/>
+  <rect class="bar-i" x="252" y="105" width="132" height="6" rx="3"/>
+  <rect class="bar-i" x="252" y="118" width="96" height="6" rx="3"/>
+  <!-- …with the source it checked. -->
+  <rect class="p2" x="240" y="142" width="104" height="20" rx="10"/>
+  <path class="ink-s thin" d="M250 147h6l3 3v8h-9z"/>
+  <rect class="bar" x="266" y="149" width="44" height="6" rx="3"/>
+  <path class="ok-s" d="M318 152l4 4 7-8"/>
+  <!-- Typing. -->
+  <rect class="p2" x="240" y="168" width="48" height="18" rx="9"/>
+  <circle class="bar-i pulse" cx="253" cy="177" r="3"/>
+  <circle class="bar-i pulse d1" cx="264" cy="177" r="3"/>
+  <circle class="bar-i pulse d2" cx="275" cy="177" r="3"/>
+
+  <!-- A lead, captured. -->
+  <g class="float">
+    <rect class="p glow" x="398" y="126" width="112" height="56" rx="13"/>
+    <circle class="warm" cx="422" cy="154" r="13"/>
+    <circle cx="422" cy="150" r="4" class="bg"/>
+    <path d="M414 162c2-5 14-5 16 0" class="bg"/>
+    <rect class="bar-i" x="442" y="144" width="54" height="6" rx="3"/>
+    <rect class="bar" x="442" y="157" width="38" height="6" rx="3"/>
+    <circle class="ok" cx="502" cy="130" r="9"/>
+    <path d="M497.5 130l3 3 5-5.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

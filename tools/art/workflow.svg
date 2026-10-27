@@ -1,0 +1,37 @@
+<svg class="art" viewBox="0 0 520 200" aria-hidden="true" focusable="false">
+  <!-- Wires, then the data moving along them. -->
+  <path class="ln" d="M84 100h60M208 100h60M332 100c40 0 40-52 76-52M332 100c40 0 40 52 76 52M300 132v26"/>
+  <path class="ac-s drift" d="M84 100h60M208 100h60M332 100c40 0 40-52 76-52M332 100c40 0 40 52 76 52" stroke-dasharray="3 9"/>
+  <path class="bad-s drift" d="M300 132v26" stroke-dasharray="3 6"/>
+
+  <!-- Trigger. -->
+  <rect class="p" x="20" y="68" width="64" height="64" rx="16"/>
+  <path class="warm" d="M55 83 44 102h9l-3 15 11-19h-9z"/>
+
+  <!-- AI agent. -->
+  <rect class="p ac-b glow" x="144" y="68" width="64" height="64" rx="16"/>
+  <path class="ac" d="M174 82c1.6 11 5 14.4 16 16-11 1.6-14.4 5-16 16-1.6-11-5-14.4-16-16 11-1.6 14.4-5 16-16z"/>
+  <path class="ac spin" d="M193 76c.7 4.4 2 5.6 6.4 6.4-4.4.7-5.6 2-6.4 6.4-.7-4.4-2-5.6-6.4-6.4 4.4-.7 5.6-2 6.4-6.4z"/>
+
+  <!-- The check that can say no. -->
+  <rect class="p" x="268" y="68" width="64" height="64" rx="16"/>
+  <path class="ac-s" d="M300 82l14 6v10c0 9-6 16-14 19-8-3-14-10-14-19V88z"/>
+  <path class="ok-s" d="M293.5 99.5l4.5 4.5 8.5-9"/>
+
+  <!-- Caught, not shipped. -->
+  <rect class="bad-soft" x="268" y="158" width="64" height="26" rx="13"/>
+  <path class="bad-s" d="M280 166l9 9M289 166l-9 9"/>
+  <rect class="bad" x="296" y="168" width="24" height="5" rx="2.5" opacity=".6"/>
+
+  <!-- Results: an email and a sheet. -->
+  <rect class="p" x="408" y="16" width="64" height="64" rx="16"/>
+  <rect class="ink-s" x="426" y="39" width="28" height="19" rx="3"/>
+  <path class="ink-s" d="M427 41l13 9 13-9"/>
+  <rect class="p" x="408" y="120" width="64" height="64" rx="16"/>
+  <rect class="ink-s" x="427" y="139" width="26" height="26" rx="3"/>
+  <path class="ink-s thin" d="M427 148h26M427 156.5h26M436 139v26"/>
+  <g class="pulse slow">
+    <circle class="ok" cx="470" cy="20" r="9"/><path d="M465.5 20l3 3 5-5.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle class="ok" cx="470" cy="124" r="9"/><path d="M465.5 124l3 3 5-5.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

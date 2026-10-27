@@ -26,7 +26,7 @@ for page in PAGES:
         errors.append(f"{rel}: no CSP")
     for ref in re.findall(r'(?:href|src|poster|srcset)="([^"]+)"', html):
         for part in ref.split(","):
-            url = part.strip().split(" ")[0].split("#")[0]
+            url = part.strip().split(" ")[0].split("#")[0].split("?")[0]
             if not url or re.match(r"^(https?:|mailto:|data:)", url):
                 continue
             if not (page.parent / url).resolve().exists():

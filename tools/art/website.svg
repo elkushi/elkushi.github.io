@@ -1,0 +1,58 @@
+<svg class="art" viewBox="0 0 520 200" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="art-web-g" x1="0" y1="0" x2="1" y2="1"><stop class="stop-a" offset="0"/><stop class="stop-b" offset="1"/></linearGradient>
+  </defs>
+
+  <!-- The Figma frame. -->
+  <rect class="ac-soft" x="18" y="22" width="74" height="14" rx="4"/>
+  <rect class="bar-i" x="25" y="26.5" width="46" height="5" rx="2.5"/>
+  <rect class="ac-s" x="18" y="42" width="200" height="134" rx="4" stroke-dasharray="5 5"/>
+  <g class="wf">
+    <rect x="32" y="56" width="172" height="42" rx="4"/>
+    <path d="M32 56l172 42M204 56L32 98"/>
+    <rect x="32" y="106" width="52" height="56" rx="4"/>
+    <rect x="92" y="106" width="52" height="56" rx="4"/>
+    <rect x="152" y="106" width="52" height="56" rx="4"/>
+  </g>
+  <rect class="hdl" x="14" y="38" width="8" height="8"/><rect class="hdl" x="214" y="38" width="8" height="8"/>
+  <rect class="hdl" x="14" y="172" width="8" height="8"/><rect class="hdl" x="214" y="172" width="8" height="8"/>
+  <g class="float d1">
+    <path d="M190 132v22l6-6 5 10 4.5-2-5-10h8.5z" class="cursor"/>
+    <rect class="ac" x="206" y="156" width="34" height="14" rx="7"/>
+  </g>
+
+  <!-- Design becomes the build. -->
+  <path class="ac-s drift" d="M222 106h22" stroke-dasharray="3 6"/>
+  <path class="ac" d="M244 100l8 6-8 6z"/>
+
+  <!-- The live site. -->
+  <rect class="p glow" x="258" y="14" width="246" height="172" rx="12"/>
+  <circle class="bad" cx="273" cy="29" r="4"/><circle class="warm" cx="286" cy="29" r="4"/><circle class="ok" cx="299" cy="29" r="4"/>
+  <rect class="bg" x="314" y="22" width="150" height="14" rx="7"/>
+  <path class="ok-s thin" d="M322 30.5v-2a3 3 0 0 1 6 0v2"/><rect class="ok" x="320.5" y="30" width="9" height="5" rx="1"/>
+  <rect class="bar" x="336" y="27" width="70" height="4" rx="2"/>
+  <path class="ln" d="M258 44h246"/>
+  <rect x="272" y="54" width="218" height="58" rx="8" fill="url(#art-web-g)"/>
+  <rect x="286" y="66" width="112" height="9" rx="4.5" fill="#fff" opacity=".95"/>
+  <rect x="286" y="81" width="80" height="6" rx="3" fill="#fff" opacity=".7"/>
+  <rect x="286" y="94" width="44" height="11" rx="5.5" fill="#fff"/>
+  <g>
+    <rect class="p2" x="272" y="120" width="68" height="54" rx="7"/>
+    <rect class="ac" x="280" y="128" width="12" height="12" rx="3"/>
+    <rect class="bar" x="280" y="148" width="48" height="5" rx="2.5"/><rect class="bar" x="280" y="158" width="36" height="5" rx="2.5"/>
+    <rect class="p2" x="347" y="120" width="68" height="54" rx="7"/>
+    <rect class="warm" x="355" y="128" width="12" height="12" rx="3"/>
+    <rect class="bar" x="355" y="148" width="48" height="5" rx="2.5"/><rect class="bar" x="355" y="158" width="36" height="5" rx="2.5"/>
+  </g>
+
+  <!-- Found on Google and in AI search. -->
+  <g class="float">
+    <rect class="p glow" x="380" y="128" width="132" height="60" rx="12"/>
+    <circle class="ink-s" cx="397" cy="146" r="6"/><path class="ink-s" d="M401.5 150.5l4 4"/>
+    <rect class="bg" x="410" y="141" width="70" height="10" rx="5"/>
+    <path class="ac spin" d="M496 139c.8 5 2.2 6.2 7 7-4.8.8-6.2 2-7 7-.8-5-2.2-6.2-7-7 4.8-.8 6.2-2 7-7z"/>
+    <circle class="ac" cx="394" cy="166" r="4"/>
+    <rect class="bar-i" x="404" y="163" width="88" height="6" rx="3"/>
+    <rect class="bar" x="404" y="175" width="60" height="5" rx="2.5"/>
+  </g>
+</svg>
