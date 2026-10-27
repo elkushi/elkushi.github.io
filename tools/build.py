@@ -33,6 +33,8 @@ TG_URL = f"https://t.me/{TELEGRAM}" if TELEGRAM else ""
 # assets/, so a missing PDF is reported at build time instead of 404ing.
 CV_FILE = {"en": "cv-en.pdf", "ar": "cv-ar.pdf", "ru": "cv-ru.pdf"}
 CV_LABEL = {"en": "Download CV", "ar": "تنزيل السيرة الذاتية", "ru": "Скачать резюме"}
+# The round button that appears near the end of a page and takes you back up.
+TOP_LABEL = {"en": "Back to top", "ar": "العودة إلى الأعلى", "ru": "Наверх"}
 CV_SHORT = {"en": "CV", "ar": "السيرة الذاتية", "ru": "Резюме"}
 
 # The one inline script on the site. Its hash goes in the CSP, so the policy can
@@ -97,7 +99,7 @@ LOCALES = {
         "nav": ["Work", "Services", "Skills", "Security", "Experience", "Blog", "Contact"],
         "tg": "Telegram", "arrow": "&#8599;",
         "theme": "Switch between light and dark theme",
-        "lang_label": "Language", "main_nav": "Main",
+        "lang_label": "Language", "main_nav": "Main", "menu": "Menu",
         "font_preload": ["Outfit.woff2"],
         "titles": {
             "index.html": ("Moustafa Elkoushy · AI Product Engineer",
@@ -129,14 +131,14 @@ LOCALES = {
         "nav": ["الأعمال", "الخدمات", "المهارات", "الأمان", "الخبرة", "المدونة", "تواصل"],
         "tg": "Telegram", "arrow": "&#8598;",
         "theme": "التبديل بين الوضع الفاتح والداكن",
-        "lang_label": "اللغة", "main_nav": "القائمة الرئيسية",
+        "lang_label": "اللغة", "main_nav": "القائمة الرئيسية", "menu": "القائمة",
         "font_preload": ["Cairo-arabic.woff2", "Cairo-latin.woff2"],
         "titles": {
             "index.html": ("مصطفى القوشي · مهندس منتجات ذكاء اصطناعي",
-                           "مهندس منتجات ذكاء اصطناعي. أحوّل أفكار الذكاء الاصطناعي الجريئة إلى منتجات تعمل في الواقع، وأجعل الذكاء الاصطناعي يتحقق من عمله بنفسه."),
+                           "مهندس منتجات ذكاء اصطناعي. أحوّل الأفكار الجريئة في الذكاء الاصطناعي إلى منتجات تعمل في الواقع، وتتحقق من عملها بنفسها."),
             "work/index.html": ("كل الأعمال · مصطفى القوشي",
                                 "كل المشاريع مصنّفة حسب المجال: منتجات ذكاء اصطناعي، وتطوير الويب، والتصميم، والأمان."),
-            "work/ritorica.html": ("ritorica.com: أعدت بناءه بمفردي، وما زال يعمل · مصطفى القوشي",
+            "work/ritorica.html": ("ritorica.com: أعدت بناءه بمفردي، وما زلت أديره · مصطفى القوشي",
                                    "المصمّم والمطوّر الوحيد: من ملف Figma والبناء على Django CMS إلى الإطلاق والخادم وكل ما تلاهما."),
             "work/video-generator.html": ("استوديو ذكاء اصطناعي يُنتج فيديو بهوية العلامة دون أي تكلفة للفيديو الواحد · مصطفى القوشي",
                                           "تُدخل طلبًا واحدًا، فتحصل على فيديو أو منشور مصوّر جاهز بالإنجليزية أو العربية أو الروسية. ولكل واجهة API مدفوعة بديل مجاني أو محلي."),
@@ -161,11 +163,11 @@ LOCALES = {
         "nav": ["Работы", "Услуги", "Навыки", "Безопасность", "Опыт", "Блог", "Контакты"],
         "tg": "Telegram", "arrow": "&#8599;",
         "theme": "Переключить светлую и тёмную тему",
-        "lang_label": "Язык", "main_nav": "Главное меню",
+        "lang_label": "Язык", "main_nav": "Главное меню", "menu": "Меню",
         "font_preload": ["Manrope-cyrillic.woff2", "Manrope-latin.woff2"],
         "titles": {
             "index.html": ("Мустафа Элькуши · AI Product Engineer",
-                           "AI Product Engineer. Превращаю смелые ИИ-идеи в работающие продукты и заставляю ИИ проверять собственную работу."),
+                           "AI Product Engineer. Довожу ИИ-идеи до работающих продуктов, в которых ИИ сам проверяет свою работу."),
             "work/index.html": ("Все работы · Мустафа Элькуши",
                                 "Все проекты по группам: ИИ-продукты, веб-разработка, дизайн и безопасность."),
             "work/ritorica.html": ("ritorica.com: пересобрал в одиночку и до сих пор веду · Мустафа Элькуши",
@@ -179,13 +181,13 @@ LOCALES = {
             "work/design-system.html": ("Одна бренд-система вместо трёх оттенков синего и четырёх форм кнопок · Мустафа Элькуши",
                                         "Бренд- и UI-система, на которой построены сайт, презентации, письма, мероприятия и печатные материалы Ritorica."),
             "work/whitepapers.html": ("Четыре отраслевых руководства на 87 страниц: текст, дизайн и публикация · Мустафа Элькуши",
-                                      "Исследование, текст, вёрстка, обложки, лендинги и письмо с доставкой для четырёх руководств по рассылкам для бизнеса, опубликованных на ritorica.com."),
+                                      "Исследование, текст, вёрстка, обложки, лендинги и письма, с которыми приходят руководства. Четыре руководства по рассылкам для бизнеса, опубликованные на ritorica.com."),
             "work/drone.html": ("Дрон, который можно разобрать в браузере · Мустафа Элькуши",
                                 "Интерактивная 3D-схема устройства дрона. Восемь узлов, сгенерированных кодом, без импорта из CAD."),
             "blog/index.html": ("Блог · Мустафа Элькуши",
                                 "Заметки о работе с ИИ: что я узнаю, когда делаю ИИ-продукты и автоматизации, и как этим пользоваться."),
             "blog/wat-framework.html": ("WAT-фреймворк: как я делаю Claude Code надёжным · Мустафа Элькуши",
-                                        "Workflows говорят, что делать, агент решает, инструменты выполняют. Как три слоя работают вместе, и десять правил, чтобы применять их правильно."),
+                                        "Workflows задают, что делать, агент принимает решения, инструменты выполняют работу. Как три слоя работают вместе — и десять правил, которые помогают применять их правильно."),
         },
     },
 }
@@ -306,6 +308,11 @@ def page(code: str, page_path: str, body: str) -> str:
         f'<a class="lang-link{" is-on" if c == code else ""}" hreflang="{c}" lang="{c}" '
         f'href="{target(c)}">{LOCALES[c]["short"]}</a>'
         for c in LOCALES)
+    # The same languages, written out in full, for the phone menu.
+    menu_langs = "".join(
+        f'<a class="menu-lang{" is-on" if c == code else ""}" hreflang="{c}" lang="{c}" '
+        f'href="{target(c)}">{LOCALES[c]["name"]}</a>'
+        for c in LOCALES)
 
     # Every nav item is a section of the home page, except the blog, which is
     # its own page and is marked current while you are reading it.
@@ -347,6 +354,13 @@ def page(code: str, page_path: str, body: str) -> str:
       <nav class="langs" aria-label="{loc['lang_label']}">{switch}</nav>
       <button class="theme-toggle cta" type="button" aria-label="{loc['theme']}"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
       {nav_cv}<a class="cta" href="{TG_URL}" target="_blank" rel="noopener noreferrer">{loc['tg']} <span aria-hidden="true">{loc['arrow']}</span></a>
+      <details class="menu">
+        <summary class="cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="menu-label">{loc['menu']}</span></summary>
+        <div class="menu-panel">
+          <nav class="menu-links" aria-label="{loc['main_nav']}">{nav}</nav>
+          <nav class="menu-langs" aria-label="{loc['lang_label']}">{menu_langs}</nav>
+        </div>
+      </details>
     </div>
   </div>
   <div class="progress" aria-hidden="true"><span></span></div>
@@ -359,6 +373,7 @@ def page(code: str, page_path: str, body: str) -> str:
     <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub</a>{tg_foot}</span>
   </div>
 </footer>
+<a class="to-top" href="#" aria-label="{TOP_LABEL[code]}" title="{TOP_LABEL[code]}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
 <script src="{up}reveal.js" defer></script>{drone}
 </body>
 </html>

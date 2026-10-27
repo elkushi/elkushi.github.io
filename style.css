@@ -68,6 +68,11 @@ section[id], figure[id], .hero { scroll-margin-top: 88px; }
 
 /* --- type ------------------------------------------------------------- */
 h1, h2, h3 { margin: 0; font-family: var(--sans); }
+/* A long word breaks instead of pushing past the edge. No hyphens here: they
+   split the hero headline at desktop width. */
+h1, h2, h3, h4 { overflow-wrap: break-word; }
+/* Card titles on a phone are the one place a long Russian word needs a hyphen. */
+@media (max-width: 700px) { .pcard h3 { hyphens: auto; } }
 h1 { font-size: 76px; line-height: 1.02; font-weight: 700; letter-spacing: -.02em; text-wrap: balance; }
 h2 { font-size: 52px; line-height: 1.08; font-weight: 600; letter-spacing: -.02em; margin-bottom: var(--space-6); }
 h3 { font-size: 22px; line-height: 1.25; font-weight: 600; margin-bottom: var(--space-2); }
@@ -91,15 +96,39 @@ p { margin: 0 0 var(--space-4); max-width: 62ch; }
 .links a { color: var(--ink-muted); text-decoration: none; padding-bottom: 6px; }
 .links a:hover { color: var(--ink); }
 .links a[aria-current="page"] { color: var(--ink); border-bottom: 2px solid var(--accent-violet); }
-@media (max-width: 860px) { .links { display: none; } }
-.cta { border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 11px 18px; color: var(--ink); text-decoration: none; font: 500 14px/1 var(--sans); background: transparent; white-space: nowrap; }
+.cta { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 11px 18px; color: var(--ink); text-decoration: none; font: 500 14px/1 var(--sans); background: transparent; white-space: nowrap; }
 .cta:hover { border-color: var(--accent-violet); }
+/* Below 1200px the section links and the languages move into a menu. It is a
+   <details>, so it opens and closes with no JS; reveal.js only shuts it after
+   a link inside is followed. The panel hangs full width under the header. */
+.menu { display: none; }
+/* 1200, not less: the Russian links, languages and Telegram need ~1170px. */
+@media (max-width: 1199px) { .links { display: none; } .menu { display: block; } }
+.menu > summary { list-style: none; cursor: pointer; }
+.menu > summary::-webkit-details-marker { display: none; }
+.menu > summary svg { width: 18px; height: 18px; flex: none; }
+.menu[open] > summary { border-color: var(--accent-violet); }
+/* On a phone the pill shows only the icon; the word stays for screen readers. */
+@media (max-width: 559px) {
+  .menu > summary { width: 44px; padding: 0; justify-content: center; }
+  .menu-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+.menu-panel { position: absolute; top: 100%; inset-inline: 0; max-height: calc(100vh - 80px); max-height: calc(100dvh - 80px); overflow-y: auto; padding: var(--space-2) var(--space-4) var(--space-6); background: var(--surface-100); border-bottom: 1px solid var(--line); box-shadow: var(--shadow-card); }
+@media (min-width: 700px) { .menu-panel { padding-inline: var(--space-8); } }
+.menu-links { display: grid; }
+.menu-links a { display: flex; align-items: center; min-height: 48px; color: var(--ink); text-decoration: none; font-size: 18px; border-bottom: 1px solid var(--line); }
+.menu-links a:hover, .menu-links a[aria-current="page"] { color: var(--accent-violet-text); }
+.menu-langs { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
+.menu-langs a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid var(--line); border-radius: var(--radius-pill); color: var(--ink-muted); text-decoration: none; font-size: 15px; }
+.menu-langs a:hover { color: var(--ink); }
+.menu-langs a.is-on { background: var(--surface-300); color: var(--ink); }
 .nav-end { display: flex; align-items: center; gap: var(--space-3); }
-.langs { display: flex; gap: 2px; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 3px; }
-.lang-link { min-width: 34px; height: 32px; display: grid; place-items: center; border-radius: var(--radius-pill); text-decoration: none; color: var(--ink-muted); font: 500 12px/1 var(--mono); letter-spacing: .06em; }
+.langs { display: flex; gap: 2px; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 0; }
+.lang-link { min-width: 44px; min-height: 44px; display: grid; place-items: center; border-radius: var(--radius-pill); text-decoration: none; color: var(--ink-muted); font: 500 12px/1 var(--mono); letter-spacing: .06em; }
 .lang-link:hover { color: var(--ink); }
 .lang-link.is-on { background: var(--surface-300); color: var(--ink); }
-@media (max-width: 620px) { .langs { display: none; } }
+/* Below 768px the languages live in the menu only. */
+@media (max-width: 767px) { .langs { display: none; } }
 .theme-toggle { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; color: var(--ink-muted); }
 .theme-toggle svg { width: 18px; height: 18px; }
 .theme-toggle:hover { color: var(--ink); }
@@ -107,19 +136,21 @@ p { margin: 0 0 var(--space-4); max-width: 62ch; }
 .theme-toggle .sun { display: block; } .theme-toggle .moon { display: none; }
 :root[data-theme="light"] .theme-toggle .sun { display: none; }
 :root[data-theme="light"] .theme-toggle .moon { display: block; }
-@media (max-width: 480px) { .nav-end .cta:not(.theme-toggle) { display: none; } }
+@media (max-width: 480px) { .nav-end > .cta:not(.theme-toggle) { display: none; } }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
 /* --- buttons and badges ----------------------------------------------- */
 /* Rule 4: buttons, nav pills and badges are all radius-pill. */
-.btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 26px; border-radius: var(--radius-pill); font: 600 16px/1 var(--sans); text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: box-shadow .3s ease-out, transform .2s ease-out; margin: 0 var(--space-3) var(--space-3) 0; }
+/* Long labels wrap on a phone, so they are centred with room between lines,
+   and the margins are logical so Arabic gets them on the correct side. */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 26px; border-radius: var(--radius-pill); font: 600 16px/1.25 var(--sans); text-align: center; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: box-shadow .3s ease-out, transform .2s ease-out; margin: 0 0 var(--space-3); margin-inline-end: var(--space-3); }
 .btn-ico { width: 18px; height: 18px; flex: none; }
 /* Rule 2: accent-violet fills the one primary action of a view, nothing else. */
 .btn-primary { background: var(--accent-violet); color: var(--on-accent); }
 .btn-secondary { background: transparent; border-color: var(--line); color: var(--ink); }
 .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
 
-.badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: var(--radius-pill); background: var(--surface-200); border: 1px solid var(--line); color: var(--ink); font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; margin: 0 var(--space-2) var(--space-2) 0; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: var(--radius-pill); background: var(--surface-200); border: 1px solid var(--line); color: var(--ink); font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 var(--space-2); margin-inline-end: var(--space-2); }
 /* On a phone the hero badge keeps only the title; the lead says the rest. */
 @media (max-width: 520px) { .badge-more { display: none; } }
 .badge.chip { color: var(--ink-muted); text-transform: none; letter-spacing: 0; font: 500 13px/1 var(--sans); }
@@ -140,6 +171,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .lead-role { color: var(--ink-muted); font-size: 16px; margin: 0 0 var(--space-6); max-width: 46ch; }
 .lead { font-size: 19px; color: var(--ink-muted); max-width: 44ch; margin: var(--space-5) 0 var(--space-3); }
 .hero .actions { margin-bottom: var(--space-2); }
+/* On a phone each call to action is its own full-width row. */
+@media (max-width: 480px) { .hero .actions .btn, .close-card .btn { width: 100%; margin-inline-end: 0; } }
 
 .stage3d { display: grid; place-items: center; min-height: 440px; position: relative; isolation: isolate; }
 @media (max-width: 899px) {
@@ -175,11 +208,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .stack-track { display: flex; width: max-content; animation: drift 46s linear infinite; animation-play-state: paused; }
 /* The row only drifts while it is on screen (reveal.js adds .on-screen). */
 .stack.on-screen .stack-track { animation-play-state: running; }
-.stack:hover .stack-track, .stack:focus-within .stack-track { animation-play-state: paused; }
+/* Keeps moving under the mouse (his call, 2026-10-27); keyboard focus still pauses it. */
+.stack:focus-within .stack-track { animation-play-state: paused; }
 .stack-row { display: flex; gap: 44px; padding-inline-end: 44px; }
 .stack .item { display: flex; flex-direction: column; align-items: center; gap: 8px; font: 500 12px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
 .stack svg { width: 28px; height: 28px; }
 @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* Right to left, the copy of the row sits to the left of the first one, so
+   the track travels right; going left it would leave an empty strip behind. */
+[dir="rtl"] .stack-track { animation-name: drift-rtl; }
+@keyframes drift-rtl { from { transform: translateX(0); } to { transform: translateX(50%); } }
 
 /* --- cards ------------------------------------------------------------ */
 .cards { display: grid; gap: var(--space-6); grid-template-columns: 1fr; }
@@ -212,7 +250,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .tk .ico { width: 44px; height: 44px; padding: 11px; border-radius: var(--radius-md); background: var(--surface-200); border: 1px solid var(--line); color: var(--accent-violet-text); }
 .tk h3 { font-size: 18px; margin: 2px 0 4px; }
 .tk p { margin: 0; color: var(--ink-muted); font-size: 15px; line-height: 1.5; }
-.tk .chips { grid-column: 2; display: flex; flex-wrap: wrap; gap: var(--space-2); align-content: start; }
+.tk .chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--space-2); align-content: start; }
 @media (min-width: 900px) {
   .tk li { grid-template-columns: 44px minmax(0, 320px) minmax(0, 1fr); gap: var(--space-6); align-items: start; }
   .tk .chips { grid-column: 3; padding-top: 4px; }
@@ -247,6 +285,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .meta { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; gap: var(--space-2); color: var(--ink-muted); font-size: 15px; }
 @media (min-width: 700px) { .meta { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4); } }
 .meta b { color: var(--ink); font-weight: 600; }
+/* A bare repo URL is one long word; let it break rather than widen the page. */
+article a, .meta a { overflow-wrap: anywhere; }
 
 article section:first-of-type { border-top: 0; }
 article section { padding: var(--space-8) 0; }
@@ -262,10 +302,13 @@ figcaption { color: var(--ink-muted); font-size: 14px; margin-top: var(--space-3
 /* A figure allowed to run wider than the 62ch text column. */
 figure.bleed { max-width: none; }
 @media (min-width: 1100px) { figure.bleed { width: calc(100% + var(--space-16)); margin-inline-start: calc(var(--space-8) * -1); } }
+/* The 3D viewer is too small to drag on a phone; the page links to it full
+   screen instead. */
+@media (max-width: 699px) { .drone-embed { display: none; } }
 .video-feature { margin: var(--space-8) 0; }
 .video-feature video { width: 100%; }
 
-.facts { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: var(--space-8) 0; }
+.facts { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); margin: var(--space-8) 0; }
 .fact { background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6); }
 .fact b { display: block; font: 600 34px/1.1 var(--sans); color: var(--ink); }
 .fact span { display: block; color: var(--ink-muted); font-size: 14px; margin-top: var(--space-2); }
@@ -288,7 +331,7 @@ figure.bleed { max-width: none; }
 
 footer { padding: var(--space-8) 0 var(--space-12); border-top: 1px solid var(--line); }
 footer .wrap { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; color: var(--ink-muted); font-size: 14px; }
-footer a { color: var(--ink-muted); }
+footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; }
 
 /* --- motion ------------------------------------------------------------ */
 /* Rule 5: motion a person triggers lasts 200-400ms; the ambient ring and sway
@@ -311,7 +354,8 @@ footer a { color: var(--ink-muted); }
 /* Rule 5 again: under reduced motion the rotation and the tilt stop; the glow
    stays, because it is colour rather than movement. */
 @media (prefers-reduced-motion: reduce) {
-  .stack-track, .dot { animation: none; }
+  .post-feature:hover { transform: none; }
+  .stack-track, [dir="rtl"] .stack-track, .dot { animation: none; }
   .nav { transition: none; }
   .pcard, .btn { transition: none; }
   .pcard:hover { transform: none; }
@@ -332,7 +376,7 @@ footer a { color: var(--ink-muted); }
 .offer .meta { display: flex; gap: var(--space-2); margin: auto 0 var(--space-5); }
 .offer .meta span { display: inline-flex; align-items: center; padding: 7px 14px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--accent-violet) 14%, transparent); border: 1px solid color-mix(in srgb, var(--accent-violet) 36%, transparent); color: var(--accent-violet-text); font: 600 13px/1 var(--sans); white-space: nowrap; }
 .offer .go { margin: 0; }
-.btn-sm { min-height: 40px; padding: 0 18px; font-size: 14px; margin: 0; }
+.btn-sm { min-height: 44px; padding: 8px 18px; font-size: 14px; margin: 0; }
 .offers-note { margin-top: var(--space-6); font-size: 15px; }
 
 /* --- the compact half of the toolkit ----------------------------------- */
@@ -344,6 +388,7 @@ footer a { color: var(--ink-muted); }
 .close-card { max-width: 720px; margin: 0 auto; padding: var(--space-12) var(--space-8); border-radius: var(--radius-lg); border: 1px solid transparent; text-align: center;
   background-image: linear-gradient(var(--surface-200), var(--surface-200)), linear-gradient(135deg, var(--accent-violet), transparent 55%, var(--accent-violet));
   background-origin: border-box; background-clip: padding-box, border-box; box-shadow: var(--shadow-card); }
+@media (max-width: 520px) { .close-card { padding: var(--space-8) var(--space-6); } }
 .close-card h2 { margin-bottom: var(--space-5); }
 .close-card p { margin-inline: auto; }
 .close-card .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); }
@@ -355,7 +400,7 @@ footer a { color: var(--ink-muted); }
 @media (min-width: 760px) { .close-facts { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); } }
 .close-facts li { display: flex; gap: var(--space-3); align-items: flex-start; color: var(--ink-muted); font-size: 14px; line-height: 1.45; }
 .close-facts .ico { width: 20px; height: 20px; flex: none; margin-top: 1px; color: var(--accent-violet-text); }
-.btn-lg { min-height: 58px; padding: 0 34px; font-size: 18px; }
+.btn-lg { min-height: 58px; padding: 14px 34px; font-size: 18px; }
 .close-card .secondary-row { margin-top: var(--space-4); }
 
 /* --- scroll ------------------------------------------------------------ */
@@ -439,7 +484,24 @@ html:not([lang="ar"]) [lang="ar"] { font-family: system-ui, sans-serif; }
 }
 
 /* --- blog ---------------------------------------------------------------- */
-.posts { max-width: 760px; }
+/* Posts read in one centred column; the cover art (tools/blog_art.py) runs
+   wider than the text so the page does not look like a narrow strip. */
+.post .post-head, .post article { max-width: 760px; margin-inline: auto; }
+.post article h2 { font-size: 34px; margin: var(--space-12) 0 var(--space-4); }
+.post article section { margin: 0; padding: 0; border: 0; }
+.post-cover { max-width: 1040px; margin: 0 auto var(--space-8); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); background: var(--surface-000); }
+.post-cover img, .post-art img { width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; }
+.posts { padding-bottom: var(--space-12); }
+.post-feature { display: grid; grid-template-columns: 1fr; background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); text-decoration: none; color: inherit; transition: transform .25s ease-out, box-shadow .25s ease-out, border-color .25s ease-out; }
+@media (min-width: 900px) { .post-feature { grid-template-columns: 1.2fr 1fr; } }
+.post-feature:hover, .post-feature:focus-visible { transform: translateY(-4px); box-shadow: var(--shadow-glow); border-color: var(--accent-glow); }
+.post-art { background: var(--surface-000); display: grid; align-items: center; }
+.post-body { padding: var(--space-8); display: flex; flex-direction: column; justify-content: center; }
+.post-body .cats { font: 500 12px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent-violet-text); margin: 0 0 var(--space-3); }
+.post-body h2 { font-size: 34px; line-height: 1.12; margin: 0 0 var(--space-4); }
+.post-body p { color: var(--ink-muted); margin: 0 0 var(--space-4); }
+.post-body .more { color: var(--accent-violet-text); font-weight: 600; margin: var(--space-2) 0 0; }
+@media (max-width: 700px) { .post-body { padding: var(--space-6); } .post-body h2, .post article h2 { font-size: 28px; } }
 article p { max-width: 68ch; }
 article code { font: .9em var(--mono); background: var(--surface-200); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }
 article pre { margin: var(--space-4) 0; padding: var(--space-5); background: var(--surface-100); border: 1px solid var(--line); border-radius: var(--radius-md); overflow-x: auto; max-width: 760px; }
@@ -453,10 +515,18 @@ article pre code { background: none; border: 0; padding: 0; font: 13.5px/1.65 va
 .wat p { color: var(--ink-muted); font-size: 15px; margin: 0; }
 
 /* drone escort (assets/drone-escort.js): the canvas follows the drone, the
-   link sits over its body, and nothing here exists without the script */
-.drone-canvas { position: fixed; left: 0; top: 0; width: 220px; height: 220px; z-index: 9; pointer-events: none; opacity: 0; transition: opacity .4s ease; filter: drop-shadow(0 16px 14px rgba(20, 13, 20, .28)); will-change: transform; }
+   link sits over its body, and nothing here exists without the script.
+   Sizes come from SIZE in the script. */
+.drone-canvas { position: fixed; left: 0; top: 0; z-index: 9; pointer-events: none; opacity: 0; transition: opacity .4s ease; filter: drop-shadow(0 16px 14px rgba(20, 13, 20, .28)); will-change: transform; }
 .drone-canvas.in { opacity: 1; }
 :root:not([data-theme="light"]) .drone-canvas { filter: drop-shadow(0 0 22px rgba(168, 85, 247, .32)); }
-.drone-link { position: fixed; left: 0; top: 0; width: 120px; height: 64px; z-index: 9; border-radius: var(--radius-pill); will-change: transform; }
+.drone-link { position: fixed; left: 0; top: 0; z-index: 9; border-radius: var(--radius-pill); will-change: transform; }
 .drone-link::after { content: attr(data-tip) " \2197"; position: absolute; left: 50%; bottom: calc(100% + 6px); translate: -50% 0; padding: var(--space-1) var(--space-3); white-space: nowrap; font: 600 13px/1.4 var(--sans); color: var(--ink); background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-pill); opacity: 0; transition: opacity .2s ease; pointer-events: none; }
 .drone-link:hover::after, .drone-link:focus-visible::after { opacity: 1; }
+
+/* back to top: bottom right (bottom left in Arabic), shown near the end of a page by reveal.js */
+.to-top { position: fixed; inset-inline-end: var(--space-6); bottom: var(--space-6); z-index: 9; display: grid; place-items: center; width: 52px; height: 52px; border-radius: var(--radius-pill); background: var(--surface-200); color: var(--ink); border: 1px solid var(--line); box-shadow: var(--shadow-card); transition: opacity .3s ease, transform .3s ease, visibility .3s, box-shadow .2s ease, border-color .2s ease; }
+.to-top svg { width: 22px; height: 22px; }
+.to-top:hover { border-color: var(--accent-glow); box-shadow: var(--shadow-glow); transform: translateY(-3px); }
+.js .to-top:not(.show) { opacity: 0; transform: translateY(12px); pointer-events: none; visibility: hidden; }
+@media (max-width: 700px) { .to-top { inset-inline-end: var(--space-4); bottom: var(--space-4); width: 48px; height: 48px; } }

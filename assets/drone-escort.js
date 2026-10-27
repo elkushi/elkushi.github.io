@@ -37,7 +37,7 @@
 
   function fly() {
     const THREE = window.THREE;
-    const SIZE = 220;                 // canvas, CSS px
+    const SIZE = 440;                 // canvas, CSS px
     const rtl = root.dir === "rtl";
     const TEXT = {
       en: { label: "Take the drone apart in 3D", tip: "Take me apart" },
@@ -47,10 +47,10 @@
     const text = TEXT || { label: "Take the drone apart in 3D", tip: "Take me apart" };
 
     /* scene: one small canvas that follows the drone, so the GPU only ever
-       draws 220x220 px, never the whole page */
+       draws SIZE x SIZE px, never the whole page */
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    renderer.setSize(SIZE, SIZE, false);
+    renderer.setSize(SIZE, SIZE);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.1;
@@ -77,10 +77,15 @@
     camera.lookAt(sphere.center);
     camera.updateMatrixWorld();
 
-    // Everything below works in "foot" coordinates: the point under the
-    // landing legs. Where that pixel sits inside the canvas is fixed.
-    const foot = new THREE.Vector3(0, bounds.min.y, 0).project(camera);
-    const footPx = (-foot.y * 0.5 + 0.5) * SIZE;
+    // Everything below works in "foot" coordinates: the lowest pixel of the
+    // drone as drawn. From a three-quarter view that is a front leg, not the
+    // middle, so take the lowest projected corner of the bounding box.
+    let footPx = 0;
+    for (let i = 0; i < 8; i++) {
+      const c = new THREE.Vector3(i & 1 ? bounds.max.x : bounds.min.x,
+        i & 2 ? bounds.max.y : bounds.min.y, i & 4 ? bounds.max.z : bounds.min.z).project(camera);
+      footPx = Math.max(footPx, (-c.y * 0.5 + 0.5) * SIZE);
+    }
     const lift = footPx - SIZE / 2;      // body centre is this far above the feet
 
     const link = document.createElement("a");
@@ -88,6 +93,8 @@
     link.href = "work/drone.html";
     link.setAttribute("aria-label", text.label);
     link.dataset.tip = text.tip;
+    const LW = Math.round(SIZE * 0.55), LH = Math.round(SIZE * 0.3);   // hit box over the body
+    link.style.width = LW + "px"; link.style.height = LH + "px";
     document.body.append(canvas, link);
 
     /* the flight path: one stop per section, measured from the live layout */
@@ -100,20 +107,24 @@
       stops = [];
       const img = document.querySelector(".hero .stage3d img") || document.querySelector(".hero");
       const r = img.getBoundingClientRect();
-      stops.push({ x: rtl ? r.left + 80 : r.right - 80, y: r.top + sy + 24, land: "hero" });
+      // Hover over the empty top corner of the hero image, body clear of the nav.
+      stops.push({ x: rtl ? r.left + SIZE * 0.36 : r.right - SIZE * 0.36, y: r.top + sy + 70 + lift, land: "hero" });
       ids.forEach((id, i) => {
         const sec = document.getElementById(id);
         if (!sec) return;
         if (id === "contact") {
-          const b = sec.querySelector(".btn-primary") || sec.querySelector("h2");
-          const rb = b.getBoundingClientRect();
-          stops.push({ x: rtl ? rb.left + 70 : rb.right - 70, y: rb.top + sy, land: "contact" });
+          // Land on the footer line, bottom corner: the end of the page is the
+          // ground. There is not room above the contact card at full scroll.
+          const ground = document.querySelector("footer") || sec;
+          const rg = ground.getBoundingClientRect();
+          stops.push({ x: rtl ? rg.left + 60 + SIZE * 0.45 : rg.right - 60 - SIZE * 0.45, y: rg.top + sy + 1, land: "contact" });
           return;
         }
+        // Hover just above the heading, on the side the text does not reach.
         const h = sec.querySelector("h2") || sec;
         const rh = h.getBoundingClientRect(), rs = sec.getBoundingClientRect();
-        const inset = 140 + (i % 2) * 190;      // weave: near the edge, then further in
-        stops.push({ x: rtl ? rs.left + inset : rs.right - inset, y: rh.top + sy + rh.height / 2 + lift });
+        const inset = SIZE * 0.55 + (i % 2) * 170;   // weave: near the edge, then further in
+        stops.push({ x: rtl ? rs.left + inset : rs.right - inset, y: rh.top + sy - 8 });
       });
       // The scroll position at which the drone should be at each stop.
       keys = stops.map((p, i) => (i === 0 ? 0 : Math.min(maxS, Math.max(0, p.y - BAND * H))));
@@ -146,22 +157,28 @@
     const clamp = (x, m) => Math.max(-m, Math.min(m, x));
 
     function frame(now) {
-      const dt = Math.min((now - clock) / 1000, 0.05); clock = now; t += dt;
+      // Real elapsed time, integrated in small steps, so a slow frame rate
+      // makes the motion choppier but never slower.
+      const dt = Math.min((now - clock) / 1000, 0.25); clock = now; t += dt;
       if (innerWidth < 1024) { canvas.hidden = link.hidden = true; return requestAnimationFrame(frame); }
       canvas.hidden = link.hidden = false;
 
       target(scrollY);
-      const dx = goal.x - p.x, dy = goal.y - p.y;
-      const near = Math.hypot(dx, dy) < 4 && Math.hypot(v.x, v.y) < 25;
-      const landed = goal.land === "contact" && near;
-      const parked = goal.land === "hero" && near;
-      // On the ground the motors stop; it has to spin up before it can move again.
-      thrust += ((landed ? 0 : 1) - thrust) * Math.min(1, dt * (landed ? 1.5 : 3));
-      const ax = (dx * K) * thrust - v.x * C, ay = (dy * K) * thrust - v.y * C;
-      v.x += ax * dt; v.y += ay * dt;
-      p.x += v.x * dt; p.y += v.y * dt;
-      acc.x += (ax - acc.x) * Math.min(1, dt * 8);
-      acc.y += (ay - acc.y) * Math.min(1, dt * 8);
+      let landed = false, parked = false;
+      for (let left = dt; left > 1e-6; left -= 1 / 120) {
+        const h = Math.min(left, 1 / 120);
+        const dx = goal.x - p.x, dy = goal.y - p.y;
+        const near = Math.hypot(dx, dy) < 4 && Math.hypot(v.x, v.y) < 25;
+        landed = goal.land === "contact" && near;
+        parked = goal.land === "hero" && near;
+        // On the ground the motors stop; it has to spin up before it can move again.
+        thrust += ((landed ? 0 : 1) - thrust) * Math.min(1, h * (landed ? 1.5 : 3));
+        const ax = (dx * K) * thrust - v.x * C, ay = (dy * K) * thrust - v.y * C;
+        v.x += ax * h; v.y += ay * h;
+        p.x += v.x * h; p.y += v.y * h;
+        acc.x += (ax - acc.x) * Math.min(1, h * 8);
+        acc.y += (ay - acc.y) * Math.min(1, h * 8);
+      }
 
       // A quadcopter accelerates by tilting its thrust: lean into the move.
       wobble = Math.max(0, wobble - dt);
@@ -180,7 +197,7 @@
       const sx = p.x - scrollX, sy = p.y - scrollY;
       const onScreen = sy > -SIZE && sy < innerHeight + SIZE;
       canvas.style.transform = `translate(${(sx - SIZE / 2).toFixed(1)}px, ${(sy - footPx).toFixed(1)}px)`;
-      link.style.transform = `translate(${(sx - 60).toFixed(1)}px, ${(sy - lift - 32).toFixed(1)}px)`;
+      link.style.transform = `translate(${(sx - LW / 2).toFixed(1)}px, ${(sy - lift - LH / 2).toFixed(1)}px)`;
       if (onScreen) renderer.render(scene, camera);
       requestAnimationFrame(frame);
     }

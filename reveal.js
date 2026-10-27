@@ -46,6 +46,18 @@ if (toggle) {
   });
 }
 
+// Phone menu. It is a <details>, so it opens and closes without JS; this only
+// shuts it once a link inside is followed (a same-page anchor would otherwise
+// leave it open over the section), on Escape, and on a tap outside it.
+const menu = document.querySelector("details.menu");
+if (menu) {
+  menu.addEventListener("click", (e) => { if (e.target.closest(".menu-panel a")) menu.open = false; });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu.open) { menu.open = false; menu.querySelector("summary").focus(); }
+  });
+  document.addEventListener("click", (e) => { if (menu.open && !menu.contains(e.target)) menu.open = false; });
+}
+
 // All-work page: category filter. Each card lists its categories in data-tags.
 const filterBar = document.querySelector(".filters");
 if (filterBar) {
@@ -95,4 +107,21 @@ if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
       .map((a) => a.href.split("#")[0]);
     navigator.serviceWorker.ready.then((reg) => reg.active && reg.active.postMessage({ warm: [...new Set(links)] }));
   }, 3000));
+}
+
+// Back-to-top button: hidden until the reader is near the end of a long page.
+// The link itself is a plain href="#", so it works without this script too.
+const toTop = document.querySelector(".to-top");
+if (toTop) {
+  let queued = false;
+  const check = () => {
+    queued = false;
+    const d = document.documentElement;
+    const fromEnd = d.scrollHeight - (scrollY + innerHeight);
+    toTop.classList.toggle("show", scrollY > innerHeight && fromEnd < innerHeight * 1.5);
+  };
+  addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(check); } }, { passive: true });
+  addEventListener("resize", check);
+  toTop.addEventListener("click", () => toTop.blur());
+  check();
 }

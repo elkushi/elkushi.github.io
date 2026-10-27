@@ -1,9 +1,10 @@
-<div class="wrap">
-  <header class="case-hero">
-    <p class="eyebrow">Блог &middot; 27 октября 2026 &middot; 6 минут чтения</p>
+<div class="wrap post">
+  <header class="case-hero post-head">
+    <p class="eyebrow">Блог &middot; 27 октября 2026 &middot; 6&nbsp;минут чтения</p>
     <h1>WAT-фреймворк: как я делаю Claude Code надёжным</h1>
-    <p class="lead">WAT делит ИИ-проект на три слоя. Workflows (инструкции) говорят, что делать, агент принимает решения, а Tools (инструменты) выполняют работу. Так устроены все ИИ-проекты на этом сайте. Ниже рассказываю, как это работает и каких правил я придерживаюсь, чтобы подход давал максимум.</p>
+    <p class="lead">WAT делит ИИ-проект на три слоя. Workflows (инструкции) задают, что делать, агент принимает решения, а Tools (инструменты) выполняют работу. Так устроены все ИИ-проекты на этом сайте. Ниже рассказываю, как это работает и каких правил я придерживаюсь, чтобы подход давал максимум.</p>
   </header>
+  <figure class="post-cover reveal"><img class="only-dark" src="../assets/blog/wat-framework-dark.svg" width="1200" height="630" alt="Три слоя друг над другом: workflows, агент, инструменты"><img class="only-light" src="../assets/blog/wat-framework-light.svg" width="1200" height="630" alt="Три слоя друг над другом: workflows, агент, инструменты"></figure>
 
   <article>
     <section class="reveal">
@@ -71,7 +72,7 @@ schemas/       # JSON-контракты между агентом и инстр
     <section class="reveal">
       <h2>Как это выглядит в реальных проектах</h2>
       <ul>
-        <li><a href="../work/research-workflow.html">Исследовательский процесс с валидатором</a>: 61 страница, около 190 источников, ни одного утверждения без источника.</li>
+        <li><a href="../work/research-workflow.html">Исследовательский процесс с валидатором</a>: 61&nbsp;страница, около 190 источников, ни одного утверждения без источника.</li>
         <li><a href="../work/video-generator.html">ИИ-генератор видео и изображений</a>: проверка схемой, этап QA и ревьюер максимум с двумя кругами правок.</li>
         <li><a href="../work/seo-audit.html">Аудит сайта для Google и ИИ-поиска</a>: проверки по правилам вынесены в инструменты, анализ делают агенты Claude.</li>
         <li>Код: <a href="https://github.com/elkushi/claude_vibe_coding_projects">github.com/elkushi/claude_vibe_coding_projects</a></li>
