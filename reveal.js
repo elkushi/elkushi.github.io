@@ -48,3 +48,19 @@ const stackRow = document.querySelector(".stack");
 if (stackRow) {
   new IntersectionObserver(([e]) => stackRow.classList.toggle("on-screen", e.isIntersecting)).observe(stackRow);
 }
+
+// Fallback for browsers without speculation rules (Firefox, Safari): fetch a
+// page into the HTTP cache when a visitor points at a link to it, so the click
+// is served from cache. Same site only, each page once.
+if (!(HTMLScriptElement.supports && HTMLScriptElement.supports("speculationrules"))) {
+  const seen = new Set();
+  const warm = (e) => {
+    const a = e.target.closest && e.target.closest("a[href]");
+    if (!a || a.target === "_blank" || a.origin !== location.origin || seen.has(a.pathname)) return;
+    if (/\/(alisa-obby|drone)\//.test(a.pathname) || a.pathname === location.pathname) return;
+    seen.add(a.pathname);
+    fetch(a.href, { credentials: "same-origin" }).catch(() => {});
+  };
+  document.addEventListener("pointerover", warm, { passive: true });
+  document.addEventListener("touchstart", warm, { passive: true });
+}

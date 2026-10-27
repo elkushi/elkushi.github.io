@@ -30,11 +30,25 @@ BOOT_JS = ('var d=document.documentElement;d.classList.add("js");'
            'try{var t=localStorage.getItem("theme");if(t)d.dataset.theme=t}catch(e){}')
 BOOT_HASH = "sha256-" + base64.b64encode(hashlib.sha256(BOOT_JS.encode()).digest()).decode()
 
+# Instant page changes without turning the site into a single-page app: when a
+# visitor hovers a link to another page here, Chrome renders that page in the
+# background, so the click shows it at once. Heavy pages are left out: the
+# drone viewer (three.js) and the obby game. Browsers without speculation rules
+# get a plain prefetch from reveal.js instead.
+SPEC_RULES = ('{"prerender":[{"where":{"and":['
+              '{"href_matches":"/*"},'
+              '{"not":{"href_matches":"/alisa-obby/*"}},'
+              '{"not":{"href_matches":"/*drone/*"}},'
+              '{"not":{"selector_matches":"[target=_blank]"}}'
+              ']},"eagerness":"moderate"}]}')
+SPEC_HASH = "sha256-" + base64.b64encode(hashlib.sha256(SPEC_RULES.encode()).digest()).decode()
+
 # default-src 'none' blocks anything not listed. Styles need 'unsafe-inline'
 # because a few elements carry a style attribute; scripts do not.
 CSP = (
     "default-src 'none'; "
-    f"script-src 'self' '{BOOT_HASH}'; "
+    f"script-src 'self' '{BOOT_HASH}' 'inline-speculation-rules' '{SPEC_HASH}'; "
+    "connect-src 'self'; "
     "style-src 'self' 'unsafe-inline'; "
     "img-src 'self' data:; "
     "font-src 'self'; "
@@ -240,6 +254,7 @@ def page(code: str, page_path: str, body: str) -> str:
 <link rel="icon" href="{up}assets/favicon.svg" type="image/svg+xml">
 <style>{css}</style>
 <script>{BOOT_JS}</script>
+<script type="speculationrules">{SPEC_RULES}</script>
 </head>
 <body>
 {sprite}<header class="nav">

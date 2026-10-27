@@ -333,3 +333,10 @@ html[lang="ar"] body { line-height: 1.9; }
 /* Arabic words on English and Russian pages (the language switch, the
    language list) use the system font, so those pages never fetch Cairo. */
 html:not([lang="ar"]) [lang="ar"] { font-family: system-ui, sans-serif; }
+
+/* Page changes cross-fade instead of flashing white, and the nav bar stays put.
+   Browsers that do not support it simply load the next page as before. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .nav { view-transition-name: site-nav; }
+}

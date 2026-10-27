@@ -1,9 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-<style>@font-face{font-family:"Outfit";src:url("../../assets/fonts/Outfit.woff2") format("woff2");font-weight:100 900;font-display:swap}</style>
+<style>@font-face{font-family:"Outfit";src:url("../../assets/fonts/Outfit.woff2") format("woff2");font-weight:100 900;font-display:swap}
+#hint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;
+  display:flex;gap:18px;align-items:center;padding:14px 20px;border-radius:999px;
+  background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  font-size:14px;color:var(--ink);box-shadow:0 10px 30px rgba(0,0,0,.18);
+  opacity:0;animation:hintIn .35s ease-out .6s forwards;pointer-events:none;white-space:nowrap}
+#hint.gone{opacity:0;transition:opacity .3s ease}
+#hint b{font-weight:600}
+#hint span{display:inline-flex;align-items:center;gap:7px}
+@keyframes hintIn{to{opacity:1}}
+@media (max-width:620px){#hint{font-size:12px;gap:10px;padding:10px 14px}}
+@media (prefers-reduced-motion:reduce){#hint{animation:none;opacity:1}}
+</style>
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-HavgweuPsWHD0yjivoBYXSQN4whj+n4zbq6IPGzTzJ0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-6MurtlwbdgDBgZJFhAzvOprVMRzmraYyRgQiGEpZAyg='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -101,9 +113,14 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline
 <div id="labels"></div>
 <div id="err">3D view needs WebGL. Open this page in a current browser to see the drone.</div>
 
+<div id="hint" aria-hidden="true">
+  <span>&#128073; <b>Drag</b> to turn</span>
+  <span>&#128269; <b>Scroll</b> to zoom</span>
+  <span>&#9755; <b>Hover</b> a part to name it</span>
+</div>
 <section class="panel" aria-label="Exploded view controls">
   <h1>Inside the drone</h1>
-  <p class="sub">Drag to turn it, scroll to zoom. Slide to take it apart and see every component.</p>
+  <p class="sub"><b>Drag</b> to turn it &middot; <b>scroll</b> to zoom &middot; <b>hover a part</b> to see what it is. Use the slider to take the whole drone apart.</p>
   <div class="slider-row">
     <label for="explode">Assembled</label>
     <input id="explode" type="range" min="0" max="1" step="0.001" value="0" aria-label="Exploded view amount">
@@ -163,21 +180,23 @@ floor.rotation.x = -Math.PI/2; floor.position.y = -0.62; floor.receiveShadow = t
 
 /* materials */
 const M = {
-  shell:new THREE.MeshStandardMaterial({color:0x343a42,roughness:.45,metalness:.15}),
-  shellDark:new THREE.MeshStandardMaterial({color:0x23272d,roughness:.55}),
+  shell:new THREE.MeshStandardMaterial({color:new THREE.Color(0x3b424b).convertSRGBToLinear(),roughness:.45,metalness:.15}),
+  shellDark:new THREE.MeshStandardMaterial({color:new THREE.Color(0x262b32).convertSRGBToLinear(),roughness:.55}),
   black:new THREE.MeshStandardMaterial({color:0x202326,roughness:.5,metalness:.2}),
-  metal:new THREE.MeshStandardMaterial({color:0xb9c1c9,roughness:.25,metalness:.9}),
+  metal:new THREE.MeshStandardMaterial({color:new THREE.Color(0xb9c1c9).convertSRGBToLinear(),roughness:.25,metalness:.9}),
   copper:new THREE.MeshStandardMaterial({color:0xb87333,roughness:.35,metalness:.9}),
   pcb:new THREE.MeshStandardMaterial({color:0x1d4f3a,roughness:.55}),
   pcbBlue:new THREE.MeshStandardMaterial({color:0x1d3550,roughness:.55}),
   chip:new THREE.MeshStandardMaterial({color:0x151719,roughness:.4}),
   gold:new THREE.MeshStandardMaterial({color:0xd4a64a,roughness:.3,metalness:.9}),
-  orange:new THREE.MeshStandardMaterial({color:0xa855f7,roughness:.4}),
+  orange:new THREE.MeshStandardMaterial({color:new THREE.Color(0xa855f7).convertSRGBToLinear(),roughness:.4}),
   lens:new THREE.MeshStandardMaterial({color:0x0b1a2a,roughness:.05,metalness:.6}),
-  battery:new THREE.MeshStandardMaterial({color:0x4a515b,roughness:.45}),
+  battery:new THREE.MeshStandardMaterial({color:new THREE.Color(0x565e69).convertSRGBToLinear(),roughness:.45}),
   led:new THREE.MeshStandardMaterial({color:0x58d68d,emissive:0x2ecc71,emissiveIntensity:.8}),
   wire:new THREE.MeshStandardMaterial({color:0xc0392b,roughness:.6}),
-  wire2:new THREE.MeshStandardMaterial({color:0x222222,roughness:.6})
+  wire2:new THREE.MeshStandardMaterial({color:0x222222,roughness:.6}),
+  mai:(()=>{const t=new THREE.TextureLoader().load('mai-logo.png');t.encoding=THREE.sRGBEncoding;t.anisotropy=4;
+    return new THREE.MeshStandardMaterial({map:t,transparent:true,roughness:.5,metalness:0,depthWrite:false});})()
 };
 
 function roundedSlab(w,d,h,r,mat){
@@ -251,6 +270,8 @@ addPart('Top cover','Protective shell with cooling channels and status light.',[
   const t = roundedSlab(1.42,2.2,0.2,0.3,M.shell); g.add(t);
   const ridge = roundedSlab(0.8,1.3,0.06,0.2,M.shellDark); ridge.position.y=0.11; g.add(ridge);
   const l=box(0.14,0.02,0.04,M.led); l.position.set(0,0.12,-0.9); g.add(l);
+  const badge=new THREE.Mesh(new THREE.PlaneGeometry(0.52,0.52),M.mai);
+  badge.rotation.x=-Math.PI/2; badge.position.set(0,0.1425,0.12); g.add(badge);
 },[0,0.35,0]);
 
 /* ---- battery ---- */
@@ -359,17 +380,48 @@ renderer.domElement.addEventListener('pointermove',ev=>{
 renderer.domElement.addEventListener('pointerleave',()=>setHot(null));
 
 /* sizing */
+let fitSphere = null;
+function measure(){
+  scene.updateMatrixWorld(true);
+  const b = new THREE.Box3();
+  parts.forEach(p=>b.expandByObject(p.group));
+  fitSphere = b.getBoundingSphere(new THREE.Sphere());
+  return fitSphere;
+}
+function fitDistance(aspect){
+  const s = fitSphere || measure();
+  const vFov = camera.fov*Math.PI/180;
+  const hFov = 2*Math.atan(Math.tan(vFov/2)*aspect);
+  const f = Math.min(vFov,hFov);
+  return (s.radius/Math.sin(f/2))*1.45;
+}
 function resize(){
   const w=innerWidth,h=innerHeight;
   renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix();
-  const d = w<h ? 15 : 11.5;
-  const v = camera.position.clone().sub(controls.target);
-  if(v.length()<0.01) camera.position.set(6,4.6,7.5);
-  camera.position.copy(controls.target).add(camera.position.clone().sub(controls.target).setLength(d));
+  const d = fitDistance(w/h);
+  controls.maxDistance = d*2.2;
   controls.target.y = w<h ? 1.1 : 0.55;
+  // Set the target first, then place the camera along a fixed three-quarter
+  // direction at the fitted distance. Doing it the other way round left the
+  // camera measured against a target that then moved.
+  const dir = new THREE.Vector3(0.62,0.47,0.77).normalize();
+  camera.position.copy(controls.target).addScaledVector(dir,d);
+  camera.lookAt(controls.target);
+  controls.update();
 }
 camera.position.set(6,4.6,7.5);
 addEventListener('resize',resize); resize();
+
+/* The hint is for people who have not realised the drone is draggable. The
+   first interaction of any kind proves they have, so it leaves. */
+(function(){
+  const hint=document.getElementById('hint'); if(!hint) return;
+  let gone=false;
+  const dismiss=()=>{ if(gone) return; gone=true; hint.classList.add('gone');
+    setTimeout(()=>hint.remove(),400); };
+  ['pointerdown','wheel','touchstart','keydown'].forEach(e=>addEventListener(e,dismiss,{once:true,passive:true}));
+  setTimeout(dismiss,7000);
+})();
 
 /* loop */
 const v3=new THREE.Vector3(), clock=new THREE.Clock();
