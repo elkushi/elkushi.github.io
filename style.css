@@ -189,8 +189,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 
 /* --- skills ------------------------------------------------------------ */
 .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); }
-.skill { background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-5, 20px); }
+.skill { background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; }
+.skill .art { margin: 0; }
+.skill .art img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+.skill .body { padding: var(--space-5, 20px); }
 .skill h3 { font-size: 17px; margin: 0 0 var(--space-2); }
+.skill p { color: var(--ink-muted); font-size: 15px; margin: 0; max-width: none; }
 .skill p { color: var(--ink-muted); font-size: 15px; margin: 0; max-width: none; }
 .lang-levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
 .lang { border-top: 1px solid var(--line); padding-top: var(--space-3); }
