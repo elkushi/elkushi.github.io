@@ -87,7 +87,7 @@ LOCALES = {
         "connect": "Let's connect",
         "theme": "Switch between light and dark theme",
         "lang_label": "Language", "main_nav": "Main",
-        "font_preload": ["Outfit.woff2", "JetBrainsMono-500.woff2"],
+        "font_preload": ["Outfit.woff2"],
         "titles": {
             "index.html": ("Moustafa Elkoushy · AI Product Engineer",
                            "AI product engineer. I turn bold AI ideas into real-world products, and I make the AI check its own work."),

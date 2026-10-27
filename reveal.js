@@ -64,3 +64,17 @@ if (!(HTMLScriptElement.supports && HTMLScriptElement.supports("speculationrules
   document.addEventListener("pointerover", warm, { passive: true });
   document.addEventListener("touchstart", warm, { passive: true });
 }
+
+// Service worker (sw.js): repeat visits and page changes load from the device.
+// Once the page has settled, it hands over the links on this page so those
+// pages are saved in the background.
+if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+  navigator.serviceWorker.register("/sw.js").catch(() => {});
+  addEventListener("load", () => setTimeout(() => {
+    const links = [...document.querySelectorAll("a[href]")]
+      .filter((a) => a.origin === location.origin && a.target !== "_blank"
+        && /\.html$|\/$/.test(a.pathname) && !/\/(alisa-obby|drone)\//.test(a.pathname))
+      .map((a) => a.href.split("#")[0]);
+    navigator.serviceWorker.ready.then((reg) => reg.active && reg.active.postMessage({ warm: [...new Set(links)] }));
+  }, 3000));
+}
