@@ -4,16 +4,15 @@
 // spring pulls it toward where the page wants it, it tilts into the
 // acceleration, overshoots a little and settles. Click it to take it apart.
 //
-// three.js (600 KB) loads only after the page has finished loading, and only on
-// a desktop-size screen with a mouse, with motion allowed and data saver off.
-// Everyone else gets the page exactly as it was.
+// three.js (600 KB) loads only after the page has finished loading, and only
+// with motion allowed, data saver off and WebGL working. Everyone else gets the
+// page exactly as it was. On phones the drone is smaller (SIZE, below).
 (function () {
   const me = document.currentScript;
   const url = (p) => new URL(p, me ? me.src : location.href).href;
   const root = document.documentElement;
 
   if (!document.getElementById("contact")) return;
-  if (!matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)").matches) return;
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (navigator.connection && navigator.connection.saveData) return;
   try {
@@ -37,7 +36,9 @@
 
   function fly() {
     const THREE = window.THREE;
-    const SIZE = 440;                 // canvas, CSS px
+    // Canvas size in CSS px: smaller on smaller screens, fixed once loaded.
+    const SIZE = innerWidth < 700 ? 170 : innerWidth < 1024 ? 260 : 440;
+    const touch = matchMedia("(pointer: coarse)").matches;
     const rtl = root.dir === "rtl";
     // `say` is what the drone shouts when the reader scrolls too fast.
     // {s} is the section it just flew past, named as the nav names it.
@@ -127,7 +128,7 @@
       stops = [];
       // The hero art if it is shown, otherwise the hero block itself.
       const img = document.querySelector(".hero .stage3d img");
-      const r = (img && img.offsetWidth ? img : document.querySelector(".hero")).getBoundingClientRect();
+      const r = (img && img.offsetWidth && innerWidth >= 900 ? img : document.querySelector(".hero")).getBoundingClientRect();
       // Hover over the empty top corner of the hero image, body clear of the nav.
       stops.push({ x: rtl ? r.left + SIZE * 0.36 : r.right - SIZE * 0.36, y: r.top + sy + 70 + lift, land: "hero" });
       ids.forEach((id, i) => {
@@ -144,8 +145,9 @@
         // Hover just above the heading, on the side the text does not reach.
         const h = sec.querySelector("h2") || sec;
         const rh = h.getBoundingClientRect(), rs = sec.getBoundingClientRect();
-        const inset = SIZE * 0.55 + (i % 2) * 170;   // weave: near the edge, then further in
-        stops.push({ x: rtl ? rs.left + inset : rs.right - inset, y: rh.top + sy - 8 });
+        const inset = SIZE * 0.55 + (i % 2) * Math.min(170, innerWidth * 0.12);   // weave: near the edge, then further in
+        // On phones headings run the full width, so leave a bit more air under the legs.
+        stops.push({ x: rtl ? rs.left + inset : rs.right - inset, y: rh.top + sy - 8 - (innerWidth < 700 ? 18 : 0) });
       });
       // The scroll position at which the drone should be at each stop.
       keys = stops.map((p, i) => (i === 0 ? 0 : Math.min(maxS, Math.max(0, p.y - BAND * H))));
@@ -165,7 +167,7 @@
       leg = i;
       const t = (s - keys[i]) / (keys[i + 1] - keys[i]);
       const a = stops[i], b = stops[i + 1];
-      return set(a.x + (b.x - a.x) * smooth(t), a.y + (b.y - a.y) * t - Math.sin(Math.PI * t) * 70, null);
+      return set(a.x + (b.x - a.x) * smooth(t), a.y + (b.y - a.y) * t - Math.sin(Math.PI * t) * SIZE * 0.16, null);
     }
     function set(x, y, land) { goal.x = x; goal.y = y; goal.land = land; return goal; }
 
@@ -183,8 +185,6 @@
       // Real elapsed time, integrated in small steps, so a slow frame rate
       // makes the motion choppier but never slower.
       const dt = Math.min((now - clock) / 1000, 0.25); clock = now; t += dt;
-      if (innerWidth < 1024) { canvas.hidden = link.hidden = true; return requestAnimationFrame(frame); }
-      canvas.hidden = link.hidden = false;
 
       target(scrollY);
       let landed = false, parked = false;
@@ -223,11 +223,12 @@
       link.style.transform = `translate(${(sx - LW / 2).toFixed(1)}px, ${(sy - lift - LH / 2).toFixed(1)}px)`;
 
       // Too fast? A flick of the wheel reads at 3,000+ px/s; reading is under 1,500.
+      // Thumbs flick much faster than wheels, so phones need a higher bar.
       speed += (Math.abs(scrollY - lastY) / Math.max(dt, 1e-3) - speed) * Math.min(1, dt * 6);
       lastY = scrollY;
       // A link jump stays exempt until the page has actually stopped moving.
       if (now < jumpUntil && speed > 150) jumpUntil = now + 400;
-      if (speed > 3000 && !jumping() && now - saidAt > 12000 && said < 4) shout(now);
+      if (speed > (touch ? 7000 : 3000) && !jumping() && now - saidAt > 12000 && said < 4) shout(now);
       if (bubble.classList.contains("on")) {
         // Long enough to read: 5 s, plus a little per character for the long lines.
         if (now - saidAt > Math.max(5000, 2500 + words.textContent.length * 60)) bubble.classList.remove("on");
