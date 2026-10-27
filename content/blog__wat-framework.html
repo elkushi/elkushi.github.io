@@ -1,0 +1,84 @@
+<div class="wrap">
+  <header class="case-hero">
+    <p class="eyebrow">Blog &middot; 27 October 2026 &middot; 6 min read</p>
+    <h1>The WAT framework: how I make Claude Code reliable</h1>
+    <p class="lead">WAT splits an AI project into three layers. Workflows say what to do, the Agent decides, and Tools do the work. Every AI project on this site is built this way. Here is how it works, and the rules I follow to get the most out of it.</p>
+  </header>
+
+  <article>
+    <section class="reveal">
+      <h2>The problem it solves</h2>
+      <p>Ask an AI agent to do a ten-step job by itself and it will usually get most steps right. That is the problem. If each step is 90% right, five steps in a row are right only 59% of the time. The errors add up, and the agent sounds just as confident when it is wrong.</p>
+      <p>The fix is not a smarter prompt. It is to stop asking the model to do the parts that code can do better. A model is good at judgement: what matters, what to say, what to try next. Code is good at doing the same thing the same way every time: fetching a page, counting, checking, rendering a PDF.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>The three layers</h2>
+      <div class="wat">
+        <div><b>W</b><h3>Workflows</h3><p>Markdown instructions in <code>workflows/</code>. Each one says the goal, the inputs, which tools to use, what the output looks like and how to handle edge cases. Written the way you would brief a colleague.</p></div>
+        <div><b>A</b><h3>Agent</h3><p>Claude Code. It reads the workflow, makes the decisions, runs the tools in the right order, recovers from errors and asks when something is unclear. It connects intent to execution without doing every step by hand.</p></div>
+        <div><b>T</b><h3>Tools</h3><p>Python scripts in <code>tools/</code> that do the actual work: API calls, data clean-up, files, databases. They are fast, testable and give the same result every time. Keys live in <code>.env</code>.</p></div>
+      </div>
+      <p>A typical project looks like this:</p>
+      <pre><code>CLAUDE.md      # the rules: you are the agent, this is how you operate
+workflows/     # Markdown instructions: what to do and how
+tools/         # Python scripts that do the work
+schemas/       # JSON contracts between the agent and the tools
+.tmp/          # intermediate files, safe to delete
+.env           # API keys, never committed</code></pre>
+    </section>
+
+    <section class="reveal">
+      <h2>How to use it well</h2>
+      <p>The structure alone does not make a project reliable. These are the rules that do, each one taken from a project I have shipped.</p>
+      <ol>
+        <li><b>Write the workflow before the code.</b> If you cannot write down the goal, the inputs and what "done" looks like, the agent cannot guess them either.</li>
+        <li><b>Let the model decide and the code execute.</b> If a step must give the same result every time, it is a tool. Fetching, counting, merging, drawing charts and rendering are never left to the model.</li>
+        <li><b>Put a contract between them.</b> The agent writes JSON, and a JSON Schema checks it before anything slow or expensive runs. In my video generator, a storyboard that fails the schema never reaches the renderer.</li>
+        <li><b>Add a gate that can say no.</b> In my research workflow, a validator blocks the PDF if any claim has no source or any link is dead. The AI is told the rules. The code enforces them.</li>
+        <li><b>Stop for a human at fixed points.</b> The research workflow pauses at four checkpoints, for example to approve the competitor list before nine research agents start. Mistakes are cheap to fix early and expensive to fix late.</li>
+        <li><b>Reuse tools before writing new ones.</b> The agent checks <code>tools/</code> first. New scripts only appear when nothing fits, so the toolbox stays small and tested.</li>
+        <li><b>Cap the retries.</b> In the video generator, a reviewer agent returns SHIP or a list of fixes, and gets two rounds at most. Then the run stops. An agent that can loop forever will.</li>
+        <li><b>Turn every failure into a better workflow.</b> When a tool breaks, the agent fixes it, tests the fix, and writes what it learned into the workflow: a rate limit, a slow API, a site that blocks bots. The next run does not hit the same wall.</li>
+        <li><b>Ask before spending money.</b> If a fix means re-running paid API calls, the agent asks first.</li>
+        <li><b>Give the agent only the tools it needs.</b> An allowlist of scripts, not open shell access. Secrets stay in <code>.env</code> and out of git.</li>
+      </ol>
+    </section>
+
+    <section class="reveal">
+      <h2>A CLAUDE.md to start from</h2>
+      <p>Claude Code reads <code>CLAUDE.md</code> at the start of every session, so that is where the framework lives. A short version:</p>
+      <pre><code># Agent instructions
+
+You work inside the WAT framework.
+- Workflows: before acting, read the matching file in workflows/.
+- Agent: you decide and run the tools in order.
+  Don't do by hand what a tool already does.
+- Tools: scripts in tools/. Look for an existing tool
+  before writing a new one.
+
+When a tool fails: read the full error, fix the tool,
+test it again, and write what you learned into the workflow.
+Ask before re-running anything that costs money.
+Don't overwrite a workflow without asking.</code></pre>
+    </section>
+
+    <section class="reveal">
+      <h2>When not to use it</h2>
+      <p>A one-off question or a quick edit does not need three layers. WAT pays off when the job repeats, when it has many steps, or when a wrong answer costs something: a report that goes to a client, a video that goes out under a brand, an audit someone will act on.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>See it in real projects</h2>
+      <ul>
+        <li><a href="../work/research-workflow.html">Research workflow with a validator</a>: 61 pages, about 190 sources, no unsourced claims.</li>
+        <li><a href="../work/video-generator.html">AI video and image generator</a>: schema check, QA step and a reviewer with two rounds at most.</li>
+        <li><a href="../work/seo-audit.html">Website audit for Google and AI search</a>: rule-based checks as tools, Claude agents for the analysis.</li>
+        <li>The code: <a href="https://github.com/elkushi/claude_vibe_coding_projects">github.com/elkushi/claude_vibe_coding_projects</a></li>
+      </ul>
+      <p>Questions, or want this set up for your team? <a href="@@TG@@">Write to me on Telegram</a>.</p>
+    </section>
+
+    <p><a href="index.html">&larr; All posts</a></p>
+  </article>
+</div>

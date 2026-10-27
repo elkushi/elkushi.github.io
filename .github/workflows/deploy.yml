@@ -34,7 +34,7 @@ jobs:
       - name: Collect the public files
         run: |
           mkdir -p _site
-          cp -r index.html style.css reveal.js sw.js .nojekyll assets work _site/
+          cp -r index.html style.css reveal.js sw.js .nojekyll assets work blog _site/
           # Every translated language lives in its own folder; copy whichever exist.
           for lang in ar ru; do
             if [ -d "$lang" ]; then cp -r "$lang" _site/; fi
