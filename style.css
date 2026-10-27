@@ -276,12 +276,12 @@ footer a { color: var(--ink-muted); }
 /* Rule 5: motion a person triggers lasts 200-400ms; the ambient ring and sway
    are deliberately slow. */
 @media (prefers-reduced-motion: no-preference) {
-  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .35s ease, transform .35s cubic-bezier(.22, 1, .36, 1); }
+  .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .35s ease, transform .35s cubic-bezier(.22, 1, .36, 1); }
   .js .reveal.in { opacity: 1; transform: none; }
   /* Children arrive one after another, so a section assembles instead of
      snapping in all at once. */
   .js .reveal .pcard, .js .reveal .skill, .js .reveal .tl li, .js .reveal .fact, .js .reveal .checks li {
-    opacity: 0; transform: translateY(12px); transition: opacity .3s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
+    opacity: 0; transform: translateY(16px); transition: opacity .3s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
   }
   .js .reveal.in .pcard, .js .reveal.in .skill, .js .reveal.in .tl li, .js .reveal.in .fact, .js .reveal.in .checks li { opacity: 1; transform: none; }
   .js .reveal.in > * > :nth-child(2), .js .reveal.in .skill:nth-child(2), .js .reveal.in .tl li:nth-child(2) { transition-delay: .06s; }
@@ -294,11 +294,45 @@ footer a { color: var(--ink-muted); }
    stays, because it is colour rather than movement. */
 @media (prefers-reduced-motion: reduce) {
   .cube, .ring, .stack-track { animation: none; }
+  .nav { transition: none; }
   .pcard, .btn { transition: none; }
   .pcard:hover { transform: none; }
   .reveal .pcard, .reveal .skill, .reveal .tl li, .reveal .fact, .reveal .checks li { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
+
+
+/* --- scroll ------------------------------------------------------------ */
+/* Read progress, a header that firms up once you leave the hero, and a slow
+   parallax inside the card art. All of it is driven by the scroll position,
+   so nothing moves unless the visitor moves it. */
+/* Sits on the header's bottom border and fills as the page scrolls, so the
+   width of the line is how much of the page is left. */
+.progress { position: absolute; inset: auto 0 -1px; height: 2px; pointer-events: none; overflow: hidden; }
+.progress span { display: block; height: 100%; transform: scaleX(0); transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent-violet), var(--accent-gold, #f0b429)); }
+[dir="rtl"] .progress span { transform-origin: 100% 50%; }
+.nav { transition: box-shadow .3s ease, background-color .3s ease; }
+.nav.scrolled { background: color-mix(in srgb, var(--surface-100) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .28); }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .progress span { animation: fill linear both; animation-timeline: scroll(root block); }
+  }
+  @supports (animation-timeline: view()) {
+    /* The art drifts against the card as the card crosses the screen. The
+       1.16 scale is the margin that keeps the edges covered while it moves. */
+    .skill .art img, .pcard .art img { animation: pan linear both; animation-timeline: view(block); }
+    .hero .stage3d { animation: recede linear both; animation-timeline: view(block); animation-range: exit; }
+  }
+}
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes pan {
+  from { transform: scale(1.16) translateY(-2.4%); }
+  to { transform: scale(1.16) translateY(2.4%); }
+}
+@keyframes recede { to { transform: translateY(-36px); opacity: .5; } }
 
 /* --- locales ----------------------------------------------------------- */
 html[lang="ar"] { --sans: "Cairo", system-ui, sans-serif; }

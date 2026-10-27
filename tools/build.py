@@ -294,6 +294,7 @@ def page(code: str, page_path: str, body: str) -> str:
       <a class="cta" href="{home}#contact">{loc['connect']} <span aria-hidden="true">&#8599;</span></a>
     </div>
   </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
 </header>
 <main>
 {body}

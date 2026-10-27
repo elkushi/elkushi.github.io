@@ -4,6 +4,37 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
+// The header firms up once the hero is behind you. A 1px marker at the top of
+// the page does it, so there is no scroll handler running the whole time.
+const nav = document.querySelector(".nav");
+if (nav) {
+  const mark = document.createElement("div");
+  mark.style.position = "absolute";
+  mark.style.top = "0";
+  mark.style.width = "1px";
+  mark.style.height = "1px";
+  document.body.prepend(mark);
+  new IntersectionObserver(([e]) => nav.classList.toggle("scrolled", !e.isIntersecting)).observe(mark);
+}
+
+// Read progress. Browsers with scroll-driven CSS fill the bar themselves; the
+// rest (Firefox today) get it from here, one write per frame.
+const bar = document.querySelector(".progress span");
+if (bar && !(window.CSS && CSS.supports("animation-timeline", "scroll()"))
+    && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let queued = false;
+  const draw = () => {
+    queued = false;
+    const d = document.documentElement;
+    const max = d.scrollHeight - d.clientHeight;
+    bar.style.transform = `scaleX(${max > 0 ? d.scrollTop / max : 0})`;
+  };
+  addEventListener("scroll", () => {
+    if (!queued) { queued = true; requestAnimationFrame(draw); }
+  }, { passive: true });
+  draw();
+}
+
 // Light / dark toggle. The choice is remembered; without it the system setting wins.
 const root = document.documentElement;
 const toggle = document.querySelector(".theme-toggle");
