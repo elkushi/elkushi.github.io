@@ -205,19 +205,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 [dir="rtl"] .pcard .result { font-family: var(--sans); }
 
 /* --- skills ------------------------------------------------------------ */
-.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); }
-.skill { position: relative; min-height: 360px; background: #120b18; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
-/* On a phone the art is a header, not a feature: shorter cards keep the
-   whole toolkit inside a couple of screens. */
-@media (max-width: 767px) { .skill { min-height: 250px; } }
-.skill .art { position: absolute; inset: 0; margin: 0; }
-.skill .art img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.skill .art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 6, 18, .55) 0%, rgba(10, 6, 18, .18) 45%, rgba(10, 6, 18, 0) 72%); }
-.skill .body { position: relative; margin: var(--space-3); padding: var(--space-4); border-radius: var(--radius-md); background: linear-gradient(rgba(255, 255, 255, .11), rgba(255, 255, 255, .04)), rgba(14, 8, 22, .38); backdrop-filter: blur(18px) saturate(1.45); -webkit-backdrop-filter: blur(18px) saturate(1.45); border: 1px solid rgba(255, 255, 255, .18); box-shadow: 0 10px 34px rgba(0, 0, 0, .36), inset 0 1px 0 rgba(255, 255, 255, .14); }
-.skill h3 { font-size: 17px; margin: 0 0 var(--space-2); color: #fff; text-shadow: 0 1px 10px rgba(0, 0, 0, .5); }
-.skill p { color: rgba(255, 255, 255, .86); font-size: 15px; margin: 0; max-width: none; text-shadow: 0 1px 10px rgba(0, 0, 0, .5); }
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .skill .body { background: rgba(14, 8, 22, .86); }
+/* Toolkit: one row per area. Name and one line on the left, tools on the right. */
+.tk { list-style: none; margin: var(--space-6) 0 0; padding: 0; border-top: 1px solid var(--line); }
+.tk li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: var(--space-3) var(--space-4); padding: var(--space-5) 0; border-bottom: 1px solid var(--line); }
+.tk .ico { width: 44px; height: 44px; padding: 11px; border-radius: var(--radius-md); background: var(--surface-200); border: 1px solid var(--line); color: var(--accent-violet-text); }
+.tk h3 { font-size: 18px; margin: 2px 0 4px; }
+.tk p { margin: 0; color: var(--ink-muted); font-size: 15px; line-height: 1.5; }
+.tk .chips { grid-column: 2; display: flex; flex-wrap: wrap; gap: var(--space-2); align-content: start; }
+@media (min-width: 900px) {
+  .tk li { grid-template-columns: 44px minmax(0, 320px) minmax(0, 1fr); gap: var(--space-6); align-items: start; }
+  .tk .chips { grid-column: 3; padding-top: 4px; }
 }
 .lang-levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
 .lang { border-top: 1px solid var(--line); padding-top: var(--space-3); }
@@ -300,15 +297,15 @@ footer a { color: var(--ink-muted); }
   .js .reveal.in { opacity: 1; transform: none; }
   /* Children arrive one after another, so a section assembles instead of
      snapping in all at once. */
-  .js .reveal .pcard, .js .reveal .skill, .js .reveal .tl li, .js .reveal .fact, .js .reveal .checks li {
+  .js .reveal .pcard, .js .reveal .tk li, .js .reveal .tl li, .js .reveal .fact, .js .reveal .checks li {
     opacity: 0; transform: translateY(16px); transition: opacity .3s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
   }
-  .js .reveal.in .pcard, .js .reveal.in .skill, .js .reveal.in .tl li, .js .reveal.in .fact, .js .reveal.in .checks li { opacity: 1; transform: none; }
-  .js .reveal.in > * > :nth-child(2), .js .reveal.in .skill:nth-child(2), .js .reveal.in .tl li:nth-child(2) { transition-delay: .06s; }
-  .js .reveal.in .skill:nth-child(3), .js .reveal.in .tl li:nth-child(3) { transition-delay: .12s; }
-  .js .reveal.in .skill:nth-child(4), .js .reveal.in .tl li:nth-child(4) { transition-delay: .18s; }
-  .js .reveal.in .skill:nth-child(5) { transition-delay: .24s; }
-  .js .reveal.in .skill:nth-child(6) { transition-delay: .3s; }
+  .js .reveal.in .pcard, .js .reveal.in .tk li, .js .reveal.in .tl li, .js .reveal.in .fact, .js .reveal.in .checks li { opacity: 1; transform: none; }
+  .js .reveal.in > * > :nth-child(2), .js .reveal.in .tk li:nth-child(2), .js .reveal.in .tl li:nth-child(2) { transition-delay: .06s; }
+  .js .reveal.in .tk li:nth-child(3), .js .reveal.in .tl li:nth-child(3) { transition-delay: .12s; }
+  .js .reveal.in .tk li:nth-child(4), .js .reveal.in .tl li:nth-child(4) { transition-delay: .18s; }
+  .js .reveal.in .tk li:nth-child(5) { transition-delay: .24s; }
+  .js .reveal.in .tk li:nth-child(6) { transition-delay: .3s; }
 }
 /* Rule 5 again: under reduced motion the rotation and the tilt stop; the glow
    stays, because it is colour rather than movement. */
@@ -317,7 +314,7 @@ footer a { color: var(--ink-muted); }
   .nav { transition: none; }
   .pcard, .btn { transition: none; }
   .pcard:hover { transform: none; }
-  .reveal .pcard, .reveal .skill, .reveal .tl li, .reveal .fact, .reveal .checks li { opacity: 1; transform: none; transition: none; }
+  .reveal .pcard, .reveal .tk li, .reveal .tl li, .reveal .fact, .reveal .checks li { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
 
@@ -338,12 +335,6 @@ footer a { color: var(--ink-muted); }
 .offers-note { margin-top: var(--space-6); font-size: 15px; }
 
 /* --- the compact half of the toolkit ----------------------------------- */
-.skills-mini { display: grid; gap: var(--space-4); grid-template-columns: 1fr; margin-top: var(--space-4); }
-@media (min-width: 768px) { .skills-mini { grid-template-columns: repeat(2, 1fr); } }
-.skill-mini { display: flex; gap: var(--space-4); align-items: flex-start; background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-5); }
-.skill-mini .ico { width: 24px; height: 24px; flex: none; margin-top: 2px; color: var(--accent-violet-text); }
-.skill-mini h3 { font-size: 16px; margin-bottom: var(--space-1); }
-.skill-mini p { font-size: 14px; color: var(--ink-muted); margin: 0; max-width: none; }
 
 /* --- the closing card -------------------------------------------------- */
 /* One card, centred, with the accent only in the border: rule 2 keeps the
@@ -387,7 +378,7 @@ footer a { color: var(--ink-muted); }
   @supports (animation-timeline: view()) {
     /* The art drifts against the card as the card crosses the screen. The
        1.16 scale is the margin that keeps the edges covered while it moves. */
-    .skill .art img, .pcard .art img { animation: pan linear both; animation-timeline: view(block); }
+    .pcard .art img { animation: pan linear both; animation-timeline: view(block); }
     .hero .stage3d { animation: recede linear both; animation-timeline: view(block); animation-range: exit; }
   }
 }
