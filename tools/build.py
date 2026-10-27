@@ -11,6 +11,7 @@ its siblings. Run: python3 tools/build.py
 """
 import base64
 import hashlib
+import json
 import re
 from pathlib import Path
 
@@ -24,12 +25,10 @@ GITHUB = "https://github.com/elkushi"
 TELEGRAM = "Elkushi99"
 TG_URL = f"https://t.me/{TELEGRAM}" if TELEGRAM else ""
 
-# --- the three things Moustafa fills in ---------------------------------
-# The booking link. While it is empty, every "Book a call" button points at the
-# contact section instead, so the site never ships a dead link.
-BOOKING_URL = ""                       # e.g. "https://cal.com/elkushi/20min"
-# The month the next slot opens. Edit and rebuild.
-AVAILABLE_FROM = {"en": "[MONTH]", "ar": "[الشهر]", "ru": "[МЕСЯЦ]"}
+# Telegram is the one call to action: hero, nav, services and contact all
+# open a chat, with the username written out so it works even when the click
+# does not. Fragments write @@TG@@ for the link.
+#
 # The CV, one per language. The button only appears once the file is in
 # assets/, so a missing PDF is reported at build time instead of 404ing.
 CV_FILE = {"en": "cv-en.pdf", "ar": "cv-ar.pdf", "ru": "cv-ru.pdf"}
@@ -95,8 +94,7 @@ LOCALES = {
     "en": {
         "lang": "en", "rtl": False, "name": "English", "short": "EN",
         "nav": ["Work", "Services", "Skills", "Security", "Experience", "Contact"],
-        "book": "Book a call", "arrow": "&#8599;",
-        "connect": "Let's connect",
+        "tg": "Telegram", "arrow": "&#8599;",
         "theme": "Switch between light and dark theme",
         "lang_label": "Language", "main_nav": "Main",
         "font_preload": ["Outfit.woff2"],
@@ -124,8 +122,7 @@ LOCALES = {
     "ar": {
         "lang": "ar", "rtl": True, "name": "العربية", "short": "ع",
         "nav": ["الأعمال", "الخدمات", "المهارات", "الأمان", "الخبرة", "تواصل"],
-        "book": "احجز مكالمة", "arrow": "&#8598;",
-        "connect": "لنتواصل",
+        "tg": "تيليجرام", "arrow": "&#8598;",
         "theme": "التبديل بين الوضع الفاتح والداكن",
         "lang_label": "اللغة", "main_nav": "القائمة الرئيسية",
         "font_preload": ["Cairo-arabic.woff2", "Cairo-latin.woff2"],
@@ -153,8 +150,7 @@ LOCALES = {
     "ru": {
         "lang": "ru", "rtl": False, "name": "Русский", "short": "RU",
         "nav": ["Работы", "Услуги", "Навыки", "Безопасность", "Опыт", "Контакты"],
-        "book": "Записаться на звонок", "arrow": "&#8599;",
-        "connect": "Связаться",
+        "tg": "Telegram", "arrow": "&#8599;",
         "theme": "Переключить светлую и тёмную тему",
         "lang_label": "Язык", "main_nav": "Главное меню",
         "font_preload": ["Manrope-cyrillic.woff2", "Manrope-latin.woff2"],
@@ -238,18 +234,12 @@ def page(code: str, page_path: str, body: str) -> str:
     current = ' aria-current="page"' if page_path == "index.html" else ""
     home = f"{up}index.html"
 
+    body = body.replace("@@TG@@", TG_URL)
     body = external_new_tab(body)
     body = responsive_images(body)
     # Fragments write asset paths relative to the English page they were
     # authored for; re-point them at the single copy under /assets.
     body = re.sub(r'(?:\.\./)*assets/', f"{up}assets/", body)
-    body = body.replace("<!--TELEGRAM-->",
-                        f'<a class="btn btn-secondary" href="{TG_URL}">Telegram</a>' if TG_URL else "")
-
-    # Placeholders Moustafa edits at the top of this file.
-    book = BOOKING_URL or f"{home}#contact"
-    body = body.replace("@@BOOK@@", book)
-    body = body.replace("@@AVAILABLE_FROM@@", AVAILABLE_FROM[code])
     cv = SITE / "assets" / CV_FILE[code]
     body = body.replace("@@CV@@",
                         f'<a class="btn btn-secondary" href="{up}assets/{CV_FILE[code]}" download>'
@@ -259,6 +249,19 @@ def page(code: str, page_path: str, body: str) -> str:
     # The logo sprite is only needed where the tool row is; elsewhere it is
     # 47 KB of markup for nothing.
     sprite = SPRITE + "\n" if "#logo-" in body else ""
+    # Structured data on the home page, so search engines and AI tools can tell
+    # who the site is about. A data block, not a script, so the CSP allows it.
+    person = ""
+    if page_path == "index.html":
+        person = "\n<script type=\"application/ld+json\">" + json.dumps({
+            "@context": "https://schema.org", "@type": "Person",
+            "name": "Moustafa Elkoushy", "jobTitle": "AI Product Engineer",
+            "url": f"{ORIGIN}/{rel}", "image": f"{ORIGIN}/assets/og.jpg", "email": f"mailto:{EMAIL}",
+            "address": {"@type": "PostalAddress", "addressLocality": "Moscow", "addressCountry": "RU"},
+            "knowsLanguage": ["ar", "en", "ru"],
+            "alumniOf": {"@type": "CollegeOrUniversity", "name": "Moscow Aviation Institute"},
+            "sameAs": [GITHUB, TG_URL],
+        }, ensure_ascii=False) + "</script>"
     tg_foot = f' · <a href="{TG_URL}" target="_blank" rel="noopener noreferrer">Telegram</a>' if TG_URL else ""
     preload = "\n".join(
         f'<link rel="preload" href="{up}assets/fonts/{f}" as="font" type="font/woff2" crossorigin>'
@@ -295,7 +298,10 @@ def page(code: str, page_path: str, body: str) -> str:
 <meta name="description" content="{desc}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{ORIGIN}/assets/hero.webp">
+<meta property="og:image" content="{ORIGIN}/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">{person}
 <meta name="color-scheme" content="dark light">
 {alts}
 {preload}
@@ -314,7 +320,7 @@ def page(code: str, page_path: str, body: str) -> str:
     <div class="nav-end">
       <nav class="langs" aria-label="{loc['lang_label']}">{switch}</nav>
       <button class="theme-toggle cta" type="button" aria-label="{loc['theme']}"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-      <a class="cta" href="{book}">{loc['book']} <span aria-hidden="true">{loc['arrow']}</span></a>
+      <a class="cta" href="{TG_URL}" target="_blank" rel="noopener noreferrer">{loc['tg']} <span aria-hidden="true">{loc['arrow']}</span></a>
     </div>
   </div>
   <div class="progress" aria-hidden="true"><span></span></div>
