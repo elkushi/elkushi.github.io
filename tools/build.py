@@ -30,8 +30,6 @@ TG_URL = f"https://t.me/{TELEGRAM}" if TELEGRAM else ""
 BOOKING_URL = ""                       # e.g. "https://cal.com/elkushi/20min"
 # The month the next slot opens. Edit and rebuild.
 AVAILABLE_FROM = {"en": "[MONTH]", "ar": "[الشهر]", "ru": "[МЕСЯЦ]"}
-# How clients pay. Deliberately not filled in here.
-PAYMENT_METHODS = {"en": "[PAYMENT METHODS]", "ar": "[وسائل الدفع]", "ru": "[СПОСОБЫ ОПЛАТЫ]"}
 # The CV, one per language. The button only appears once the file is in
 # assets/, so a missing PDF is reported at build time instead of 404ing.
 CV_FILE = {"en": "cv-en.pdf", "ar": "cv-ar.pdf", "ru": "cv-ru.pdf"}
@@ -252,7 +250,6 @@ def page(code: str, page_path: str, body: str) -> str:
     book = BOOKING_URL or f"{home}#contact"
     body = body.replace("@@BOOK@@", book)
     body = body.replace("@@AVAILABLE_FROM@@", AVAILABLE_FROM[code])
-    body = body.replace("@@PAYMENT@@", PAYMENT_METHODS[code])
     cv = SITE / "assets" / CV_FILE[code]
     body = body.replace("@@CV@@",
                         f'<a class="btn btn-secondary" href="{up}assets/{CV_FILE[code]}" download>'

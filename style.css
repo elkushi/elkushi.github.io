@@ -325,7 +325,7 @@ footer a { color: var(--ink-muted); }
 .offer h3 { font-size: 20px; }
 .offer p { color: var(--ink-muted); font-size: 15px; margin-bottom: var(--space-5); max-width: none; }
 /* Scope and price are what a client scans for, so they get their own row. */
-.offer .meta { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: auto 0 var(--space-5); }
+.offer .meta { display: flex; gap: var(--space-2); margin: auto 0 var(--space-5); }
 .offer .meta span { display: inline-flex; align-items: center; padding: 7px 14px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--accent-violet) 14%, transparent); border: 1px solid color-mix(in srgb, var(--accent-violet) 36%, transparent); color: var(--accent-violet-text); font: 600 13px/1 var(--sans); white-space: nowrap; }
 .offer .go { margin: 0; }
 .btn-sm { min-height: 40px; padding: 0 18px; font-size: 14px; margin: 0; }
@@ -359,7 +359,6 @@ footer a { color: var(--ink-muted); }
 .close-facts .ico { width: 20px; height: 20px; flex: none; margin-top: 1px; color: var(--accent-violet-text); }
 .btn-lg { min-height: 58px; padding: 0 34px; font-size: 18px; }
 .close-card .secondary-row { margin-top: var(--space-4); }
-.pay { margin: var(--space-8) 0 0; font-size: 13px; }
 
 /* --- scroll ------------------------------------------------------------ */
 /* Read progress, a header that firms up once you leave the hero, and a slow
