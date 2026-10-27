@@ -39,12 +39,26 @@
     const THREE = window.THREE;
     const SIZE = 440;                 // canvas, CSS px
     const rtl = root.dir === "rtl";
+    // `say` is what the drone shouts when the reader scrolls too fast.
+    // {s} is the section it just flew past, named as the nav names it.
     const TEXT = {
-      en: { label: "Take the drone apart in 3D", tip: "Take me apart" },
-      ar: { label: "فكّك الطائرة المسيّرة ثلاثية الأبعاد", tip: "فكّكني" },
-      ru: { label: "Разобрать дрон в 3D", tip: "Разбери меня" },
+      en: { label: "Take the drone apart in 3D", tip: "Take me apart",
+        say: ["Whoa, slow down! My props can't keep up.",
+              "You just flew past {s}. Moustafa built that part for you to read.",
+              "Turbulence! Ease off the scroll and see what Moustafa can do.",
+              "Speeding detected. I'm writing you a ticket for skipping {s}."] },
+      ar: { label: "فكّك الطائرة المسيّرة ثلاثية الأبعاد", tip: "فكّكني",
+        say: ["مهلاً! مراوحي لا تلحق بك.",
+              "مررت بقسم {s} بسرعة. كتبه مصطفى لتقرأه.",
+              "مطبات هوائية! خفّف السرعة وشاهد ما يستطيع مصطفى فعله.",
+              "تجاوزت السرعة المسموحة! هذه مخالفة لأنك تخطّيت {s}."] },
+      ru: { label: "Разобрать дрон в 3D", tip: "Разбери меня",
+        say: ["Тише! Мои винты за вами не успевают.",
+              "Вы пролетели раздел «{s}». Мустафа писал его, чтобы его читали.",
+              "Турбулентность! Сбавьте скорость и посмотрите, что умеет Мустафа.",
+              "Превышение скорости! Выписываю штраф за пропущенный раздел «{s}»."] },
     }[(root.lang || "en").slice(0, 2)] || null;
-    const text = TEXT || { label: "Take the drone apart in 3D", tip: "Take me apart" };
+    const text = TEXT || { label: "Take the drone apart in 3D", tip: "Take me apart", say: ["Whoa, slow down! My props can't keep up."] };
 
     /* scene: one small canvas that follows the drone, so the GPU only ever
        draws SIZE x SIZE px, never the whole page */
@@ -95,7 +109,13 @@
     link.dataset.tip = text.tip;
     const LW = Math.round(SIZE * 0.55), LH = Math.round(SIZE * 0.3);   // hit box over the body
     link.style.width = LW + "px"; link.style.height = LH + "px";
-    document.body.append(canvas, link);
+    // Speech bubble. Decorative, so screen readers are not interrupted by it.
+    const bubble = document.createElement("div");
+    bubble.className = "drone-say";
+    bubble.setAttribute("aria-hidden", "true");
+    const words = document.createElement("span");
+    bubble.append(words);
+    document.body.append(canvas, link, bubble);
 
     /* the flight path: one stop per section, measured from the live layout */
     const ids = ["work", "services", "skills", "security", "about", "contact"];
@@ -134,12 +154,14 @@
 
     const smooth = (t) => t * t * (3 - 2 * t);
     const goal = { x: 0, y: 0, land: null };
+    let leg = 0;                         // index of the stop the drone last left
     function target(s) {
       const n = stops.length - 1;
       if (s <= keys[0]) return set(stops[0].x, stops[0].y, stops[0].land);
       if (s >= keys[n]) return set(stops[n].x, stops[n].y, stops[n].land);
       let i = 0;
       while (s >= keys[i + 1]) i++;
+      leg = i;
       const t = (s - keys[i]) / (keys[i + 1] - keys[i]);
       const a = stops[i], b = stops[i + 1];
       return set(a.x + (b.x - a.x) * smooth(t), a.y + (b.y - a.y) * t - Math.sin(Math.PI * t) * 70, null);
@@ -198,8 +220,36 @@
       const onScreen = sy > -SIZE && sy < innerHeight + SIZE;
       canvas.style.transform = `translate(${(sx - SIZE / 2).toFixed(1)}px, ${(sy - footPx).toFixed(1)}px)`;
       link.style.transform = `translate(${(sx - LW / 2).toFixed(1)}px, ${(sy - lift - LH / 2).toFixed(1)}px)`;
+
+      // Too fast? A flick of the wheel reads at 3,000+ px/s; reading is under 1,500.
+      speed += (Math.abs(scrollY - lastY) / Math.max(dt, 1e-3) - speed) * Math.min(1, dt * 6);
+      lastY = scrollY;
+      if (speed > 3000 && !jumping() && now - saidAt > 12000 && said < 4) shout(now);
+      if (bubble.classList.contains("on")) {
+        if (now - saidAt > 3400) bubble.classList.remove("on");
+        // Above the body, kept below the sticky nav.
+        const top = Math.max(96 + words.offsetHeight, sy - lift - SIZE * 0.16);
+        bubble.style.transform = `translate(${sx.toFixed(1)}px, ${top.toFixed(1)}px)`;
+      }
       if (onScreen) renderer.render(scene, camera);
       requestAnimationFrame(frame);
+    }
+
+    /* "slow down" bubble */
+    let speed = 0, lastY = scrollY, saidAt = -1e9, said = 0, jumpUntil = 0, line = 0;
+    // Clicking a menu link or back-to-top scrolls fast on purpose: no telling off.
+    const jumping = () => performance.now() < jumpUntil;
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest && e.target.closest("a[href*='#']");
+      if (a) jumpUntil = performance.now() + 2500;
+    });
+    function shout(now) {
+      const n = Math.max(1, Math.min(leg, ids.length)) - 1;   // stop k is section k-1
+      const nav = document.querySelector(`.links a[href$="#${ids[n]}"]`);
+      const name = (nav && nav.textContent.trim()) || ids[n];
+      words.textContent = text.say[line++ % text.say.length].replace("{s}", name);
+      bubble.classList.add("on");
+      saidAt = now; said++; wobble = 0.7;
     }
 
     link.addEventListener("pointerenter", () => { wobble = 0.7; });

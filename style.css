@@ -530,3 +530,7 @@ article pre code { background: none; border: 0; padding: 0; font: 13.5px/1.65 va
 .to-top:hover { border-color: var(--accent-glow); box-shadow: var(--shadow-glow); transform: translateY(-3px); }
 .js .to-top:not(.show) { opacity: 0; transform: translateY(12px); pointer-events: none; visibility: hidden; }
 @media (max-width: 700px) { .to-top { inset-inline-end: var(--space-4); bottom: var(--space-4); width: 48px; height: 48px; } }
+.drone-say { position: fixed; left: 0; top: 0; z-index: 9; pointer-events: none; translate: -50% -100%; }
+.drone-say span { position: relative; display: block; width: max-content; max-width: 260px; padding: var(--space-3) var(--space-4); font: 600 15px/1.35 var(--sans); color: var(--ink); background: var(--surface-200); border: 1px solid var(--accent-glow); border-radius: var(--radius-lg); box-shadow: var(--shadow-glow); opacity: 0; transform: translateY(8px) scale(.92); transform-origin: 50% 100%; transition: opacity .25s ease, transform .3s ease; }
+.drone-say span::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 12px; height: 12px; translate: -50% 0; rotate: 45deg; background: var(--surface-200); border-right: 1px solid var(--accent-glow); border-bottom: 1px solid var(--accent-glow); }
+.drone-say.on span { opacity: 1; transform: none; }

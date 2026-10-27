@@ -21,9 +21,14 @@ ORIGIN = "https://elkushi.github.io"
 
 EMAIL = "moustafa.elkoushy7@gmail.com"
 GITHUB = "https://github.com/elkushi"
-# The t.me username. No phone number: CLAUDE.md keeps that off public pages.
+# The t.me username.
 TELEGRAM = "Elkushi99"
 TG_URL = f"https://t.me/{TELEGRAM}" if TELEGRAM else ""
+# WhatsApp, on the Arabic pages only: it is how Gulf recruiters and clients
+# write. His decision, 2026-10-27; every other language keeps the phone off.
+WHATSAPP = "79932802066"
+WA_URL = f"https://wa.me/{WHATSAPP}"
+WA_SHOWN = "+7 993 280-20-66"
 
 # Telegram is the one call to action: hero, nav, services and contact all
 # open a chat, with the username written out so it works even when the click
@@ -252,7 +257,7 @@ def page(code: str, page_path: str, body: str) -> str:
     current = ' aria-current="page"' if page_path == "index.html" else ""
     home = f"{up}index.html"
 
-    body = body.replace("@@TG@@", TG_URL)
+    body = body.replace("@@TG@@", TG_URL).replace("@@WA@@", WA_URL).replace("@@WA_SHOWN@@", WA_SHOWN)
     body = external_new_tab(body)
     body = responsive_images(body)
     # Fragments write asset paths relative to the English page they were
