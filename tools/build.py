@@ -33,6 +33,7 @@ TG_URL = f"https://t.me/{TELEGRAM}" if TELEGRAM else ""
 # assets/, so a missing PDF is reported at build time instead of 404ing.
 CV_FILE = {"en": "cv-en.pdf", "ar": "cv-ar.pdf", "ru": "cv-ru.pdf"}
 CV_LABEL = {"en": "Download CV", "ar": "تنزيل السيرة الذاتية", "ru": "Скачать резюме"}
+CV_SHORT = {"en": "CV", "ar": "السيرة الذاتية", "ru": "Резюме"}
 
 # The one inline script on the site. Its hash goes in the CSP, so the policy can
 # refuse every other inline script without needing 'unsafe-inline'.
@@ -255,10 +256,13 @@ def page(code: str, page_path: str, body: str) -> str:
     # Fragments write asset paths relative to the English page they were
     # authored for; re-point them at the single copy under /assets.
     body = re.sub(r'(?:\.\./)*assets/', f"{up}assets/", body)
-    cv = SITE / "assets" / CV_FILE[code]
+    # The CV shows in three places: the nav, the hero and the contact section.
+    has_cv = (SITE / "assets" / CV_FILE[code]).exists()
+    cv_href = f"{up}assets/{CV_FILE[code]}"
     body = body.replace("@@CV@@",
-                        f'<a class="btn btn-secondary" href="{up}assets/{CV_FILE[code]}" download>'
-                        f'{CV_LABEL[code]}</a>' if cv.exists() else "")
+                        f'<a class="btn btn-secondary" href="{cv_href}" download>'
+                        f'{CV_LABEL[code]}</a>' if has_cv else "")
+    nav_cv = f'<a class="cta" href="{cv_href}" download>{CV_SHORT[code]}</a>\n      ' if has_cv else ""
 
     css = CSS.replace('url("assets/', f'url("{up}assets/')
     # The logo sprite is only needed where the tool row is; elsewhere it is
@@ -277,6 +281,9 @@ def page(code: str, page_path: str, body: str) -> str:
             "alumniOf": {"@type": "CollegeOrUniversity", "name": "Moscow Aviation Institute"},
             "sameAs": [GITHUB, TG_URL],
         }, ensure_ascii=False) + "</script>"
+    # The home page gets the drone that flies down it. The script decides on
+    # the visitor's device whether three.js is worth loading at all.
+    drone = f'\n<script src="{up}assets/drone-escort.js" defer></script>' if page_path == "index.html" else ""
     tg_foot = f' · <a href="{TG_URL}" target="_blank" rel="noopener noreferrer">Telegram</a>' if TG_URL else ""
     preload = "\n".join(
         f'<link rel="preload" href="{up}assets/fonts/{f}" as="font" type="font/woff2" crossorigin>'
@@ -339,7 +346,7 @@ def page(code: str, page_path: str, body: str) -> str:
     <div class="nav-end">
       <nav class="langs" aria-label="{loc['lang_label']}">{switch}</nav>
       <button class="theme-toggle cta" type="button" aria-label="{loc['theme']}"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-      <a class="cta" href="{TG_URL}" target="_blank" rel="noopener noreferrer">{loc['tg']} <span aria-hidden="true">{loc['arrow']}</span></a>
+      {nav_cv}<a class="cta" href="{TG_URL}" target="_blank" rel="noopener noreferrer">{loc['tg']} <span aria-hidden="true">{loc['arrow']}</span></a>
     </div>
   </div>
   <div class="progress" aria-hidden="true"><span></span></div>
@@ -352,7 +359,7 @@ def page(code: str, page_path: str, body: str) -> str:
     <span>Moustafa Elkoushy · <a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub</a>{tg_foot}</span>
   </div>
 </footer>
-<script src="{up}reveal.js" defer></script>
+<script src="{up}reveal.js" defer></script>{drone}
 </body>
 </html>
 """

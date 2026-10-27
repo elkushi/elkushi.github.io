@@ -451,3 +451,12 @@ article pre code { background: none; border: 0; padding: 0; font: 13.5px/1.65 va
 .wat b { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--accent-glow); color: var(--on-accent); font: 700 20px/1 var(--mono); }
 .wat h3 { font-size: 20px; margin: var(--space-4) 0 var(--space-2); }
 .wat p { color: var(--ink-muted); font-size: 15px; margin: 0; }
+
+/* drone escort (assets/drone-escort.js): the canvas follows the drone, the
+   link sits over its body, and nothing here exists without the script */
+.drone-canvas { position: fixed; left: 0; top: 0; width: 220px; height: 220px; z-index: 9; pointer-events: none; opacity: 0; transition: opacity .4s ease; filter: drop-shadow(0 16px 14px rgba(20, 13, 20, .28)); will-change: transform; }
+.drone-canvas.in { opacity: 1; }
+:root:not([data-theme="light"]) .drone-canvas { filter: drop-shadow(0 0 22px rgba(168, 85, 247, .32)); }
+.drone-link { position: fixed; left: 0; top: 0; width: 120px; height: 64px; z-index: 9; border-radius: var(--radius-pill); will-change: transform; }
+.drone-link::after { content: attr(data-tip) " \2197"; position: absolute; left: 50%; bottom: calc(100% + 6px); translate: -50% 0; padding: var(--space-1) var(--space-3); white-space: nowrap; font: 600 13px/1.4 var(--sans); color: var(--ink); background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-pill); opacity: 0; transition: opacity .2s ease; pointer-events: none; }
+.drone-link:hover::after, .drone-link:focus-visible::after { opacity: 1; }
