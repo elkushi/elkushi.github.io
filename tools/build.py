@@ -272,7 +272,7 @@ def page(code: str, page_path: str, body: str) -> str:
 <meta name="description" content="{desc}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{ORIGIN}/assets/portrait-900.webp">
+<meta property="og:image" content="{ORIGIN}/assets/hero.webp">
 <meta name="color-scheme" content="dark light">
 {alts}
 {preload}
