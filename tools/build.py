@@ -202,6 +202,10 @@ LOCALES = {
                                 "Notes on building with AI: what I learn shipping AI products and workflows, written up so you can use it too."),
             "blog/wat-framework.html": ("The WAT framework: how I make Claude Code reliable · Moustafa Elkoushy",
                                         "Workflows say what to do, the Agent decides, Tools do the work. How the three layers fit together, and ten rules for using them well."),
+            "blog/secure-vibe-coded-apps.html": ("Vibe-coded apps: how to make them secure, and how to prove it · Moustafa Elkoushy",
+                                                 "The eight holes AI-built apps most often have, how to close each one, and the test that proves it. With real code from my own apps."),
+            "blog/seo-geo-aeo-audit.html": ("Get found on Google and in ChatGPT: what my audit app checks · Moustafa Elkoushy",
+                                            "What my free SEO, AEO and GEO audit checks, what it means for a business, and 22 fixes you can make this week."),
         },
     },
     "ar": {
@@ -234,6 +238,10 @@ LOCALES = {
                                 "ملاحظات عن البناء بالذكاء الاصطناعي: ما أتعلّمه أثناء بناء المنتجات ومسارات العمل، مكتوبًا لتستفيد منه أنت أيضًا."),
             "blog/wat-framework.html": ("إطار WAT: كيف أجعل Claude Code موثوقًا · مصطفى القوشي",
                                         "مسارات العمل تحدّد ما يجب فعله، والوكيل يقرّر، والأدوات تنفّذ. كيف تعمل الطبقات الثلاث معًا، وعشر قواعد لاستخدامها جيدًا."),
+            "blog/secure-vibe-coded-apps.html": ("تطبيقات Vibe Coding: كيف تجعلها آمنة، وكيف تثبت ذلك · مصطفى القوشي",
+                                                 "الثغرات الثماني الأكثر شيوعًا في التطبيقات المبنية بالذكاء الاصطناعي، وكيف تغلق كل واحدة منها، والاختبار الذي يثبت ذلك، مع كود حقيقي من تطبيقاتي."),
+            "blog/seo-geo-aeo-audit.html": ("كيف تظهر في Google وفي ChatGPT: ما يفحصه تطبيقي · مصطفى القوشي",
+                                            "ما يفحصه تطبيقي المجاني لـ SEO وAEO وGEO، وما يعنيه ذلك للشركة، و22 إصلاحًا تستطيع تنفيذها هذا الأسبوع."),
         },
     },
     "ru": {
@@ -266,11 +274,15 @@ LOCALES = {
                                 "Заметки о работе с ИИ: что я узнаю, когда делаю ИИ-продукты и автоматизации, и как этим пользоваться."),
             "blog/wat-framework.html": ("WAT-фреймворк: как я делаю Claude Code надёжным · Мустафа Элькуши",
                                         "Workflows задают, что делать, агент принимает решения, инструменты выполняют работу. Как три слоя работают вместе — и десять правил, которые помогают применять их правильно."),
+            "blog/secure-vibe-coded-apps.html": ("Приложения на вайб-кодинге: как сделать их безопасными и как это доказать · Мустафа Элькуши",
+                                                 "Восемь дыр в безопасности, которые чаще всего встречаются в приложениях, написанных ИИ, как закрыть каждую и какой тест это доказывает, с реальным кодом из моих приложений."),
+            "blog/seo-geo-aeo-audit.html": ("Как стать заметным в Google и в ChatGPT: что проверяет мой инструмент аудита · Мустафа Элькуши",
+                                            "Что проверяет мой бесплатный аудит SEO, AEO и GEO, что это значит для бизнеса и 22 исправления, которые можно сделать на этой неделе."),
         },
     },
 }
 
-BLOG = ["wat-framework"]
+BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit"]
 
 PAGE_PATHS = (["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
               + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG])

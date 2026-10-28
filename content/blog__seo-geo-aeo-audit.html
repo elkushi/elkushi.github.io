@@ -1,0 +1,143 @@
+<div class="wrap post">
+  <header class="case-hero post-head">
+    <p class="eyebrow">Blog &middot; 28 October 2026 &middot; 10 min read</p>
+    <h1>Get found on Google and in ChatGPT: what my audit app checks, and how to fix it yourself</h1>
+    <p class="lead">Customers find a business in two ways now. They search Google, or they ask an AI. I built a free tool that checks a website for both in under a minute. Here is what it checks, what that means for a business, and the fixes you can make this week, with or without the tool.</p>
+  </header>
+  <figure class="post-cover reveal"><img class="only-dark" src="../assets/blog/seo-geo-aeo-audit-dark.svg" width="1200" height="630" alt="An audit in the middle, connected to search, AI crawlers, structured data, llms.txt and a plan"><img class="only-light" src="../assets/blog/seo-geo-aeo-audit-light.svg" width="1200" height="630" alt="An audit in the middle, connected to search, AI crawlers, structured data, llms.txt and a plan"></figure>
+
+  <article>
+    <section class="reveal">
+      <h2>Three ways to be found</h2>
+      <p>The words sound alike, so here is the difference in one line each:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>The question it answers</th><th>Where it shows</th></tr></thead>
+          <tbody>
+            <tr><td><b>SEO</b></td><td>Can search engines find, read and rank my pages?</td><td>Google and Bing results</td></tr>
+            <tr><td><b>AEO</b></td><td>Can a search engine lift a direct answer from my page?</td><td>Answer boxes, "People also ask", voice assistants</td></tr>
+            <tr><td><b>GEO</b></td><td>Can AI tools reach my site, understand who I am, and cite me?</td><td>ChatGPT, Perplexity, Claude, Gemini, Google's AI answers</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Most audit tools still check only the first one, and the good ones are paid. A site can rank well on Google and still be invisible when a buyer asks ChatGPT "which company should I use for this?". That is the gap I built the tool for.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>What the audit gives a business</h2>
+      <p>You paste a web address. The tool reads the homepage, robots.txt, the sitemap and up to 25 pages, and returns:</p>
+      <ul class="checks">
+        <li><b>Three scores</b>, SEO, AEO and GEO, plus an overall score. On a real run it checked 25 pages of djangoproject.com in 57 seconds and scored it 76 out of 100.</li>
+        <li><b>A to-do list ranked by impact.</b> Week 1 quick wins, then 30 days, then 90 days. The biggest, cheapest fixes come first, so a small team knows where to start.</li>
+        <li><b>Code you can paste in</b> for each fix: structured data (JSON-LD), robots.txt rules and an llms.txt draft. Your developer does not have to research the fix, only apply it.</li>
+        <li><b>A live check of 14 AI crawlers</b>, including the ones behind ChatGPT, Claude, Perplexity and Gemini. More on why this one matters below.</li>
+        <li><b>The report as a web page, a PDF and a Markdown checklist</b>, so it can go to a manager, an agency or a developer as it is.</li>
+      </ul>
+      <p>The checks are plain rules written in Python, so the same site gets the same score every time. AI is used only where judgement helps: an optional test that asks a language model the questions a buyer would ask and looks for your name in the answer, and optional Claude Code agents for a deeper review.</p>
+      <p>Who it is for: a business owner who wonders why a competitor shows up in AI answers and they don't, a marketing team before a redesign, or an agency that wants a fast first look at a new client's site.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>The problem most sites don't know they have</h2>
+      <p>A site can allow AI bots in robots.txt and still block them at the firewall or CDN. The owner reads robots.txt, sees "allowed", and moves on. Meanwhile every request from an AI search bot gets a <code>403</code>, so the AI tools cannot read a single page.</p>
+      <p>That is why the tool does not stop at robots.txt. It requests the homepage as each AI crawler and records what the server actually answers. You can do the same check by hand in ten seconds:</p>
+      <pre><code># what does your server answer to ChatGPT's search bot?
+curl -sI -A "OAI-SearchBot/1.0; +https://openai.com/searchbot" https://your-site.com | head -1
+
+# HTTP/2 200  -&gt; it can read your page
+# HTTP/2 403  -&gt; it is blocked, whatever robots.txt says</code></pre>
+    </section>
+
+    <section class="reveal">
+      <h2>Tips: technical SEO</h2>
+      <p>Each tip below is a check the tool runs. They are the issues I see most often, roughly in order of how much they cost you.</p>
+      <ol>
+        <li><b>Check you are not hiding the site by accident.</b> A <code>noindex</code> tag left over from the test version, or <code>Disallow: /</code> in robots.txt, removes you from Google completely. It happens after launches more often than you would think.</li>
+        <li><b>Serve everything over HTTPS</b>, with no images or scripts still loading over <code>http://</code>.</li>
+        <li><b>Give every page its own title</b>, under about 60 characters, and its own meta description, between 70 and 160. Duplicate titles make pages compete with each other.</li>
+        <li><b>One H1 per page</b> that says what the page is about.</li>
+        <li><b>Publish an XML sitemap and name it in robots.txt</b> with a <code>Sitemap:</code> line.</li>
+        <li><b>Add a canonical tag to every page</b>, pointing to your own domain. A canonical that points to another domain tells Google the other site is the original.</li>
+        <li><b>Fix broken links and redirect chains.</b> Every extra hop wastes crawl time and loses some of the link's value.</li>
+        <li><b>Make it fast and mobile-friendly.</b> A viewport meta tag, image sizes set, and a server that answers in under two seconds. Google ranks the mobile version of your site.</li>
+        <li><b>If you have language versions, add hreflang</b>, so Google shows the Arabic page in Dubai and the English page in London.</li>
+      </ol>
+    </section>
+
+    <section class="reveal">
+      <h2>Tips: AEO, answers search engines can lift</h2>
+      <ol>
+        <li><b>Write headings as the questions your customers ask.</b> "How long does delivery take?" works better than "Delivery".</li>
+        <li><b>Answer in the first sentence or two under the heading.</b> Then add the detail. A search engine lifts the short answer; a reader stays for the rest.</li>
+        <li><b>Use lists for steps and tables for comparisons.</b> They are the easiest formats for machines to quote.</li>
+        <li><b>Add structured data.</b> At minimum: <code>Organization</code> on the homepage, <code>WebSite</code>, <code>BreadcrumbList</code> on inner pages, <code>Article</code> with dates on blog posts, <code>Product</code> on product pages, and <code>FAQPage</code> where you answer questions.</li>
+        <li><b>Validate it.</b> JSON-LD with one missing comma is ignored completely. Test every page type with Google's Rich Results Test before you ship.</li>
+      </ol>
+      <p>This is the kind of fix the tool hands you ready-made. A minimal Organization block looks like this:</p>
+      <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Your Company",
+  "url": "https://your-site.com",
+  "logo": "https://your-site.com/logo.png",
+  "sameAs": [
+    "https://www.linkedin.com/company/your-company",
+    "https://x.com/yourcompany"
+  ]
+}
+&lt;/script&gt;</code></pre>
+    </section>
+
+    <section class="reveal">
+      <h2>Tips: GEO, getting cited by AI</h2>
+      <ol>
+        <li><b>Let AI search bots in.</b> There are two kinds of AI bot. Search bots fetch your page to answer a question and can cite you: <code>OAI-SearchBot</code>, <code>Claude-SearchBot</code>, <code>PerplexityBot</code>. Training bots collect text to train models: <code>GPTBot</code>, <code>ClaudeBot</code>, <code>Google-Extended</code>, <code>CCBot</code>. Blocking training bots is a fair business decision. Blocking search bots means you cannot be cited.</li>
+        <li><b>Then check the firewall</b>, as shown above. Some CDN and firewall settings block AI bots by default.</li>
+        <li><b>Don't build pages that only exist in JavaScript.</b> Many crawlers read the raw HTML and do not run scripts. If your text appears only after JavaScript runs, an AI bot sees an almost empty page. Open "View source" in your browser: if your main text is not there, that is what the bots see.</li>
+        <li><b>Make it obvious who you are.</b> An About page, the Organization markup above with <code>sameAs</code> links to your real profiles, and the same company name everywhere. AI tools cite sources they can identify.</li>
+        <li><b>Show who wrote it and when.</b> A visible author and a published or updated date on every article. Content that has not been touched in six months looks stale to people and machines.</li>
+        <li><b>Give AI something to quote.</b> Concrete numbers, clear definitions, and links to your sources. "Delivery takes 2 to 4 working days within the UAE" gets quoted. "We deliver fast" does not.</li>
+        <li><b>Register with Bing Webmaster Tools.</b> Bing powers Copilot, and ChatGPT's search also draws on it. Most businesses only ever set up Google.</li>
+        <li><b>Add an llms.txt if you like, but don't count on it.</b> It is a short Markdown file that summarises your site for AI tools. It is cheap to add, and the tool drafts one for you. No major AI search engine has confirmed it reads the file, so it is the last item on this list, not the first.</li>
+      </ol>
+    </section>
+
+    <section class="reveal">
+      <h2>A 10-minute check you can do today</h2>
+      <p>No tools needed:</p>
+      <ol>
+        <li>Open <code>your-site.com/robots.txt</code>. Look for <code>Disallow: /</code> and for the AI bots named above.</li>
+        <li>Open <code>your-site.com/sitemap.xml</code>. It should load and list your pages.</li>
+        <li>Search Google for <code>site:your-site.com</code>. Are all your important pages there?</li>
+        <li>Open "View source" on your homepage. Is your main text in the HTML?</li>
+        <li>Run the <code>curl</code> line above with an AI bot's name.</li>
+        <li>Ask ChatGPT and Perplexity the question your customers ask, for example "best accounting firm for small businesses in Dubai". Who gets named? Who gets a link?</li>
+      </ol>
+      <p>If step 6 names your competitors and not you, the other five steps usually show why.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>What the tool can't tell you</h2>
+      <p>Honest limits, because they matter when you decide what to do next:</p>
+      <ul>
+        <li>No tool can promise a ranking. The scores show what is broken or missing, not where you will land.</li>
+        <li>The crawler reads raw HTML, like many bots do. It does not run JavaScript, so a single-page app looks almost empty to it. That is a finding in itself.</li>
+        <li>The AI visibility test asks one model, plus DuckDuckGo results. It does not show what ChatGPT or Perplexity answer today. For that, ask them, as in step 6.</li>
+        <li>It checks up to 25 pages. That is enough to find the patterns on most business sites, not to audit every page of a large shop.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>See it in real projects</h2>
+      <ul>
+        <li><a href="../work/seo-audit.html">The case study</a>: screenshots from a real run, how it works, and the guard rails for a public tool.</li>
+        <li><a href="../work/ritorica.html">ritorica.com</a>: a site I built that was close to invisible in AI search, and the SEO and GEO plan I wrote for it.</li>
+        <li>The code: <a href="https://github.com/elkushi/elkoushy_seo_geo_aeo">github.com/elkushi/elkoushy_seo_geo_aeo</a></li>
+      </ul>
+      <p>Want to know how your site does in Google and in AI search? <a href="@@TG@@">Write to me on Telegram</a>.</p>
+    </section>
+
+    <p><a href="index.html">&larr; All posts</a></p>
+  </article>
+</div>
