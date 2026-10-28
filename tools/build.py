@@ -459,7 +459,8 @@ def page(code: str, page_path: str, body: str) -> str:
 {preload}
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="icon" href="{up}assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{up}assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{up}assets/apple-touch-icon.png">
 <style>{css}</style>
 <script>{BOOT_JS}</script>
 <script type="speculationrules">{SPEC_RULES}</script>
