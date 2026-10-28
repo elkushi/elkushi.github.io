@@ -1,0 +1,118 @@
+<div class="wrap post">
+  <header class="case-hero post-head">
+    <p class="eyebrow">Blog &middot; 28 October 2026 &middot; 8 min read</p>
+    <h1>PHP in October 2026: what happened, and when a Django CMS is the safer choice</h1>
+    <p class="lead">This month every PHP website on the internet needed an emergency update, and a WordPress plugin bug let strangers run their own code on the sites that used it. Here is what happened, in plain words, what to do this week if your site runs on PHP, and when moving to a Django CMS is worth it, and when it isn't.</p>
+  </header>
+  <figure class="post-cover reveal"><img class="only-dark" src="../assets/blog/php-october-2026-django-cms-dark.svg" width="1200" height="630" alt="A PHP site at the centre, with the places attackers used this month around it: the runtime, plugins, uploads, .user.ini, the database and cron"><img class="only-light" src="../assets/blog/php-october-2026-django-cms-light.svg" width="1200" height="630" alt="A PHP site at the centre, with the places attackers used this month around it: the runtime, plugins, uploads, .user.ini, the database and cron"></figure>
+
+  <article>
+    <section class="reveal">
+      <h2>What happened in October</h2>
+      <h3>1. A bug in PHP itself: "php2shell"</h3>
+      <p>On 21 October the PHP project released emergency updates for two flaws in PHP itself, <code>CVE-2026-109618</code> and <code>CVE-2026-109619</code>. Both are rated 9.2 out of 10. Together they let an attacker run code on the server without logging in.</p>
+      <ul>
+        <li><b>Who is affected:</b> every PHP installation that serves web pages. That includes Apache with mod_php, PHP-FPM, php-cgi, FrankenPHP and LiteSpeed. On mod_php the attack can work before any of your own code runs, so a well-written site is not protected.</li>
+        <li><b>The fix:</b> PHP 8.5.12, 8.4.27, 8.3.36 or 8.2.35.</li>
+        <li><b>How many sites:</b> Palo Alto Networks counted over 22.6 million exposed PHP instances that were potentially vulnerable.</li>
+        <li><b>Is it being used:</b> yes. On 26 October the US cybersecurity agency CISA added both flaws to its list of vulnerabilities known to be exploited, and gave US federal agencies three days to fix them.</li>
+        <li><b>Old PHP:</b> CISA's advice for PHP 8.1 and older is blunt: take the system offline until it can be updated.</li>
+      </ul>
+      <p>On 23 October a third flaw, <code>CVE-2026-115560</code>, was published. It only works on unusual server setups, and it has a configuration workaround rather than a patch.</p>
+
+      <h3>2. A plugin that let anyone upload PHP</h3>
+      <p>Bricksforge, an add-on for the Bricks site builder on WordPress, had a flaw (<code>CVE-2026-85097</code>, rated 9.8) that let anyone upload a file and run it as code. No login needed. Patchstack saw attacks from 7 October. It is fixed in version 3.1.8.10. About 6,000 sites use the plugin.</p>
+
+      <h3>3. A backdoor that rebuilds itself</h3>
+      <p>Researchers at Sucuri described WordPress malware that hides in at least eight places at once: a <code>.user.ini</code> file that loads it before every PHP request, <code>mu-plugins</code>, the theme's <code>functions.php</code>, a copy in the database, scheduled tasks, and on some servers even shared memory. Delete one copy and the others put it back. How it first gets in is not known; the usual ways are old plugins, weak passwords and upload bugs.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Is PHP the problem?</h2>
+      <p>Not by itself. Every language has had serious bugs, and the PHP team shipped fixes fast. Django had a security release this month too: on 6 October it fixed four issues, rated low or moderate. Two could slow a server down, one could make it send unwanted network requests through a mapping library, and one let forged form data edit records it shouldn't. None let a stranger run code.</p>
+      <p>The bigger difference is not the language. It is how a typical PHP site is built, and it shows in all three stories above.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>What decides your risk</th><th>Typical PHP site (WordPress)</th><th>Django CMS site</th></tr></thead>
+          <tbody>
+            <tr><td><b>A file lands in a public folder</b></td><td>If it ends in <code>.php</code>, the server can run it. An upload bug becomes full control of the site.</td><td>Uploads are served as plain files. Dropping a file on the server does not make it code.</td></tr>
+            <tr><td><b>Where code can hide</b></td><td>Any PHP file, <code>.user.ini</code>, <code>mu-plugins</code>, the theme, the database</td><td>The app's code loads from the project when it starts. A stray file in the uploads folder does nothing.</td></tr>
+            <tr><td><b>Third-party code</b></td><td>Often many plugins from many authors, each with its own security record</td><td>Fewer packages, pinned to exact versions, and easy to check automatically for known flaws</td></tr>
+            <tr><td><b>Protection you get by default</b></td><td>Depends on the theme and each plugin</td><td>Built into Django: protection against forged forms, safe database queries, HTML escaping, and a <code>check --deploy</code> command that flags unsafe settings</td></tr>
+            <tr><td><b>Updates</b></td><td>Core, theme and every plugin, each on its own schedule</td><td>Django and django CMS publish security releases with a severity rating, and both have long-term support versions</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>None of this makes a Django site safe automatically. A badly configured Django server can still be broken into. But a whole class of attack from this month, "upload a file, then run it", does not work against it.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>If your site runs on PHP: do this week</h2>
+      <ol>
+        <li><b>Check your PHP version.</b> Ask your host, or look in the hosting panel. You need 8.5.12, 8.4.27, 8.3.36 or 8.2.35 or newer. Some managed hosts patched within hours; ask yours to confirm.</li>
+        <li><b>If you are on PHP 8.1 or older, treat it as an emergency.</b> That is CISA's advice, not mine.</li>
+        <li><b>Update every plugin and theme, and delete the ones you don't use.</b> An inactive plugin can still be attacked.</li>
+        <li><b>Look for PHP files where there should be none.</b> On WordPress, the uploads folder should hold images and documents only:
+          <pre><code>find wp-content/uploads -name "*.php"</code></pre>
+          Anything this finds needs a closer look.</li>
+        <li><b>Check for <code>.user.ini</code> files you didn't create</b>, and for unknown files in <code>mu-plugins</code>.</li>
+        <li><b>Watch for PHP starting other programs.</b> CISA's advice is to look for PHP processes launching shells or downloading tools. That is not normal behaviour for a website.</li>
+      </ol>
+    </section>
+
+    <section class="reveal">
+      <h2>When moving to a Django CMS is worth it</h2>
+      <p>Moving a site costs time and money. It is worth it when the site is more than a brochure:</p>
+      <ul>
+        <li>It takes uploads, forms or orders, or has user accounts.</li>
+        <li>It holds personal data you would have to report if it leaked.</li>
+        <li>It depends on many plugins to do its job, and nobody owns updating them.</li>
+        <li>You need custom features, an API, or AI tools built into the site.</li>
+        <li>You were going to redesign or rebuild it anyway.</li>
+      </ul>
+      <p><b>When to stay:</b> a small company site with a handful of well-known plugins, on a managed host that updates PHP for you. For that site, the steps above are enough. Moving it would cost more than it saves.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>django CMS or Wagtail?</h2>
+      <p>Both are content management systems built on Django, so both get the protections above.</p>
+      <ul>
+        <li><b>django CMS:</b> the team edits pages directly in the browser and drags in blocks. Good for marketing sites that change often. The current long-term support version is 5.0.</li>
+        <li><b>Wagtail:</b> content is entered into structured fields and then laid out by templates. Good when the same content is reused in many places.</li>
+      </ul>
+      <p>I built <a href="../work/ritorica.html">ritorica.com</a> on django CMS: designed in Figma, edited in the browser by the team, running in three languages including Arabic, with PostgreSQL, a server that only accepts SSH keys, and deploys through GitHub Actions.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>What a move looks like</h2>
+      <ol>
+        <li><b>Inventory:</b> list every page, form, plugin and integration the current site uses.</li>
+        <li><b>Map:</b> turn each page type into a template, and decide what replaces each plugin. Often it is a few lines of Python, not another package.</li>
+        <li><b>Move the content</b> with a script, not by hand.</li>
+        <li><b>Keep your URLs.</b> Redirect every old address to its new one, so Google and your customers' bookmarks still work.</li>
+        <li><b>Run both</b> until the new site is checked, then switch over.</li>
+      </ol>
+    </section>
+
+    <section class="reveal">
+      <h2>Sources</h2>
+      <ul>
+        <li><a href="https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching">CISA: Critical vulnerabilities in PHP require immediate patching</a></li>
+        <li><a href="https://www.rapid7.com/blog/post/etr-cve-2026-109618-and-cve-2026-109619-critical-unauthenticated-remote-code-execution-in-php/">Rapid7: CVE-2026-109618 and CVE-2026-109619</a></li>
+        <li><a href="https://unit42.paloaltonetworks.com/cve-2026-109618-cve-2026-109619/">Palo Alto Networks Unit 42: threat brief</a></li>
+        <li><a href="https://www.securityweek.com/bricksforge-wordpress-plugin-vulnerability-exploited-in-the-wild/">SecurityWeek: Bricksforge plugin flaw exploited</a></li>
+        <li><a href="https://thehackernews.com/2026/10/wordpress-backdoor-rebuilds-itself.html">The Hacker News: WordPress backdoor rebuilds itself</a></li>
+        <li><a href="https://www.djangoproject.com/weblog/2026/oct/06/security-releases/">Django: security releases 6.1.2, 6.0.9 and 5.2.18</a></li>
+        <li><a href="https://www.django-cms.org/resources/blog/2026/08/27/django-cms-5011-and-512-released/">django CMS: 5.0.11 and 5.1.2 released</a></li>
+      </ul>
+    </section>
+
+    <aside class="post-cta reveal">
+      <h2>Not sure where your site stands?</h2>
+      <p>Send me the address. I'll check what it runs on and what is exposed, and tell you whether it needs a patch, a cleanup or a move.</p>
+      <p class="cta-row"><a class="btn btn-primary" href="@@TG@@?text=Hi%20Moustafa%2C%20I%27m%20interested%20in%3A%20a%20security%20check">Write to me on Telegram</a></p>
+    </aside>
+
+    <p><a href="index.html">&larr; All posts</a></p>
+  </article>
+</div>

@@ -208,6 +208,8 @@ LOCALES = {
                                             "What my free SEO, AEO and GEO audit checks, what it means for a business, and 22 fixes you can make this week."),
             "blog/ai-agents-python.html": ("AI agents: what they are, how to build one, and why Python · Moustafa Elkoushy",
                                            "What an AI agent is, a working agent in about 40 lines of Python, and the rules that keep it from going wrong."),
+            "blog/php-october-2026-django-cms.html": ("PHP in October 2026: what happened, and when a Django CMS is the safer choice · Moustafa Elkoushy",
+                                                      "php2shell, an exploited WordPress plugin and a self-rebuilding backdoor: what to do this week if your site runs on PHP, and when moving to Django CMS is worth it."),
         },
     },
     "ar": {
@@ -288,7 +290,7 @@ LOCALES = {
     },
 }
 
-BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agents-python"]
+BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agents-python", "php-october-2026-django-cms"]
 
 PAGE_PATHS = (["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
               + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG])
