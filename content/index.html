@@ -1,22 +1,23 @@
-<div class="wrap">
-  <header class="hero">
+<header class="hero">
+  <div class="wrap hero-inner">
     <div class="hero-copy">
       <span class="badge"><span class="acc" aria-hidden="true">&#9889;</span>AI Product Engineer <span class="badge-more"><span class="sep" aria-hidden="true">|</span> Marketing department &middot; 2+ years</span></span>
       <h1>I build AI products that <span>check their own work.</span></h1>
       <p class="lead">2+ years in a marketing department, turning business cases into products that bring the company leads and save the team hours. Most AI demos break the first time the model is confidently wrong. Mine catch it: schemas, validators and QA checks are built in.</p>
       <p class="lead-role">I designed, built and run <a href="https://www.ritorica.com">ritorica.com</a> alone, from the Figma file to the Linux server.</p>
       <div class="actions">
+        <a class="btn btn-primary" href="@@TG@@">Write to me on Telegram: @Elkushi99</a>
         <a class="btn btn-secondary" href="#work">See what I shipped <span aria-hidden="true">&#8599;</span></a>
-        <a class="btn btn-secondary" href="@@TG@@">Write to me on Telegram: @Elkushi99</a>
         <a href="https://github.com/elkushi" class="btn btn-secondary"><svg class="btn-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-github"/></svg>GitHub</a>
         @@CV@@
       </div>
     </div>
-    <div class="stage3d">
-      <img src="assets/hero.webp" fetchpriority="high" srcset="assets/hero-560.webp 560w, assets/hero-740.webp 740w, assets/hero.webp 1180w" sizes="(min-width: 900px) 620px, 96vw" width="1180" height="1071" alt="Moustafa in a storm of violet lightning with a wolverine behind him, ringed by floating panels: code, a chart, a cloud, a database, a chatbot, a security shield, and a checklist that reads Validate Output, Check Sources, QA Verification.">
-    </div>
+    <div class="hero-art">@@ART:hero-back@@<img class="hero-photo" src="assets/hero-photo-1000.webp" srcset="assets/hero-photo-500.webp 500w, assets/hero-photo-760.webp 760w, assets/hero-photo-1000.webp 1000w" sizes="(min-width: 900px) 500px, 88vw" width="1000" height="1022" fetchpriority="high" alt="Illustrated portrait of Moustafa, laughing, with a wolverine wreathed in violet lightning behind him.">@@ART:hero-front@@</div>
     <p class="label hero-strip">Available for new projects &middot; Moscow, UTC+3 &middot; Remote or relocating &middot; English, Arabic, Russian</p>
-  </header>
+  </div>
+</header>
+
+<div class="wrap">
 
   <div class="stack" aria-label="Tools I work with">
     <div class="stack-track">
@@ -167,15 +168,18 @@
     <span class="label">04 &middot; How I build</span>
     <h2>I break things for work, so I build them locked down</h2>
     <p class="section-lede">I do part-time penetration testing of my company's websites and SMS platform against an OWASP checklist. That work is why the apps below start closed and open only where they have to. Every line here is enforced in code, not promised in a policy.</p>
-    <ul class="checks">
-      <li><b>AI agents get an allowlist of tools</b>, never open shell access. An agent that can run commands is the attack surface.</li>
-      <li><b>Uploads and file paths are checked</b>, so nobody can read files outside the app. Tests try <code>/etc/passwd</code> and <code>../</code> and expect a refusal.</li>
-      <li><b>The audit app refuses private and internal addresses</b> and re-checks after every redirect, so a stranger cannot make my server fetch my own network.</li>
-      <li><b>Servers run HTTPS and key-only SSH</b>, with hashed passwords and rate-limited sign-in.</li>
-      <li><b>Containers run as a normal user</b>, not root, with Linux capabilities dropped.</li>
-      <li><b>Keys stay in <code>.env</code></b>, and every repository is scanned for secrets before it goes public.</li>
-    </ul>
-    <p style="margin-top:24px">Tools: nmap, Wireshark, Burp Suite, OWASP testing, TryHackMe. I also wrote <a href="https://github.com/elkushi/system-audit">system-audit</a>, a Bash tool that checks a Linux server for the misconfigurations I keep finding.</p>
+    <div class="sec-grid">
+      <div class="sec-art">@@ART:guard@@</div>
+      <ul class="checks">
+        <li><b>AI agents get an allowlist of tools</b>, never open shell access. An agent that can run commands is the attack surface.</li>
+        <li><b>Uploads and file paths are checked</b>, so nobody can read files outside the app. Tests try <code>/etc/passwd</code> and <code>../</code> and expect a refusal.</li>
+        <li><b>The audit app refuses private and internal addresses</b> and re-checks after every redirect, so a stranger cannot make my server fetch my own network.</li>
+        <li><b>Servers run HTTPS and key-only SSH</b>, with hashed passwords and rate-limited sign-in.</li>
+        <li><b>Containers run as a normal user</b>, not root, with Linux capabilities dropped.</li>
+        <li><b>Keys stay in <code>.env</code></b>, and every repository is scanned for secrets before it goes public.</li>
+      </ul>
+      <p>Tools: nmap, Wireshark, Burp Suite, OWASP testing, TryHackMe. I also wrote <a href="https://github.com/elkushi/system-audit">system-audit</a>, a Bash tool that checks a Linux server for the misconfigurations I keep finding.</p>
+    </div>
   </section>
 
   <section id="about" class="reveal">

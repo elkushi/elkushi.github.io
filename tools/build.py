@@ -79,7 +79,39 @@ CSP = (
 # The work pages, in the order they appear on the home page.
 # The tool logos. Inlined into every page rather than referenced as a file:
 # browsers refuse cross-document <use> for SVG, and the CSP forbids it anyway.
-SPRITE = (SITE / "assets" / "logos.svg").read_text(encoding="utf-8")
+# Its path data is the bulk of every page, so the numbers are cut to two
+# decimals: a hundredth of a 24-unit icon drawn at 48px is a fiftieth of a pixel.
+
+
+def tighten_path(d: str) -> str:
+    """Shorten one path's data without changing the shape it draws.
+
+    Paths with arcs are left alone: their flags may be written run together
+    ("011"), which a plain number reader would misread as eleven.
+    """
+    if re.search(r"[aAeE]", d):
+        return d
+    out, prev = [], ""
+    for tok in re.findall(r"[A-Za-z]|-?(?:\d+\.?\d*|\.\d+)", d):
+        if tok.isalpha():
+            out.append(tok)
+            prev = tok
+            continue
+        n = f"{float(tok):.2f}".rstrip("0").rstrip(".")
+        n = re.sub(r"^(-?)0\.", r"\1.", n)
+        if n in ("-0", "", "-"):
+            n = "0"
+        # Two numbers need a space between them unless the second starts with
+        # a minus, or with a dot after a number that already has one.
+        if prev and not prev.isalpha() and not (n[0] == "-" or (n[0] == "." and "." in prev)):
+            out.append(" ")
+        out.append(n)
+        prev = n
+    return "".join(out)
+
+
+SPRITE = re.sub(r'\sd="([^"]*)"', lambda m: f' d="{tighten_path(m.group(1))}"',
+                (SITE / "assets" / "logos.svg").read_text(encoding="utf-8"))
 
 
 def minify_css(css: str) -> str:
@@ -88,7 +120,35 @@ def minify_css(css: str) -> str:
     css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
     css = re.sub(r"\s+", " ", css)
     css = re.sub(r"\s*([{};,>])\s*", r"\1", css)
+    # A space after a colon only ever follows a property or a media feature
+    # here; no selector or string in the sheet has one.
+    css = re.sub(r":\s+", ":", css)
     return css.replace(";}", "}").strip()
+
+
+# Blocks whose text must reach the browser byte for byte: the inline scripts
+# are allowed by the hash of their exact contents, and <pre> keeps its spaces.
+KEEP = re.compile(r"<(script|style|pre|textarea)\b.*?</\1>", re.S | re.I)
+
+
+def minify_html(html: str) -> str:
+    """Drop comments and indentation from a built page.
+
+    Whitespace is shortened, never removed outright: a run of spaces and
+    newlines becomes one character, so text between inline tags still reads
+    the same. Scripts, styles and <pre> pass through untouched.
+    """
+    kept = []
+
+    def hold(m):
+        kept.append(m.group(0))
+        return f"\x00{len(kept) - 1}\x00"
+
+    html = KEEP.sub(hold, html)
+    html = re.sub(r"<!--.*?-->", "", html, flags=re.S)
+    html = re.sub(r"\s*\n\s*", "\n", html)
+    html = re.sub(r"[ \t]{2,}", " ", html)
+    return re.sub(r"\x00(\d+)\x00", lambda m: kept[int(m.group(1))], html).strip() + "\n"
 
 
 # The stylesheet goes inline in every page, so the first paint does not wait
@@ -420,6 +480,6 @@ if __name__ == "__main__":
                 continue
             out = SITE / out_path(code, page_path)
             out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(page(code, page_path, src.read_text(encoding="utf-8")), encoding="utf-8")
+            out.write_text(minify_html(page(code, page_path, src.read_text(encoding="utf-8"))), encoding="utf-8")
             built += 1
     print(f"built {built} pages" + (f", {missing} still untranslated" if missing else ""))

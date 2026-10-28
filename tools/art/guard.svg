@@ -1,0 +1,113 @@
+<svg class="art" viewBox="0 0 520 400" direction="ltr" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="guard-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" class="stop-a" stop-opacity=".45"/><stop offset="1" class="stop-a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="guard-core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8b4fe"/><stop offset=".5" stop-color="#a855f7"/><stop offset="1" stop-color="#5b21b6"/>
+    </linearGradient>
+    <radialGradient id="guard-fade-g" cx="50%" cy="50%" r="50%">
+      <stop offset=".3" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <mask id="guard-fade"><rect width="520" height="400" fill="url(#guard-fade-g)"/></mask>
+    <pattern id="guard-dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle class="bar" cx="2" cy="2" r="1.2"/></pattern>
+    <path id="guard-star" d="M0-16c1.6 11 5 14.4 16 16-11 1.6-14.4 5-16 16-1.6-11-5-14.4-16-16 11-1.6 14.4-5 16-16z"/>
+  </defs>
+
+  <!-- Light behind the app, and a dot grid fading out. -->
+  <circle cx="290" cy="200" r="200" fill="url(#guard-glow)"/>
+  <rect width="520" height="400" fill="url(#guard-dots)" mask="url(#guard-fade)"/>
+
+  <!-- The wall: closed by default. -->
+  <path class="ac-s thin drift" d="M290 30l108 42v114c0 90-42 148-108 174-66-26-108-84-108-174V72z" stroke-dasharray="3 9" opacity=".7"/>
+  <g class="glow">
+    <path class="ac-soft" d="M290 46l94 36v104c0 80-38 134-94 158-56-24-94-78-94-158V82z"/>
+  </g>
+
+  <!-- HTTPS on the way in. -->
+  <path class="ac-s" d="M281 88v-8a9 9 0 0 1 18 0v8" stroke-width="3"/>
+  <rect class="ac glow" x="274" y="86" width="32" height="24" rx="6"/>
+  <circle cx="290" cy="96" r="3" fill="#fff"/><path d="M290 98v5" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- The app: a container that runs as a normal user, not root. -->
+  <rect class="p" x="228" y="122" width="124" height="146" rx="14"/>
+  <text class="code" x="242" y="141">uid 1000</text>
+  <path class="ln-s" d="M228 150h124"/>
+  <rect class="bg ln-s" x="240" y="160" width="100" height="26" rx="7"/>
+  <circle class="ok" cx="254" cy="173" r="4"/><rect class="bar-i" x="266" y="170.5" width="58" height="5" rx="2.5"/>
+  <rect class="bg ln-s" x="240" y="194" width="100" height="26" rx="7"/>
+  <circle class="ok" cx="254" cy="207" r="4"/><rect class="bar-i" x="266" y="204.5" width="44" height="5" rx="2.5"/>
+  <rect class="bg ln-s" x="240" y="228" width="100" height="26" rx="7"/>
+  <circle class="ok pulse slow" cx="254" cy="241" r="4"/><rect class="bar-i" x="266" y="238.5" width="64" height="5" rx="2.5"/>
+
+  <!-- Key-only SSH. -->
+  <circle class="warm-s" cx="276" cy="300" r="9"/>
+  <path class="warm-s" d="M285 300h26M305 300v7M298 300v5"/>
+
+  <!-- Traffic from outside: one request let in, two refused at the wall. -->
+  <rect class="p" x="8" y="134" width="132" height="32" rx="16"/>
+  <text class="code code-i" x="24" y="154">GET /report</text>
+  <path class="ln" d="M140 150h88"/>
+  <path class="ac-s drift" d="M140 150h88" stroke-dasharray="3 9"/>
+  <circle class="ok" cx="182" cy="150" r="9"/>
+  <path d="M178 150l3 3 5-5.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect class="p" x="8" y="196" width="132" height="32" rx="16"/>
+  <text class="code code-i" x="24" y="216">../etc/passwd</text>
+  <path class="bad-s" d="M140 212h32" stroke-dasharray="3 6"/>
+  <g class="pulse slow">
+    <circle class="bad-soft" cx="182" cy="212" r="10"/>
+    <path class="bad-s" d="M178 208l8 8M186 208l-8 8"/>
+  </g>
+
+  <rect class="p" x="8" y="252" width="132" height="32" rx="16"/>
+  <text class="code code-i" x="24" y="272">10.0.0.1</text>
+  <path class="bad-s" d="M140 268h43" stroke-dasharray="3 6"/>
+  <g class="pulse slow d1">
+    <circle class="bad-soft" cx="193" cy="268" r="10"/>
+    <path class="bad-s" d="M189 264l8 8M197 264l-8 8"/>
+  </g>
+
+  <!-- Passwords are stored hashed. -->
+  <g class="float d1">
+    <rect class="p" x="16" y="318" width="144" height="60" rx="14"/>
+    <circle class="bar-i" cx="34" cy="338" r="3.5"/><circle class="bar-i" cx="45" cy="338" r="3.5"/>
+    <circle class="bar-i" cx="56" cy="338" r="3.5"/><circle class="bar-i" cx="67" cy="338" r="3.5"/>
+    <path class="ac-s" d="M78 338h14m-5-5l5 5-5 5"/>
+    <text class="code code-i" x="100" y="342">$2b$12</text>
+    <rect class="bar" x="30" y="356" width="116" height="5" rx="2.5"/>
+  </g>
+
+  <!-- An AI agent gets a short allowlist of tools. The shell is not on it. -->
+  <path class="ln" d="M408 140c-24 0-30 30-56 30"/>
+  <path class="ac-s drift" d="M408 140c-24 0-30 30-56 30" stroke-dasharray="3 9"/>
+  <g class="float">
+    <rect class="p" x="408" y="70" width="104" height="122" rx="16"/>
+    <circle cx="430" cy="94" r="13" fill="url(#guard-core)"/>
+    <use href="#guard-star" transform="translate(430 94) scale(.42)" fill="#fff"/>
+    <rect class="bar-i" x="452" y="91" width="44" height="6" rx="3"/>
+    <circle class="ok" cx="426" cy="124" r="5"/><rect class="bar-i" x="438" y="121.5" width="56" height="5" rx="2.5"/>
+    <circle class="ok" cx="426" cy="144" r="5"/><rect class="bar-i" x="438" y="141.5" width="42" height="5" rx="2.5"/>
+    <circle class="bad" cx="426" cy="168" r="5"/>
+    <text class="code code-bad" x="438" y="172">$ sh</text>
+    <path class="bad-s" d="M436 168h34"/>
+  </g>
+
+  <!-- Keys stay in .env, and the repo is scanned before it goes public. -->
+  <path class="ln" d="M352 250c26 0 32 26 56 26"/>
+  <g class="float d2">
+    <rect class="p" x="408" y="232" width="104" height="92" rx="16"/>
+    <path class="ac-s" d="M424 248h20l8 8v28h-28zM444 248v8h8"/>
+    <path class="warm-s" d="M434 268v-4a4 4 0 0 1 8 0v4"/>
+    <rect class="warm" x="430" y="267" width="16" height="12" rx="3"/>
+    <text class="code code-i" x="462" y="262">.env</text>
+    <circle class="ok" cx="426" cy="304" r="6"/>
+    <path d="M423.2 304l2 2 3.6-4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect class="bar-i" x="438" y="301.5" width="58" height="5" rx="2.5"/>
+  </g>
+
+  <!-- Sparks. -->
+  <use class="ac pulse" href="#guard-star" transform="translate(70 70) scale(.3)"/>
+  <use class="warm pulse slow" href="#guard-star" transform="translate(470 370) scale(.26)"/>
+  <use class="ac pulse slow d1" href="#guard-star" transform="translate(150 40) scale(.22)"/>
+</svg>

@@ -157,12 +157,37 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .sep { opacity: .5; }
 
 /* --- hero ------------------------------------------------------------- */
-.hero { display: grid; gap: var(--space-6); align-items: center; padding: var(--space-8) 0; }
+/* The hero stays dark in light mode too, so it carries its own dark tokens and
+   the text on it stays legible. The art beside the copy is his portrait cut
+   out on transparency, set between two inlined SVGs (tools/art/hero-back.svg
+   and hero-front.svg) that share one 640x680 frame: the far half of the ring
+   and the portal behind him, the near half and the floating shapes in front. */
+.hero { position: relative; isolation: isolate; overflow: hidden; background: #060513; color: var(--ink); }
+:root[data-theme="light"] .hero {
+  --surface-200: #171121; --surface-300: #221a2e; --ink: #f7f5fa; --ink-muted: #c4bcd2;
+  --accent-violet: #a855f7; --accent-violet-text: #c084fc; --line: #3a2f50; --focus: #e9d5ff;
+  color-scheme: dark; }
+.hero-inner { position: relative; width: 100%; display: grid; gap: var(--space-6); padding-block: var(--space-8); }
+/* Phone and tablet: the art sits under the buttons, so the headline comes first. */
+.hero-art { position: relative; width: min(100%, 440px); margin-inline: auto; aspect-ratio: 640 / 680; }
+.hero-art svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+/* The photo is cut off at the waist, so it fades out into the portal. */
+.hero-photo { position: absolute; left: 6%; top: 4%; width: 88%; height: auto;
+  -webkit-mask-image: linear-gradient(#000 74%, transparent 96%); mask-image: linear-gradient(#000 74%, transparent 96%); }
+/* Desktop: copy on one side, art on the far side. In Arabic the grid mirrors it
+   to the left. */
 @media (min-width: 900px) {
-  /* Text 55, art 45. In Arabic the grid flows the other way, which mirrors
-     the two columns without a second rule. */
-  .hero { grid-template-columns: 55% 45%; gap: var(--space-8); padding: var(--space-12) 0 var(--space-8); }
+  .hero { min-height: min(820px, calc(100vh - 77px)); display: grid; align-items: center; }
+  .hero-inner { grid-template-columns: minmax(0, 600px) minmax(0, 1fr); column-gap: var(--space-8); align-items: center; padding-block: var(--space-8); }
+  .hero-art { width: 100%; max-width: 560px; }
   .hero-strip { grid-column: 1 / -1; }
+  /* Smaller than other h1s, so the buttons stay above the fold at 1440x900.
+     Russian runs longer and gets one size down, so it still fits three lines. */
+  .hero h1 { font-size: 64px; }
+  html[lang="ru"] .hero h1 { font-size: 56px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-art .comet { animation: hero-drift 5s linear infinite; }
 }
 /* Rule 1: one phrase in the headline may take accent-violet-text. */
 .hero h1 { margin-top: var(--space-4); }
@@ -171,29 +196,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .lead-role { color: var(--ink-muted); font-size: 16px; margin: 0 0 var(--space-6); max-width: 46ch; }
 .lead { font-size: 19px; color: var(--ink-muted); max-width: 44ch; margin: var(--space-5) 0 var(--space-3); }
 .hero .actions { margin-bottom: var(--space-2); }
+.hero .btn-secondary { background: rgba(6, 5, 19, .55); }
 /* On a phone each call to action is its own full-width row. */
 @media (max-width: 480px) { .hero .actions .btn, .close-card .btn { width: 100%; margin-inline-end: 0; } }
-
-.stage3d { display: grid; place-items: center; min-height: 440px; position: relative; isolation: isolate; }
-@media (max-width: 899px) {
-  /* Below the fold the art is decoration, so it is capped and the block
-     shrinks to it, which keeps the pool behind it the same width. */
-  .stage3d { min-height: 0; width: fit-content; margin-inline: auto; max-width: 100%; }
-  .stage3d img { max-height: 320px; width: auto; max-width: 100%; object-fit: contain; }
-}
-/* The scene was painted on #060513, which is darker than the page. Its edge is
-   feathered in the file, but the inside of that rectangle still read as a box
-   against the page, so the same colour is laid behind it as a soft pool that
-   fades out: the art then has no edge anywhere. */
-/* Inset stays 0 sideways: a negative one widened the page at phone width. */
-.stage3d::before { content: ""; position: absolute; inset: -9% 0; z-index: -1;
-  background: radial-gradient(74% 58% at 50% 48%, #060513 0%, #060513 48%, rgba(6, 5, 19, 0) 100%); }
-.stage3d img { width: 100%; height: auto; display: block; }
-/* Cream paper is the one place the scene needs something to sit on, so there
-   it gets a dark panel and the feathered edge lands inside the frame. */
-:root[data-theme="light"] .stage3d { background: #0b0714; border-radius: var(--radius-lg);
-  border: 1px solid var(--line); box-shadow: var(--shadow-card); overflow: hidden; }
-:root[data-theme="light"] .stage3d::before { display: none; }
 
 /* The tool row drifts sideways for ever. Two identical halves, and the track
    is translated by exactly half its width, so the seam never shows. The name
@@ -321,6 +326,18 @@ figure.bleed { max-width: none; }
 .checks { list-style: none; padding: 0; }
 .checks li { position: relative; padding-inline-start: 28px; }
 .checks li::before { content: "✓"; position: absolute; inset-inline-start: 0; color: var(--accent-violet-text); font-weight: 600; }
+/* Security: the art (tools/art/guard.svg) sits between the lede and the list
+   on phones, and beside the list on desktop, which also keeps those lines
+   short enough to read. */
+.sec-grid { display: grid; gap: var(--space-6); }
+.sec-grid > :not(.sec-art) { margin-block: 0; }
+.sec-art { width: min(100%, 480px); margin-inline: auto; }
+.sec-art svg { display: block; width: 100%; height: auto; overflow: visible; }
+@media (min-width: 1000px) {
+  .sec-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); column-gap: var(--space-12); align-items: start; }
+  .sec-grid > :not(.sec-art) { grid-column: 1; }
+  .sec-art { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+}
 
 .note { background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6); color: var(--ink-muted); }
 .note b { color: var(--ink); }
@@ -416,6 +433,9 @@ footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; 
 .art .bad-s { stroke: #f43f5e; }
 .art .warm-s { stroke: var(--accent-gold, #e3a53c); }
 .art .thin { stroke-width: 1.5; }
+.art .code { font: 500 12px var(--mono); fill: var(--ink-muted); }
+.art .code-i { fill: var(--ink); }
+.art .code-bad { fill: #f43f5e; }
 .art .glow { filter: drop-shadow(0 6px 14px color-mix(in srgb, var(--accent-glow) 45%, transparent)); }
 @media (prefers-reduced-motion: no-preference) {
   .art .float { animation: art-float 4s ease-in-out infinite; }
@@ -432,6 +452,7 @@ footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; 
 @keyframes art-drift { to { stroke-dashoffset: -24; } }
 @keyframes art-spin { to { transform: rotate(360deg); } }
 @keyframes art-sway { to { transform: translateY(138px); } }
+@keyframes hero-drift { from { stroke-dashoffset: 40; } to { stroke-dashoffset: -1000; } }
 
 .offers-note { margin-top: var(--space-6); font-size: 15px; }
 
@@ -481,7 +502,6 @@ footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; 
     /* The art drifts against the card as the card crosses the screen. The
        1.16 scale is the margin that keeps the edges covered while it moves. */
     .pcard .art img { animation: pan linear both; animation-timeline: view(block); }
-    .hero .stage3d { animation: recede linear both; animation-timeline: view(block); animation-range: exit; }
   }
 }
 @keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -489,7 +509,6 @@ footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; 
   from { transform: scale(1.16) translateY(-2.4%); }
   to { transform: scale(1.16) translateY(2.4%); }
 }
-@keyframes recede { to { transform: translateY(-36px); opacity: .5; } }
 
 /* --- locales ----------------------------------------------------------- */
 html[lang="ar"] { --sans: "Cairo", system-ui, sans-serif; }

@@ -1,22 +1,23 @@
-<div class="wrap">
-  <header class="hero">
+<header class="hero">
+  <div class="wrap hero-inner">
     <div class="hero-copy">
       <span class="badge"><span class="acc" aria-hidden="true">&#9889;</span>AI Product Engineer <span class="badge-more"><span class="sep" aria-hidden="true">|</span> 2+ года в отделе маркетинга</span></span>
       <h1>Создаю ИИ-продукты, которые <span>сами проверяют свою работу.</span></h1>
       <p class="lead">Больше двух лет работаю в отделе маркетинга: превращаю бизнес-задачи в продукты, которые приносят компании лиды и экономят команде часы работы. Большинство ИИ-демо ломается при первой же уверенной ошибке модели. Мои продукты такую ошибку ловят: в них встроены схемы, валидаторы и QA-проверки.</p>
       <p class="lead-role">В одиночку спроектировал, разработал и веду <a href="https://www.ritorica.com">ritorica.com</a>&nbsp;— от макета в Figma до Linux-сервера.</p>
       <div class="actions">
+        <a class="btn btn-primary" href="@@TG@@">Написать в Telegram: @Elkushi99</a>
         <a class="btn btn-secondary" href="#work">Посмотреть работы <span aria-hidden="true">&#8599;</span></a>
-        <a class="btn btn-secondary" href="@@TG@@">Написать в Telegram: @Elkushi99</a>
         <a href="https://github.com/elkushi" class="btn btn-secondary"><svg class="btn-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-github"/></svg>GitHub</a>
         @@CV@@
       </div>
     </div>
-    <div class="stage3d">
-      <img src="assets/hero.webp" fetchpriority="high" srcset="assets/hero-560.webp 560w, assets/hero-740.webp 740w, assets/hero.webp 1180w" sizes="(min-width: 900px) 620px, 96vw" width="1180" height="1071" alt="Мустафа среди фиолетовых молний, за ним росомаха, вокруг парят панели: код, график, облако, база данных, чат-бот, щит безопасности и чек-лист с пунктами «Validate Output», «Check Sources», «QA Verification».">
-    </div>
+    <div class="hero-art">@@ART:hero-back@@<img class="hero-photo" src="assets/hero-photo-1000.webp" srcset="assets/hero-photo-500.webp 500w, assets/hero-photo-760.webp 760w, assets/hero-photo-1000.webp 1000w" sizes="(min-width: 900px) 500px, 88vw" width="1000" height="1022" fetchpriority="high" alt="Рисованный портрет Мустафы: он смеётся, а за ним росомаха в фиолетовых молниях.">@@ART:hero-front@@</div>
     <p class="label hero-strip">Беру новые проекты &middot; Москва, UTC+3 &middot; Удалённо или с переездом &middot; Английский, арабский, русский</p>
-  </header>
+  </div>
+</header>
+
+<div class="wrap">
 
   <div class="stack" aria-label="Инструменты, с которыми я работаю">
     <div class="stack-track">
@@ -167,15 +168,18 @@
     <span class="label">04 &middot; Как я разрабатываю</span>
     <h2>По работе я ищу уязвимости, поэтому свои системы сразу делаю защищёнными</h2>
     <p class="section-lede">Параллельно с основными задачами я провожу пентест сайтов и SMS-платформы своей компании по чек-листу OWASP. Поэтому мои приложения по умолчанию закрыты, а доступ открыт только там, где без этого не обойтись. Каждый пункт ниже реализован в коде, а не просто обещан в регламенте.</p>
-    <ul class="checks">
-      <li><b>ИИ-агенты получают только разрешённый список инструментов</b>, а не открытый доступ к командной строке. Агент, способный выполнять команды,&nbsp;— это и есть поверхность атаки.</li>
-      <li><b>Загружаемые файлы и пути проверяются</b>, поэтому никто не прочитает файлы за пределами приложения. Тесты подставляют <code>/etc/passwd</code> и <code>../</code> и ждут отказа.</li>
-      <li><b>Приложение для аудита не обращается к частным и внутренним адресам</b> и перепроверяет адрес после каждого редиректа, так что посторонний не заставит мой сервер обращаться к моей же внутренней сети.</li>
-      <li><b>Серверы работают по HTTPS, SSH&nbsp;— только по ключам</b>, пароли хранятся в виде хешей, а число попыток входа ограничено.</li>
-      <li><b>Контейнеры запускаются от обычного пользователя</b>, а не от root, с отключёнными Linux capabilities.</li>
-      <li><b>Ключи хранятся в <code>.env</code></b>, а каждый репозиторий перед публикацией проверяется на наличие секретов.</li>
-    </ul>
-    <p style="margin-top:24px">Инструменты: nmap, Wireshark, Burp Suite, тестирование по OWASP, TryHackMe. Ещё я написал <a href="https://github.com/elkushi/system-audit">system-audit</a>&nbsp;— Bash-скрипт для проверки Linux-сервера на ошибки конфигурации, которые я нахожу чаще всего.</p>
+    <div class="sec-grid">
+      <div class="sec-art">@@ART:guard@@</div>
+      <ul class="checks">
+        <li><b>ИИ-агенты получают только разрешённый список инструментов</b>, а не открытый доступ к командной строке. Агент, способный выполнять команды,&nbsp;— это и есть поверхность атаки.</li>
+        <li><b>Загружаемые файлы и пути проверяются</b>, поэтому никто не прочитает файлы за пределами приложения. Тесты подставляют <code>/etc/passwd</code> и <code>../</code> и ждут отказа.</li>
+        <li><b>Приложение для аудита не обращается к частным и внутренним адресам</b> и перепроверяет адрес после каждого редиректа, так что посторонний не заставит мой сервер обращаться к моей же внутренней сети.</li>
+        <li><b>Серверы работают по HTTPS, SSH&nbsp;— только по ключам</b>, пароли хранятся в виде хешей, а число попыток входа ограничено.</li>
+        <li><b>Контейнеры запускаются от обычного пользователя</b>, а не от root, с отключёнными Linux capabilities.</li>
+        <li><b>Ключи хранятся в <code>.env</code></b>, а каждый репозиторий перед публикацией проверяется на наличие секретов.</li>
+      </ul>
+      <p>Инструменты: nmap, Wireshark, Burp Suite, тестирование по OWASP, TryHackMe. Ещё я написал <a href="https://github.com/elkushi/system-audit">system-audit</a>&nbsp;— Bash-скрипт для проверки Linux-сервера на ошибки конфигурации, которые я нахожу чаще всего.</p>
+    </div>
   </section>
 
   <section id="about" class="reveal">

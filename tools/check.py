@@ -32,10 +32,12 @@ for page in PAGES:
             if not (page.parent / url).resolve().exists():
                 errors.append(f"{rel}: missing {url}")
 
-    # Rule 2: accent-violet fills the one primary action of a view.
-    primaries = len(re.findall(r'class="[^"]*\bbtn-primary\b', html))
-    if primaries > 1:
-        errors.append(f"design rule 2: {rel} has {primaries} btn-primary; a view gets one")
+    # Rule 2: accent-violet fills the one primary action of a view. A view is
+    # the hero or one section: the home page has one in each of those two.
+    for view in re.split(r"<(?=section\b|header class=\"hero)", html):
+        primaries = len(re.findall(r'class="[^"]*\bbtn-primary\b', view))
+        if primaries > 1:
+            errors.append(f"design rule 2: {rel} has {primaries} btn-primary in one view; a view gets one")
 
 css = (SITE / "style.css").read_text(encoding="utf-8")
 blocks = re.findall(r"([^{}]*)\{([^}]*)\}", css)
