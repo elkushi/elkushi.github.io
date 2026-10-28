@@ -1,0 +1,150 @@
+<div class="wrap post">
+  <header class="case-hero post-head">
+    <p class="eyebrow">Blog &middot; 28 October 2026 &middot; 8 min read</p>
+    <h1>AI agents: what they are, how to build one, and why Python</h1>
+    <p class="lead">An AI agent is a language model that can act: it picks a tool, runs it, reads the result and decides what to do next. Here is what that means in plain words, a working agent in about 40 lines of Python, and the rules that keep one from going wrong. Every rule comes from an agent I have shipped.</p>
+  </header>
+  <figure class="post-cover reveal"><img class="only-dark" src="../assets/blog/ai-agents-python-dark.svg" width="1200" height="630" alt="A goal goes to the model, the model calls Python tools, and a check stands before the result"><img class="only-light" src="../assets/blog/ai-agents-python-light.svg" width="1200" height="630" alt="A goal goes to the model, the model calls Python tools, and a check stands before the result"></figure>
+
+  <article>
+    <section class="reveal">
+      <h2>What an AI agent is</h2>
+      <p>A chatbot answers. An agent acts. You give it a goal, not a question, and it works out the steps.</p>
+      <p>Every agent has the same four parts:</p>
+      <ul>
+        <li><b>A model</b> that makes the decisions: Claude, GPT, Gemini or a local model.</li>
+        <li><b>Tools</b> it is allowed to use: search the web, read a file, query a database, send an email. Each tool is a normal function in your code.</li>
+        <li><b>A loop.</b> The model asks for a tool, your code runs it, the result goes back to the model, and the model decides the next step.</li>
+        <li><b>A stop condition.</b> The job is done, a check fails, or the agent has used up its steps.</li>
+      </ul>
+      <p>The model never runs anything itself. It only says "call this tool with these inputs". Your code decides whether to do it. That is the most important fact about agents, and it is what makes them safe to build.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Chatbot, workflow or agent?</h2>
+      <p>Not every AI feature needs an agent. Pick the simplest one that does the job.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Who decides the steps</th><th>Use it when</th></tr></thead>
+          <tbody>
+            <tr><td><b>Chatbot</b></td><td>Nobody: one question, one answer</td><td>Answering questions from your own content</td></tr>
+            <tr><td><b>Workflow</b></td><td>You, in code, in a fixed order</td><td>The steps are the same every time, like a weekly report</td></tr>
+            <tr><td><b>Agent</b></td><td>The model, one step at a time</td><td>The next step depends on what the last one found, like research</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Most of my projects mix the two. Code runs the fixed steps, and the agent only decides where judgement is needed. I wrote about that split in <a href="wat-framework.html">the WAT framework</a>.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>An agent in about 40 lines of Python</h2>
+      <p>This agent gets a list of web addresses and reports which ones are broken. It has one tool, <code>check_url</code>, a plain Python function. The model decides which addresses to check and writes the summary.</p>
+      <pre><code>import json
+import urllib.request
+
+import anthropic
+
+client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from the environment
+
+
+def check_url(url: str) -&gt; str:
+    """The tool: a normal function. The model never runs it, we do."""
+    if not url.startswith("https://"):
+        return json.dumps({"url": url, "error": "only https addresses are allowed"})
+    try:
+        with urllib.request.urlopen(url, timeout=10) as r:
+            return json.dumps({"url": url, "status": r.status})
+    except Exception as e:
+        return json.dumps({"url": url, "error": str(e)})
+
+
+TOOLS = [{
+    "name": "check_url",
+    "description": "Fetch one https address and return its HTTP status, or the error.",
+    "input_schema": {
+        "type": "object",
+        "properties": {"url": {"type": "string"}},
+        "required": ["url"],
+    },
+}]
+
+messages = [{"role": "user", "content":
+             "Check these pages and tell me which are broken: "
+             "https://example.com, https://example.com/missing-page"}]
+
+for step in range(10):  # a hard cap: an agent that can loop forever will
+    reply = client.messages.create(model="claude-sonnet-5-5", max_tokens=1024,
+                                   tools=TOOLS, messages=messages)
+    messages.append({"role": "assistant", "content": reply.content})
+    if reply.stop_reason != "tool_use":
+        print("".join(b.text for b in reply.content if b.type == "text"))
+        break
+    results = [{"type": "tool_result", "tool_use_id": b.id, "content": check_url(**b.input)}
+               for b in reply.content if b.type == "tool_use"]
+    messages.append({"role": "user", "content": results})</code></pre>
+      <p>Install the library with <code>pip install anthropic</code>, set your API key, and run it. Three things in this code matter more than the model:</p>
+      <ul>
+        <li><b>The tool checks its own inputs.</b> It refuses anything that is not <code>https</code>. Never trust the model to stay inside the rules you wrote in the prompt.</li>
+        <li><b>The description is the documentation.</b> The model reads it to decide when to use the tool. A vague description gives you a confused agent.</li>
+        <li><b>The loop has a cap.</b> Ten steps, then it stops, whatever happens.</li>
+      </ul>
+      <p>That is the whole idea. Frameworks like LangGraph or CrewAI add memory, many agents and retries on top, but inside every one of them is this loop.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>How to build one that works</h2>
+      <p>The demo above works on the first try. A real agent has to work on the hundredth try too. These are the rules I follow:</p>
+      <ol>
+        <li><b>Start from the job, not the model.</b> Write down the goal, the inputs and what "done" looks like before writing any code. If you can't, the agent can't guess it.</li>
+        <li><b>Give it only the tools it needs.</b> An allowlist of functions, not open shell access. My video generator's agent can run the project's own scripts, ffmpeg and a few read-only commands. Nothing else.</li>
+        <li><b>Let code do what code does better.</b> Fetching, counting, merging and rendering go in Python tools. The model decides; the tools execute.</li>
+        <li><b>Check the output with a schema.</b> Make the agent return JSON, and check it before anything slow or expensive runs. In my video generator, a storyboard that fails the JSON schema never reaches the renderer.</li>
+        <li><b>Add a gate that can say no.</b> In my research workflow, a validator blocks the report if any claim has no source or any link is dead. The agent is told the rules. The code enforces them.</li>
+        <li><b>Stop for a person at fixed points.</b> The same workflow pauses at four checkpoints, for example to approve the competitor list before nine research agents start.</li>
+        <li><b>Cap the retries.</b> A reviewer agent in the video generator returns SHIP or a fix list, and gets two rounds at most.</li>
+        <li><b>Log every step.</b> Save each tool call and result. When the agent gets something wrong, the log shows you which step, and that is where the fix goes.</li>
+      </ol>
+    </section>
+
+    <section class="reveal">
+      <h2>Why Python</h2>
+      <p>You can build an agent in any language. Python is where most of the work happens, for practical reasons:</p>
+      <ul>
+        <li><b>The AI libraries come to Python first.</b> Anthropic and OpenAI both publish official Python libraries, and LangGraph, CrewAI, LlamaIndex and Pydantic AI all started as Python projects.</li>
+        <li><b>A tool is just a function.</b> As the example shows, any Python function can become a tool. Whatever Python can do, your agent can do.</li>
+        <li><b>The libraries for the tools already exist.</b> Playwright for browsers, pandas for data, requests for APIs, WeasyPrint for PDFs, Whisper for speech. Most tools you need are a few lines of glue.</li>
+        <li><b>Checking output is easy.</b> Pydantic and jsonschema turn "the model must return this shape" into one line of code that fails loudly.</li>
+        <li><b>The same code becomes a product.</b> FastAPI puts the agent behind a web API, and Docker ships it. No second language needed.</li>
+      </ul>
+      <p>Here is what a schema check looks like with Pydantic. If the model leaves out the source, the run stops instead of shipping the claim:</p>
+      <pre><code>from pydantic import BaseModel, HttpUrl
+
+
+class Claim(BaseModel):
+    text: str
+    source_url: HttpUrl  # no source, no claim
+
+
+claim = Claim.model_validate_json(model_output)  # raises an error if anything is missing</code></pre>
+      <p>All three of my agent projects follow this pattern: Claude decides, Python does the work and checks it.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>When you don't need an agent</h2>
+      <p>If the steps are always the same, write a script. It is cheaper, faster and gives the same result every time. If you only need answers from your own content, a chatbot is enough. Use an agent when the next step really depends on what the last one found, and put checks around it so a wrong step gets caught.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>See it in real projects</h2>
+      <ul>
+        <li><a href="../work/video-generator.html">AI video and image generator</a>: strategist, scriptwriter and reviewer agents, Python tools, a schema check and a QA step.</li>
+        <li><a href="../work/research-workflow.html">Research workflow with a validator</a>: nine research agents in parallel, and a gate that blocks unsourced claims.</li>
+        <li><a href="../work/seo-audit.html">Website audit for Google and AI search</a>: a Python crawler and rule-based checks, with five Claude Code agents for the analysis.</li>
+        <li><a href="wat-framework.html">The WAT framework</a>: how I split work between the agent and the tools.</li>
+      </ul>
+      <p>Want an agent built for your team? <a href="@@TG@@">Write to me on Telegram</a>.</p>
+    </section>
+
+    <p><a href="index.html">&larr; All posts</a></p>
+  </article>
+</div>

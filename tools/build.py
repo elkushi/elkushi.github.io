@@ -206,6 +206,8 @@ LOCALES = {
                                                  "The eight holes AI-built apps most often have, how to close each one, and the test that proves it. With real code from my own apps."),
             "blog/seo-geo-aeo-audit.html": ("Get found on Google and in ChatGPT: what my audit app checks · Moustafa Elkoushy",
                                             "What my free SEO, AEO and GEO audit checks, what it means for a business, and 22 fixes you can make this week."),
+            "blog/ai-agents-python.html": ("AI agents: what they are, how to build one, and why Python · Moustafa Elkoushy",
+                                           "What an AI agent is, a working agent in about 40 lines of Python, and the rules that keep it from going wrong."),
         },
     },
     "ar": {
@@ -242,6 +244,8 @@ LOCALES = {
                                                  "الثغرات الثماني الأكثر شيوعًا في التطبيقات المبنية بالذكاء الاصطناعي، وكيف تغلق كل واحدة منها، والاختبار الذي يثبت ذلك، مع كود حقيقي من تطبيقاتي."),
             "blog/seo-geo-aeo-audit.html": ("كيف تظهر في Google وفي ChatGPT: ما يفحصه تطبيقي · مصطفى القوشي",
                                             "ما يفحصه تطبيقي المجاني لـ SEO وAEO وGEO، وما يعنيه ذلك للشركة، و22 إصلاحًا تستطيع تنفيذها هذا الأسبوع."),
+            "blog/ai-agents-python.html": ("وكيل الذكاء الاصطناعي: ما هو، وكيف تبنيه، ولماذا Python · مصطفى القوشي",
+                                           "ما هو وكيل الذكاء الاصطناعي بكلمات بسيطة، ووكيل يعمل في نحو 40 سطرًا من Python، وثماني قواعد تحميه من الخطأ."),
         },
     },
     "ru": {
@@ -278,11 +282,13 @@ LOCALES = {
                                                  "Восемь дыр в безопасности, которые чаще всего встречаются в приложениях, написанных ИИ, как закрыть каждую и какой тест это доказывает, с реальным кодом из моих приложений."),
             "blog/seo-geo-aeo-audit.html": ("Как стать заметным в Google и в ChatGPT: что проверяет мой инструмент аудита · Мустафа Элькуши",
                                             "Что проверяет мой бесплатный аудит SEO, AEO и GEO, что это значит для бизнеса и 22 исправления, которые можно сделать на этой неделе."),
+            "blog/ai-agents-python.html": ("ИИ-агенты: что это такое, как их делать и почему на Python · Мустафа Элькуши",
+                                           "Что такое ИИ-агент и чем он отличается от чат-бота, работающий агент примерно в 40 строк на Python и восемь правил, которые не дают ему пойти не туда."),
         },
     },
 }
 
-BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit"]
+BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agents-python"]
 
 PAGE_PATHS = (["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
               + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG])

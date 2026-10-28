@@ -1,0 +1,150 @@
+<div class="wrap post">
+  <header class="case-hero post-head">
+    <p class="eyebrow">المدونة &middot; 28 أكتوبر 2026 &middot; مدة القراءة 8 دقائق</p>
+    <h1>وكيل الذكاء الاصطناعي: ما هو، وكيف تبنيه، ولماذا Python</h1>
+    <p class="lead">وكيل الذكاء الاصطناعي نموذج لغوي يستطيع أن يتصرّف: يختار أداة، ويشغّلها، ويقرأ النتيجة، ثم يقرّر ما يفعله بعد ذلك. في هذا المقال: ما يعنيه ذلك بكلمات بسيطة، ووكيل يعمل في نحو 40 سطرًا من Python، والقواعد التي تمنعه من الخطأ. كل قاعدة منها مأخوذة من وكيل أطلقته فعلًا.</p>
+  </header>
+  <figure class="post-cover reveal"><img class="only-dark" src="../assets/blog/ai-agents-python-dark.svg" width="1200" height="630" alt="هدف يدخل إلى النموذج، والنموذج يستدعي أدوات Python، وفحص يقف قبل النتيجة"><img class="only-light" src="../assets/blog/ai-agents-python-light.svg" width="1200" height="630" alt="هدف يدخل إلى النموذج، والنموذج يستدعي أدوات Python، وفحص يقف قبل النتيجة"></figure>
+
+  <article>
+    <section class="reveal">
+      <h2>ما هو وكيل الذكاء الاصطناعي</h2>
+      <p>روبوت المحادثة يجيب. أما الوكيل فينفّذ. تعطيه هدفًا، لا سؤالًا، وهو يحدّد الخطوات بنفسه.</p>
+      <p>لكل وكيل الأجزاء الأربعة نفسها:</p>
+      <ul>
+        <li><b>نموذج</b> يتخذ القرارات: Claude، أو GPT، أو Gemini، أو نموذج يعمل محليًا.</li>
+        <li><b>أدوات</b> مسموح له باستخدامها: البحث في الويب، وقراءة ملف، والاستعلام من قاعدة بيانات، وإرسال بريد إلكتروني. كل أداة دالة عادية في الكود الخاص بك.</li>
+        <li><b>حلقة.</b> يطلب النموذج أداة، فيشغّلها الكود الخاص بك، وتعود النتيجة إلى النموذج، فيقرّر الخطوة التالية.</li>
+        <li><b>شرط توقف.</b> انتهت المهمة، أو فشل فحص، أو استنفد الوكيل عدد الخطوات المسموح له.</li>
+      </ul>
+      <p>النموذج لا يشغّل أي شيء بنفسه. كل ما يفعله أن يقول «استدعِ هذه الأداة بهذه المدخلات». والكود الخاص بك هو الذي يقرّر هل ينفّذ ذلك أم لا. هذه أهم حقيقة عن الوكلاء، وهي ما يجعل بناءها آمنًا.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>روبوت محادثة، أم مسار عمل، أم وكيل؟</h2>
+      <p>لا تحتاج كل ميزة ذكاء اصطناعي إلى وكيل. اختر أبسط خيار ينجز المهمة.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>النوع</th><th>من يحدّد الخطوات</th><th>متى تستخدمه</th></tr></thead>
+          <tbody>
+            <tr><td><b>روبوت محادثة</b></td><td>لا أحد: سؤال واحد وجواب واحد</td><td>للإجابة عن الأسئلة من المحتوى الخاص بك</td></tr>
+            <tr><td><b>مسار عمل</b></td><td>أنت، في الكود، بترتيب ثابت</td><td>حين تكون الخطوات هي نفسها كل مرة، مثل تقرير أسبوعي</td></tr>
+            <tr><td><b>وكيل</b></td><td>النموذج، خطوة بعد خطوة</td><td>حين تعتمد الخطوة التالية على ما وجدته الخطوة السابقة، مثل البحث</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>معظم مشاريعي تجمع بين الاثنين. الكود ينفّذ الخطوات الثابتة، والوكيل لا يقرّر إلا حيث يلزم التقدير. كتبت عن هذا التقسيم في مقال <a href="wat-framework.html">إطار WAT</a>.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>وكيل في نحو 40 سطرًا من Python</h2>
+      <p>يستقبل هذا الوكيل قائمة من عناوين الويب، ويخبرك أيها معطّل. لديه أداة واحدة هي <code>check_url</code>، وهي دالة Python عادية. النموذج يقرّر أي العناوين يفحص، ويكتب الملخص.</p>
+      <pre><code>import json
+import urllib.request
+
+import anthropic
+
+client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from the environment
+
+
+def check_url(url: str) -&gt; str:
+    """The tool: a normal function. The model never runs it, we do."""
+    if not url.startswith("https://"):
+        return json.dumps({"url": url, "error": "only https addresses are allowed"})
+    try:
+        with urllib.request.urlopen(url, timeout=10) as r:
+            return json.dumps({"url": url, "status": r.status})
+    except Exception as e:
+        return json.dumps({"url": url, "error": str(e)})
+
+
+TOOLS = [{
+    "name": "check_url",
+    "description": "Fetch one https address and return its HTTP status, or the error.",
+    "input_schema": {
+        "type": "object",
+        "properties": {"url": {"type": "string"}},
+        "required": ["url"],
+    },
+}]
+
+messages = [{"role": "user", "content":
+             "Check these pages and tell me which are broken: "
+             "https://example.com, https://example.com/missing-page"}]
+
+for step in range(10):  # a hard cap: an agent that can loop forever will
+    reply = client.messages.create(model="claude-sonnet-5-5", max_tokens=1024,
+                                   tools=TOOLS, messages=messages)
+    messages.append({"role": "assistant", "content": reply.content})
+    if reply.stop_reason != "tool_use":
+        print("".join(b.text for b in reply.content if b.type == "text"))
+        break
+    results = [{"type": "tool_result", "tool_use_id": b.id, "content": check_url(**b.input)}
+               for b in reply.content if b.type == "tool_use"]
+    messages.append({"role": "user", "content": results})</code></pre>
+      <p>ثبّت المكتبة بالأمر <code>pip install anthropic</code>، وأضف مفتاح API الخاص بك، ثم شغّل الكود. في هذا الكود ثلاثة أشياء أهم من النموذج نفسه:</p>
+      <ul>
+        <li><b>الأداة تتحقق من مدخلاتها بنفسها.</b> ترفض أي عنوان ليس <code>https</code>. لا تثق أبدًا بأن النموذج سيلتزم بالقواعد التي كتبتها في الأمر (Prompt).</li>
+        <li><b>الوصف هو التوثيق.</b> يقرأ النموذج وصف الأداة ليقرّر متى يستخدمها. والوصف الغامض يعطيك وكيلًا مرتبكًا.</li>
+        <li><b>للحلقة حدّ أقصى.</b> عشر خطوات، ثم تتوقف، مهما حدث.</li>
+      </ul>
+      <p>هذه هي الفكرة كلها. أُطر العمل مثل LangGraph أو CrewAI تضيف فوقها الذاكرة، وتعدّد الوكلاء، وإعادة المحاولة، لكن في داخل كل واحد منها هذه الحلقة نفسها.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>كيف تبني وكيلًا يعمل فعلًا</h2>
+      <p>العرض التجريبي أعلاه يعمل من المحاولة الأولى. أما الوكيل الحقيقي فعليه أن يعمل في المحاولة المئة أيضًا. هذه هي القواعد التي أتبعها:</p>
+      <ol>
+        <li><b>ابدأ من المهمة، لا من النموذج.</b> اكتب الهدف، والمدخلات، وما يعنيه «الانتهاء»، قبل أن تكتب أي كود. إذا لم تستطع ذلك، فلن يخمّنه الوكيل.</li>
+        <li><b>لا تعطه إلا الأدوات التي يحتاجها.</b> قائمة محددة من الدوال المسموح بها، لا وصول مفتوح إلى سطر الأوامر. الوكيل في مولّد الفيديو الخاص بي يستطيع تشغيل سكربتات المشروع نفسه، وffmpeg، وبضعة أوامر للقراءة فقط. ولا شيء غير ذلك.</li>
+        <li><b>دع الكود يفعل ما يتقنه أكثر من النموذج.</b> الجلب، والعدّ، والدمج، وإنتاج الملفات النهائية مكانها أدوات Python. النموذج يقرّر، والأدوات تنفّذ.</li>
+        <li><b>تحقّق من المخرجات بمخطط بيانات (schema).</b> اجعل الوكيل يعيد JSON، وتحقّق منه قبل تشغيل أي خطوة بطيئة أو مكلفة. في مولّد الفيديو الخاص بي، لا تصل لوحة القصة (Storyboard) التي تفشل في التحقق من JSON Schema إلى مرحلة إنتاج الفيديو أبدًا.</li>
+        <li><b>أضف بوابة تستطيع أن ترفض.</b> في مسار البحث الذي بنيته، يمنع مدقّق إصدار التقرير إذا كان أي ادعاء بلا مصدر أو أي رابط معطّلًا. الوكيل يُبلَّغ بالقواعد، والكود يفرضها.</li>
+        <li><b>توقّف لمراجعة بشرية عند نقاط محددة.</b> يتوقف المسار نفسه عند أربع نقاط تحقق، منها مثلًا اعتماد قائمة المنافسين قبل أن يبدأ تسعة وكلاء بحث عملهم.</li>
+        <li><b>ضع حدًا لمحاولات الإعادة.</b> في مولّد الفيديو، يعيد وكيل المراجعة إما SHIP أو قائمة إصلاحات، وله جولتان على الأكثر.</li>
+        <li><b>سجّل كل خطوة.</b> احفظ كل استدعاء لأداة ونتيجته. حين يخطئ الوكيل، يُريك السجل في أي خطوة حدث الخطأ، وهناك تضع الإصلاح.</li>
+      </ol>
+    </section>
+
+    <section class="reveal">
+      <h2>لماذا Python</h2>
+      <p>تستطيع أن تبني وكيلًا بأي لغة برمجة. لكن معظم العمل يجري في Python، لأسباب عملية:</p>
+      <ul>
+        <li><b>مكتبات الذكاء الاصطناعي تصل إلى Python أولًا.</b> تنشر Anthropic وOpenAI مكتبات Python رسمية، وبدأت LangGraph وCrewAI وLlamaIndex وPydantic AI كلها مشاريعَ مكتوبة بـ Python.</li>
+        <li><b>الأداة مجرد دالة.</b> كما يُظهر المثال، يمكن لأي دالة Python أن تصبح أداة. كل ما تستطيع Python فعله، يستطيع وكيلك فعله.</li>
+        <li><b>مكتبات الأدوات موجودة أصلًا.</b> Playwright للمتصفحات، وpandas للبيانات، وrequests لواجهات API، وWeasyPrint لملفات PDF، وWhisper للكلام. معظم الأدوات التي تحتاجها لا تتطلب أكثر من بضعة أسطر تربط بين هذه المكتبات.</li>
+        <li><b>التحقق من المخرجات سهل.</b> تحوّل Pydantic وjsonschema شرط «يجب أن يعيد النموذج هذا الشكل» إلى سطر واحد من الكود، يفشل بخطأ واضح.</li>
+        <li><b>الكود نفسه يصبح منتجًا.</b> FastAPI تضع الوكيل خلف واجهة API على الويب، وDocker يجهّزه للنشر. لا حاجة إلى لغة ثانية.</li>
+      </ul>
+      <p>هكذا يبدو التحقق بمخطط البيانات في Pydantic. إذا أغفل النموذج المصدر، يتوقف التشغيل بدل أن يُنشر الادعاء:</p>
+      <pre><code>from pydantic import BaseModel, HttpUrl
+
+
+class Claim(BaseModel):
+    text: str
+    source_url: HttpUrl  # no source, no claim
+
+
+claim = Claim.model_validate_json(model_output)  # raises an error if anything is missing</code></pre>
+      <p>مشاريعي الثلاثة القائمة على الوكلاء تتبع كلها هذا النمط: Claude يقرّر، وPython تنفّذ العمل وتتحقق منه.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>متى لا تحتاج إلى وكيل</h2>
+      <p>إذا كانت الخطوات هي نفسها دائمًا، فاكتب سكربتًا. السكربت أرخص وأسرع، ويعطي النتيجة نفسها في كل مرة. وإذا كنت تحتاج فقط إلى إجابات من المحتوى الخاص بك، فروبوت المحادثة يكفي. استخدم الوكيل حين تعتمد الخطوة التالية فعلًا على ما وجدته الخطوة السابقة، وضع حوله فحوصًا تكشف أي خطوة خاطئة.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>شاهده في مشاريع حقيقية</h2>
+      <ul>
+        <li><a href="../work/video-generator.html">مولّد الفيديو والصور بالذكاء الاصطناعي</a>: وكيل للاستراتيجية، ووكيل لكتابة السيناريو، ووكيل للمراجعة، مع أدوات Python، وفحص مخطط البيانات، وخطوة لضمان الجودة.</li>
+        <li><a href="../work/research-workflow.html">مسار عمل بحثي مع مدقّق</a>: تسعة وكلاء بحث يعملون بالتوازي، وبوابة تمنع أي ادعاء بلا مصدر.</li>
+        <li><a href="../work/seo-audit.html">فحص المواقع لـ Google وللبحث بالذكاء الاصطناعي</a>: زاحف (crawler) مكتوب بـ Python وفحوص قائمة على القواعد، مع خمسة وكلاء Claude Code للتحليل.</li>
+        <li><a href="wat-framework.html">إطار WAT</a>: كيف أقسّم العمل بين الوكيل والأدوات.</li>
+      </ul>
+      <p>تريد وكيلًا مبنيًا لفريقك؟ <a href="@@TG@@">راسلني على Telegram</a>.</p>
+    </section>
+
+    <p><a href="index.html">&rarr; كل المقالات</a></p>
+  </article>
+</div>
