@@ -579,7 +579,7 @@ html[lang="ar"] body { line-height: 1.9; }
 .pcard .cats { font: 500 12px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent-violet-text); margin: 0 0 var(--space-2); }
 [dir="rtl"] .pcard .cats { letter-spacing: 0; font-family: var(--sans); }
 .pcard.mini h3 { font-size: 22px; }
-.pcard.mini { align-self: start; }
+/* Cards in a row share one height; the link sits at the bottom of each. */
 
 /* Arabic words on English and Russian pages (the language switch, the
    language list) use the system font, so those pages never fetch Cairo. */
