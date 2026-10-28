@@ -458,6 +458,40 @@ footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; 
 
 /* --- the compact half of the toolkit ----------------------------------- */
 
+/* --- FAQ ------------------------------------------------------------- */
+/* Native <details>, so every answer opens with no script and stays readable
+   to search engines. build.py also emits the same questions as FAQPage data. */
+.faq-wrap { display: grid; gap: var(--space-8); }
+.faq-head .section-lede { margin-bottom: 0; }
+.faq { display: grid; gap: var(--space-3); }
+.faq-item { background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); transition: border-color .25s ease-out, box-shadow .25s ease-out; }
+.faq-item[open] { border-color: var(--accent-glow); box-shadow: var(--shadow-card); }
+.faq-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 44px; padding: var(--space-5) var(--space-6); font: 600 18px/1.35 var(--sans); color: var(--ink); }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius-pill); border: 1px solid var(--line); color: var(--accent-violet-text); font: 400 22px/1 var(--sans); transition: transform .25s ease-out, background-color .25s ease-out; }
+.faq-item[open] summary::after { transform: rotate(45deg); background: color-mix(in srgb, var(--accent-violet) 14%, transparent); }
+.faq-item summary:hover::after { border-color: var(--accent-glow); }
+.faq-item summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: var(--radius-lg); }
+.faq-a { padding: 0 var(--space-6) var(--space-5); color: var(--ink-muted); }
+.faq-a p { margin: 0; max-width: 62ch; }
+@media (max-width: 700px) {
+  .faq-item summary { padding: var(--space-4) var(--space-5); font-size: 17px; }
+  .faq-a { padding: 0 var(--space-5) var(--space-4); }
+}
+/* Desktop: the heading stays in view beside the questions. */
+@media (min-width: 900px) {
+  .faq-wrap { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; gap: var(--space-12); }
+  .faq-head { position: sticky; top: 110px; }
+}
+/* Where the browser can animate to height: auto, answers slide open. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) {
+    .faq-item { interpolate-size: allow-keywords; }
+    .faq-item::details-content { height: 0; overflow: clip; transition: height .3s ease-out, content-visibility .3s allow-discrete; }
+    .faq-item[open]::details-content { height: auto; }
+  }
+}
+
 /* --- the closing card -------------------------------------------------- */
 /* One card, centred, with the accent only in the border: rule 2 keeps the
    solid accent for the single primary button inside it. */

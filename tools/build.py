@@ -13,6 +13,7 @@ import base64
 import hashlib
 import json
 import re
+from html import unescape
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
@@ -365,6 +366,18 @@ def page(code: str, page_path: str, body: str) -> str:
             "knowsLanguage": ["ar", "en", "ru"],
             "alumniOf": {"@type": "CollegeOrUniversity", "name": "Moscow Aviation Institute"},
             "sameAs": [GITHUB, TG_URL],
+        }, ensure_ascii=False) + "</script>"
+    # The FAQ, as structured data too, read straight from the page so the two
+    # can never disagree. AI search tools quote these answers.
+    faq = re.findall(r'<details class="faq-item"[^>]*>\s*<summary>(.*?)</summary>\s*'
+                     r'<div class="faq-a">(.*?)</div>', body, flags=re.S)
+    if faq:
+        def plain(x):
+            return unescape(re.sub(r"<[^>]+>", "", x)).strip()
+        person += "\n<script type=\"application/ld+json\">" + json.dumps({
+            "@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [{"@type": "Question", "name": plain(q),
+                            "acceptedAnswer": {"@type": "Answer", "text": plain(a)}} for q, a in faq],
         }, ensure_ascii=False) + "</script>"
     # The home page gets the drone that flies down it. The script decides on
     # the visitor's device whether three.js is worth loading at all.
