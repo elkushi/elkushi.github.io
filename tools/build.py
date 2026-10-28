@@ -31,9 +31,10 @@ WHATSAPP = "79932802066"
 WA_URL = f"https://wa.me/{WHATSAPP}"
 WA_SHOWN = "+7 993 280-20-66"
 
-# Telegram is the one call to action: hero, nav, services and contact all
-# open a chat, with the username written out so it works even when the click
-# does not. Fragments write @@TG@@ for the link.
+# One chat app is the call to action: hero, nav, services and contact all open
+# a chat, with the username or number written out so it works even when the
+# click does not. Telegram everywhere, except the Arabic pages, which use
+# WhatsApp only (his decision, 2026-10-28). Fragments write @@TG@@ or @@WA@@.
 #
 # The CV, one per language. The button only appears once the file is in
 # assets/, so a missing PDF is reported at build time instead of 404ing.
@@ -166,8 +167,9 @@ def version(*names: str) -> str:
     return "?v=" + h.hexdigest()[:8]
 
 REVEAL_V = version("reveal.js")
-# drone-escort.js passes its own ?v= on to drone-model.js, so one hash covers both.
-DRONE_V = version("assets/drone-escort.js", "assets/drone-model.js")
+# drone-escort.js passes its own ?v= on to the files it loads (the model, the
+# scene and the worker), so one hash covers all four.
+DRONE_V = version("assets/drone-escort.js", "assets/drone-model.js", "assets/drone-scene.js", "assets/drone-worker.js")
 
 WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system", "whitepapers", "drone"]
 
@@ -282,8 +284,8 @@ LOCALES = {
                                 "Заметки о работе с ИИ: что я узнаю, когда делаю ИИ-продукты и автоматизации, и как этим пользоваться."),
             "blog/wat-framework.html": ("WAT-фреймворк: как я делаю Claude Code надёжным · Мустафа Элькуши",
                                         "Workflows задают, что делать, агент принимает решения, инструменты выполняют работу. Как три слоя работают вместе — и десять правил, которые помогают применять их правильно."),
-            "blog/secure-vibe-coded-apps.html": ("Приложения на вайб-кодинге: как сделать их безопасными и как это доказать · Мустафа Элькуши",
-                                                 "Восемь дыр в безопасности, которые чаще всего встречаются в приложениях, написанных ИИ, как закрыть каждую и какой тест это доказывает, с реальным кодом из моих приложений."),
+            "blog/secure-vibe-coded-apps.html": ("Приложения на вайб-кодинге: как их защитить и как это доказать · Мустафа Элькуши",
+                                                 "Восемь уязвимостей, которые чаще всего встречаются в приложениях, написанных с помощью ИИ: как закрыть каждую и каким тестом это доказать. С реальным кодом из моих приложений."),
             "blog/seo-geo-aeo-audit.html": ("Как стать заметным в Google и в ChatGPT: что проверяет мой инструмент аудита · Мустафа Элькуши",
                                             "Что проверяет мой бесплатный аудит SEO, AEO и GEO, что это значит для бизнеса и 22 исправления, которые можно сделать на этой неделе."),
             "blog/ai-agents-python.html": ("ИИ-агенты: что это такое, как их делать и почему на Python · Мустафа Элькуши",
@@ -303,6 +305,43 @@ EXTERNAL = re.compile(r'<a href="(https?://[^"]+)"(?![^>]*target=)')
 
 
 IMG = re.compile(r'<img ([^>]*?)src="((?:\.\./)*assets/)([\w-]+)\.webp"([^>]*)>')
+
+
+def canonical(rel: str) -> str:
+    """The one public URL of a page. The site serves / and /index.html alike;
+    without a canonical both get indexed, cached and prerendered separately.
+    Folder URLs win, because that is what people link to."""
+    return f"{ORIGIN}/{rel[:-len('index.html')] if rel.endswith('index.html') else rel}"
+
+
+def image_priority(body: str) -> str:
+    """Load the page's main image first and every other image only when needed.
+
+    The first image on a page that is not marked lazy is its largest early
+    paint (a case study's screenshot, a post's cover), so it gets
+    fetchpriority="high". A cover comes as a dark and a light copy side by
+    side, so the pair gets it. Every later image is lazy and decodes off the
+    main thread. An image that must load at once can say loading="eager".
+    """
+    imgs = list(re.finditer(r"<img\b[^>]*>", body))
+    lead = next((i for i, m in enumerate(imgs) if 'loading="lazy"' not in m.group(0)), None)
+    first = set()
+    if lead is not None:
+        first.add(lead)
+        if "only-dark" in imgs[lead].group(0) and lead + 1 < len(imgs) and "only-light" in imgs[lead + 1].group(0):
+            first.add(lead + 1)
+    out, pos = [], 0
+    for i, m in enumerate(imgs):
+        tag = m.group(0)
+        if i in first and "fetchpriority=" not in tag:
+            tag = tag[:-1].rstrip("/").rstrip() + ' fetchpriority="high">'
+        elif i not in first and "loading=" not in tag:
+            tag = tag[:-1].rstrip("/").rstrip() + ' loading="lazy">'
+        if i not in first and "decoding=" not in tag:
+            tag = tag[:-1].rstrip("/").rstrip() + ' decoding="async">'
+        out += [body[pos:m.start()], tag]
+        pos = m.end()
+    return "".join(out) + body[pos:]
 
 
 def responsive_images(body: str) -> str:
@@ -362,6 +401,7 @@ def page(code: str, page_path: str, body: str) -> str:
     body = body.replace("@@TG@@", TG_URL).replace("@@WA@@", WA_URL).replace("@@WA_SHOWN@@", WA_SHOWN)
     body = external_new_tab(body)
     body = responsive_images(body)
+    body = image_priority(body)
     # Fragments write asset paths relative to the English page they were
     # authored for; re-point them at the single copy under /assets.
     body = re.sub(r'(?:\.\./)*assets/', f"{up}assets/", body)
@@ -384,7 +424,7 @@ def page(code: str, page_path: str, body: str) -> str:
         person = "\n<script type=\"application/ld+json\">" + json.dumps({
             "@context": "https://schema.org", "@type": "Person",
             "name": "Moustafa Elkoushy", "jobTitle": "AI Product Engineer",
-            "url": f"{ORIGIN}/{rel}", "image": f"{ORIGIN}/assets/og.jpg", "email": f"mailto:{EMAIL}",
+            "url": canonical(rel), "image": f"{ORIGIN}/assets/og.jpg", "email": f"mailto:{EMAIL}",
             "address": {"@type": "PostalAddress", "addressLocality": "Moscow", "addressCountry": "RU"},
             "knowsLanguage": ["ar", "en", "ru"],
             "alumniOf": {"@type": "CollegeOrUniversity", "name": "Moscow Aviation Institute"},
@@ -405,17 +445,18 @@ def page(code: str, page_path: str, body: str) -> str:
     # The home page gets the drone that flies down it. The script decides on
     # the visitor's device whether three.js is worth loading at all.
     drone = f'\n<script src="{up}assets/drone-escort.js{DRONE_V}" defer></script>' if page_path == "index.html" else ""
-    tg_foot = f' · <a href="{TG_URL}" target="_blank" rel="noopener noreferrer">Telegram</a>' if TG_URL else ""
+    chat_url, chat_name = (WA_URL, "WhatsApp") if code == "ar" else (TG_URL, "Telegram")
+    tg_foot = f' · <a href="{chat_url}" target="_blank" rel="noopener noreferrer">{chat_name}</a>' if chat_url else ""
     preload = "\n".join(
         f'<link rel="preload" href="{up}assets/fonts/{f}" as="font" type="font/woff2" crossorigin>'
         for f in loc["font_preload"])
     # Only point hreflang at pages that actually exist, so the tags never
     # promise a translation that has not been written yet.
     have = [c for c in LOCALES if fragment(c, page_path).exists()]
-    alts = "\n".join(
-        f'<link rel="alternate" hreflang="{c}" href="{ORIGIN}/{out_path(c, page_path)}">'
+    alts = f'<link rel="canonical" href="{canonical(rel)}">\n' + "\n".join(
+        f'<link rel="alternate" hreflang="{c}" href="{canonical(out_path(c, page_path))}">'
         for c in have)
-    alts += f'\n<link rel="alternate" hreflang="x-default" href="{ORIGIN}/{page_path}">'
+    alts += f'\n<link rel="alternate" hreflang="x-default" href="{canonical(page_path)}">'
 
     # Language switcher: the same page in the other languages, or that
     # language's home page when this page is not translated yet.
@@ -473,7 +514,7 @@ def page(code: str, page_path: str, body: str) -> str:
     <div class="nav-end">
       <nav class="langs" aria-label="{loc['lang_label']}">{switch}</nav>
       <button class="theme-toggle cta" type="button" aria-label="{loc['theme']}"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-      <a class="cta" href="{TG_URL}" target="_blank" rel="noopener noreferrer">{loc['tg']} <span aria-hidden="true">{loc['arrow']}</span></a>
+      <a class="cta" href="{chat_url}" target="_blank" rel="noopener noreferrer">{chat_name} <span aria-hidden="true">{loc['arrow']}</span></a>
       <details class="menu">
         <summary class="cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="menu-label">{loc['menu']}</span></summary>
         <div class="menu-panel">

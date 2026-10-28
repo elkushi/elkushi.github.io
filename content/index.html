@@ -12,7 +12,7 @@
         @@CV@@
       </div>
     </div>
-    <div class="hero-art">@@ART:hero-back@@<img class="hero-photo" src="assets/hero-photo-1000.webp" srcset="assets/hero-photo-500.webp 500w, assets/hero-photo-760.webp 760w, assets/hero-photo-1000.webp 1000w" sizes="(min-width: 900px) 500px, 88vw" width="1000" height="1022" fetchpriority="high" alt="Illustrated portrait of Moustafa, laughing, with a wolverine wreathed in violet lightning behind him.">@@ART:hero-front@@</div>
+    <div class="hero-art">@@ART:hero-ai@@</div>
     <p class="label hero-strip">Available for new projects &middot; Moscow, UTC+3 &middot; Remote or relocating &middot; English, Arabic, Russian</p>
   </div>
 </header>
@@ -175,7 +175,7 @@
         <li><b>Uploads and file paths are checked</b>, so nobody can read files outside the app. Tests try <code>/etc/passwd</code> and <code>../</code> and expect a refusal.</li>
         <li><b>The audit app refuses private and internal addresses</b> and re-checks after every redirect, so a stranger cannot make my server fetch my own network.</li>
         <li><b>Servers run HTTPS and key-only SSH</b>, with hashed passwords and rate-limited sign-in.</li>
-        <li><b>Containers run as a normal user</b>, not root, with Linux capabilities dropped.</li>
+        <li><b>Containers run as a normal user</b>, not root.</li>
         <li><b>Keys stay in <code>.env</code></b>, and every repository is scanned for secrets before it goes public.</li>
       </ul>
       <p>Tools: nmap, Wireshark, Burp Suite, OWASP testing, TryHackMe. I also wrote <a href="https://github.com/elkushi/system-audit">system-audit</a>, a Bash tool that checks a Linux server for the misconfigurations I keep finding.</p>

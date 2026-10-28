@@ -1,0 +1,147 @@
+<svg class="art" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="hx-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" class="stop-a" stop-opacity=".55"/><stop offset="1" class="stop-a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hx-core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e9d5ff"/><stop offset=".5" stop-color="#a855f7"/><stop offset="1" stop-color="#4c1d95"/>
+    </linearGradient>
+    <linearGradient id="hx-ship" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="hx-scan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c084fc" stop-opacity="0"/><stop offset="1" stop-color="#c084fc" stop-opacity=".45"/>
+    </linearGradient>
+    <radialGradient id="hx-fade-g" cx="50%" cy="50%" r="50%">
+      <stop offset=".25" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <mask id="hx-fade"><rect width="600" height="600" fill="url(#hx-fade-g)"/></mask>
+    <pattern id="hx-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle class="bar" cx="2" cy="2" r="1.3"/></pattern>
+    <clipPath id="hx-reply"><rect x="184" y="236" width="274" height="78" rx="14"/></clipPath>
+    <path id="hx-star" d="M0-16c1.6 11 5 14.4 16 16-11 1.6-14.4 5-16 16-1.6-11-5-14.4-16-16 11-1.6 14.4-5 16-16z"/>
+    <path id="hx-tick" d="M-3.5 0l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </defs>
+
+  <!-- Light behind the scene, a dot grid that fades out, and a slow orbit. -->
+  <circle cx="300" cy="300" r="300" fill="url(#hx-glow)"/>
+  <rect width="600" height="600" fill="url(#hx-dots)" mask="url(#hx-fade)"/>
+  <g class="orbit">
+    <circle class="ac-s thin" cx="300" cy="300" r="282" stroke-dasharray="2 12" opacity=".4"/>
+    <circle class="ac" cx="18" cy="300" r="4.5"/>
+    <circle class="warm" cx="582" cy="300" r="3.5"/>
+    <circle class="ok" cx="300" cy="582" r="3.5"/>
+  </g>
+
+  <!-- Structured output: the model answers in JSON, not prose. -->
+  <path class="ln" d="M156 92c90-58 190-62 274-40"/>
+  <path class="ac-s drift" d="M156 92c90-58 190-62 274-40" stroke-dasharray="3 9"/>
+  <g class="float d2">
+    <rect class="p2" x="430" y="22" width="150" height="88" rx="14"/>
+    <text class="tx" x="446" y="46"><tspan class="tx-m">{</tspan></text>
+    <text class="tx" x="458" y="64"><tspan class="tx-a">"intent"</tspan><tspan class="tx-m">:</tspan> "buy"</text>
+    <text class="tx" x="458" y="82"><tspan class="tx-a">"valid"</tspan><tspan class="tx-m">:</tspan> <tspan class="tx-ok">true</tspan></text>
+    <text class="tx" x="446" y="100"><tspan class="tx-m">}</tspan></text>
+  </g>
+
+  <!-- The product: a chat window. -->
+  <g class="glow">
+    <rect class="p2" x="120" y="124" width="360" height="342" rx="22"/>
+  </g>
+  <path class="ln-s" d="M120 164h360"/>
+  <circle class="bad" cx="144" cy="144" r="4.5"/>
+  <circle class="warm" cx="160" cy="144" r="4.5"/>
+  <circle class="ok" cx="176" cy="144" r="4.5"/>
+  <text class="tx tx-m" x="300" y="148" text-anchor="middle">assistant · live</text>
+
+  <!-- The question. -->
+  <rect class="ac-soft" x="262" y="182" width="196" height="40" rx="14"/>
+  <rect class="bar-i" x="278" y="195" width="140" height="6" rx="3"/>
+  <rect class="bar-i" x="278" y="207" width="96" height="6" rx="3" opacity=".5"/>
+
+  <!-- The answer, scanned before it goes anywhere. -->
+  <circle cx="158" cy="258" r="16" fill="url(#hx-core)"/>
+  <use href="#hx-star" transform="translate(158 258) scale(.5)" fill="#fff"/>
+  <rect class="p" x="184" y="236" width="274" height="78" rx="14"/>
+  <rect class="bar" x="200" y="252" width="230" height="6" rx="3"/>
+  <rect class="bar" x="200" y="266" width="196" height="6" rx="3"/>
+  <rect class="bad" x="200" y="280" width="150" height="6" rx="3" opacity=".75"/>
+  <rect class="bar" x="200" y="294" width="110" height="6" rx="3"/>
+  <g clip-path="url(#hx-reply)">
+    <g class="scan-line">
+      <rect x="184" y="212" width="274" height="24" fill="url(#hx-scan)"/>
+      <rect x="184" y="235" width="274" height="1.5" fill="#c084fc"/>
+    </g>
+  </g>
+
+  <!-- A wrong line, caught and held back. -->
+  <path class="bad-s" d="M458 283c16 0 22-12 34-12" stroke-dasharray="3 6"/>
+  <g class="float d1">
+    <rect class="bad-soft" x="490" y="254" width="104" height="34" rx="17"/>
+    <path class="bad-s" d="M503 266l10 10M513 266l-10 10"/>
+    <text class="tx tx-bad" x="521" y="275">blocked</text>
+  </g>
+
+  <!-- The checks it has to pass before anyone sees it. -->
+  <rect class="bg ln-s" x="140" y="330" width="318" height="86" rx="14"/>
+  <g class="tick t1">
+    <circle class="ok" cx="162" cy="350" r="7"/><use href="#hx-tick" x="162" y="350"/>
+    <text class="tx" x="178" y="354">schema valid</text>
+  </g>
+  <g class="tick t2">
+    <circle class="ok" cx="162" cy="373" r="7"/><use href="#hx-tick" x="162" y="373"/>
+    <text class="tx" x="178" y="377">sources checked</text>
+  </g>
+  <g class="tick t3">
+    <circle class="ok" cx="162" cy="396" r="7"/><use href="#hx-tick" x="162" y="396"/>
+    <text class="tx" x="178" y="400">QA passed</text>
+  </g>
+  <path class="ac-s" d="M420 352l18 8v12c0 11-8 20-18 23-10-3-18-12-18-23v-12z"/>
+  <path class="ok-s" d="M412 373l6 6 10-11"/>
+
+  <!-- Only then does it ship. -->
+  <text class="tx tx-m" x="198" y="444">ready to ship</text>
+  <g class="glow">
+    <rect x="330" y="426" width="128" height="28" rx="14" fill="url(#hx-ship)"/>
+  </g>
+  <text class="tx tx-w" x="394" y="444" text-anchor="middle">deploy ✓</text>
+
+  <!-- The model that sits behind it. -->
+  <circle class="ac-s thin spin" cx="118" cy="108" r="50" stroke-dasharray="4 8" opacity=".7"/>
+  <g class="glow">
+    <circle cx="118" cy="108" r="36" fill="url(#hx-core)"/>
+  </g>
+  <use href="#hx-star" transform="translate(118 108) scale(1.05)" fill="#fff"/>
+  <g transform="translate(142 86) scale(.36)"><use class="spin" href="#hx-star" fill="#fff"/></g>
+
+  <!-- Code. -->
+  <g class="float">
+    <rect class="p2" x="22" y="222" width="76" height="38" rx="19"/>
+    <text class="tx tx-a tx-lg" x="60" y="247" text-anchor="middle">&lt;/&gt;</text>
+  </g>
+
+  <!-- What the business sees: the line going up. -->
+  <g class="float d1">
+    <g class="glow"><rect class="p2" x="24" y="420" width="156" height="118" rx="16"/></g>
+    <text class="tx tx-m" x="42" y="446">leads</text>
+    <path class="ok-s thin" d="M140 438l10-10 10 10"/>
+    <rect class="bar" x="42" y="496" width="16" height="22" rx="3"/>
+    <rect class="bar" x="66" y="486" width="16" height="32" rx="3"/>
+    <rect class="bar" x="90" y="490" width="16" height="28" rx="3"/>
+    <rect class="bar" x="114" y="474" width="16" height="44" rx="3"/>
+    <rect class="ac" x="138" y="458" width="16" height="60" rx="3"/>
+    <path class="ok-s" d="M50 488l24-10 24 4 24-16 24-16"/>
+    <circle class="ok" cx="146" cy="450" r="4"/>
+  </g>
+
+  <!-- An automation running in the corner: trigger, step, done. -->
+  <path class="ln" d="M408 536h52M488 536h52"/>
+  <path class="ac-s drift" d="M408 536h52M488 536h52" stroke-dasharray="3 9"/>
+  <circle class="p2" cx="394" cy="536" r="16"/><circle class="warm" cx="394" cy="536" r="5"/>
+  <circle class="p2" cx="474" cy="536" r="16"/><circle class="ac" cx="474" cy="536" r="5"/>
+  <circle class="p2" cx="554" cy="536" r="16"/><use href="#hx-tick" x="554" y="536"/>
+
+  <!-- Sparkles. -->
+  <use href="#hx-star" class="warm pulse slow" transform="translate(560 170) scale(.45)"/>
+  <use href="#hx-star" class="ac pulse slow d2" transform="translate(52 560) scale(.35)"/>
+  <use href="#hx-star" class="warm pulse" transform="translate(250 580) scale(.25)"/>
+</svg>

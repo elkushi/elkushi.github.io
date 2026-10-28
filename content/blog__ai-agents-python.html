@@ -1,10 +1,10 @@
 <div class="wrap post">
   <header class="case-hero post-head">
-    <p class="eyebrow">Blog &middot; 28 October 2026 &middot; 8 min read</p>
+    <p class="eyebrow">Blog &middot; 8 min read</p>
     <h1>AI agents: what they are, how to build one, and why Python</h1>
     <p class="lead">An AI agent is a language model that can act: it picks a tool, runs it, reads the result and decides what to do next. Here is what that means in plain words, a working agent in about 40 lines of Python, and the rules that keep one from going wrong. Every rule comes from an agent I have shipped.</p>
   </header>
-  <figure class="post-cover reveal"><img class="only-dark" src="../assets/blog/ai-agents-python-dark.svg" width="1200" height="630" alt="A goal goes to the model, the model calls Python tools, and a check stands before the result"><img class="only-light" src="../assets/blog/ai-agents-python-light.svg" width="1200" height="630" alt="A goal goes to the model, the model calls Python tools, and a check stands before the result"></figure>
+  <figure class="post-cover"><img class="only-dark" src="../assets/blog/ai-agents-python-dark.svg" width="1200" height="630" alt="A goal goes to the model, the model calls Python tools, and a check stands before the result"><img class="only-light" src="../assets/blog/ai-agents-python-light.svg" width="1200" height="630" alt="A goal goes to the model, the model calls Python tools, and a check stands before the result"></figure>
 
   <article>
     <section class="reveal">
@@ -142,8 +142,13 @@ claim = Claim.model_validate_json(model_output)  # raises an error if anything i
         <li><a href="../work/seo-audit.html">Website audit for Google and AI search</a>: a Python crawler and rule-based checks, with five Claude Code agents for the analysis.</li>
         <li><a href="wat-framework.html">The WAT framework</a>: how I split work between the agent and the tools.</li>
       </ul>
-      <p>Want an agent built for your team? <a href="@@TG@@">Write to me on Telegram</a>.</p>
     </section>
+
+    <aside class="post-cta reveal">
+      <h2>Want an agent built for your team?</h2>
+      <p>Tell me the task. I'll tell you whether an agent is the right tool for it, and what it would take to build.</p>
+      <p class="cta-row"><a class="btn btn-primary" href="@@TG@@?text=Hi%20Moustafa%2C%20I%27m%20interested%20in%3A%20an%20AI%20agent">Write to me on Telegram</a></p>
+    </aside>
 
     <p><a href="index.html">&larr; All posts</a></p>
   </article>

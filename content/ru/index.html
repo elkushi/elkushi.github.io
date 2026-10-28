@@ -12,7 +12,7 @@
         @@CV@@
       </div>
     </div>
-    <div class="hero-art">@@ART:hero-back@@<img class="hero-photo" src="assets/hero-photo-1000.webp" srcset="assets/hero-photo-500.webp 500w, assets/hero-photo-760.webp 760w, assets/hero-photo-1000.webp 1000w" sizes="(min-width: 900px) 500px, 88vw" width="1000" height="1022" fetchpriority="high" alt="Рисованный портрет Мустафы: он смеётся, а за ним росомаха в фиолетовых молниях.">@@ART:hero-front@@</div>
+    <div class="hero-art">@@ART:hero-ai@@</div>
     <p class="label hero-strip">Беру новые проекты &middot; Москва, UTC+3 &middot; Удалённо или с переездом &middot; Английский, арабский, русский</p>
   </div>
 </header>
@@ -175,7 +175,7 @@
         <li><b>Загружаемые файлы и пути проверяются</b>, поэтому никто не прочитает файлы за пределами приложения. Тесты подставляют <code>/etc/passwd</code> и <code>../</code> и ждут отказа.</li>
         <li><b>Приложение для аудита не обращается к частным и внутренним адресам</b> и перепроверяет адрес после каждого редиректа, так что посторонний не заставит мой сервер обращаться к моей же внутренней сети.</li>
         <li><b>Серверы работают по HTTPS, SSH&nbsp;— только по ключам</b>, пароли хранятся в виде хешей, а число попыток входа ограничено.</li>
-        <li><b>Контейнеры запускаются от обычного пользователя</b>, а не от root, с отключёнными Linux capabilities.</li>
+        <li><b>Контейнеры запускаются от обычного пользователя</b>, а не от root.</li>
         <li><b>Ключи хранятся в <code>.env</code></b>, а каждый репозиторий перед публикацией проверяется на наличие секретов.</li>
       </ul>
       <p>Инструменты: nmap, Wireshark, Burp Suite, тестирование по OWASP, TryHackMe. Ещё я написал <a href="https://github.com/elkushi/system-audit">system-audit</a>&nbsp;— Bash-скрипт для проверки Linux-сервера на ошибки конфигурации, которые я нахожу чаще всего.</p>

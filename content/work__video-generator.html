@@ -100,11 +100,13 @@
 
     <section class="reveal">
       <h2>Security</h2>
-      <p>The app runs an AI agent on a server, so it is locked down by default:</p>
+      <p>There is no hosted version. You download it from GitHub and run it on your own machine, so it is locked down for that:</p>
       <ul class="checks">
-        <li>The agent can only use an allowlist of tools: the project's own scripts, ffmpeg and a few read-only commands. Other integrations are blocked.</li>
+        <li>It holds none of my keys or accounts. Each copy uses its owner's Claude Code login. The full git history is scanned for secrets, and the scan is clean.</li>
+        <li>It listens on <code>127.0.0.1</code> only, so other machines on the same network can't open it.</li>
+        <li>The agent can only use an allowlist of tools: the project's own scripts, ffmpeg and a few file commands. Other integrations are blocked.</li>
+        <li>A hook checks every shell command and file path before it runs. In a live prompt-injection test, Claude tried 30 routes to get a planted fake key out of <code>.env</code> and got nothing.</li>
         <li>Every uploaded file must sit inside the uploads folder. Tests try <code>/etc/passwd</code>, <code>../../etc/passwd</code> and <code>.env</code>.</li>
-        <li>The public mode sits behind HTTPS and a per-person login with hashed passwords, plus security headers and an upload size limit.</li>
         <li>The container runs as its own user, not root. Keys live in <code>.env</code>, outside git.</li>
       </ul>
     </section>

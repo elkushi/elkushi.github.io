@@ -1,0 +1,1 @@
+let scene=null;onmessage=e=>{const s=e.data;if(s.init)try{importScripts(s.init.three,s.init.model,s.init.scene),scene=DroneScene.create(self.THREE,self.DroneModel,s.init),postMessage({ready:!0,footPx:scene.footPx})}catch(e){postMessage({failed:String(e)})}else scene&&scene.draw(s)};
