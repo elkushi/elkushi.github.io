@@ -143,7 +143,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 /* Rule 4: buttons, nav pills and badges are all radius-pill. */
 /* Long labels wrap on a phone, so they are centred with room between lines,
    and the margins are logical so Arabic gets them on the correct side. */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 26px; border-radius: var(--radius-pill); font: 600 16px/1.25 var(--sans); text-align: center; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: box-shadow .3s ease-out, transform .2s ease-out; margin: 0 0 var(--space-3); margin-inline-end: var(--space-3); }
+.btn { display: inline-flex; vertical-align: middle; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 26px; border-radius: var(--radius-pill); font: 600 16px/1.25 var(--sans); text-align: center; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: box-shadow .3s ease-out, transform .2s ease-out; margin: 0 0 var(--space-3); margin-inline-end: var(--space-3); }
 .btn-ico { width: 18px; height: 18px; flex: none; }
 /* Rule 2: accent-violet fills the one primary action of a view, nothing else. */
 .btn-primary { background: var(--accent-violet); color: var(--on-accent); }
