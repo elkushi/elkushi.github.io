@@ -212,6 +212,8 @@ LOCALES = {
                                            "What an AI agent is, a working agent in about 40 lines of Python, and the rules that keep it from going wrong."),
             "blog/php-october-2026-django-cms.html": ("PHP in October 2026: what happened, and when a Django CMS is the safer choice · Moustafa Elkoushy",
                                                       "php2shell, an exploited WordPress plugin and a self-rebuilding backdoor: what to do this week if your site runs on PHP, and when moving to Django CMS is worth it."),
+            "404.html": ("Page not found · Moustafa Elkoushy",
+                         "This page doesn't exist. Links to the home page, the work and the blog."),
         },
     },
     "ar": {
@@ -388,7 +390,9 @@ def page(code: str, page_path: str, body: str) -> str:
     loc = LOCALES[code]
     title, desc = loc["titles"][page_path]
     rel = out_path(code, page_path)
-    up = "../" * rel.count("/")
+    # GitHub Pages serves 404.html for a missing address at any depth, so its
+    # links and assets start from the site root instead of counting ../.
+    up = "/" if page_path == "404.html" else "../" * rel.count("/")
     dir_attr = ' dir="rtl"' if loc["rtl"] else ""
     current = ' aria-current="page"' if page_path == "index.html" else ""
     # This language's own home page. "{up}index.html" alone is the English one,
@@ -457,11 +461,13 @@ def page(code: str, page_path: str, body: str) -> str:
         f'<link rel="alternate" hreflang="{c}" href="{canonical(out_path(c, page_path))}">'
         for c in have)
     alts += f'\n<link rel="alternate" hreflang="x-default" href="{canonical(page_path)}">'
+    if page_path == "404.html":
+        alts = '<meta name="robots" content="noindex">'
 
     # Language switcher: the same page in the other languages, or that
     # language's home page when this page is not translated yet.
     def target(c):
-        wanted = page_path if fragment(c, page_path).exists() else "index.html"
+        wanted = page_path if fragment(c, page_path).exists() and page_path != "404.html" else "index.html"
         return f"{up}{out_path(c, wanted)}"
 
     switch = "".join(
@@ -500,7 +506,7 @@ def page(code: str, page_path: str, body: str) -> str:
 {preload}
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="google-site-verification" content="3JFS0vJ_Erxu6fGrwpnXT0jaC41ccL5C2abv1gQSxvk">
+<meta name="google-site-verification" content="3JFS0vJ_Erxu6fGrwpnXT0jaC41ccL5C2abv1gQSxvk"><!-- Search Console: keep, or the site loses verification -->
 <link rel="icon" href="{up}assets/favicon.svg?v=2" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{up}assets/apple-touch-icon.png">
 <style>{css}</style>
@@ -562,6 +568,10 @@ if __name__ == "__main__":
             out.write_text(minify_html(page(code, page_path, src.read_text(encoding="utf-8"))), encoding="utf-8")
             built += 1
     print(f"built {built} pages" + (f", {missing} still untranslated" if missing else ""))
+
+    # The not-found page. Kept out of PAGE_PATHS, so it gets no translations,
+    # no hreflang and no sitemap entry; the fragment has a line in each language.
+    (SITE / "404.html").write_text(minify_html(page("en", "404.html", fragment("en", "404.html").read_text(encoding="utf-8"))), encoding="utf-8")
 
     # sitemap.xml: every built page, with its translations, so Google finds the
     # whole site from one file. robots.txt points to it.

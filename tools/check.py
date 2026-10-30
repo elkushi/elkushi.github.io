@@ -29,7 +29,8 @@ for page in PAGES:
             url = part.strip().split(" ")[0].split("#")[0].split("?")[0]
             if not url or re.match(r"^(https?:|mailto:|data:)", url):
                 continue
-            if not (page.parent / url).resolve().exists():
+            base = SITE if url.startswith("/") else page.parent   # root-relative, as on 404.html
+            if not (base / url.lstrip("/")).resolve().exists():
                 errors.append(f"{rel}: missing {url}")
 
     # Rule 2: accent-violet fills the one primary action of a view. A view is
