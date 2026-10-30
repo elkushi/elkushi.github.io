@@ -500,6 +500,7 @@ def page(code: str, page_path: str, body: str) -> str:
 {preload}
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="google-site-verification" content="3JFS0vJ_Erxu6fGrwpnXT0jaC41ccL5C2abv1gQSxvk">
 <link rel="icon" href="{up}assets/favicon.svg?v=2" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{up}assets/apple-touch-icon.png">
 <style>{css}</style>
@@ -561,3 +562,21 @@ if __name__ == "__main__":
             out.write_text(minify_html(page(code, page_path, src.read_text(encoding="utf-8"))), encoding="utf-8")
             built += 1
     print(f"built {built} pages" + (f", {missing} still untranslated" if missing else ""))
+
+    # sitemap.xml: every built page, with its translations, so Google finds the
+    # whole site from one file. robots.txt points to it.
+    urls = []
+    for code in LOCALES:
+        for page_path in PAGE_PATHS:
+            if not fragment(code, page_path).exists():
+                continue
+            have = [c for c in LOCALES if fragment(c, page_path).exists()]
+            alts = "".join(
+                f'\n    <xhtml:link rel="alternate" hreflang="{c}" href="{canonical(out_path(c, page_path))}"/>'
+                for c in have)
+            urls.append(f"  <url>\n    <loc>{canonical(out_path(code, page_path))}</loc>{alts}\n  </url>")
+    (SITE / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+        + "\n".join(urls) + "\n</urlset>\n", encoding="utf-8")
+    print(f"sitemap: {len(urls)} pages")

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elkushi.github.io/sitemap.xml

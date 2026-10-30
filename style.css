@@ -396,6 +396,14 @@ footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; 
   .js .reveal.in .tk li:nth-child(4), .js .reveal.in .tl li:nth-child(4) { transition-delay: .18s; }
   .js .reveal.in .tk li:nth-child(5) { transition-delay: .24s; }
   .js .reveal.in .tk li:nth-child(6) { transition-delay: .3s; }
+  /* Safety net: if reveal.js is slow or never arrives (weak mobile signal), the
+     content shows anyway after 2 s instead of staying invisible. reveal.js adds
+     .reveal-ready to <html> when it runs in time, which switches this off. */
+  .js:not(.reveal-ready) .reveal, .js:not(.reveal-ready) .reveal .pcard, .js:not(.reveal-ready) .reveal .tk li,
+  .js:not(.reveal-ready) .reveal .tl li, .js:not(.reveal-ready) .reveal .fact, .js:not(.reveal-ready) .reveal .checks li {
+    animation: reveal-failsafe 0s 2s forwards;
+  }
+  @keyframes reveal-failsafe { to { opacity: 1; transform: none; } }
 }
 /* Rule 5 again: under reduced motion the rotation and the tilt stop; the glow
    stays, because it is colour rather than movement. */

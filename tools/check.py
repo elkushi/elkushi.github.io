@@ -45,6 +45,8 @@ blocks = re.findall(r"([^{}]*)\{([^}]*)\}", css)
 # Animations that loop in the background are meant to be slow. The 200-400ms
 # band in rule 5 is about motion a person triggers.
 AMBIENT = {"spin", "sway", "float", "drift", "pulse"}
+# Not motion at all: an instant switch that shows content if reveal.js is late.
+NOT_MOTION = {"reveal-failsafe"}
 
 for sel, body in blocks:
     sel = " ".join(sel.split())
@@ -57,7 +59,7 @@ for sel, body in blocks:
         errors.append(f"design rule 3: {sel[:60]} has a coloured left border")
     # Rule 5: motion a person triggers lasts 200-400ms.
     for prop, val in re.findall(r"(transition|animation)\s*:([^;]*)", body):
-        if prop == "animation" and any(name in val for name in AMBIENT):
+        if prop == "animation" and any(name in val for name in AMBIENT | NOT_MOTION):
             continue
         for d in re.findall(r"(\d*\.?\d+)s", val):
             if not 0.2 <= float(d) <= 0.4:
