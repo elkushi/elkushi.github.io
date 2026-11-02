@@ -71,10 +71,11 @@ SPEC_HASH = "sha256-" + base64.b64encode(hashlib.sha256(SPEC_RULES.encode()).dig
 # because a few elements carry a style attribute; scripts do not.
 CSP = (
     "default-src 'none'; "
-    f"script-src 'self' '{BOOT_HASH}' 'inline-speculation-rules' '{SPEC_HASH}'; "
-    "connect-src 'self'; "
+    f"script-src 'self' '{BOOT_HASH}' 'inline-speculation-rules' '{SPEC_HASH}' https://www.googletagmanager.com; "
+    # Google Analytics (assets/analytics.js): the hosts Google lists for GA4.
+    "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; "
     "style-src 'self' 'unsafe-inline'; "
-    "img-src 'self' data:; "
+    "img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; "
     "font-src 'self'; "
     "media-src 'self'; "
     "frame-src 'self'; "
@@ -172,6 +173,7 @@ def version(*names: str) -> str:
     return "?v=" + h.hexdigest()[:8]
 
 REVEAL_V = version("reveal.js")
+ANALYTICS_V = version("assets/analytics.js")
 # drone-escort.js passes its own ?v= on to the files it loads (the model, the
 # scene and the worker), so one hash covers all four.
 DRONE_V = version("assets/drone-escort.js", "assets/drone-model.js", "assets/drone-scene.js", "assets/drone-worker.js")
@@ -548,7 +550,8 @@ def page(code: str, page_path: str, body: str) -> str:
   </div>
 </footer>
 <a class="to-top" href="#" aria-label="{TOP_LABEL[code]}" title="{TOP_LABEL[code]}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
-<script src="{up}reveal.js{REVEAL_V}" defer></script>{drone}
+<script src="{up}reveal.js{REVEAL_V}" defer></script>
+<script src="{up}assets/analytics.js{ANALYTICS_V}" defer></script>{drone}
 </body>
 </html>
 """
