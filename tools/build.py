@@ -43,6 +43,11 @@ CV_LABEL = {"en": "Download CV", "ar": "تنزيل السيرة الذاتية",
 # The round button that appears near the end of a page and takes you back up.
 TOP_LABEL = {"en": "Back to top", "ar": "العودة إلى الأعلى", "ru": "Наверх"}
 
+# The theme switch's two icons: the header button and, on a phone, the one in
+# the menu. style.css shows the one for the action the button performs.
+SUN_MOON = ('<svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+            '<svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>')
+
 # The one inline script on the site. Its hash goes in the CSP, so the policy can
 # refuse every other inline script without needing 'unsafe-inline'.
 BOOT_JS = ('var d=document.documentElement;d.classList.add("js");'
@@ -178,7 +183,7 @@ LOCALES = {
         "lang": "en", "rtl": False, "name": "English", "short": "EN",
         "nav": ["Work", "Services", "Skills", "Security", "Experience", "Blog", "Contact"],
         "tg": "Telegram", "arrow": "&#8599;",
-        "theme": "Switch between light and dark theme",
+        "theme": "Switch between light and dark theme", "theme_short": "Light / dark theme",
         "lang_label": "Language", "main_nav": "Main", "menu": "Menu",
         "font_preload": ["Outfit.woff2"],
         "titles": {
@@ -220,7 +225,7 @@ LOCALES = {
         "lang": "ar", "rtl": True, "name": "العربية", "short": "ع",
         "nav": ["الأعمال", "الخدمات", "المهارات", "الأمان", "الخبرة", "المدونة", "تواصل"],
         "tg": "Telegram", "arrow": "&#8598;",
-        "theme": "التبديل بين الوضع الفاتح والداكن",
+        "theme": "التبديل بين الوضع الفاتح والداكن", "theme_short": "الوضع الفاتح / الداكن",
         "lang_label": "اللغة", "main_nav": "القائمة الرئيسية", "menu": "القائمة",
         "font_preload": ["Cairo-arabic.woff2", "Cairo-latin.woff2"],
         "titles": {
@@ -260,7 +265,7 @@ LOCALES = {
         "lang": "ru", "rtl": False, "name": "Русский", "short": "RU",
         "nav": ["Работы", "Услуги", "Навыки", "Безопасность", "Опыт", "Блог", "Контакты"],
         "tg": "Telegram", "arrow": "&#8599;",
-        "theme": "Переключить светлую и тёмную тему",
+        "theme": "Переключить светлую и тёмную тему", "theme_short": "Светлая / тёмная тема",
         "lang_label": "Язык", "main_nav": "Главное меню", "menu": "Меню",
         "font_preload": ["Manrope-cyrillic.woff2", "Manrope-latin.woff2"],
         "titles": {
@@ -516,17 +521,18 @@ def page(code: str, page_path: str, body: str) -> str:
 <body>
 {sprite}<header class="nav">
   <div class="wrap">
-    <a class="brand" href="{home}"><span class="mark" aria-hidden="true"></span><span>Moustafa Elkoushy</span></a>
+    <a class="brand" href="{home}"><span class="mark" aria-hidden="true"></span><span class="brand-name">Moustafa Elkoushy</span></a>
     <nav class="links" aria-label="{loc['main_nav']}">{nav}</nav>
     <div class="nav-end">
       <nav class="langs" aria-label="{loc['lang_label']}">{switch}</nav>
-      <button class="theme-toggle cta" type="button" aria-label="{loc['theme']}"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button class="theme-toggle cta" type="button" aria-label="{loc['theme']}">{SUN_MOON}</button>
       <a class="cta" href="{chat_url}" target="_blank" rel="noopener noreferrer">{chat_name} <span aria-hidden="true">{loc['arrow']}</span></a>
       <details class="menu">
         <summary class="cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="menu-label">{loc['menu']}</span></summary>
         <div class="menu-panel">
           <nav class="menu-links" aria-label="{loc['main_nav']}">{nav}</nav>
           <nav class="menu-langs" aria-label="{loc['lang_label']}">{menu_langs}</nav>
+          <button class="theme-toggle menu-theme" type="button" aria-label="{loc['theme']}">{SUN_MOON}<span>{loc['theme_short']}</span></button>
         </div>
       </details>
     </div>

@@ -11,8 +11,14 @@
 #hint b{font-weight:600}
 #hint span{display:inline-flex;align-items:center;gap:7px}
 @keyframes hintIn{to{opacity:1}}
-@media (max-width:620px){#hint{font-size:11px;gap:8px;padding:8px 12px;bottom:12px;white-space:normal;justify-content:center;flex-wrap:wrap;max-width:92vw}}
+@media (max-width:620px){#hint{font-size:12px;gap:8px;padding:8px 12px;bottom:auto;top:calc(12px + env(safe-area-inset-top,0px));white-space:normal;justify-content:center;flex-wrap:wrap;max-width:92vw}}
 @media (prefers-reduced-motion:reduce){#hint{animation:none;opacity:1}}
+/* Phones and tablets have no hover or scroll wheel: show tap / pinch there instead. */
+.touch-only,#hint span.touch-only{display:none}
+/* The side list and its "hover a part" note are for a mouse. A phone on its side has no room for the list. */
+@media (hover:none){.hint{display:none}}
+@media (hover:none) and (max-height:500px){.parts{display:none}}
+@media (hover:none){.mouse-only,#hint span.mouse-only{display:none}.touch-only{display:revert}#hint span.touch-only{display:inline-flex}}
 </style>
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
@@ -74,10 +80,10 @@ canvas{display:block;outline:none;touch-action:none}
 h1{margin:0 0 4px;font-size:30px;line-height:1.05;font-weight:800;font-stretch:78%;letter-spacing:-.01em}
 .sub{margin:0 0 18px;color:var(--muted);font-size:14.5px;line-height:1.45}
 .slider-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;font-size:13px;color:var(--muted);font-weight:600}
-input[type=range]{width:100%;accent-color:var(--accent);height:28px;cursor:pointer}
+input[type=range]{width:100%;accent-color:var(--accent);height:44px;cursor:pointer}
 .btns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 button{
-  font:inherit;font-size:14px;font-weight:600;border-radius:8px;padding:9px 14px;cursor:pointer;
+  font:inherit;font-size:14px;font-weight:600;border-radius:8px;padding:9px 14px;min-height:44px;cursor:pointer;
   border:1px solid var(--line);background:transparent;color:var(--ink);
 }
 button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -105,7 +111,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline
   .panel{left:12px;right:12px;width:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));padding:16px}
   h1{font-size:25px}
   .sub{margin-bottom:12px}
-  .tag{font-size:11px}
+  .tag{font-size:12px}
 }
 </style>
 </head>
@@ -116,12 +122,13 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline
 
 <div id="hint" aria-hidden="true">
   <span>&#128073; <b>Drag</b> to turn</span>
-  <span>&#128269; <b>Scroll</b> to zoom</span>
-  <span>&#9755; <b>Hover</b> a part to name it</span>
+  <span class="mouse-only">&#128269; <b>Scroll</b> to zoom</span><span class="touch-only">&#128269; <b>Pinch</b> to zoom</span>
+  <span class="mouse-only">&#9755; <b>Hover</b> a part to name it</span><span class="touch-only">&#9755; <b>Tap</b> a part to name it</span>
 </div>
 <section class="panel" aria-label="Exploded view controls">
   <h1>Inside the drone</h1>
-  <p class="sub"><b>Drag</b> to turn it &middot; <b>scroll</b> to zoom &middot; <b>hover a part</b> to see what it is. Use the slider to take the whole drone apart.</p>
+  <p class="sub mouse-only"><b>Drag</b> to turn it &middot; <b>scroll</b> to zoom &middot; <b>hover a part</b> to see what it is. Use the slider to take the whole drone apart.</p>
+  <p class="sub touch-only"><b>Drag</b> to turn it &middot; <b>pinch</b> to zoom &middot; <b>tap a part</b> to see what it is. Use the slider to take the whole drone apart.</p>
   <div class="slider-row">
     <label for="explode">Assembled</label>
     <input id="explode" type="range" min="0" max="1" step="0.001" value="0" aria-label="Exploded view amount">
@@ -142,6 +149,6 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline
 
 <script src="../../assets/vendor/three.min.js" defer></script>
 <script src="../../assets/vendor/OrbitControls.js" defer></script>
-<script src="../../assets/drone-viewer.js" defer></script>
+<script src="../../assets/drone-viewer.js?v=2" defer></script>
 </body>
 </html>

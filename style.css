@@ -80,6 +80,8 @@ p { margin: 0 0 var(--space-4); max-width: 62ch; }
 
 .muted, .section-lede { color: var(--ink-muted); }
 .section-lede { font-size: 19px; max-width: 52ch; margin-top: calc(var(--space-6) * -1); margin-bottom: var(--space-8); }
+/* On a phone the heading wraps to two lines and sits right on the lede; give it a little air. */
+@media (max-width: 700px) { .section-lede { margin-top: calc(var(--space-6) * -1 + var(--space-3)); } }
 .acc { color: var(--accent-violet-text); }
 
 /* Rule 4: eyebrows are the label style in ink-muted. */
@@ -89,7 +91,7 @@ p { margin: 0 0 var(--space-4); max-width: 62ch; }
 /* No backdrop blur: it re-blurs the page under the bar on every scroll frame. */
 .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--surface-100) 96%, transparent); border-bottom: 1px solid var(--line); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding-top: var(--space-4); padding-bottom: var(--space-4); }
-.brand { display: inline-flex; align-items: center; gap: 10px; font: 600 16px/1 var(--sans); color: var(--ink); text-decoration: none; white-space: nowrap; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font: 600 16px/1 var(--sans); color: var(--ink); text-decoration: none; white-space: nowrap; min-height: 44px; }
 .mark { width: 22px; height: 22px; background: var(--accent-violet); clip-path: polygon(50% 0, 100% 100%, 0 100%); flex: none; }
 .links { display: flex; gap: 28px; font-size: 15px; }
 .links a { color: var(--ink-muted); text-decoration: none; padding-bottom: 6px; }
@@ -107,8 +109,9 @@ p { margin: 0 0 var(--space-4); max-width: 62ch; }
 .menu > summary::-webkit-details-marker { display: none; }
 .menu > summary svg { width: 18px; height: 18px; flex: none; }
 .menu[open] > summary { border-color: var(--accent-violet); }
-/* On a phone the pill shows only the icon; the word stays for screen readers. */
-@media (max-width: 559px) {
+/* On a phone the pill shows only the icon; the word stays for screen readers.
+   639, not 559: with the languages in the bar the word no longer fits there. */
+@media (max-width: 639px) {
   .menu > summary { width: 44px; padding: 0; justify-content: center; }
   .menu-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
@@ -126,8 +129,19 @@ p { margin: 0 0 var(--space-4); max-width: 62ch; }
 .lang-link { min-width: 44px; min-height: 44px; display: grid; place-items: center; border-radius: var(--radius-pill); text-decoration: none; color: var(--ink-muted); font: 500 12px/1 var(--mono); letter-spacing: .06em; }
 .lang-link:hover { color: var(--ink); }
 .lang-link.is-on { background: var(--surface-300); color: var(--ink); }
-/* Below 768px the languages live in the menu only. */
-@media (max-width: 767px) { .langs { display: none; } }
+/* Phones and small tablets: the languages stay in the bar, one tap away, and
+   the theme switch moves into the menu to make room. On narrow phones the name
+   stacks on two lines; below 360px only the mark is left. */
+.menu .menu-theme { display: none; }
+/* The bar shows the languages at every width now, so the menu doesn't repeat them. */
+.menu-langs { display: none; }
+@media (max-width: 767px) {
+  .nav-end > .theme-toggle { display: none; }
+  .menu .menu-theme { display: inline-flex; align-items: center; gap: var(--space-2); width: auto; height: auto; min-height: 44px; margin-top: var(--space-3); padding: 0 18px; border: 1px solid var(--line); border-radius: var(--radius-pill); background: transparent; color: var(--ink-muted); font: 500 15px/1 var(--sans); cursor: pointer; }
+  .lang-link { min-width: 40px; }
+}
+@media (max-width: 559px) { .brand-name { width: min-content; white-space: normal; font-size: 14px; line-height: 1.15; } }
+@media (max-width: 359px) { .brand { min-width: 44px; } .brand-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }
 .theme-toggle { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; color: var(--ink-muted); }
 .theme-toggle svg { width: 18px; height: 18px; }
 .theme-toggle:hover { color: var(--ink); }
@@ -378,6 +392,8 @@ figure.bleed { max-width: none; }
 footer { padding: var(--space-8) 0 var(--space-12); border-top: 1px solid var(--line); }
 footer .wrap { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; color: var(--ink-muted); font-size: 14px; }
 footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; }
+/* "← All posts" and the like: a link on its own line, so a full-size tap target. */
+.back a { display: inline-block; padding-block: 12px; }
 
 /* --- motion ------------------------------------------------------------ */
 /* Rule 5: motion a person triggers lasts 200-400ms; the ambient ring and sway
