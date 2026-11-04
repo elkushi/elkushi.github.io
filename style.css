@@ -330,6 +330,19 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline
 .case-hero h1 { font-size: 52px; line-height: 1.08; font-weight: 600; margin: var(--space-4) 0; }
 @media (max-width: 700px) { .case-hero h1 { font-size: 34px; } }
 .case-hero .lead { max-width: 58ch; }
+/* List pages (all work, blog): a shorter intro so the first cards show without scrolling. */
+.list-hero { padding: var(--space-8) 0 var(--space-6); }
+.list-hero h1 { margin: var(--space-3) 0; }
+.list-hero .lead { margin-bottom: 0; }
+.list-hero + section { padding-top: var(--space-6); border-top: 0; }
+/* Phones: the filters sit on one swipeable row, so the first project shows on the first screen. */
+@media (max-width: 700px) {
+  .list-hero { padding: var(--space-6) 0 var(--space-4); }
+  .list-hero + section { padding-top: var(--space-4); }
+  .js .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--space-4)); padding-inline: var(--space-4); margin-bottom: var(--space-4); }
+  .filters::-webkit-scrollbar { display: none; }
+  .filters button { flex: none; }
+}
 .meta { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; gap: var(--space-2); color: var(--ink-muted); font-size: 15px; }
 @media (min-width: 700px) { .meta { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4); } }
 .meta b { color: var(--ink); font-weight: 600; }

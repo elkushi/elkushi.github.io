@@ -401,7 +401,6 @@ def page(code: str, page_path: str, body: str) -> str:
     # links and assets start from the site root instead of counting ../.
     up = "/" if page_path == "404.html" else "../" * rel.count("/")
     dir_attr = ' dir="rtl"' if loc["rtl"] else ""
-    current = ' aria-current="page"' if page_path == "index.html" else ""
     # This language's own home page. "{up}index.html" alone is the English one,
     # which sent Arabic and Russian readers to English from every nav link.
     home = f"{up}{out_path(code, 'index.html')}"
@@ -487,12 +486,16 @@ def page(code: str, page_path: str, body: str) -> str:
         f'href="{target(c)}">{LOCALES[c]["name"]}</a>'
         for c in LOCALES)
 
-    # Every nav item is a section of the home page, except the blog, which is
-    # its own page and is marked current while you are reading it.
+    # Every nav item is a section of the home page, except Work and the blog,
+    # which are their own pages and are marked current while you are on them.
+    # Work goes straight to the full project list: test users who landed on the
+    # home section first did not find the rest (2026-11-04).
     on_blog = ' aria-current="page"' if page_path.startswith("blog/") else ""
+    on_work = ' aria-current="page"' if page_path.startswith("work/") else ""
     nav = "".join(
         f'<a href="{up}{out_path(code, "blog/index.html")}"{on_blog}>{label}</a>' if anchor == "blog" else
-        f'<a href="{home}#{anchor}"{current if anchor == "work" else ""}>{label}</a>'
+        f'<a href="{up}{out_path(code, "work/index.html")}"{on_work}>{label}</a>' if anchor == "work" else
+        f'<a href="{home}#{anchor}">{label}</a>'
         for anchor, label in zip(["work", "services", "skills", "security", "about", "blog", "contact"], loc["nav"]))
 
     return f"""<!doctype html>
