@@ -270,4 +270,8 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/blog/php-october-2026-django-cms.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/php-october-2026-django-cms.html"/>
   </url>
+  <url>
+    <loc>https://elkushi.github.io/ru/clinics/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/clinics/"/>
+  </url>
 </urlset>

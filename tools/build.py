@@ -30,6 +30,13 @@ TG_URL = f"https://t.me/{TELEGRAM}" if TELEGRAM else ""
 WHATSAPP = "79932802066"
 WA_URL = f"https://wa.me/{WHATSAPP}"
 WA_SHOWN = "+7 993 280-20-66"
+# A phone number for the Russian clinics page (ru/clinics/) only: clinic owners
+# are often older and prefer a normal call to a chat. Moustafa asked for a call
+# button there on 2026-11-04, but has not yet said which number to show, so it
+# stays empty and the button is left out. Set both to publish it, e.g.
+# PHONE = "+79932802066" and PHONE_SHOWN = "+7 993 280-20-66". Fragments write @@CALL@@.
+PHONE = ""
+PHONE_SHOWN = ""
 
 # One chat app is the call to action: hero, nav, services and contact all open
 # a chat, with the username or number written out so it works even when the
@@ -299,6 +306,8 @@ LOCALES = {
                                             "Что проверяет мой бесплатный аудит SEO, AEO и GEO, что это значит для бизнеса и 22 исправления, которые можно сделать на этой неделе."),
             "blog/ai-agents-python.html": ("ИИ-агенты: что это такое, как их делать и почему на Python · Мустафа Элькуши",
                                            "Что такое ИИ-агент и чем он отличается от чат-бота, работающий агент примерно в 40 строк на Python и восемь правил, которые не дают ему пойти не туда."),
+            "clinics/index.html": ("Сайт, онлайн-запись и бот для частной клиники · Мустафа Элькуши",
+                                   "Решение для частных клиник под ключ: сайт под телефон, онлайн-запись, бот в Telegram и MAX с напоминаниями, отзывы, аналитика и дизайн. Бесплатный концепт для вашей клиники."),
             "blog/php-october-2026-django-cms.html": ("PHP в октябре 2026 года: что произошло и когда Django CMS — более безопасный выбор · Мустафа Элькуши",
                                                       "Срочное обновление для всех PHP-сайтов, атакованный плагин WordPress и бэкдор, который восстанавливает себя: что сделать на этой неделе и когда стоит переехать на Django CMS."),
         },
@@ -308,7 +317,10 @@ LOCALES = {
 BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agents-python", "php-october-2026-django-cms"]
 
 PAGE_PATHS = (["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
-              + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG])
+              + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG]
+              # Russian only: the offer for Moscow clinics. Pages without a
+              # fragment in a language are skipped for that language.
+              + ["clinics/index.html"])
 
 EXTERNAL = re.compile(r'<a href="(https?://[^"]+)"(?![^>]*target=)')
 
@@ -408,6 +420,9 @@ def page(code: str, page_path: str, body: str) -> str:
     # Service illustrations live in tools/art/ and are inlined, so their colours
     # come from the page's theme tokens.
     body = re.sub(r"@@ART:([a-z-]+)@@", lambda m: (SITE / "tools" / "art" / f"{m.group(1)}.svg").read_text().strip(), body)
+    call = (f'<a class="btn btn-secondary btn-lg" href="tel:{PHONE}">Позвонить: {PHONE_SHOWN}</a>'
+            if PHONE and PHONE_SHOWN else "")
+    body = body.replace("@@CALL@@", call)
     body = body.replace("@@TG@@", TG_URL).replace("@@WA@@", WA_URL).replace("@@WA_SHOWN@@", WA_SHOWN)
     body = external_new_tab(body)
     body = responsive_images(body)
@@ -466,7 +481,9 @@ def page(code: str, page_path: str, body: str) -> str:
     alts = f'<link rel="canonical" href="{canonical(rel)}">\n' + "\n".join(
         f'<link rel="alternate" hreflang="{c}" href="{canonical(out_path(c, page_path))}">'
         for c in have)
-    alts += f'\n<link rel="alternate" hreflang="x-default" href="{canonical(page_path)}">'
+    # x-default is the English page; a page with no English version (the
+    # Russian-only clinics page) points it at the first language it has.
+    alts += f'\n<link rel="alternate" hreflang="x-default" href="{canonical(out_path(have[0] if have and "en" not in have else "en", page_path))}">'
     if page_path == "404.html":
         alts = '<meta name="robots" content="noindex">'
 
