@@ -224,6 +224,8 @@ LOCALES = {
                                             "What my free SEO, AEO and GEO audit checks, what it means for a business, and 22 fixes you can make this week."),
             "blog/ai-agents-python.html": ("AI agents: what they are, how to build one, and why Python · Moustafa Elkoushy",
                                            "What an AI agent is, a working agent in about 40 lines of Python, and the rules that keep it from going wrong."),
+            "clinics/index.html": ("Website, online booking and a clinic bot for private clinics · Moustafa Elkoushy",
+                                   "A done-for-you package for private clinics: a phone-first website, online booking, a messenger bot with reminders, reviews, analytics and design. A free concept for your clinic."),
             "blog/php-october-2026-django-cms.html": ("PHP in October 2026: what happened, and when a Django CMS is the safer choice · Moustafa Elkoushy",
                                                       "php2shell, an exploited WordPress plugin and a self-rebuilding backdoor: what to do this week if your site runs on PHP, and when moving to Django CMS is worth it."),
             "404.html": ("Page not found · Moustafa Elkoushy",
@@ -266,6 +268,8 @@ LOCALES = {
                                             "ما يفحصه تطبيقي المجاني لـ SEO وAEO وGEO، وما يعنيه ذلك للشركة، و22 إصلاحًا تستطيع تنفيذها هذا الأسبوع."),
             "blog/ai-agents-python.html": ("وكيل الذكاء الاصطناعي: ما هو، وكيف تبنيه، ولماذا Python · مصطفى القوشي",
                                            "ما هو وكيل الذكاء الاصطناعي بكلمات بسيطة، ووكيل يعمل في نحو 40 سطرًا من Python، وثماني قواعد تحميه من الخطأ."),
+            "clinics/index.html": ("موقع وحجز إلكتروني وروبوت محادثة للعيادات الخاصة · مصطفى القوشي",
+                                   "حل متكامل للعيادات الخاصة: موقع مصمَّم للهاتف، وحجز إلكتروني، وروبوت على WhatsApp أو Telegram مع تذكير بالمواعيد، وتقييمات، وتحليلات، وتصميم. تصوّر مجاني لعيادتك."),
             "blog/php-october-2026-django-cms.html": ("PHP في أكتوبر 2026: ماذا حدث، ومتى يكون Django CMS الخيار الأكثر أمانًا · مصطفى القوشي",
                                                       "ثغرات PHP في أكتوبر 2026، وإضافة WordPress سمحت بتشغيل كود دون تسجيل دخول، وباب خلفي يعيد بناء نفسه. ما تفعله هذا الأسبوع، ومتى يستحق الانتقال إلى Django CMS."),
         },
@@ -318,8 +322,9 @@ BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agen
 
 PAGE_PATHS = (["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
               + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG]
-              # Russian only: the offer for Moscow clinics. Pages without a
-              # fragment in a language are skipped for that language.
+              # The clinics offer: Russian first (Moscow clinics), English and
+              # Arabic since 2026-11-07. Pages without a fragment in a language
+              # are skipped for that language.
               + ["clinics/index.html"])
 
 EXTERNAL = re.compile(r'<a href="(https?://[^"]+)"(?![^>]*target=)')

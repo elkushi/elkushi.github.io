@@ -91,6 +91,12 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/php-october-2026-django-cms.html"/>
   </url>
   <url>
+    <loc>https://elkushi.github.io/clinics/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/clinics/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/clinics/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/clinics/"/>
+  </url>
+  <url>
     <loc>https://elkushi.github.io/ar/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/"/>
@@ -179,6 +185,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/blog/php-october-2026-django-cms.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/blog/php-october-2026-django-cms.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/php-october-2026-django-cms.html"/>
+  </url>
+  <url>
+    <loc>https://elkushi.github.io/ar/clinics/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/clinics/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/clinics/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/clinics/"/>
   </url>
   <url>
     <loc>https://elkushi.github.io/ru/</loc>
@@ -272,6 +284,8 @@
   </url>
   <url>
     <loc>https://elkushi.github.io/ru/clinics/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/clinics/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/clinics/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/clinics/"/>
   </url>
 </urlset>
