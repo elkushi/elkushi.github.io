@@ -1,34 +1,131 @@
 <div class="wrap">
-  <header class="case-hero">
-    <p class="eyebrow">For private clinics</p>
-    <h1>A website, online booking and a clinic bot&nbsp;— done for you</h1>
-    <p class="lead">Patients look for a clinic on their phone. I make it easy for them to book from that phone, get a reminder before the visit and, afterwards, a request to leave a review. You don&rsquo;t set anything up: I do the work, you approve it.</p>
-    <div class="actions">
-      <a class="btn btn-primary btn-lg" href="@@TG@@?text=Hello%20Moustafa%21%20I%27m%20writing%20from%20a%20clinic.%20We%27d%20like%20to%20talk%20about%20a%20website%20and%20online%20booking.">Message me on Telegram: @Elkushi99</a>
+  <header class="case-hero clinic-hero">
+    <div class="clinic-hero-text">
+      <p class="eyebrow">For private dental and medical clinics</p>
+      <h1>Patients book from their phone, show up on time and leave reviews</h1>
+      <p class="lead">Online booking at any hour, a messenger bot with reminders, and reviews after each visit. You can start on your current website, without a new one. I do the work, you approve it.</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="@@TG@@?text=Hello%20Moustafa%21%20Please%20send%20a%20free%20concept%20for%20our%20clinic.%20Our%20website%3A%20">Get a free concept</a>
+        <a class="btn btn-secondary btn-lg" href="#how">How it works</a>
+      </div>
+      <p class="clinic-tg">Message me on Telegram: <a href="@@TG@@">@Elkushi99</a></p>
     </div>
+    <figure class="clinic-devices">
+      <img class="laptop" src="assets/clinic-demo-laptop-en.webp" width="1600" height="1008" alt="Example clinic website on a laptop: a Book online button and a Next available times card with free slots for the week.">
+      <img class="phone" src="assets/clinic-demo-phone-en.webp" width="420" height="853" alt="The same site on a phone: headline, Book online and Book on Telegram buttons.">
+      <figcaption>Example: how your clinic&rsquo;s site could look</figcaption>
+    </figure>
   </header>
 
   <article>
     <section class="reveal">
-      <h2>What the clinic gets</h2>
-      <div class="offers">
-        <div class="offer">
-          <h3>A new site built for phones</h3>
-          <p>Services and prices, doctors, reviews, licence details and every required document. It loads fast and reads without zooming. Your front desk updates prices and offers without calling a developer.</p>
+      <h2>Sound familiar?</h2>
+      <p>Four reasons a clinic loses patients even when its doctors are good. One part of the solution fixes each of them.</p>
+      <div class="pains">
+        <div class="pain">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 2l6 6M22 2l-6 6"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <h3>A patient couldn&rsquo;t get through and booked somewhere else</h3>
+          <p><strong>Fix:</strong> online booking on the site and in the bot works around the clock. After a missed call the patient gets a message at once, and the front desk gets a reminder to call back.</p>
         </div>
-        <div class="offer">
-          <h3>Online booking</h3>
-          <p>The patient picks a free time on the site or in the bot. The front desk confirms it in one click. Moving or cancelling a visit takes a couple of taps, no phone calls.</p>
+        <div class="pain">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M10 14l4 4M14 14l-4 4"/></svg>
+          <h3>Patients forget their appointment and the chair sits empty</h3>
+          <p><strong>Fix:</strong> the bot reminds them a day and two hours before. The patient confirms or moves the visit with one button, so a freed slot can go to someone else.</p>
         </div>
-        <div class="offer">
-          <h3>A clinic bot in the messenger patients use</h3>
-          <p>Telegram and MAX in Russia, WhatsApp or Telegram elsewhere. It answers common questions (address, hours, how to prepare for a visit) and sends reminders a day and two hours before the appointment. The front desk sees each new request right away.</p>
+        <div class="pain">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>
+          <h3>On a phone, prices and booking are hard to find</h3>
+          <p><strong>Fix:</strong> the new site is built for phones first. Services and prices, doctors, licence and booking are in plain sight, no zooming or searching.</p>
         </div>
-        <div class="offer">
-          <h3>Reviews after the visit</h3>
-          <p>After the appointment the patient gets a link to leave a review on Google Maps, Yandex Maps or 2GIS. More fresh reviews mean more trust from new patients.</p>
+        <div class="pain">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <h3>Happy patients leave without a word</h3>
+          <p><strong>Fix:</strong> after the visit the bot asks for a review on Google Maps, Yandex Maps or 2GIS. Fresh reviews help new patients choose you.</p>
         </div>
       </div>
+    </section>
+
+    <section id="how" class="reveal">
+      <h2>What it looks like</h2>
+      <p>One patient&rsquo;s path, from booking to review. The front desk doesn&rsquo;t chase calls or messages in different apps: everything arrives in one chat.</p>
+      <div class="phones">
+        <figure>
+          <img src="assets/clinic-bot-booking-en.webp" width="520" height="1056" alt="Chat with the clinic bot: the patient asks to book a cleaning, the bot offers three times as buttons, she picks Tuesday 16:30 and gets a confirmation." loading="lazy">
+          <figcaption><b>1</b><span><strong>Booking in two taps.</strong> The patient picks a time with a button, on the site or in the bot.</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/clinic-bot-admin-en.webp" width="520" height="1056" alt="The front desk chat: a new request with name, phone, service and time, and Confirm and Reschedule buttons." loading="lazy">
+          <figcaption><b>2</b><span><strong>The front desk confirms</strong> the request in one tap.</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/clinic-bot-reminder-en.webp" width="520" height="1056" alt="Reminders from the bot: the day before and two hours before, with I'll be there and Reschedule buttons." loading="lazy">
+          <figcaption><b>3</b><span><strong>Reminders</strong> a day and two hours before. The patient answers with a button.</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/clinic-bot-review-en.webp" width="520" height="1056" alt="Message after the visit: a thank-you and buttons for a review on Google Maps or Yandex Maps, or a message to the front desk." loading="lazy">
+          <figcaption><b>4</b><span><strong>A review request after the visit,</strong> with a link to the map listing.</span></figcaption>
+        </figure>
+      </div>
+      <p class="muted clinic-caption">An illustration of how the bot works. Texts, buttons and reminder times are set up for your clinic. It runs in the messenger your patients use: Telegram and MAX in Russia, WhatsApp or Telegram elsewhere. Patients without it book on the site or by phone, as before.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Two steps. You can start without a new site</h2>
+      <div class="steps2">
+        <div class="offer">
+          <p class="eyebrow">Step 1 · about two weeks</p>
+          <h3>Booking, bot and reviews on your current site</h3>
+          <ul class="checks">
+            <li><strong>Online booking.</strong> The patient picks a free time on the site or in the bot, the front desk confirms in one click.</li>
+            <li><strong>A messenger bot.</strong> Answers common questions: address, hours, how to prepare for a visit. SMS as a backup.</li>
+            <li><strong>Reminders</strong> a day and two hours before, with one-button rescheduling.</li>
+            <li><strong>Reviews after the visit:</strong> a link to Google Maps, Yandex Maps or 2GIS.</li>
+            <li><strong>Missed-call reply:</strong> the patient gets a message with a booking link at once.</li>
+          </ul>
+        </div>
+        <div class="offer">
+          <p class="eyebrow">Step 2 · 3–4 weeks</p>
+          <h3>A new site or a refreshed home page</h3>
+          <ul class="checks">
+            <li><strong>Phone first.</strong> The first screen says what matters: what you treat, where you are, your rating.</li>
+            <li><strong>Booking in one tap:</strong> the Book button is always within reach.</li>
+            <li><strong>Prices, doctors and reviews</strong> in plain sight, plus licence details and the required documents.</li>
+            <li><strong>In the style of your logo.</strong> The front desk updates prices and offers without calling a developer.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>What it can bring the clinic</h2>
+      <p>An example, not a promise. We work out the real numbers together from your data: how many requests, calls and no-shows you have each month, and your prices.</p>
+      <div class="calc">
+        <div class="calc-row"><span><strong>Bookings in the evening and at weekends.</strong> Extra bookings while the clinic is closed and nobody answers the phone</span><span>+8 visits</span></div>
+        <div class="calc-row"><span><strong>Fewer no-shows.</strong> Appointments saved by reminders</span><span>+4 visits</span></div>
+        <div class="calc-row total"><span>A month, example</span><span><b>12 visits × your average bill</b></span></div>
+      </div>
+      <p class="muted clinic-caption">Reviews are not counted here, although they are what helps new patients choose you.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>How we work</h2>
+      <div class="facts">
+        <div class="fact"><b>1</b><span><strong>A free concept.</strong> I look at your current site and show how a new home page could look: two options to choose from, in a PDF.</span></div>
+        <div class="fact"><b>2</b><span><strong>A 15-minute call.</strong> We talk about what matters to your clinic and fix the scope and price before work starts.</span></div>
+        <div class="fact"><b>3</b><span><strong>Launch.</strong> Booking and bot in about two weeks, a new site in 3&ndash;4 weeks. All on your own data: services, prices, doctors. You approve the design and the texts.</span></div>
+        <div class="fact"><b>4</b><span><strong>Support every month.</strong> Hosting, updates, small edits and a short report: how many requests and new reviews came in.</span></div>
+      </div>
+      <div class="note"><b>Special terms for the first five clinics.</b> In return I ask for a review of the work and permission to show the site in my portfolio. The price is fixed in the contract before work starts, with no extra charges.</div>
+    </section>
+
+    <section class="reveal">
+      <h2>Built for medical rules</h2>
+      <ul class="checks">
+        <li>Patient data is stored where local law requires it (in Russia, on servers in Russia under 152-FZ).</li>
+        <li>Separate consents for personal data processing and a privacy policy.</li>
+        <li>Licence details and a contraindications notice on the site.</li>
+        <li>The bot never collects diagnoses or health data: only bookings and reminders.</li>
+      </ul>
     </section>
 
     <section class="reveal">
@@ -75,26 +172,16 @@
     </section>
 
     <section class="reveal">
-      <h2>How we work</h2>
-      <div class="facts">
-        <div class="fact"><b>1</b><span><strong>A free concept.</strong> I look at your current site and show how a new home page could look: two options to choose from, in a PDF.</span></div>
-        <div class="fact"><b>2</b><span><strong>A 15-minute call.</strong> We talk about what matters to your clinic and fix the scope and price before work starts.</span></div>
-        <div class="fact"><b>3</b><span><strong>Launch in 3&ndash;4 weeks.</strong> Site, booking and bot on your own data: services, prices, doctors. You approve the design and the texts.</span></div>
-        <div class="fact"><b>4</b><span><strong>Support every month.</strong> Hosting, updates, small edits and a short report: how many requests and new reviews came in.</span></div>
+      <h2>Who does the work</h2>
+      <div class="clinic-who">
+        <img src="assets/ritorica-home.webp" width="1200" height="750" alt="The ritorica.com home page: a business messaging platform with a Request Demo button." loading="lazy">
+        <div>
+          <p><strong>Moustafa Elkoushy</strong>, web developer and automation specialist, Moscow.</p>
+          <p>I designed, built and run <a href="https://www.ritorica.com">ritorica.com</a> on my own: design, code, texts and SEO. For clinics I do the same, set up around patient bookings.</p>
+          <p><a href="../index.html">More of my work <span aria-hidden="true">&rarr;</span></a></p>
+        </div>
       </div>
     </section>
-
-    <section class="reveal">
-      <h2>Built for medical rules</h2>
-      <ul class="checks">
-        <li>Patient data is stored where local law requires it (in Russia, on servers in Russia under 152-FZ).</li>
-        <li>Separate consents for personal data processing and a privacy policy.</li>
-        <li>Licence details and a contraindications notice on the site.</li>
-        <li>The bot never collects diagnoses or health data: only bookings and reminders.</li>
-      </ul>
-    </section>
-
-    <div class="note"><b>Special terms for the first five clinics.</b> In return I ask for a review of the work and permission to show the site in my portfolio. The price is fixed in the contract before work starts, with no extra charges.</div>
 
     <section class="reveal">
       <h2>Common questions</h2>
@@ -114,10 +201,6 @@
         <details class="faq-item">
           <summary>What do you need from the clinic?</summary>
           <div class="faq-a"><p>A list of services with prices, information about the doctors and photos if you have them. The clinic approves all texts about medical services. I do everything else.</p></div>
-        </details>
-        <details class="faq-item">
-          <summary>Who are you?</summary>
-          <div class="faq-a"><p>Moustafa Elkoushy, web developer and automation specialist based in Moscow. I designed, built and run <a href="https://www.ritorica.com">ritorica.com</a> on my own. More of my work is on the <a href="../index.html">home page</a>.</p></div>
         </details>
       </div>
     </section>

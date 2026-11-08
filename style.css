@@ -771,3 +771,49 @@ article pre code { background: none; border: 0; padding: 0; font: 13.5px/1.65 va
 
 /* Keep a phone number on one line, left to right, inside Arabic buttons (2026-11-07) */
 .btn bdi { white-space: nowrap; direction: ltr; unicode-bidi: isolate; }
+
+/* --- clinics page (ru/clinics): hero with devices, pains, bot screens, two steps, example calc (2026-11-09) --- */
+.clinic-hero { display: grid; gap: var(--space-8); align-items: center; }
+@media (min-width: 980px) { .clinic-hero { grid-template-columns: 1fr 1.05fr; gap: var(--space-12); } }
+.clinic-hero h1 { font-size: 46px; }
+@media (max-width: 700px) { .clinic-hero h1 { font-size: 32px; } }
+.clinic-hero .lead { max-width: 48ch; }
+.clinic-tg { color: var(--ink-muted); font-size: 15px; margin: 0; }
+.clinic-devices { position: relative; margin: 0; padding-inline-end: 6%; }
+.clinic-devices .laptop { width: 100%; }
+.clinic-devices .phone { position: absolute; inset-inline-end: 0; bottom: 22px; width: 25%; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .45)); }
+.clinic-devices figcaption, .clinic-caption { color: var(--ink-muted); font-size: 14px; margin-top: var(--space-3); }
+.clinic-devices figcaption { padding-inline-end: 30%; }
+.pains { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); margin-top: var(--space-6); }
+.pain { background: var(--surface-200); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6); }
+.pain svg { width: 44px; height: 44px; padding: 10px; border-radius: var(--radius-md); background: var(--surface-300); fill: none; stroke: var(--accent-violet-text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-bottom: var(--space-4); }
+.pain h3 { font-size: 19px; }
+.pain p { color: var(--ink-muted); font-size: 15px; margin: 0; }
+.pain p strong { color: var(--ink); }
+.phones { display: grid; gap: var(--space-6); grid-template-columns: repeat(4, 1fr); margin: var(--space-8) 0 var(--space-4); }
+.phones figure { margin: 0; }
+.phones img { width: 100%; max-width: 260px; margin: 0 auto var(--space-4); }
+.phones figcaption { display: flex; gap: var(--space-3); align-items: flex-start; font-size: 15px; color: var(--ink-muted); }
+.phones figcaption b { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: var(--radius-pill); background: var(--surface-300); border: 1px solid var(--line); color: var(--ink); font-size: 14px; }
+.phones figcaption strong { color: var(--ink); }
+@media (max-width: 979px) { .phones { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) {
+  .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--space-4); padding-bottom: var(--space-3); margin-inline: calc(-1 * var(--space-4)); padding-inline: var(--space-4); }
+  .phones figure { flex: 0 0 72%; scroll-snap-align: center; }
+}
+.steps2 { display: grid; gap: var(--space-6); grid-template-columns: 1fr; }
+@media (min-width: 860px) { .steps2 { grid-template-columns: 1fr 1fr; } }
+.steps2 .offer:hover { transform: none; }
+.steps2 .eyebrow { margin-bottom: var(--space-3); }
+.steps2 .checks li { color: var(--ink-muted); font-size: 15px; margin-bottom: var(--space-2); }
+.steps2 .checks strong { color: var(--ink); }
+.calc { border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface-200); overflow: hidden; margin: var(--space-6) 0 var(--space-3); max-width: 860px; }
+.calc-row { display: flex; justify-content: space-between; gap: var(--space-6); padding: var(--space-4) var(--space-6); border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 15px; }
+.calc-row:first-child { border-top: 0; }
+.calc-row span:last-child { flex: none; text-align: end; white-space: nowrap; }
+.calc-row strong, .calc-row b { color: var(--ink); }
+.calc-row.total { background: var(--surface-300); font-size: 17px; color: var(--ink); font-weight: 600; }
+@media (max-width: 560px) { .calc-row { flex-direction: column; gap: var(--space-1); } .calc-row span:last-child { text-align: start; } }
+.clinic-who { display: grid; gap: var(--space-8); align-items: center; }
+@media (min-width: 860px) { .clinic-who { grid-template-columns: 1.1fr 1fr; } }
+.clinic-who img { border-radius: var(--radius-lg); border: 1px solid var(--line); box-shadow: var(--shadow-card); }
