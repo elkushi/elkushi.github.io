@@ -27,7 +27,8 @@ for page in PAGES:
     for ref in re.findall(r'(?:href|src|poster|srcset)="([^"]+)"', html):
         for part in ref.split(","):
             url = part.strip().split(" ")[0].split("#")[0].split("?")[0]
-            if not url or re.match(r"^(https?:|mailto:|data:)", url):
+            # tel: is a real scheme, not a path (the clinic demo pages dial the clinic).
+            if not url or re.match(r"^(https?:|mailto:|tel:|data:)", url):
                 continue
             base = SITE if url.startswith("/") else page.parent   # root-relative, as on 404.html
             if not (base / url.lstrip("/")).resolve().exists():
