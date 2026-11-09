@@ -24,8 +24,11 @@ for page in PAGES:
     rel = page.relative_to(SITE)
     if "Content-Security-Policy" not in html:
         errors.append(f"{rel}: no CSP")
-    for ref in re.findall(r'(?:href|src|poster|srcset)="([^"]+)"', html):
-        for part in ref.split(","):
+    # Only srcset is a comma-separated list. Splitting an ordinary href on commas tears apart any
+    # URL that legitimately contains one — a Google Fonts request like
+    # family=Fraunces:opsz,wght@9..144,700 became three "missing" files and blocked a publish.
+    for attr, ref in re.findall(r'(href|src|poster|srcset)="([^"]+)"', html):
+        for part in (ref.split(",") if attr == "srcset" else [ref]):
             url = part.strip().split(" ")[0].split("#")[0].split("?")[0]
             # tel: is a real scheme, not a path (the clinic demo pages dial the clinic).
             if not url or re.match(r"^(https?:|mailto:|tel:|data:)", url):

@@ -226,6 +226,8 @@ LOCALES = {
                                            "What an AI agent is, a working agent in about 40 lines of Python, and the rules that keep it from going wrong."),
             "clinics/index.html": ("Website, online booking and a clinic bot for private clinics · Moustafa Elkoushy",
                                    "A done-for-you package for private clinics: a phone-first website, online booking, a messenger bot with reminders, reviews, analytics and design. A free concept for your clinic."),
+            "blog/maps-ranking-google-yandex.html": ("Get higher on Google Maps and Yandex Maps: what decides the order, and the photos that help · Moustafa Elkoushy",
+                                                     "What Google and Yandex say decides the order on the map, the photos a card needs, honest reviews, and a 15-minute check, with examples from about 40 Moscow clinics."),
             "blog/php-october-2026-django-cms.html": ("PHP in October 2026: what happened, and when a Django CMS is the safer choice · Moustafa Elkoushy",
                                                       "php2shell, an exploited WordPress plugin and a self-rebuilding backdoor: what to do this week if your site runs on PHP, and when moving to Django CMS is worth it."),
             "404.html": ("Page not found · Moustafa Elkoushy",
@@ -270,6 +272,8 @@ LOCALES = {
                                            "ما هو وكيل الذكاء الاصطناعي بكلمات بسيطة، ووكيل يعمل في نحو 40 سطرًا من Python، وثماني قواعد تحميه من الخطأ."),
             "clinics/index.html": ("موقع وحجز إلكتروني وروبوت محادثة للعيادات الخاصة · مصطفى القوشي",
                                    "حل متكامل للعيادات الخاصة: موقع مصمَّم للهاتف، وحجز إلكتروني، وروبوت على WhatsApp أو Telegram مع تذكير بالمواعيد، وتقييمات، وتحليلات، وتصميم. تصوّر مجاني لعيادتك."),
+            "blog/maps-ranking-google-yandex.html": ("كيف ترتفع في خرائط Google وخرائط Yandex: ما الذي يحدّد الترتيب، وأي صور تساعد · مصطفى القوشي",
+                                                     "ما تقوله Google وYandex عن ترتيب النتائج على الخريطة، والصور التي تحتاجها البطاقة، والمراجعات النزيهة، وفحص في 15 دقيقة، مع أمثلة من نحو 40 عيادة في موسكو."),
             "blog/php-october-2026-django-cms.html": ("PHP في أكتوبر 2026: ماذا حدث، ومتى يكون Django CMS الخيار الأكثر أمانًا · مصطفى القوشي",
                                                       "ثغرات PHP في أكتوبر 2026، وإضافة WordPress سمحت بتشغيل كود دون تسجيل دخول، وباب خلفي يعيد بناء نفسه. ما تفعله هذا الأسبوع، ومتى يستحق الانتقال إلى Django CMS."),
         },
@@ -312,13 +316,16 @@ LOCALES = {
                                            "Что такое ИИ-агент и чем он отличается от чат-бота, работающий агент примерно в 40 строк на Python и восемь правил, которые не дают ему пойти не туда."),
             "clinics/index.html": ("Сайт, онлайн-запись и бот для частной клиники · Мустафа Элькуши",
                                    "Решение для частных клиник под ключ: сайт под телефон, онлайн-запись, бот в Telegram и MAX с напоминаниями, отзывы, аналитика и дизайн. Бесплатный концепт для вашей клиники."),
+            "blog/maps-ranking-google-yandex.html": ("Как подняться выше в Яндекс Картах и Google Картах: что решает порядок и какие фото помогают · Мустафа Элькуши",
+                                                     "Что Яндекс и Google говорят о порядке на картах, какие фото нужны карточке, честные отзывы и проверка за 15 минут. С примерами из примерно 40 московских клиник."),
             "blog/php-october-2026-django-cms.html": ("PHP в октябре 2026 года: что произошло и когда Django CMS — более безопасный выбор · Мустафа Элькуши",
                                                       "Срочное обновление для всех PHP-сайтов, атакованный плагин WordPress и бэкдор, который восстанавливает себя: что сделать на этой неделе и когда стоит переехать на Django CMS."),
         },
     },
 }
 
-BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agents-python", "php-october-2026-django-cms"]
+BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agents-python", "php-october-2026-django-cms",
+        "maps-ranking-google-yandex"]
 
 PAGE_PATHS = (["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
               + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG]
@@ -405,6 +412,20 @@ def external_new_tab(html: str) -> str:
     return EXTERNAL.sub(r'<a href="\1" target="_blank" rel="noopener noreferrer"', html)
 
 
+def line_icon(name: str) -> str:
+    """One Lucide icon from tools/icons/lucide/ (cached by blog_art.py), inline.
+
+    Only drawing elements are kept, the same clean-up blog_art.py does, so a
+    cached file cannot bring a script or a link into a page.
+    """
+    raw = (SITE / "tools" / "icons" / "lucide" / f"{name}.svg").read_text()
+    shapes = re.findall(r"<(?:path|circle|rect|line|polyline|polygon|ellipse)\b[^>]*?/?>", re.sub(r"<!--.*?-->", "", raw, flags=re.S))
+    clean = "".join(re.sub(r"\s(?!(?:d|cx|cy|r|rx|ry|x|y|x1|y1|x2|y2|width|height|points)=)[\w:-]+=\"[^\"]*\"", "", t).rstrip("/>").rstrip() + "/>"
+                    for t in shapes)
+    return ('<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+            f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{clean}</svg>')
+
+
 def out_path(code: str, page: str) -> str:
     """Where a page lands. English sits at the root; the rest under /ar, /ru."""
     return page if code == "en" else f"{code}/{page}"
@@ -425,6 +446,9 @@ def page(code: str, page_path: str, body: str) -> str:
     # Service illustrations live in tools/art/ and are inlined, so their colours
     # come from the page's theme tokens.
     body = re.sub(r"@@ART:([a-z-]+)@@", lambda m: (SITE / "tools" / "art" / f"{m.group(1)}.svg").read_text().strip(), body)
+    # Small line icons inside a post (the maps post's card mock-ups and photo
+    # list): @@ICON:name@@ inlines a cached Lucide icon in the text colour.
+    body = re.sub(r"@@ICON:([a-z0-9-]+)@@", lambda m: line_icon(m.group(1)), body)
     call = (f'<a class="btn btn-secondary btn-lg" href="tel:{PHONE}">Позвонить: {PHONE_SHOWN}</a>'
             if PHONE and PHONE_SHOWN else "")
     body = body.replace("@@CALL@@", call)
