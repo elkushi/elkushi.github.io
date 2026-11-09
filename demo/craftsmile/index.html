@@ -1,0 +1,390 @@
+<!doctype html>
+<!-- Концепт главной страницы для стоматологии «Мастерская улыбки» (Ленинградское ш., 15, м. Войковская).
+     Данные: сайт craftsmile.ru (услуги, цены, врачи, оборудование, значок «Хорошее место»),
+     карточка клиники на Яндексе (рейтинг, отзывы, часы работы, второй телефон).
+     Фото — собственные фото клиники с её сайта (логотип, фотография главного врача).
+     Стоковые и сгенерированные изображения не используются. демонстрация, не сайт клиники, noindex. -->
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="description" content="Стоматология «Мастерская улыбки» у м. Войковская: терапия, хирургия, имплантация, протезирование, ортодонтия и гигиена. Ленинградское шоссе, 15. Пн–пт 10:00–21:00, сб и вс 10:00–20:00.">
+<title>Стоматология «Мастерская улыбки» на Войковской — демо-концепт, не официальный сайт клиники</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Цвета из логотипа клиники: бирюзовый #00c2c2 и сине-серый #5b6177 */
+  :root{
+    --tl:#00bfc4; --tl-d:#0b7d8c; --tl-dd:#0a5f6b;
+    --slate:#5b6177; --ink:#2b3142; --body:#464d60;
+    --mint:#e9f8f9; --mint2:#d6f1f3; --paper:#f6fafb; --line:#dde8ea; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Manrope,Arial,sans-serif;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  .banner{background:var(--ink);color:#dff4f5;font-size:12px;text-align:center;padding:7px 12px;letter-spacing:.02em}
+  .nw{white-space:nowrap}
+
+  header{background:var(--white);border-bottom:1px solid var(--line);position:relative;z-index:3}
+  .hd{display:flex;align-items:center;gap:26px;height:86px}
+  .logo img{height:40px}
+  nav{display:flex;gap:20px;white-space:nowrap;font-size:14.5px;font-weight:700;color:var(--slate)}
+  nav a:hover{color:var(--tl-d)}
+  .hd-end{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .tel{text-align:right;white-space:nowrap;font-size:12px;color:var(--slate);line-height:1.35}
+  .tel b{display:block;font-size:16.5px;color:var(--ink);font-weight:800}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;border-radius:10px;font-weight:700;font-size:15px;border:1.5px solid transparent;white-space:nowrap}
+  .btn-tl{background:var(--tl-d);color:#fff}
+  .btn-line{border-color:var(--slate);color:var(--ink);background:transparent}
+  .btn-tg{border-color:var(--line);background:var(--white);color:var(--slate);padding:0 16px}
+  .btn-tg svg{width:17px;height:17px;fill:#2a9fd8}
+
+  .hero{background:var(--mint);position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--mint) 55%,var(--mint2))}
+  .hero-in{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center;padding:56px 28px 70px}
+  .eyebrow{display:flex;align-items:center;gap:12px;font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--tl-d)}
+  .eyebrow i{display:block;width:34px;height:2px;background:var(--tl)}
+  h1{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:43px;line-height:1.12;letter-spacing:-.015em;color:var(--ink);margin:16px 0 18px}
+  .lead{font-size:17.5px;line-height:1.6;color:var(--body);max-width:560px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 26px}
+  .chip{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13.5px;font-weight:700;color:var(--ink)}
+  .chip .y{background:#fc3f1d;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+  .chip .star{color:#e8a93c;font-size:15px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .cta-note{font-size:12px;color:var(--slate);margin-top:12px}
+  .media{position:relative}
+  .media .ph1{width:100%;height:466px;object-fit:cover;object-position:center 18%;border-radius:20px}
+  .who{position:absolute;left:16px;top:16px;background:rgba(255,255,255,.94);border-radius:12px;padding:9px 13px;line-height:1.3}
+  .who b{display:block;font-size:14px}
+  .who span{font-size:11.5px;color:var(--slate)}
+  .slot{position:absolute;left:-46px;bottom:-32px;width:326px;background:var(--white);border-radius:14px;padding:16px 16px 14px;box-shadow:0 18px 44px rgba(43,49,66,.16)}
+  .slot .t{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:800}
+  .slot .demo{font-size:10px;font-weight:800;color:var(--slate);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+  .slot .doc{display:flex;align-items:center;gap:11px;margin:12px 0 11px}
+  .slot .doc .av{width:44px;height:44px;border-radius:50%;background:var(--mint2);color:var(--tl-dd);display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-size:15px;font-weight:700}
+  .slot .doc b{font-size:13.5px;display:block}
+  .slot .doc span{font-size:11.5px;color:var(--slate)}
+  .times{display:flex;gap:6px}
+  .times span{flex:1;text-align:center;font-size:12.5px;font-weight:700;padding:8px 0;border-radius:8px;border:1px solid var(--line)}
+  .times span.on{background:var(--tl-d);color:#fff;border-color:var(--tl-d)}
+
+  .prices{border-bottom:1px solid var(--line)}
+  .prices-in{display:grid;grid-template-columns:repeat(4,1fr)}
+  .pr{padding:24px 22px;border-right:1px solid var(--line)}
+  .pr:last-child{border-right:0}
+  .pr span{display:block;font-size:13px;color:var(--slate);line-height:1.4}
+  .pr b{display:block;font-size:22px;font-weight:800;margin-top:5px;font-family:Montserrat,sans-serif}
+  .pr-note{padding:0 28px 18px;font-size:12.5px;color:var(--slate)}
+
+  section.block{padding:70px 0}
+  .sh{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:28px}
+  h2{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:33px;line-height:1.16;color:var(--ink);letter-spacing:-.01em}
+  .sh p{color:var(--slate);font-size:15px;max-width:450px;line-height:1.55}
+  .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .sv{border:1px solid var(--line);border-radius:14px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:9px}
+  .sv .k{font-size:11.5px;font-weight:800;color:var(--tl-d);letter-spacing:.09em}
+  .sv h3{font-size:19px;font-weight:800;font-family:Montserrat,sans-serif}
+  .sv ul{list-style:none;font-size:14.5px;line-height:1.7;color:var(--body);flex:1}
+  .sv ul li{padding-left:16px;position:relative}
+  .sv ul li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:var(--tl)}
+  .sv .p{font-size:15px;font-weight:700;border-top:1px dashed var(--line);padding-top:10px}
+  .sv .p.soft{font-weight:600;font-size:13.5px;color:var(--slate)}
+
+  .docs-sec{background:var(--paper)}
+  .docs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .dc{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px 20px 18px}
+  .dc .av{width:56px;height:56px;border-radius:50%;background:var(--mint2);color:var(--tl-dd);display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-size:18px;font-weight:700;margin-bottom:13px}
+  .dc b{display:block;font-size:16px;line-height:1.3}
+  .dc span{display:block;margin-top:5px;font-size:13px;line-height:1.45;color:var(--slate)}
+  .dc em{display:block;margin-top:10px;font-style:italic;font-size:13px;line-height:1.5;color:var(--body)}
+  .fill{margin-top:18px;font-size:13px;color:var(--slate);background:var(--white);border-left:3px solid var(--tl);padding:10px 14px;border-radius:0 8px 8px 0}
+
+  .about{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+  .lead2{font-size:16px;line-height:1.68;color:var(--body);margin-top:14px}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+  .fact{border-left:3px solid var(--tl);padding:4px 0 4px 14px}
+  .fact b{display:block;font-family:Montserrat,sans-serif;font-size:23px;font-weight:800;color:var(--tl-dd)}
+  .fact span{font-size:13.5px;color:var(--body);line-height:1.45}
+  .badgebox{background:var(--mint);border-radius:18px;padding:26px 26px 22px;text-align:center}
+  .badgebox img{height:206px;margin:0 auto 14px}
+  .badgebox p{font-size:13px;color:var(--slate);line-height:1.55}
+  .photonote{margin-top:14px;font-size:12.5px;color:var(--slate);line-height:1.55;text-align:left;border-top:1px solid var(--line);padding-top:12px}
+
+  .lic{background:var(--ink);color:#e7eef0}
+  .lic h2{color:#fff}
+  .lic .licgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start}
+  .lic p{font-size:15.5px;line-height:1.65;margin-top:14px;color:#cdd8dc}
+  .liclist{list-style:none;margin-top:18px;display:grid;gap:10px}
+  .liclist li{padding-left:24px;position:relative;font-size:15px;line-height:1.5}
+  .liclist li::before{content:"";position:absolute;left:0;top:6px;width:11px;height:6px;border-left:2px solid var(--tl);border-bottom:2px solid var(--tl);transform:rotate(-45deg)}
+  .licnote{background:rgba(255,255,255,.07);border-radius:12px;padding:18px 20px;font-size:13.5px;line-height:1.6;color:#cdd8dc}
+  .licnote b{color:#fff;display:block;margin-bottom:6px;font-size:15px}
+
+  .rev{background:var(--mint)}
+  .revs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .rv{background:var(--white);border-radius:14px;padding:24px;font-size:15px;line-height:1.6;color:var(--body)}
+  .rv .st{display:table;background:#fc3f1d;color:#fff;border-radius:6px;padding:2px 8px;font-size:11.5px;font-weight:800;letter-spacing:.02em;margin-bottom:10px}
+  .rv b{display:block;margin-top:12px;color:var(--ink);font-size:13.5px}
+
+  .bookwrap{display:grid;grid-template-columns:1fr 300px;gap:34px;align-items:start}
+  .book{display:grid;gap:16px}
+  .bk{border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start}
+  .bk .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--tl-d);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+  .bk h3{font-size:17px;margin-bottom:6px;font-family:Montserrat,sans-serif}
+  .bk p{font-size:14.5px;line-height:1.55;color:var(--body)}
+  .bk small{display:inline-block;margin-top:9px;font-size:11px;font-weight:800;color:var(--slate);border:1px solid var(--line);border-radius:6px;padding:2px 7px}
+
+  .botphone{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--white);box-shadow:0 14px 36px rgba(43,49,66,.1)}
+  .botphone .top{background:var(--ink);color:#fff;padding:13px 16px;font-size:13.5px;font-weight:700;line-height:1.3}
+  .botphone .top small{display:block;font-weight:500;font-size:11.5px;color:#aebcc0;margin-top:2px}
+  .botphone .chat{background:var(--paper);padding:14px;display:grid;gap:9px}
+  .msg{background:var(--white);border:1px solid var(--line);border-radius:12px 12px 12px 4px;padding:10px 12px;font-size:13px;line-height:1.5;color:var(--body)}
+  .msg.me{background:var(--mint2);border-color:var(--mint2);border-radius:12px 12px 4px 12px;justify-self:end;color:var(--ink);font-weight:600}
+  .msg b{color:var(--ink)}
+  .botbtns{display:flex;gap:6px;flex-wrap:wrap}
+  .botbtns span{font-size:12px;font-weight:700;border:1px solid var(--line);background:var(--white);border-radius:8px;padding:6px 9px;color:var(--tl-dd)}
+  .botphone .demo{text-align:center;font-size:11.5px;color:var(--slate);padding:9px;border-top:1px solid var(--line)}
+
+  .contacts{background:var(--paper)}
+  .ct{display:grid;grid-template-columns:1.1fr 1fr 1.15fr;gap:26px}
+  .ct h3{font-size:13px;color:var(--slate);font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+  .ct p{font-size:15.5px;line-height:1.6;color:var(--ink)}
+  .hours{display:grid;gap:3px;font-size:15px}
+  .hours div{display:flex;justify-content:space-between;gap:14px;border-bottom:1px dashed var(--line);padding:4px 0}
+  .hours div b{font-weight:700}
+  .srcnote{font-size:12.5px;color:var(--slate);margin-top:10px;line-height:1.5}
+
+  footer{background:var(--ink);color:#c9d4d8;font-size:13px;line-height:1.75;padding:34px 0 92px}
+  footer b{color:#fff}
+  .warn{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);color:#fff;font-size:13.5px}
+  .sticky{display:none}
+
+  @media (max-width:1020px){ nav{display:none} .bookwrap{grid-template-columns:1fr} .botphone{max-width:330px} }
+  @media (max-width:760px){
+    .wrap{padding:0 16px}
+    .tel,.hd-end .btn-tg{display:none}
+    .hd{height:64px}
+    .logo img{height:30px}
+    .hd-end .btn{height:40px;padding:0 14px;font-size:13.5px}
+    .hero-in{grid-template-columns:1fr;gap:22px;padding:26px 16px 74px}
+    h1{font-size:29px;margin:12px 0}
+    .lead{font-size:15.5px}
+    .chips{margin:16px 0 18px;gap:8px}
+    .chip{font-size:12.5px;padding:7px 11px}
+    .cta-row .btn{flex:1;font-size:14px;padding:0 10px}
+    .media .ph1{height:268px;object-position:center 22%;border-radius:14px}
+    .who{position:static;margin:10px 0 0;padding:11px 13px;border:1px solid var(--line);background:var(--white)}
+    .who span{font-size:11.5px}
+    .slot{position:relative;left:0;bottom:0;width:auto;margin:10px 0 0}
+    .prices-in{grid-template-columns:1fr 1fr}
+    .pr{padding:16px;border-bottom:1px solid var(--line)}
+    .pr:nth-child(2){border-right:0}
+    .pr b{font-size:19px}
+    .pr-note{padding:14px 16px 16px}
+    section.block{padding:44px 0}
+    .sh{display:block}
+    .sh p{margin-top:8px}
+    h2{font-size:25px}
+    .svc,.revs,.about,.lic .licgrid,.ct{grid-template-columns:1fr}
+    .docs{grid-template-columns:1fr 1fr;gap:12px}
+    .badgebox img{height:168px}
+    .botphone{max-width:none}
+    .sticky{display:flex;position:fixed;left:0;right:0;bottom:0;gap:8px;padding:10px 12px;background:var(--white);border-top:1px solid var(--line);z-index:5}
+    .sticky .btn{flex:1;height:46px}
+  }
+</style>
+</head>
+<body>
+<div class="banner">Концепт главной страницы для стоматологии «Мастерская улыбки» · подготовил Мустафа Элькуши · это не официальный сайт клиники · запись и бот — демо</div>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="#"><img src="img/logo.png" alt="Стоматология «Мастерская улыбки»"></a>
+    <nav><a href="#uslugi">Услуги и цены</a><a href="#vrachi">Врачи</a><a href="#klinika">О клинике</a><a href="#otzyvy">Отзывы</a><a href="#kontakty">Контакты</a></nav>
+    <div class="hd-end">
+      <div class="tel">пн–пт 10:00–21:00 · сб и вс 10:00–20:00<b>+7 (926) 075-00-03</b></div>
+      <a class="btn btn-tg" href="#bot"><svg viewBox="0 0 24 24"><path d="M9.8 15.2 9.6 19c.4 0 .6-.2.8-.4l2-1.9 4.1 3c.8.4 1.3.2 1.5-.7l2.7-12.6c.3-1.1-.4-1.6-1.1-1.3L3.7 10.9c-1.1.4-1 1-.2 1.3l4.1 1.3 9.5-6c.4-.3.9-.1.6.2z"/></svg>Бот клиники</a>
+      <a class="btn btn-tl" href="#zapis">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="zapis">
+  <div class="hero-in wrap">
+    <div>
+      <div class="eyebrow"><i></i>Стоматология у метро Войковская</div>
+      <h1>Лечим, восстанавливаем и&nbsp;выравниваем зубы — семь дней в&nbsp;неделю</h1>
+      <p class="lead">Терапия, хирургия, имплантация, протезирование, ортодонтия и гигиена. Своя зуботехническая лаборатория, лечение с микроскопом или бинокуляром. Москва, Ленинградское шоссе, 15 — 150 м от метро Войковская.</p>
+      <div class="chips">
+        <div class="chip"><span class="y">Я</span><span class="star">★</span> 4,8 · 37 отзывов на Яндексе</div>
+        <div class="chip">Первичный приём врача — бесплатно</div>
+        <div class="chip">Пн–пт до 21:00, сб и вс до 20:00</div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-tl" href="#zapis">Выбрать время онлайн</a>
+        <a class="btn btn-line" href="tel:+79260750003">+7 (926) 075-00-03</a>
+      </div>
+      <p class="cta-note">Онлайн-запись и бот на этой странице — демонстрация: выбранное время никуда не отправляется.</p>
+    </div>
+    <div class="media">
+      <div class="ph1" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#0f3f45,#17626b);color:#dff0f1;font:600 15px/1.5 system-ui,sans-serif;text-align:center;padding:22px">Фото главного врача<br>поставим из ваших материалов</div>
+      <div class="who"><b>Мамедов Руслан Эльшадович</b><span>главный врач · стоматолог-хирург, ортопед · стаж 18 лет</span></div>
+      <div class="slot">
+        <div class="t">Ближайшее свободное время <span class="demo">демо</span></div>
+        <div class="doc"><div class="av">РЭ</div><div><b>Руслан Эльшадович</b><span>стоматолог-хирург, ортопед</span></div></div>
+        <div class="times"><span>Сегодня 19:30</span><span class="on">Завтра 11:00</span><span>Суббота 12:00</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prices">
+  <div class="wrap prices-in">
+    <div class="pr"><span>Имплантация</span><b>35&nbsp;000&nbsp;₽</b></div>
+    <div class="pr"><span>Чистка AirFlow</span><b>6&nbsp;000&nbsp;₽</b></div>
+    <div class="pr"><span>Удаление зуба</span><b>от 2&nbsp;000&nbsp;₽</b></div>
+    <div class="pr"><span>Металлокерамика</span><b>10&nbsp;500&nbsp;₽</b></div>
+  </div>
+  <div class="wrap pr-note">Цены клиники с сайта craftsmile.ru. Полный прайс — на отдельной странице «Цены»; точную сумму врач называет после осмотра, первичный приём бесплатный.</div>
+</section>
+
+<section class="block" id="uslugi">
+  <div class="wrap">
+    <div class="sh"><h2>Услуги и цены</h2><p>Шесть направлений клиники. Цены — те, что клиника публикует сама; остальные позиции добавим в прайс из ваших данных.</p></div>
+    <div class="svc">
+      <div class="sv"><div class="k">ТЕРАПИЯ</div><h3>Лечение зубов</h3><ul><li>Лечение кариеса</li><li>Лечение корневых каналов</li><li>Реставрация зубов</li></ul><div class="p soft">Первичный приём врача — бесплатно, стоимость лечения врач называет после осмотра</div></div>
+      <div class="sv"><div class="k">ХИРУРГИЯ</div><h3>Удаление зубов</h3><ul><li>Удаление зубов</li><li>Операции при пародонтите</li><li>Резекция верхушки корня</li></ul><div class="p">удаление зуба от 2&nbsp;000&nbsp;₽</div></div>
+      <div class="sv"><div class="k">ИМПЛАНТАЦИЯ</div><h3>Импланты и протезирование</h3><ul><li>Имплантация</li><li>Протезирование</li><li>All-on-4</li></ul><div class="p">имплантация 35&nbsp;000&nbsp;₽</div></div>
+      <div class="sv"><div class="k">ОРТОПЕДИЯ</div><h3>Коронки и виниры</h3><ul><li>Металлокерамика</li><li>Циркониевые коронки</li><li>Виниры</li></ul><div class="p">металлокерамика 10&nbsp;500&nbsp;₽</div></div>
+      <div class="sv"><div class="k">ОРТОДОНТИЯ</div><h3>Исправление прикуса</h3><ul><li>Исправление прикуса</li><li>Коррекция челюсти</li><li>Ретенция</li></ul><div class="p soft">План лечения и стоимость — после осмотра и снимка</div></div>
+      <div class="sv"><div class="k">ГИГИЕНА</div><h3>Чистка и профилактика</h3><ul><li>Снятие зубных отложений</li><li>Лечение гиперестезии</li><li>Лечение пародонтоза</li></ul><div class="p">чистка AirFlow 6&nbsp;000&nbsp;₽</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block docs-sec" id="vrachi">
+  <div class="wrap">
+    <div class="sh"><h2>Врачи клиники</h2><p>Имена, специализации и стаж — с сайта клиники. К каждому врачу можно выбрать время онлайн.</p></div>
+    <div class="docs">
+      <div class="dc"><div class="av">РЭ</div><b>Мамедов Руслан Эльшадович</b><span>главный врач, стоматолог-хирург, ортопед · стаж 18 лет · его называют по имени в 17 отзывах из 37 на Яндексе</span><em>«Всё объясняет, лишнего не назначает,  чётко и по делу, очень спокойно в его руках.»<br>Алина, Яндекс, 22 октября 2025</em></div>
+      <div class="dc"><div class="av">ИВ</div><b>Беджанова Ирина Владимировна</b><span>врач-стоматолог общей практики · стаж 15 лет</span></div>
+      <div class="dc"><div class="av">НВ</div><b>Андросова Наталья Викторовна</b><span>врач-стоматолог, терапевт, ортопед · стаж 25 лет</span></div>
+      <div class="dc"><div class="av">НА</div><b>Гуджабидзе Ника Автандилович</b><span>врач-стоматолог, хирург, имплантолог · стаж 10 лет</span></div>
+    </div>
+    <div class="fill">В клинике работают также медсестра и администраторы — их пациенты отдельно благодарят в отзывах. Фотографии врачей, образование и сертификаты поставим из ваших данных, а у каждого врача будет своя страница.</div>
+  </div>
+</section>
+
+<section class="block" id="klinika">
+  <div class="wrap about">
+    <div>
+      <h2>Своя зуботехническая лаборатория</h2>
+      <p class="lead2">Команда клиники работает в стоматологии больше 15 лет и принимает и взрослых, и детей. Кабинеты оснащены современным оборудованием, а собственная зуботехническая лаборатория позволяет быстрее выполнять ортопедические и ортодонтические работы. Лечение проводится на немецком оборудовании с микроскопом или бинокуляром, а на консультации врач делает дентальные фотографии полости рта, чтобы показать беспокоящие участки. Так описывает работу сама клиника на craftsmile.ru.</p>
+      <div class="facts">
+        <div class="fact"><b>4,8</b><span>рейтинг на Яндексе, 37 отзывов</span></div>
+        <div class="fact"><b>7 дней</b><span>в неделю, пн–пт до 21:00</span></div>
+        <div class="fact"><b>Бесплатно</b><span>первичный приём врача</span></div>
+        <div class="fact"><b>Своя</b><span>зуботехническая лаборатория</span></div>
+      </div>
+    </div>
+    <div class="photonote">Фотографии кабинетов, лаборатории и входа в этом концепте не поставлены специально: стоковые снимки здесь не используются, а на готовой странице будут ваши собственные фотографии.</div>
+    </div>
+  </div>
+</section>
+
+<section class="block lic">
+  <div class="wrap licgrid">
+    <div>
+      <h2>Лицензия и документы</h2>
+      <p>Клиника работает по медицинской лицензии — сейчас она указана на сайте одной строкой. На отдельной странице «Лицензия и документы» пациент видит их заранее и не спрашивает на ресепшене:</p>
+      <ul class="liclist">
+        <li>медицинская лицензия и приложения к ней — сканом, который можно открыть и прочитать;</li>
+        <li>договор на оказание платных медицинских услуг;</li>
+        <li>политика обработки персональных данных и согласие пациента;</li>
+        <li>порядок записи, отмены и переноса приёма.</li>
+      </ul>
+    </div>
+    <div class="licnote"><b>Что нужно от клиники</b>Номер и дату лицензии, сканы приложений и реквизиты поставим из ваших документов — придумывать их в концепте нельзя, поэтому здесь их нет.</div>
+  </div>
+</section>
+
+<section class="block rev" id="otzyvy">
+  <div class="wrap">
+    <div class="sh"><h2>Что пишут пациенты</h2><p>4,8 из 5 и 37 отзывов на Яндексе. Клиника отвечает на отзывы — в том числе на те, где пациент чем-то недоволен.</p></div>
+    <div class="revs">
+      <div class="rv"><div class="st">Яндекс</div>«Все сделали аккуратно, безболезненно, профессионально.»<b>Elena, Яндекс, 1 ноября 2026</b></div>
+      <div class="rv"><div class="st">Яндекс</div>«Записалась легко, выбрали удобное для меня время.»<b>Олеся Дмитриева, Яндекс, 28 июля 2025</b></div>
+      <div class="rv"><div class="st">Яндекс</div>«+ очень приятная женщина на ресепшене, которая по просьбе может позвонить и напомнить о записи»<b>Екатерина Комарова, Яндекс, 29 августа 2022</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="bot">
+  <div class="wrap">
+    <div class="sh"><h2>Как записаться</h2><p>Три способа — в том числе вечером и в выходные, когда администратор занят или клиника уже закрыта.</p></div>
+    <div class="bookwrap">
+      <div class="book">
+        <div class="bk"><div class="n">1</div><div><h3>Онлайн, за минуту</h3><p>Выберите врача, день и свободное время. Администратор подтверждает запись, а накануне вечером и за 2 часа до приёма приходит напоминание.</p><small>демо</small></div></div>
+        <div class="bk"><div class="n">2</div><div><h3>В Telegram и MAX</h3><p>Бот клиники запишет на приём, перенесёт визит и ответит на частые вопросы: адрес и как добраться, часы работы, цены, подготовка к приёму. SMS — запасной канал.</p><small>демо</small></div></div>
+        <div class="bk"><div class="n">3</div><div><h3>По телефону</h3><p>Пн–пт с 10:00 до 21:00, сб и вс с 10:00 до 20:00: <span class="nw">+7 (926) 075-00-03</span>, <span class="nw">+7 (926) 767-45-79</span>.</p></div></div>
+      </div>
+      <div class="botphone">
+        <div class="top">Мастерская улыбки · бот<small>Telegram и MAX</small></div>
+        <div class="chat">
+          <div class="msg me">Здравствуйте! Хочу записаться на чистку</div>
+          <div class="msg">Здравствуйте! Чистка AirFlow — <b>6&nbsp;000&nbsp;₽</b>, первичный приём врача бесплатный. Ближайшее свободное время на Ленинградском шоссе, 15:</div>
+          <div class="botbtns"><span>сегодня 19:30</span><span>завтра 11:00</span><span>суббота 12:00</span></div>
+          <div class="msg me">завтра 11:00</div>
+          <div class="msg">Готово: чистка AirFlow, завтра в 11:00. Ленинградское шоссе, 15, 150 м от метро Войковская. Напомню накануне вечером и за 2 часа до приёма.</div>
+        </div>
+        <div class="demo">демо, пример переписки</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block contacts" id="kontakty">
+  <div class="wrap">
+    <h2 style="margin-bottom:26px">Контакты</h2>
+    <div class="ct">
+      <div>
+        <h3>Адрес</h3>
+        <p>Москва, Ленинградское шоссе, 15<br>150 м от метро Войковская</p>
+        <p class="srcnote">Этаж и вход укажем вашими словами: в этом же доме работает другая клиника, и пациенту важно не перепутать вход.</p>
+      </div>
+      <div>
+        <h3>Часы работы</h3>
+        <div class="hours">
+          <div><span>Понедельник</span><b>10:00–21:00</b></div>
+          <div><span>Вторник</span><b>10:00–21:00</b></div>
+          <div><span>Среда</span><b>10:00–21:00</b></div>
+          <div><span>Четверг</span><b>10:00–21:00</b></div>
+          <div><span>Пятница</span><b>10:00–21:00</b></div>
+          <div><span>Суббота</span><b>10:00–20:00</b></div>
+          <div><span>Воскресенье</span><b>10:00–20:00</b></div>
+        </div>
+        <p class="srcnote">Часы работы — из карточки клиники на Яндексе.</p>
+      </div>
+      <div>
+        <h3>Связь</h3>
+        <p><span class="nw">+7 (926) 075-00-03</span><br><span class="nw">+7 (926) 767-45-79</span><br>info@craftsmile.ru<br>Бот клиники в Telegram и MAX</p>
+        <p class="srcnote">Второй номер — из карточки клиники на Яндексе. Онлайн-запись и бот работают круглосуточно, администратор подтверждает запись в рабочие часы.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Демонстрационная страница. Автор — Мустафа Элькуши, веб-разработчик, Москва · <a href="https://t.me/Elkushi99" style="color:inherit">Telegram @Elkushi99</a><br>Клиника к созданию этой страницы отношения не имеет и за неё не отвечает. Тексты и цены взяты с сайта клиники и её карточки на Яндексе и приведены как пример. Онлайн-запись и бот на этой странице не работают — это демонстрация.
+    <div class="warn">Имеются противопоказания, необходима консультация специалиста</div>
+  </div>
+</footer>
+<div class="sticky"><a class="btn btn-tl" href="#zapis">Записаться</a><a class="btn btn-line" href="tel:+79260750003">Позвонить</a></div>
+</body>
+</html>
