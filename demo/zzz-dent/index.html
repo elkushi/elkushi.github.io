@@ -1,311 +1,1172 @@
 <!doctype html>
 <html lang="ru">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'none'; base-uri 'none'; form-action 'none'">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Концепт главной страницы стоматологии «Здравствуйте, здоровые зубы»: м. Автозаводская и м. Варшавская, онлайн-запись (демо).">
-<title>Стоматология «Здравствуйте, здоровые зубы» — демо-концепт, не официальный сайт клиники</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap" rel="stylesheet">
-<style>
-  :root { --blue:#0a3f86; --blue2:#3c6aa6; --sky:#eaf0f7; --sky2:#dbe5f1; --paper:#f7f5f0; --ink:#152130; --ink2:#334152; --muted:#55657a; --line:#e3e1da; --ok:#2f7a52; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:"Golos Text", Arial, sans-serif; color:var(--ink); background:#fff; -webkit-font-smoothing:antialiased; }
-  a { color:inherit; text-decoration:none; }
-  .wrap { max-width:1200px; margin:0 auto; padding:0 28px; }
-  .banner { background:var(--ink); color:#dfe6ef; font-size:12px; text-align:center; padding:7px 12px; letter-spacing:.02em; }
-  header { background:#fff; border-bottom:1px solid var(--line); }
-  .hd { display:flex; align-items:center; gap:24px; height:80px; }
-  .logo { display:flex; align-items:center; gap:12px; }
-  .logo img { width:42px; height:42px; }
-  .logo b { font-family:Literata, Georgia, serif; font-size:18px; font-weight:700; color:var(--blue); display:block; line-height:1.15; }
-  .logo span { font-size:12px; color:var(--muted); white-space:nowrap; }
-  nav { display:flex; gap:20px; font-size:14.5px; font-weight:500; color:var(--ink2); white-space:nowrap; }
-  .hd-end { margin-left:auto; display:flex; align-items:center; gap:16px; }
-  .hours { font-size:12px; color:var(--muted); text-align:right; line-height:1.4; white-space:nowrap; }
-  .hours b { white-space:nowrap; display:block; font-size:14px; color:var(--ink); font-weight:600; }
-  .btn { display:inline-flex; align-items:center; justify-content:center; height:48px; padding:0 22px; border-radius:10px; font-weight:600; font-size:15px; border:1.5px solid var(--blue); white-space:nowrap; }
-  .btn-main { background:var(--blue); color:#fff; }
-  .btn-line { background:#fff; color:var(--blue); }
-  .btn-soft { border-color:var(--line); color:var(--ink2); background:#fff; }
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="description"
+      content="Концепт главной страницы стоматологии «Здравствуйте, здоровые зубы»: м. Автозаводская и м. Варшавская, онлайн-запись (демо)."
+    />
+    <title>Стоматология «Здравствуйте, здоровые зубы» — демо-концепт, не официальный сайт клиники</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --blue: #0a3f86;
+        --blue2: #3c6aa6;
+        --sky: #eaf0f7;
+        --sky2: #dbe5f1;
+        --paper: #f7f5f0;
+        --ink: #152130;
+        --ink2: #334152;
+        --muted: #55657a;
+        --line: #e3e1da;
+        --ok: #2f7a52;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Golos Text", Arial, sans-serif;
+        color: var(--ink);
+        background: #fff;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+      .banner {
+        background: var(--ink);
+        color: #dfe6ef;
+        font-size: 12px;
+        text-align: center;
+        padding: 7px 12px;
+        letter-spacing: 0.02em;
+      }
+      header {
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+      .hd {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        height: 80px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo img {
+        width: 42px;
+        height: 42px;
+      }
+      .logo b {
+        font-family: Literata, Georgia, serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--blue);
+        display: block;
+        line-height: 1.15;
+      }
+      .logo span {
+        font-size: 12px;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      nav {
+        display: flex;
+        gap: 20px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink2);
+        white-space: nowrap;
+      }
+      .hd-end {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .hours {
+        font-size: 12px;
+        color: var(--muted);
+        text-align: right;
+        line-height: 1.4;
+        white-space: nowrap;
+      }
+      .hours b {
+        white-space: nowrap;
+        display: block;
+        font-size: 14px;
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 48px;
+        padding: 0 22px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 15px;
+        border: 1.5px solid var(--blue);
+        white-space: nowrap;
+      }
+      .btn-main {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-line {
+        background: #fff;
+        color: var(--blue);
+      }
+      .btn-soft {
+        border-color: var(--line);
+        color: var(--ink2);
+        background: #fff;
+      }
 
-  .hero { background:linear-gradient(90deg, #fff 0 56%, var(--sky) 56% 100%); }
-  .hero-in { display:grid; grid-template-columns:1.12fr .88fr; gap:56px; padding-top:56px; padding-bottom:60px; align-items:center; }
-  .eyebrow { font-size:12.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--blue2); }
-  h1 { font-family:Literata, Georgia, serif; font-size:50px; line-height:1.08; font-weight:700; letter-spacing:-.015em; margin:14px 0 18px; }
-  h1 em { font-style:normal; color:var(--blue); }
-  .lead { font-size:17.5px; line-height:1.6; color:var(--ink2); max-width:560px; }
-  .chips { display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 28px; }
-  .chip { display:flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:999px; padding:8px 14px; font-size:13.5px; font-weight:500; background:#fff; }
-  .chip .star { color:#e0a320; }
-  .cta { display:flex; gap:12px; flex-wrap:wrap; }
-  .since { display:flex; gap:28px; margin-top:30px; padding-top:22px; border-top:1px solid var(--line); max-width:560px; }
-  .since div { font-size:13px; color:var(--muted); line-height:1.45; }
-  .since b { display:block; font-family:Literata, Georgia, serif; font-size:24px; color:var(--ink); white-space:nowrap; }
-  .since b .star { color:#e0a320; font-size:.85em; }
+      .hero {
+        background: linear-gradient(90deg, #fff 0 56%, var(--sky) 56% 100%);
+      }
+      .hero-in {
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 56px;
+        padding-top: 56px;
+        padding-bottom: 60px;
+        align-items: center;
+      }
+      .eyebrow {
+        font-size: 12.5px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--blue2);
+      }
+      h1 {
+        font-family: Literata, Georgia, serif;
+        font-size: 50px;
+        line-height: 1.08;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        margin: 14px 0 18px;
+      }
+      h1 em {
+        font-style: normal;
+        color: var(--blue);
+      }
+      .lead {
+        font-size: 17.5px;
+        line-height: 1.6;
+        color: var(--ink2);
+        max-width: 560px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 24px 0 28px;
+      }
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 13.5px;
+        font-weight: 500;
+        background: #fff;
+      }
+      .chip .star {
+        color: #e0a320;
+      }
+      .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .since {
+        display: flex;
+        gap: 28px;
+        margin-top: 30px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        max-width: 560px;
+      }
+      .since div {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+      .since b {
+        display: block;
+        font-family: Literata, Georgia, serif;
+        font-size: 24px;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+      .since b .star {
+        color: #e0a320;
+        font-size: 0.85em;
+      }
 
-  .book { background:#fff; border-radius:18px; padding:22px 22px 18px; box-shadow:0 18px 50px rgba(10,63,134,.14); border:1px solid var(--sky2); }
-  .book .t { display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:16px; }
-  .demo { font-size:10.5px; font-weight:700; color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:2px 7px; letter-spacing:.04em; }
-  .lbl { font-size:12px; color:var(--muted); margin:16px 0 7px; font-weight:500; }
-  .seg { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-  .seg span { border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; font-size:13.5px; line-height:1.35; }
-  .seg span small { display:block; color:var(--muted); font-size:11.5px; }
-  .seg span.on { border-color:var(--blue); background:var(--sky); }
-  .svc { display:flex; flex-wrap:wrap; gap:6px; }
-  .svc span { font-size:13px; padding:7px 10px; border-radius:8px; border:1px solid var(--line); }
-  .svc span.on { background:var(--blue); color:#fff; border-color:var(--blue); }
-  .doc { display:flex; align-items:center; gap:12px; }
-  .av { width:42px; height:42px; border-radius:50%; background:var(--sky); color:var(--blue); display:flex; align-items:center; justify-content:center; font-family:Literata, serif; font-weight:700; font-size:15px; flex-shrink:0; }
-  .doc b { display:block; font-size:14px; }
-  .doc span { font-size:12px; color:var(--muted); }
-  .times { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
-  .times span { text-align:center; font-size:13px; font-weight:600; padding:9px 0; border-radius:9px; border:1px solid var(--line); line-height:1.25; }
-  .times span small { display:block; font-weight:400; font-size:11px; color:var(--muted); }
-  .times span.on { background:var(--blue); color:#fff; border-color:var(--blue); }
-  .times span.on small { color:#d6e2f2; }
-  .book .go { margin-top:16px; width:100%; }
-  .book .rem { font-size:12px; color:var(--muted); text-align:center; margin-top:10px; }
+      .book {
+        background: #fff;
+        border-radius: 18px;
+        padding: 22px 22px 18px;
+        box-shadow: 0 18px 50px rgba(10, 63, 134, 0.14);
+        border: 1px solid var(--sky2);
+      }
+      .book .t {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .demo {
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 2px 7px;
+        letter-spacing: 0.04em;
+      }
+      .lbl {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 16px 0 7px;
+        font-weight: 500;
+      }
+      .seg {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .seg span {
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 13.5px;
+        line-height: 1.35;
+      }
+      .seg span small {
+        display: block;
+        color: var(--muted);
+        font-size: 11.5px;
+      }
+      .seg span.on {
+        border-color: var(--blue);
+        background: var(--sky);
+      }
+      .svc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .svc span {
+        font-size: 13px;
+        padding: 7px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+      }
+      .svc span.on {
+        background: var(--blue);
+        color: #fff;
+        border-color: var(--blue);
+      }
+      .doc {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .av {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--sky);
+        color: var(--blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Literata, serif;
+        font-weight: 700;
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+      .doc b {
+        display: block;
+        font-size: 14px;
+      }
+      .doc span {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .times {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+      }
+      .times span {
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 9px 0;
+        border-radius: 9px;
+        border: 1px solid var(--line);
+        line-height: 1.25;
+      }
+      .times span small {
+        display: block;
+        font-weight: 400;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .times span.on {
+        background: var(--blue);
+        color: #fff;
+        border-color: var(--blue);
+      }
+      .times span.on small {
+        color: #d6e2f2;
+      }
+      .book .go {
+        margin-top: 16px;
+        width: 100%;
+      }
+      .book .rem {
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+        margin-top: 10px;
+      }
 
-  .prices { border-bottom:1px solid var(--line); background:#fff; }
-  .prices-in { display:grid; grid-template-columns:repeat(5,1fr); }
-  .pr { padding:22px 20px; border-right:1px solid var(--line); }
-  .pr:last-child { border-right:0; }
-  .pr span { font-size:13px; color:var(--muted); display:block; line-height:1.35; }
-  .pr b { font-size:22px; font-weight:700; display:block; margin-top:6px; }
+      .prices {
+        background: #fff;
+        position: relative;
+        z-index: 1;
+      }
+      .pbox {
+        margin-top: -34px;
+        background: #fff;
+        border: 1px solid var(--sky2);
+        border-radius: 18px;
+        box-shadow: 0 12px 36px rgba(10, 63, 134, 0.09);
+        overflow: hidden;
+      }
+      .phead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 22px;
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .phead b {
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 600;
+        margin-right: 6px;
+      }
+      .phead a {
+        color: var(--blue);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .phead a:hover {
+        text-decoration: underline;
+      }
+      .prices-in {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+      }
+      .pr {
+        padding: 18px 22px 20px;
+        border-right: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transition: background 0.15s;
+      }
+      .pr:hover {
+        background: var(--sky);
+      }
+      .pr:last-child {
+        border-right: 0;
+      }
+      .pr b {
+        font-size: 22px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .pr b small {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--muted);
+        margin-right: 2px;
+      }
+      .pr span {
+        font-size: 13px;
+        color: var(--ink2);
+        line-height: 1.35;
+      }
+      .pr:hover b {
+        color: var(--blue);
+      }
 
-  section.block { padding:68px 0; }
-  h2 { font-family:Literata, Georgia, serif; font-size:34px; font-weight:700; line-height:1.15; letter-spacing:-.01em; margin-bottom:10px; }
-  .sub { color:var(--muted); font-size:16px; margin-bottom:28px; max-width:640px; line-height:1.55; }
-  .clinics { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  .clinic { border:1px solid var(--line); border-radius:18px; padding:26px 26px 22px; display:flex; flex-direction:column; gap:10px; }
-  .clinic .metro { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--blue2); }
-  .clinic .metro i { width:10px; height:10px; border-radius:50%; background:#2db04b; display:inline-block; }
-  .clinic.v .metro i { background:#8a8f97; }
-  .clinic h3 { font-family:Literata, serif; font-size:23px; }
-  .clinic p { color:var(--ink2); line-height:1.6; font-size:15px; }
-  .clinic .row { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:14px; border-top:1px solid var(--line); gap:12px; }
-  .clinic .row b { font-size:17px; white-space:nowrap; }
-  .clinic .row .btn { height:42px; font-size:14px; padding:0 16px; }
+      section.block {
+        padding: 68px 0;
+      }
+      h2 {
+        font-family: Literata, Georgia, serif;
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        margin-bottom: 10px;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 16px;
+        margin-bottom: 28px;
+        max-width: 640px;
+        line-height: 1.55;
+      }
+      .clinics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .clinic {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 26px 26px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .clinic .metro {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--blue2);
+      }
+      .clinic .metro i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #2db04b;
+        display: inline-block;
+      }
+      .clinic.v .metro i {
+        background: #8a8f97;
+      }
+      .clinic h3 {
+        font-family: Literata, serif;
+        font-size: 23px;
+      }
+      .clinic p {
+        color: var(--ink2);
+        line-height: 1.6;
+        font-size: 15px;
+      }
+      .clinic .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        gap: 12px;
+      }
+      .clinic .row b {
+        font-size: 17px;
+        white-space: nowrap;
+      }
+      .clinic .row .btn {
+        height: 42px;
+        font-size: 14px;
+        padding: 0 16px;
+      }
 
-  .svcs { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  .sv { background:#fff; border:1px solid var(--line); border-radius:16px; padding:22px; display:flex; flex-direction:column; }
-  .sv h3 { font-size:17px; font-weight:600; margin-bottom:6px; }
-  .sv p { font-size:14px; color:var(--ink2); line-height:1.55; }
-  .sv .from { margin-top:auto; padding-top:14px; font-weight:600; color:var(--blue); font-size:14.5px; }
-  .sv .from:hover, .dc .dl:hover, .route:hover { text-decoration:underline; }
+      .svcs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .sv {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+      }
+      .sv h3 {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .sv p {
+        font-size: 14px;
+        color: var(--ink2);
+        line-height: 1.55;
+      }
+      .sv .from {
+        margin-top: auto;
+        padding-top: 14px;
+        font-weight: 600;
+        color: var(--blue);
+        font-size: 14.5px;
+      }
+      .sv .from:hover,
+      .dc .dl:hover,
+      .route:hover {
+        text-decoration: underline;
+      }
 
-  .docs { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-  .dc { border:1px solid var(--line); border-radius:16px; padding:22px 20px 18px; display:flex; flex-direction:column; background:linear-gradient(180deg, var(--sky) 0 62px, #fff 62px); }
-  .dc .av { width:64px; height:64px; font-size:21px; margin-bottom:14px; background:#fff; border:3px solid #fff; box-shadow:0 4px 14px rgba(10,63,134,.14); }
-  .dc .role { display:inline-block; align-self:flex-start; font-size:12px; font-weight:600; color:var(--blue); background:var(--sky); border-radius:6px; padding:3px 8px; margin-bottom:8px; }
-  .dc b { display:block; font-size:15.5px; line-height:1.3; }
-  .dc .dl { margin-top:auto; padding-top:14px; font-size:14px; font-weight:600; color:var(--blue); }
-  .route { font-size:14px; font-weight:600; color:var(--blue); }
-  .book .pd { font-size:11.5px; color:var(--muted); text-align:center; margin-top:6px; line-height:1.4; }
+      .docs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .dc {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px 20px 18px;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(180deg, var(--sky) 0 62px, #fff 62px);
+      }
+      .dc .av {
+        width: 64px;
+        height: 64px;
+        font-size: 21px;
+        margin-bottom: 14px;
+        background: #fff;
+        border: 3px solid #fff;
+        box-shadow: 0 4px 14px rgba(10, 63, 134, 0.14);
+      }
+      .dc .role {
+        display: inline-block;
+        align-self: flex-start;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--blue);
+        background: var(--sky);
+        border-radius: 6px;
+        padding: 3px 8px;
+        margin-bottom: 8px;
+      }
+      .dc b {
+        display: block;
+        font-size: 15.5px;
+        line-height: 1.3;
+      }
+      .dc .dl {
+        margin-top: auto;
+        padding-top: 14px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--blue);
+      }
+      .route {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--blue);
+      }
+      .book .pd {
+        font-size: 11.5px;
+        color: var(--muted);
+        text-align: center;
+        margin-top: 6px;
+        line-height: 1.4;
+      }
 
-  .rev { background:var(--sky); }
-  .revs { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  .rv { background:#fff; border-radius:16px; padding:22px; font-size:15px; line-height:1.6; color:var(--ink2); display:flex; flex-direction:column; }
-  .rv .st { color:#e0a320; letter-spacing:2px; margin-bottom:8px; }
-  .rv b { margin-top:auto; padding-top:14px; color:var(--ink); font-size:13.5px; font-weight:600; }
-  .rv b small { font-weight:400; color:var(--muted); }
+      .rev {
+        background: var(--sky);
+      }
+      .revs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .rv {
+        background: #fff;
+        border-radius: 16px;
+        padding: 22px;
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--ink2);
+        display: flex;
+        flex-direction: column;
+      }
+      .rv .st {
+        color: #e0a320;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .rv b {
+        margin-top: auto;
+        padding-top: 14px;
+        color: var(--ink);
+        font-size: 13.5px;
+        font-weight: 600;
+      }
+      .rv b small {
+        font-weight: 400;
+        color: var(--muted);
+      }
 
-  .bot { display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center; background:var(--blue); color:#fff; border-radius:20px; padding:34px 36px; }
-  .bot h2 { color:#fff; }
-  .bot p { color:#d9e4f3; font-size:16px; line-height:1.6; max-width:640px; }
-  .bot .btn { background:#fff; color:var(--blue); border-color:#fff; }
+      .bot {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 30px;
+        align-items: center;
+        background: var(--blue);
+        color: #fff;
+        border-radius: 20px;
+        padding: 34px 36px;
+      }
+      .bot h2 {
+        color: #fff;
+      }
+      .bot p {
+        color: #d9e4f3;
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 640px;
+      }
+      .bot .btn {
+        background: #fff;
+        color: var(--blue);
+        border-color: #fff;
+      }
 
-  footer { background:var(--ink); color:#c9d2de; font-size:13px; line-height:1.75; padding:40px 0 96px; }
-  footer b { color:#fff; }
-  .fgrid { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:28px; }
-  .warn { margin-top:22px; font-size:13.5px; color:#fff; border-top:1px solid #2c3a4c; padding-top:16px; }
-  .sticky { display:none; }
+      footer {
+        background: var(--ink);
+        color: #c9d2de;
+        font-size: 13px;
+        line-height: 1.75;
+        padding: 40px 0 96px;
+      }
+      footer b {
+        color: #fff;
+      }
+      .fgrid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        gap: 28px;
+      }
+      .warn {
+        margin-top: 22px;
+        font-size: 13.5px;
+        color: #fff;
+        border-top: 1px solid #2c3a4c;
+        padding-top: 16px;
+      }
+      .sticky {
+        display: none;
+      }
 
-  @media (max-width: 760px) {
-    .wrap { padding:0 16px; }
-    nav, .hours, .hd-end .btn-soft { display:none; }
-    .hd { height:64px; gap:10px; }
-    .logo img { width:34px; height:34px; }
-    .logo b { font-size:15px; }
-    .logo span { font-size:11px; }
-    .hd-end .btn { height:40px; padding:0 14px; font-size:14px; }
-    .hero { background:#fff; }
-    .hero-in { grid-template-columns:1fr; gap:26px; padding-top:28px; padding-bottom:36px; }
-    h1 { font-size:33px; margin:10px 0 12px; }
-    .lead { font-size:15.5px; }
-    .chips { margin:16px 0 18px; gap:8px; }
-    .chip { font-size:12.5px; padding:7px 11px; }
-    .cta .btn { flex:1; font-size:14.5px; padding:0 12px; }
-    .since { gap:20px; margin-top:22px; }
-    .since b { font-size:19px; }
-    .since { gap:14px; }
-    h1 { font-size:31px; }
-    .book { padding:18px 16px 16px; box-shadow:0 10px 30px rgba(10,63,134,.12); }
-    .prices-in { grid-template-columns:1fr 1fr; }
-    .pr { border-bottom:1px solid var(--line); padding:16px; }
-    .pr:nth-child(2n) { border-right:0; }
-    .pr:last-child { grid-column:1 / -1; }
-    .pr b { font-size:19px; }
-    section.block { padding:44px 0; }
-    h2 { font-size:26px; }
-    .clinics, .svcs, .docs, .revs, .fgrid { grid-template-columns:1fr; }
-    .docs { grid-template-columns:1fr 1fr; gap:10px; }
-    .dc { padding:16px; }
-    .bot { grid-template-columns:1fr; padding:26px 22px; }
-    .clinic .row b { font-size:15.5px; }
-    .clinic .row .btn { padding:0 12px; font-size:13.5px; }
-    .sticky { display:flex; position:fixed; left:0; right:0; bottom:0; gap:8px; padding:10px 12px; background:#fff; border-top:1px solid var(--line); z-index:5; }
-    .sticky .btn { flex:1; height:46px; }
-  }
-</style>
-</head>
-<body>
-<div class="banner">Концепт главной страницы для клиники «Здравствуйте, здоровые зубы» · подготовил Мустафа Элькуши · это не официальный сайт клиники · запись и бот — демо</div>
+      @media (max-width: 760px) {
+        .wrap {
+          padding: 0 16px;
+        }
+        nav,
+        .hours,
+        .hd-end .btn-soft {
+          display: none;
+        }
+        .hd {
+          height: 64px;
+          gap: 10px;
+        }
+        .logo img {
+          width: 34px;
+          height: 34px;
+        }
+        .logo b {
+          font-size: 15px;
+        }
+        .logo span {
+          font-size: 11px;
+        }
+        .hd-end .btn {
+          height: 40px;
+          padding: 0 14px;
+          font-size: 14px;
+        }
+        .hero {
+          background: #fff;
+        }
+        .hero-in {
+          grid-template-columns: 1fr;
+          gap: 26px;
+          padding-top: 28px;
+          padding-bottom: 36px;
+        }
+        h1 {
+          font-size: 33px;
+          margin: 10px 0 12px;
+        }
+        .lead {
+          font-size: 15.5px;
+        }
+        .chips {
+          margin: 16px 0 18px;
+          gap: 8px;
+        }
+        .chip {
+          font-size: 12.5px;
+          padding: 7px 11px;
+        }
+        .cta .btn {
+          flex: 1;
+          font-size: 14.5px;
+          padding: 0 12px;
+        }
+        .since {
+          gap: 20px;
+          margin-top: 22px;
+        }
+        .since b {
+          font-size: 19px;
+        }
+        .since {
+          gap: 14px;
+        }
+        h1 {
+          font-size: 31px;
+        }
+        .book {
+          padding: 18px 16px 16px;
+          box-shadow: 0 10px 30px rgba(10, 63, 134, 0.12);
+        }
+        .pbox {
+          margin-top: 0;
+          box-shadow: none;
+        }
+        .phead {
+          padding: 12px 16px;
+          font-size: 12px;
+        }
+        .phead span {
+          min-width: 0;
+        }
+        .prices-in {
+          grid-template-columns: 1fr 1fr;
+        }
+        .pr {
+          border-bottom: 1px solid var(--line);
+          padding: 14px 16px;
+        }
+        .pr:nth-child(2n) {
+          border-right: 0;
+        }
+        .pr:last-child {
+          grid-column: 1 / -1;
+          border-bottom: 0;
+        }
+        .pr b {
+          font-size: 19px;
+        }
+        section.block {
+          padding: 44px 0;
+        }
+        h2 {
+          font-size: 26px;
+        }
+        .clinics,
+        .svcs,
+        .docs,
+        .revs,
+        .fgrid {
+          grid-template-columns: 1fr;
+        }
+        .docs {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .dc {
+          padding: 16px;
+        }
+        .bot {
+          grid-template-columns: 1fr;
+          padding: 26px 22px;
+        }
+        .clinic .row b {
+          font-size: 15.5px;
+        }
+        .clinic .row .btn {
+          padding: 0 12px;
+          font-size: 13.5px;
+        }
+        .sticky {
+          display: flex;
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          gap: 8px;
+          padding: 10px 12px;
+          background: #fff;
+          border-top: 1px solid var(--line);
+          z-index: 5;
+        }
+        .sticky .btn {
+          flex: 1;
+          height: 46px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">Концепт главной страницы для клиники «Здравствуйте, здоровые зубы» ·
+      подготовил Мустафа Элькуши · подготовил Мустафа Элькуши · это не официальный сайт клиники · запись и бот — демо</div>
 
-<header>
-  <div class="wrap hd">
-    <a class="logo" href="#"><img src="img/mark.png" alt=""><div><b>Здравствуйте,<br>здоровые зубы</b><span>Стоматология · с 2001 года</span></div></a>
-    <nav><a href="#uslugi">Услуги и цены</a><a href="#vrachi">Врачи</a><a href="#otzyvy">Отзывы</a><a href="#kliniki">Две клиники</a></nav>
-    <div class="hd-end">
-      <div class="hours">пн–пт 9:00–20:00<b>+7 (495) 710-01-10</b></div>
-      <a class="btn btn-soft" href="#bot">Telegram</a>
-      <a class="btn btn-main" href="#zapis">Записаться</a>
-    </div>
-  </div>
-</header>
-
-<section class="hero" id="zapis">
-  <div class="wrap hero-in">
-    <div>
-      <div class="eyebrow">Стоматология с&nbsp;2001 года · две клиники</div>
-      <h1>Лечим зубы у&nbsp;метро <em>Автозаводская и&nbsp;Варшавская</em></h1>
-      <p class="lead">Терапия, хирургия, имплантация, ортодонтия и протезирование. Многие пациенты лечатся у нас 5–10 лет и приводят семьи.</p>
-      <div class="chips">
-        <div class="chip">Пн–пт 9:00–20:00</div>
-        <div class="chip">Онлайн-запись в обе клиники</div>
+    <header>
+      <div class="wrap hd">
+        <a class="logo" href="#"
+          ><img src="img/mark.png" alt="" />
+          <div>
+            <b>Здравствуйте,<br />здоровые зубы</b
+            ><span>Стоматология · с 2001 года</span>
+          </div></a
+        >
+        <nav>
+          <a href="#uslugi">Услуги и цены</a><a href="#vrachi">Врачи</a
+          ><a href="#otzyvy">Отзывы</a><a href="#kliniki">Две клиники</a>
+        </nav>
+        <div class="hd-end">
+          <div class="hours">пн–пт 9:00–20:00<b>+7 (495) 710-01-10</b></div>
+          <a class="btn btn-soft" href="#bot">Telegram</a>
+          <a class="btn btn-main" href="#zapis">Записаться</a>
+        </div>
       </div>
-      <div class="cta">
-        <a class="btn btn-main" href="#zapis">Выбрать время онлайн</a>
-        <a class="btn btn-line" href="tel:+74957100110">Позвонить</a>
+    </header>
+
+    <section class="hero" id="zapis">
+      <div class="wrap hero-in">
+        <div>
+          <div class="eyebrow">Стоматология с&nbsp;2001 года · две клиники</div>
+          <h1>
+            Лечим зубы у&nbsp;метро <em>Автозаводская и&nbsp;Варшавская</em>
+          </h1>
+          <p class="lead">
+            Терапия, хирургия, имплантация, ортодонтия и протезирование. Многие
+            пациенты лечатся у нас 5–10 лет и приводят семьи.
+          </p>
+          <div class="chips">
+            <div class="chip">Пн–пт 9:00–20:00</div>
+            <div class="chip">Онлайн-запись в обе клиники</div>
+          </div>
+          <div class="cta">
+            <a class="btn btn-main" href="#zapis">Выбрать время онлайн</a>
+            <a class="btn btn-line" href="tel:+74957100110">Позвонить</a>
+          </div>
+          <div class="since">
+            <div>
+              <b><span class="star">★</span> 5,0</b>рейтинг на Яндексе,
+              114&nbsp;отзывов
+            </div>
+            <div><b>25 лет</b>лечим на Варшавской, с&nbsp;2001</div>
+            <div><b>2 клиники</b>у метро, одна запись</div>
+          </div>
+        </div>
+
+        <div class="book">
+          <div class="t">Запись онлайн <span class="demo">ДЕМО</span></div>
+          <div class="lbl">Клиника</div>
+          <div class="seg">
+            <span class="on"
+              ><b>Автозаводская</b><small>ул. Трофимова, 4</small></span
+            ><span
+              ><b>Варшавская</b><small>Болотниковская ул., 1к2</small></span
+            >
+          </div>
+          <div class="lbl">Что беспокоит</div>
+          <div class="svc">
+            <span class="on">Лечение зуба</span><span>Гигиена</span
+            ><span>Удаление</span><span>Брекеты</span><span>Импланты</span>
+          </div>
+          <div class="lbl">Врач</div>
+          <div class="doc">
+            <div class="av">АД</div>
+            <div>
+              <b>Дорошенко Анастасия Андреевна</b
+              ><span>стоматолог-терапевт</span>
+            </div>
+          </div>
+          <div class="lbl">Ближайшее свободное время</div>
+          <div class="times">
+            <span>17:30<small>сегодня</small></span
+            ><span class="on">10:00<small>завтра</small></span
+            ><span>18:30<small>завтра</small></span>
+          </div>
+          <a class="btn btn-main go" href="#zapis"
+            >Записаться на завтра, 10:00</a
+          >
+          <div class="rem">
+            Напомним за сутки и за 2 часа в Telegram или SMS
+          </div>
+          <div class="pd">
+            Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+          </div>
+        </div>
       </div>
-      <div class="since">
-        <div><b><span class="star">★</span> 5,0</b>рейтинг на Яндексе, 114&nbsp;отзывов</div>
-        <div><b>25 лет</b>лечим на Варшавской, с&nbsp;2001</div>
-        <div><b>2 клиники</b>у метро, одна запись</div>
+    </section>
+
+    <section class="prices">
+      <div class="wrap">
+        <div class="pbox">
+          <div class="phead">
+            <span
+              ><b>Цены</b>по карточке клиники на Яндексе · точная стоимость
+              после осмотра</span
+            ><a href="#uslugi">Все услуги →</a>
+          </div>
+          <div class="prices-in">
+            <a class="pr" href="#zapis"
+              ><b><small>от</small> 6 900 ₽</b><span>Лечение кариеса</span></a
+            >
+            <a class="pr" href="#zapis"
+              ><b><small>от</small> 16 500 ₽</b><span>Лечение пульпита</span></a
+            >
+            <a class="pr" href="#zapis"
+              ><b><small>от</small> 7 500 ₽</b
+              ><span>Профессиональная гигиена</span></a
+            >
+            <a class="pr" href="#zapis"
+              ><b><small>от</small> 15 000 ₽</b><span>Отбеливание</span></a
+            >
+            <a class="pr" href="#zapis"
+              ><b><small>от</small> 22 000 ₽</b
+              ><span>Коронка из металлокерамики</span></a
+            >
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="book">
-      <div class="t">Запись онлайн <span class="demo">ДЕМО</span></div>
-      <div class="lbl">Клиника</div>
-      <div class="seg"><span class="on"><b>Автозаводская</b><small>ул. Трофимова, 4</small></span><span><b>Варшавская</b><small>Болотниковская ул., 1к2</small></span></div>
-      <div class="lbl">Что беспокоит</div>
-      <div class="svc"><span class="on">Лечение зуба</span><span>Гигиена</span><span>Удаление</span><span>Брекеты</span><span>Импланты</span></div>
-      <div class="lbl">Врач</div>
-      <div class="doc"><div class="av">АД</div><div><b>Дорошенко Анастасия Андреевна</b><span>стоматолог-терапевт</span></div></div>
-      <div class="lbl">Ближайшее свободное время</div>
-      <div class="times"><span>17:30<small>сегодня</small></span><span class="on">10:00<small>завтра</small></span><span>18:30<small>завтра</small></span></div>
-      <a class="btn btn-main go" href="#zapis">Записаться на завтра, 10:00</a>
-      <div class="rem">Напомним за сутки и за 2 часа в Telegram или SMS</div>
-      <div class="pd">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</div>
-    </div>
-  </div>
-</section>
-
-<section class="prices">
-  <div class="wrap prices-in">
-    <div class="pr"><span>Лечение кариеса</span><b>6 900 ₽</b></div>
-    <div class="pr"><span>Лечение пульпита</span><b>16 500 ₽</b></div>
-    <div class="pr"><span>Профессиональная гигиена</span><b>7 500 ₽</b></div>
-    <div class="pr"><span>Отбеливание</span><b>15 000 ₽</b></div>
-    <div class="pr"><span>Металлокерамическая коронка</span><b>22 000 ₽</b></div>
-  </div>
-</section>
-
-<section class="block" id="kliniki">
-  <div class="wrap">
-    <h2>Две клиники — выберите ближайшую</h2>
-    <p class="sub">Запись в обе клиники — в одной форме: выберите клинику, врача и время или позвоните в нужную.</p>
-    <div class="clinics">
-      <div class="clinic">
-        <div class="metro"><i></i> м. Автозаводская</div>
-        <h3>ул. Трофимова, 4</h3>
-        <p>Клиника открыта в ноябре 2011 года. <span style="white-space:nowrap">Пн–пт 9:00–20:00.</span></p>
-        <a class="route" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%A2%D1%80%D0%BE%D1%84%D0%B8%D0%BC%D0%BE%D0%B2%D0%B0%2C%204" target="_blank" rel="noopener">Как добраться — на Яндекс Картах</a>
-        <div class="row"><b><a href="tel:+74957100110" style="color:inherit">+7 (495) 710-01-10</a></b><a class="btn btn-main" href="#zapis">Записаться сюда</a></div>
+    <section class="block" id="kliniki">
+      <div class="wrap">
+        <h2>Две клиники — выберите ближайшую</h2>
+        <p class="sub">
+          Запись в обе клиники — в одной форме: выберите клинику, врача и время
+          или позвоните в нужную.
+        </p>
+        <div class="clinics">
+          <div class="clinic">
+            <div class="metro"><i></i> м. Автозаводская</div>
+            <h3>ул. Трофимова, 4</h3>
+            <p>
+              Клиника открыта в ноябре 2011 года.
+              <span style="white-space: nowrap">Пн–пт 9:00–20:00.</span>
+            </p>
+            <a
+              class="route"
+              href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%A2%D1%80%D0%BE%D1%84%D0%B8%D0%BC%D0%BE%D0%B2%D0%B0%2C%204"
+              target="_blank"
+              rel="noopener"
+              >Как добраться — на Яндекс Картах</a
+            >
+            <div class="row">
+              <b
+                ><a href="tel:+74957100110" style="color: inherit"
+                  >+7 (495) 710-01-10</a
+                ></b
+              ><a class="btn btn-main" href="#zapis">Записаться сюда</a>
+            </div>
+          </div>
+          <div class="clinic v">
+            <div class="metro"><i></i> м. Варшавская</div>
+            <h3>Болотниковская ул., 1, корп. 2</h3>
+            <p>
+              Первая клиника, работает с 2001 года.
+              <span style="white-space: nowrap">Пн–пт 9:00–20:00.</span>
+            </p>
+            <a
+              class="route"
+              href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%91%D0%BE%D0%BB%D0%BE%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%201%D0%BA2"
+              target="_blank"
+              rel="noopener"
+              >Как добраться — на Яндекс Картах</a
+            >
+            <div class="row">
+              <b
+                ><a href="tel:+74996196922" style="color: inherit"
+                  >+7 (499) 619-69-22</a
+                ></b
+              ><a class="btn btn-main" href="#zapis">Записаться сюда</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="clinic v">
-        <div class="metro"><i></i> м. Варшавская</div>
-        <h3>Болотниковская ул., 1, корп. 2</h3>
-        <p>Первая клиника, работает с 2001 года. <span style="white-space:nowrap">Пн–пт 9:00–20:00.</span></p>
-        <a class="route" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%91%D0%BE%D0%BB%D0%BE%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%201%D0%BA2" target="_blank" rel="noopener">Как добраться — на Яндекс Картах</a>
-        <div class="row"><b><a href="tel:+74996196922" style="color:inherit">+7 (499) 619-69-22</a></b><a class="btn btn-main" href="#zapis">Записаться сюда</a></div>
+    </section>
+
+    <section class="block" style="padding-top: 0">
+      <div class="wrap">
+        <h2 id="uslugi">Услуги и цены</h2>
+        <p class="sub">
+          Цены из карточки клиники на Яндексе. Точную стоимость лечения врач
+          называет после осмотра.
+        </p>
+        <div class="svcs">
+          <div class="sv">
+            <h3>Лечение зубов</h3>
+            <p>Кариес, пульпит, лечение каналов, реставрация.</p>
+            <a class="from" href="#zapis">Записаться к терапевту →</a>
+          </div>
+          <div class="sv">
+            <h3>Удаление и хирургия</h3>
+            <p>Удаление зубов, в том числе зубов мудрости, френулопластика.</p>
+            <a class="from" href="#zapis">Записаться к хирургу →</a>
+          </div>
+          <div class="sv">
+            <h3>Имплантация</h3>
+            <p>
+              Импланты и коронки на импланты. Составление плана лечения —
+              1&nbsp;000&nbsp;₽.
+            </p>
+            <a class="from" href="#zapis">Записаться на план лечения →</a>
+          </div>
+          <div class="sv">
+            <h3>Протезирование</h3>
+            <p>Металлокерамические коронки, коронки на импланты, протезы.</p>
+            <a class="from" href="#zapis">Записаться к ортопеду →</a>
+          </div>
+          <div class="sv">
+            <h3>Ортодонтия</h3>
+            <p>Брекеты для детей и взрослых, мини-винты.</p>
+            <a class="from" href="#zapis">Записаться к ортодонту →</a>
+          </div>
+          <div class="sv">
+            <h3>Гигиена и отбеливание</h3>
+            <p>Профессиональная чистка и отбеливание зубов.</p>
+            <a class="from" href="#zapis">Записаться на гигиену →</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="block" style="padding-top:0">
-  <div class="wrap">
-    <h2 id="uslugi">Услуги и цены</h2>
-    <p class="sub">Цены из карточки клиники на Яндексе. Точную стоимость лечения врач называет после осмотра.</p>
-    <div class="svcs">
-      <div class="sv"><h3>Лечение зубов</h3><p>Кариес, пульпит, лечение каналов, реставрация.</p><a class="from" href="#zapis">Записаться к терапевту →</a></div>
-      <div class="sv"><h3>Удаление и хирургия</h3><p>Удаление зубов, в том числе зубов мудрости, френулопластика.</p><a class="from" href="#zapis">Записаться к хирургу →</a></div>
-      <div class="sv"><h3>Имплантация</h3><p>Импланты и коронки на импланты. Составление плана лечения — 1&nbsp;000&nbsp;₽.</p><a class="from" href="#zapis">Записаться на план лечения →</a></div>
-      <div class="sv"><h3>Протезирование</h3><p>Металлокерамические коронки, коронки на импланты, протезы.</p><a class="from" href="#zapis">Записаться к ортопеду →</a></div>
-      <div class="sv"><h3>Ортодонтия</h3><p>Брекеты для детей и взрослых, мини-винты.</p><a class="from" href="#zapis">Записаться к ортодонту →</a></div>
-      <div class="sv"><h3>Гигиена и отбеливание</h3><p>Профессиональная чистка и отбеливание зубов.</p><a class="from" href="#zapis">Записаться на гигиену →</a></div>
-    </div>
-  </div>
-</section>
-
-<section class="block" style="padding-top:0">
-  <div class="wrap">
-    <h2 id="vrachi">Врачи</h2>
-    <p class="sub">Пациенты называют их по именам в отзывах на Яндексе.</p>
-    <div class="docs">
-      <div class="dc"><div class="av">НК</div><span class="role">Хирург · имплантолог</span><b>Кузнецова Наталия Андреевна</b><a class="dl" href="#zapis">Записаться →</a></div>
-      <div class="dc"><div class="av">АД</div><span class="role">Терапевт</span><b>Дорошенко Анастасия Андреевна</b><a class="dl" href="#zapis">Записаться →</a></div>
-      <div class="dc"><div class="av">АМ</div><span class="role">Ортодонт</span><b>Милосердная Анастасия Денисовна</b><a class="dl" href="#zapis">Записаться →</a></div>
-      <div class="dc"><div class="av">АК</div><span class="role">Директор клиники</span><b>Кузнецов Андрей Станиславович</b><a class="dl" href="#zapis">Записаться →</a></div>
-    </div>
-  </div>
-</section>
-
-<section class="block rev">
-  <div class="wrap">
-    <h2 id="otzyvy">Что пишут пациенты</h2>
-    <p class="sub">Отзывы с Яндекс Карт, клиника на Автозаводской.</p>
-    <div class="revs">
-      <div class="rv"><div class="st">★★★★★</div>«Сходил на консультацию буквально в 11 клиник, находящихся в удобной доступности, и эта была последней. Без сомнений я остался делать лечение в ней.»<b>Лев К. <small>· февраль 2026</small></b></div>
-      <div class="rv"><div class="st">★★★★★</div>«Отдельное спасибо, что нас согласились принять срочно, в тот же день! До этого обзванивала несколько клиник, записаться по срочному не смогла.»<b>Елена Ш. <small>· сентябрь 2025</small></b></div>
-      <div class="rv"><div class="st">★★★★★</div>«Лечение и подготовка к брекетам прошла очень быстро, уже почти год ношу систему… Цены средние, качество отличное.»<b>Анастасия Г. <small>· июнь 2025</small></b></div>
-    </div>
-  </div>
-</section>
-
-<section class="block">
-  <div class="wrap">
-    <div class="bot">
-      <div>
-        <h2 id="bot">Запись в Telegram и MAX</h2>
-        <p>Бот клиники: выберите клинику, врача и время, перенесите приём или задайте вопрос про адрес и цены. Напомним о визите за сутки и за 2 часа.</p>
+    <section class="block" style="padding-top: 0">
+      <div class="wrap">
+        <h2 id="vrachi">Врачи</h2>
+        <p class="sub">Пациенты называют их по именам в отзывах на Яндексе.</p>
+        <div class="docs">
+          <div class="dc">
+            <div class="av">НК</div>
+            <span class="role">Хирург · имплантолог</span
+            ><b>Кузнецова Наталия Андреевна</b
+            ><a class="dl" href="#zapis">Записаться →</a>
+          </div>
+          <div class="dc">
+            <div class="av">АД</div>
+            <span class="role">Терапевт</span
+            ><b>Дорошенко Анастасия Андреевна</b
+            ><a class="dl" href="#zapis">Записаться →</a>
+          </div>
+          <div class="dc">
+            <div class="av">АМ</div>
+            <span class="role">Ортодонт</span
+            ><b>Милосердная Анастасия Денисовна</b
+            ><a class="dl" href="#zapis">Записаться →</a>
+          </div>
+          <div class="dc">
+            <div class="av">АК</div>
+            <span class="role">Директор клиники</span
+            ><b>Кузнецов Андрей Станиславович</b
+            ><a class="dl" href="#zapis">Записаться →</a>
+          </div>
+        </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:10px"><a class="btn" href="#bot">Открыть в Telegram · демо</a><a class="btn" href="#bot">Открыть в MAX · демо</a></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<footer>
-  <div class="wrap">
+    <section class="block rev">
+      <div class="wrap">
+        <h2 id="otzyvy">Что пишут пациенты</h2>
+        <p class="sub">Отзывы с Яндекс Карт, клиника на Автозаводской.</p>
+        <div class="revs">
+          <div class="rv">
+            <div class="st">★★★★★</div>
+            «Сходил на консультацию буквально в 11 клиник, находящихся в удобной
+            доступности, и эта была последней. Без сомнений я остался делать
+            лечение в ней.»<b>Лев К. <small>· февраль 2026</small></b>
+          </div>
+          <div class="rv">
+            <div class="st">★★★★★</div>
+            «Отдельное спасибо, что нас согласились принять срочно, в тот же
+            день! До этого обзванивала несколько клиник, записаться по срочному
+            не смогла.»<b>Елена Ш. <small>· сентябрь 2025</small></b>
+          </div>
+          <div class="rv">
+            <div class="st">★★★★★</div>
+            «Лечение и подготовка к брекетам прошла очень быстро, уже почти год
+            ношу систему… Цены средние, качество отличное.»<b
+              >Анастасия Г. <small>· июнь 2025</small></b
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="wrap">
+        <div class="bot">
+          <div>
+            <h2 id="bot">Запись в Telegram и MAX</h2>
+            <p>
+              Бот клиники: выберите клинику, врача и время, перенесите приём или
+              задайте вопрос про адрес и цены. Напомним о визите за сутки и за 2
+              часа.
+            </p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <a class="btn" href="#bot">Открыть в Telegram · демо</a
+            ><a class="btn" href="#bot">Открыть в MAX · демо</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
     Демонстрационная страница. Автор — Мустафа Элькуши, веб-разработчик, Москва · <a href="https://t.me/Elkushi99" style="color:inherit">Telegram @Elkushi99</a><br>Клиника к созданию этой страницы отношения не имеет и за неё не отвечает. Тексты и цены взяты из карточки клиники на Яндекс Картах и приведены как пример. Онлайн-запись и бот на этой странице не работают — это демонстрация.
-    <div class="warn">Имеются противопоказания, необходима консультация специалиста</div>
-  </div>
-</footer>
-<div class="sticky"><a class="btn btn-main" href="#zapis">Записаться</a><a class="btn btn-line" href="tel:+74957100110">Позвонить</a></div>
-</body>
+    <div class="warn">
+          Имеются противопоказания, необходима консультация специалиста
+        </div>
+      </div>
+    </footer>
+    <div class="sticky">
+      <a class="btn btn-main" href="#zapis">Записаться</a
+      ><a class="btn btn-line" href="tel:+74957100110">Позвонить</a>
+    </div>
+  </body>
 </html>
