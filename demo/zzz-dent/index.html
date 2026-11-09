@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap" rel="stylesheet">
 <style>
-  :root { --blue:#0a3f86; --blue2:#3c6aa6; --sky:#eaf0f7; --sky2:#dbe5f1; --paper:#f7f5f0; --ink:#152130; --ink2:#334152; --muted:#617082; --line:#e3e1da; --ok:#2f7a52; }
+  :root { --blue:#0a3f86; --blue2:#3c6aa6; --sky:#eaf0f7; --sky2:#dbe5f1; --paper:#f7f5f0; --ink:#152130; --ink2:#334152; --muted:#55657a; --line:#e3e1da; --ok:#2f7a52; }
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:"Golos Text", Arial, sans-serif; color:var(--ink); background:#fff; -webkit-font-smoothing:antialiased; }
   a { color:inherit; text-decoration:none; }
@@ -44,6 +44,7 @@
   .since { display:flex; gap:28px; margin-top:30px; padding-top:22px; border-top:1px solid var(--line); max-width:560px; }
   .since div { font-size:13px; color:var(--muted); line-height:1.45; }
   .since b { display:block; font-family:Literata, Georgia, serif; font-size:24px; color:var(--ink); white-space:nowrap; }
+  .since b .star { color:#e0a320; font-size:.85em; }
 
   .book { background:#fff; border-radius:18px; padding:22px 22px 18px; box-shadow:0 18px 50px rgba(10,63,134,.14); border:1px solid var(--sky2); }
   .book .t { display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:16px; }
@@ -90,16 +91,20 @@
   .clinic .row .btn { height:42px; font-size:14px; padding:0 16px; }
 
   .svcs { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  .sv { background:var(--paper); border-radius:16px; padding:22px; }
+  .sv { background:#fff; border:1px solid var(--line); border-radius:16px; padding:22px; display:flex; flex-direction:column; }
   .sv h3 { font-size:17px; font-weight:600; margin-bottom:6px; }
   .sv p { font-size:14px; color:var(--ink2); line-height:1.55; }
-  .sv .from { margin-top:12px; font-weight:700; color:var(--blue); font-size:15px; }
+  .sv .from { margin-top:auto; padding-top:14px; font-weight:600; color:var(--blue); font-size:14.5px; }
+  .sv .from:hover, .dc .dl:hover, .route:hover { text-decoration:underline; }
 
   .docs { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-  .dc { border:1px solid var(--line); border-radius:16px; padding:20px; }
-  .dc .av { width:54px; height:54px; font-size:18px; margin-bottom:14px; }
+  .dc { border:1px solid var(--line); border-radius:16px; padding:22px 20px 18px; display:flex; flex-direction:column; background:linear-gradient(180deg, var(--sky) 0 62px, #fff 62px); }
+  .dc .av { width:64px; height:64px; font-size:21px; margin-bottom:14px; background:#fff; border:3px solid #fff; box-shadow:0 4px 14px rgba(10,63,134,.14); }
+  .dc .role { display:inline-block; align-self:flex-start; font-size:12px; font-weight:600; color:var(--blue); background:var(--sky); border-radius:6px; padding:3px 8px; margin-bottom:8px; }
   .dc b { display:block; font-size:15.5px; line-height:1.3; }
-  .dc span { display:block; font-size:13px; color:var(--muted); margin-top:4px; }
+  .dc .dl { margin-top:auto; padding-top:14px; font-size:14px; font-weight:600; color:var(--blue); }
+  .route { font-size:14px; font-weight:600; color:var(--blue); }
+  .book .pd { font-size:11.5px; color:var(--muted); text-align:center; margin-top:6px; line-height:1.4; }
 
   .rev { background:var(--sky); }
   .revs { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
@@ -175,21 +180,21 @@
 <section class="hero" id="zapis">
   <div class="wrap hero-in">
     <div>
-      <div class="eyebrow">Стоматология у метро Автозаводская и Варшавская</div>
-      <h1>Лечим, удаляем, ставим импланты и&nbsp;брекеты — <em>с&nbsp;2001&nbsp;года, две клиники у&nbsp;метро</em></h1>
+      <div class="eyebrow">Стоматология с&nbsp;2001 года · две клиники</div>
+      <h1>Лечим зубы у&nbsp;метро <em>Автозаводская и&nbsp;Варшавская</em></h1>
       <p class="lead">Терапия, хирургия, имплантация, ортодонтия и протезирование. Многие пациенты лечатся у нас 5–10 лет и приводят семьи.</p>
       <div class="chips">
-        <div class="chip"><span class="star">★</span> 5,0 · 114 отзывов на Яндексе (Автозаводская)</div>
         <div class="chip">Пн–пт 9:00–20:00</div>
+        <div class="chip">Онлайн-запись в обе клиники</div>
       </div>
       <div class="cta">
         <a class="btn btn-main" href="#zapis">Выбрать время онлайн</a>
         <a class="btn btn-line" href="tel:+74957100110">Позвонить</a>
       </div>
       <div class="since">
-        <div><b>2001</b>первая клиника на Варшавской</div>
-        <div><b>2011</b>вторая клиника на Автозаводской</div>
-        <div><b>6 900 ₽</b>лечение кариеса</div>
+        <div><b><span class="star">★</span> 5,0</b>рейтинг на Яндексе, 114&nbsp;отзывов</div>
+        <div><b>25 лет</b>лечим на Варшавской, с&nbsp;2001</div>
+        <div><b>2 клиники</b>у метро, одна запись</div>
       </div>
     </div>
 
@@ -202,9 +207,10 @@
       <div class="lbl">Врач</div>
       <div class="doc"><div class="av">АД</div><div><b>Дорошенко Анастасия Андреевна</b><span>стоматолог-терапевт</span></div></div>
       <div class="lbl">Ближайшее свободное время</div>
-      <div class="times"><span>17:30<small>сегодня</small></span><span class="on">10:00<small>вт</small></span><span>18:30<small>вт</small></span></div>
-      <a class="btn btn-main go" href="#zapis">Записаться на вт, 10:00</a>
+      <div class="times"><span>17:30<small>сегодня</small></span><span class="on">10:00<small>завтра</small></span><span>18:30<small>завтра</small></span></div>
+      <a class="btn btn-main go" href="#zapis">Записаться на завтра, 10:00</a>
       <div class="rem">Напомним за сутки и за 2 часа в Telegram или SMS</div>
+      <div class="pd">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</div>
     </div>
   </div>
 </section>
@@ -228,12 +234,14 @@
         <div class="metro"><i></i> м. Автозаводская</div>
         <h3>ул. Трофимова, 4</h3>
         <p>Клиника открыта в ноябре 2011 года. <span style="white-space:nowrap">Пн–пт 9:00–20:00.</span></p>
-        <div class="row"><b>+7 (495) 710-01-10</b><a class="btn btn-main" href="#zapis">Записаться сюда</a></div>
+        <a class="route" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%A2%D1%80%D0%BE%D1%84%D0%B8%D0%BC%D0%BE%D0%B2%D0%B0%2C%204" target="_blank" rel="noopener">Как добраться — на Яндекс Картах</a>
+        <div class="row"><b><a href="tel:+74957100110" style="color:inherit">+7 (495) 710-01-10</a></b><a class="btn btn-main" href="#zapis">Записаться сюда</a></div>
       </div>
       <div class="clinic v">
         <div class="metro"><i></i> м. Варшавская</div>
         <h3>Болотниковская ул., 1, корп. 2</h3>
         <p>Первая клиника, работает с 2001 года. <span style="white-space:nowrap">Пн–пт 9:00–20:00.</span></p>
+        <a class="route" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%91%D0%BE%D0%BB%D0%BE%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%201%D0%BA2" target="_blank" rel="noopener">Как добраться — на Яндекс Картах</a>
         <div class="row"><b><a href="tel:+74996196922" style="color:inherit">+7 (499) 619-69-22</a></b><a class="btn btn-main" href="#zapis">Записаться сюда</a></div>
       </div>
     </div>
@@ -245,12 +253,12 @@
     <h2 id="uslugi">Услуги и цены</h2>
     <p class="sub">Цены из карточки клиники на Яндексе. Точную стоимость лечения врач называет после осмотра.</p>
     <div class="svcs">
-      <div class="sv"><h3>Лечение зубов</h3><p>Кариес, пульпит, лечение каналов, реставрация.</p><div class="from">кариес — 6 900 ₽</div></div>
-      <div class="sv"><h3>Удаление и хирургия</h3><p>Удаление зубов, в том числе зубов мудрости, френулопластика.</p><div class="from">консультация хирурга</div></div>
-      <div class="sv"><h3>Имплантация</h3><p>Импланты и коронки на импланты — по плану лечения.</p><div class="from">план лечения — 1 000 ₽</div></div>
-      <div class="sv"><h3>Протезирование</h3><p>Металлокерамические коронки, коронки на импланты, протезы.</p><div class="from">коронка — 22 000 ₽</div></div>
-      <div class="sv"><h3>Ортодонтия</h3><p>Брекеты для детей и взрослых, мини-винты.</p><div class="from">консультация ортодонта</div></div>
-      <div class="sv"><h3>Гигиена и отбеливание</h3><p>Профессиональная чистка и отбеливание зубов.</p><div class="from">гигиена — 7 500 ₽</div></div>
+      <div class="sv"><h3>Лечение зубов</h3><p>Кариес, пульпит, лечение каналов, реставрация.</p><a class="from" href="#zapis">Записаться к терапевту →</a></div>
+      <div class="sv"><h3>Удаление и хирургия</h3><p>Удаление зубов, в том числе зубов мудрости, френулопластика.</p><a class="from" href="#zapis">Записаться к хирургу →</a></div>
+      <div class="sv"><h3>Имплантация</h3><p>Импланты и коронки на импланты. Составление плана лечения — 1&nbsp;000&nbsp;₽.</p><a class="from" href="#zapis">Записаться на план лечения →</a></div>
+      <div class="sv"><h3>Протезирование</h3><p>Металлокерамические коронки, коронки на импланты, протезы.</p><a class="from" href="#zapis">Записаться к ортопеду →</a></div>
+      <div class="sv"><h3>Ортодонтия</h3><p>Брекеты для детей и взрослых, мини-винты.</p><a class="from" href="#zapis">Записаться к ортодонту →</a></div>
+      <div class="sv"><h3>Гигиена и отбеливание</h3><p>Профессиональная чистка и отбеливание зубов.</p><a class="from" href="#zapis">Записаться на гигиену →</a></div>
     </div>
   </div>
 </section>
@@ -260,10 +268,10 @@
     <h2 id="vrachi">Врачи</h2>
     <p class="sub">Пациенты называют их по именам в отзывах на Яндексе.</p>
     <div class="docs">
-      <div class="dc"><div class="av">НК</div><b>Кузнецова Наталия Андреевна</b><span>стоматолог-хирург, имплантация</span></div>
-      <div class="dc"><div class="av">АД</div><b>Дорошенко Анастасия Андреевна</b><span>стоматолог-терапевт</span></div>
-      <div class="dc"><div class="av">АМ</div><b>Милосердная Анастасия Денисовна</b><span>ортодонт</span></div>
-      <div class="dc"><div class="av">АК</div><b>Кузнецов Андрей Станиславович</b><span>директор клиники</span></div>
+      <div class="dc"><div class="av">НК</div><span class="role">Хирург · имплантолог</span><b>Кузнецова Наталия Андреевна</b><a class="dl" href="#zapis">Записаться →</a></div>
+      <div class="dc"><div class="av">АД</div><span class="role">Терапевт</span><b>Дорошенко Анастасия Андреевна</b><a class="dl" href="#zapis">Записаться →</a></div>
+      <div class="dc"><div class="av">АМ</div><span class="role">Ортодонт</span><b>Милосердная Анастасия Денисовна</b><a class="dl" href="#zapis">Записаться →</a></div>
+      <div class="dc"><div class="av">АК</div><span class="role">Директор клиники</span><b>Кузнецов Андрей Станиславович</b><a class="dl" href="#zapis">Записаться →</a></div>
     </div>
   </div>
 </section>

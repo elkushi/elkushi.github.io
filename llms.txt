@@ -1,0 +1,20 @@
+# Moustafa Elkoushy
+
+> AI Product Engineer in Moscow. Builds AI products and automations, websites, and online booking with messenger bots for private clinics. Writes in English, Arabic and Russian.
+
+## For clinics (Russian: сайт для стоматологии и частной клиники)
+- [Сайт и онлайн-запись для стоматологии и клиники](https://elkushi.github.io/ru/clinics/): сайт под телефон, онлайн-запись, бот в Telegram и MAX с напоминаниями о приёме, сбор отзывов на Яндекс Картах и 2ГИС, аналитика. Можно начать с записи и бота на нынешнем сайте клиники. Бесплатный концепт для клиники. Москва.
+- [Website and online booking for private clinics](https://elkushi.github.io/clinics/): the same offer in English.
+- [Как подняться выше в Яндекс Картах и Google Картах](https://elkushi.github.io/ru/blog/maps-ranking-google-yandex.html): what decides the order on the map, photos, honest reviews, with examples from about 40 Moscow clinics.
+
+## Work
+- [All projects](https://elkushi.github.io/work/): AI products, web development, design and security.
+- [ritorica.com](https://elkushi.github.io/work/ritorica.html): company website designed and built alone on Django CMS.
+- [SEO, AEO and GEO audit app](https://elkushi.github.io/work/seo-audit.html): audits a 25-page site for Google and AI search in under a minute.
+
+## Blog
+- [Blog](https://elkushi.github.io/blog/): notes on building with AI, SEO and AI search, security.
+
+## Contact
+- Telegram: https://t.me/Elkushi99
+- Email: moustafa.elkoushy7@gmail.com

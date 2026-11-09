@@ -37,6 +37,11 @@ WA_SHOWN = "+7 993 280-20-66"
 # PHONE = "+79932802066" and PHONE_SHOWN = "+7 993 280-20-66". Fragments write @@CALL@@.
 PHONE = ""
 PHONE_SHOWN = ""
+# Yandex Webmaster ownership code (webmaster.yandex.ru → add the site → "Meta tag").
+# Russian clinic owners search on Yandex, so the site has to be in Webmaster to be
+# indexed fast, get a region and show up for «сайт для стоматологии». Empty until
+# Moustafa sends the code; the tag is left out while it is empty.
+YANDEX_VERIFICATION = ""
 
 # One chat app is the call to action: hero, nav, services and contact all open
 # a chat, with the username or number written out so it works even when the
@@ -190,6 +195,11 @@ WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design
 LOCALES = {
     "en": {
         "lang": "en", "rtl": False, "name": "English", "short": "EN",
+        "home_name": "Moustafa Elkoushy", "city": "Moscow",
+        "service_type": "Website, online booking and patient bot for private clinics",
+        "service_audience": "Private dental and medical clinics",
+        "service_items": ["Phone-first clinic website", "Online booking", "Telegram and MAX bot with appointment reminders",
+                          "Review collection on Yandex Maps and 2GIS", "Analytics", "Design and print"],
         "nav": ["Work", "Services", "Skills", "Security", "Experience", "Blog", "Contact"],
         "tg": "Telegram", "arrow": "&#8599;",
         "theme": "Switch between light and dark theme", "theme_short": "Light / dark theme",
@@ -236,6 +246,11 @@ LOCALES = {
     },
     "ar": {
         "lang": "ar", "rtl": True, "name": "العربية", "short": "ع",
+        "home_name": "مصطفى القوشي", "city": "Moscow",
+        "service_type": "موقع وحجز إلكتروني وروبوت محادثة للعيادات الخاصة",
+        "service_audience": "عيادات الأسنان والعيادات الطبية الخاصة",
+        "service_items": ["موقع عيادة مصمَّم للهاتف", "حجز إلكتروني", "روبوت محادثة مع تذكير بالمواعيد",
+                          "جمع التقييمات", "التحليلات", "التصميم والمطبوعات"],
         "nav": ["الأعمال", "الخدمات", "المهارات", "الأمان", "الخبرة", "المدونة", "تواصل"],
         "tg": "Telegram", "arrow": "&#8598;",
         "theme": "التبديل بين الوضع الفاتح والداكن", "theme_short": "الوضع الفاتح / الداكن",
@@ -280,6 +295,12 @@ LOCALES = {
     },
     "ru": {
         "lang": "ru", "rtl": False, "name": "Русский", "short": "RU",
+        "home_name": "Мустафа Элькуши", "city": "Москва",
+        "service_type": "Создание сайта и онлайн-записи для стоматологии и частной клиники",
+        "service_audience": "Частные стоматологии и клиники",
+        "service_items": ["Сайт для стоматологии и клиники под телефон", "Онлайн-запись пациентов",
+                          "Бот в Telegram и MAX с напоминаниями о приёме", "Сбор отзывов на Яндекс Картах и 2ГИС",
+                          "Яндекс Метрика и аналитика", "Дизайн и полиграфия для клиники"],
         "nav": ["Работы", "Услуги", "Навыки", "Безопасность", "Опыт", "Блог", "Контакты"],
         "tg": "Telegram", "arrow": "&#8599;",
         "theme": "Переключить светлую и тёмную тему", "theme_short": "Светлая / тёмная тема",
@@ -314,8 +335,8 @@ LOCALES = {
                                             "Что проверяет мой бесплатный аудит SEO, AEO и GEO, что это значит для бизнеса и 22 исправления, которые можно сделать на этой неделе."),
             "blog/ai-agents-python.html": ("ИИ-агенты: что это такое, как их делать и почему на Python · Мустафа Элькуши",
                                            "Что такое ИИ-агент и чем он отличается от чат-бота, работающий агент примерно в 40 строк на Python и восемь правил, которые не дают ему пойти не туда."),
-            "clinics/index.html": ("Сайт, онлайн-запись и бот для частной клиники · Мустафа Элькуши",
-                                   "Решение для частных клиник под ключ: сайт под телефон, онлайн-запись, бот в Telegram и MAX с напоминаниями, отзывы, аналитика и дизайн. Бесплатный концепт для вашей клиники."),
+            "clinics/index.html": ("Сайт для стоматологии и клиники с онлайн-записью · Москва",
+                                   "Сайт для стоматологии и частной клиники в Москве: онлайн-запись, бот в Telegram и MAX с напоминаниями, отзывы на Картах. Бесплатный концепт."),
             "blog/maps-ranking-google-yandex.html": ("Как подняться выше в Яндекс Картах и Google Картах: что решает порядок и какие фото помогают · Мустафа Элькуши",
                                                      "Что Яндекс и Google говорят о порядке на картах, какие фото нужны карточке, честные отзывы и проверка за 15 минут. С примерами из примерно 40 московских клиник."),
             "blog/php-october-2026-django-cms.html": ("PHP в октябре 2026 года: что произошло и когда Django CMS — более безопасный выбор · Мустафа Элькуши",
@@ -473,17 +494,60 @@ def page(code: str, page_path: str, body: str) -> str:
     sprite = SPRITE + "\n" if "#logo-" in body else ""
     # Structured data on the home page, so search engines and AI tools can tell
     # who the site is about. A data block, not a script, so the CSP allows it.
-    person = ""
+    # Structured data, so search engines and AI tools can tell who the site is
+    # about, where a page sits and what is offered. Data blocks, not scripts, so
+    # the CSP allows them. One Person with a fixed @id that every page points to.
+    ld = []
+    me = {"@id": f"{ORIGIN}/#person"}
+    page_name = title.split(" · ")[0]
     if page_path == "index.html":
-        person = "\n<script type=\"application/ld+json\">" + json.dumps({
-            "@context": "https://schema.org", "@type": "Person",
-            "name": "Moustafa Elkoushy", "jobTitle": "AI Product Engineer",
-            "url": canonical(rel), "image": f"{ORIGIN}/assets/og.jpg", "email": f"mailto:{EMAIL}",
-            "address": {"@type": "PostalAddress", "addressLocality": "Moscow", "addressCountry": "RU"},
-            "knowsLanguage": ["ar", "en", "ru"],
-            "alumniOf": {"@type": "CollegeOrUniversity", "name": "Moscow Aviation Institute"},
-            "sameAs": [GITHUB, TG_URL],
-        }, ensure_ascii=False) + "</script>"
+        ld.append({
+            "@context": "https://schema.org",
+            "@graph": [
+                {"@type": "Person", "@id": f"{ORIGIN}/#person",
+                 "name": "Moustafa Elkoushy", "alternateName": ["Мустафа Элькуши", "مصطفى القوشي"],
+                 "jobTitle": "AI Product Engineer",
+                 "url": f"{ORIGIN}/", "image": f"{ORIGIN}/assets/og.jpg", "email": f"mailto:{EMAIL}",
+                 "address": {"@type": "PostalAddress", "addressLocality": "Moscow", "addressCountry": "RU"},
+                 "knowsLanguage": ["ar", "en", "ru"],
+                 "alumniOf": {"@type": "CollegeOrUniversity", "name": "Moscow Aviation Institute"},
+                 "sameAs": [GITHUB, TG_URL]},
+                {"@type": "WebSite", "@id": f"{ORIGIN}/#website", "url": f"{ORIGIN}/",
+                 "name": "Moustafa Elkoushy", "inLanguage": ["en", "ar", "ru"], "publisher": me},
+            ],
+        })
+    elif page_path != "404.html":
+        # Home › section › page, in this page's language.
+        crumbs = [(loc["home_name"], canonical(out_path(code, "index.html")))]
+        section = page_path.split("/")[0]
+        if section in ("work", "blog") and not page_path.endswith("index.html"):
+            crumbs.append((loc["titles"][f"{section}/index.html"][0].split(" · ")[0],
+                           canonical(out_path(code, f"{section}/index.html"))))
+        crumbs.append((page_name, canonical(rel)))
+        ld.append({"@context": "https://schema.org", "@type": "BreadcrumbList",
+                   "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": n, "item": u}
+                                       for i, (n, u) in enumerate(crumbs)]})
+    if page_path == "clinics/index.html":
+        # The clinic offer as a Service: what it is, who provides it, where.
+        # No prices: the clinics pages never show them.
+        ld.append({"@context": "https://schema.org", "@type": "Service",
+                   "name": page_name, "description": desc, "url": canonical(rel),
+                   "serviceType": loc["service_type"], "provider": me,
+                   "areaServed": {"@type": "City", "name": loc["city"]},
+                   "audience": {"@type": "BusinessAudience", "name": loc["service_audience"]},
+                   "availableLanguage": loc["lang"],
+                   "hasOfferCatalog": {"@type": "OfferCatalog", "name": page_name,
+                                       "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n}}
+                                                           for n in loc["service_items"]]}})
+    if page_path.startswith("blog/") and not page_path.endswith("index.html"):
+        slug = page_path[len("blog/"):-len(".html")]
+        ld.append({"@context": "https://schema.org", "@type": "BlogPosting",
+                   "headline": page_name, "description": desc, "url": canonical(rel),
+                   "mainEntityOfPage": canonical(rel), "inLanguage": loc["lang"],
+                   "image": f"{ORIGIN}/assets/og.jpg", "author": me, "publisher": me,
+                   "isPartOf": {"@id": f"{ORIGIN}/#website"},
+                   "about": slug.replace("-", " ")})
+    person = "".join("\n<script type=\"application/ld+json\">" + json.dumps(d, ensure_ascii=False) + "</script>" for d in ld)
     # The FAQ, as structured data too, read straight from the page so the two
     # can never disagree. AI search tools quote these answers.
     faq = re.findall(r'<details class="faq-item"[^>]*>\s*<summary>(.*?)</summary>\s*'
@@ -544,6 +608,7 @@ def page(code: str, page_path: str, body: str) -> str:
         f'<a href="{home}#{anchor}">{label}</a>'
         for anchor, label in zip(["work", "services", "skills", "security", "about", "blog", "contact"], loc["nav"]))
 
+    yandex = f'\n<meta name="yandex-verification" content="{YANDEX_VERIFICATION}">' if YANDEX_VERIFICATION else ""
     return f"""<!doctype html>
 <html lang="{loc['lang']}"{dir_attr}>
 <head>
@@ -562,7 +627,7 @@ def page(code: str, page_path: str, body: str) -> str:
 {preload}
 <meta http-equiv="Content-Security-Policy" content="{CSP}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="google-site-verification" content="3JFS0vJ_Erxu6fGrwpnXT0jaC41ccL5C2abv1gQSxvk"><!-- Search Console: keep, or the site loses verification -->
+<meta name="google-site-verification" content="3JFS0vJ_Erxu6fGrwpnXT0jaC41ccL5C2abv1gQSxvk"><!-- Search Console: keep, or the site loses verification -->{yandex}
 <link rel="icon" href="{up}assets/favicon.svg?v=2" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{up}assets/apple-touch-icon.png">
 <style>{css}</style>
