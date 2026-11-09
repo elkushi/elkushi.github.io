@@ -691,11 +691,50 @@
         border-top: 1px solid #2c3a4c;
         padding-top: 16px;
       }
-      .sticky {
+      .sticky,
+      .book-x {
         display: none;
       }
 
       @media (max-width: 760px) {
+
+        /* Booking on the phone: the card is not shown inline — it opens as a sheet when the
+           visitor taps «Выбрать время онлайн» or the sticky «Записаться». Pure CSS :target,
+           because the published page carries no JavaScript at all. */
+        .book {
+          display: none;
+        }
+        .book:target {
+          display: block;
+          position: fixed;
+          inset: 0;
+          z-index: 50;
+          margin: 0;
+          border-radius: 0;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+          padding: 54px 16px 28px;
+          box-shadow: none;
+        }
+        .book:target .book-x {
+          display: flex;
+        }
+        .book-x {
+          display: none;
+          position: fixed;
+          top: 10px;
+          right: 12px;
+          width: 40px;
+          height: 40px;
+          align-items: center;
+          justify-content: center;
+          border-radius: 12px;
+          background: var(--sand, #eef2f7);
+          color: #0a3f86;
+          font-size: 26px;
+          line-height: 1;
+          text-decoration: none;
+        }
         .wrap {
           padding: 0 16px;
         }
@@ -867,7 +906,7 @@
         <div class="hd-end">
           <div class="hours">пн–пт 9:00–20:00<b>+7 (495) 710-01-10</b></div>
           <a class="btn btn-soft" href="#bot">Telegram</a>
-          <a class="btn btn-main" href="#zapis">Записаться</a>
+          <a class="btn btn-main" href="#book">Записаться</a>
         </div>
       </div>
     </header>
@@ -888,7 +927,7 @@
             <div class="chip">Онлайн-запись в обе клиники</div>
           </div>
           <div class="cta">
-            <a class="btn btn-main" href="#zapis">Выбрать время онлайн</a>
+            <a class="btn btn-main" href="#book">Выбрать время онлайн</a>
             <a class="btn btn-line" href="tel:+74957100110">Позвонить</a>
           </div>
           <div class="since">
@@ -901,7 +940,8 @@
           </div>
         </div>
 
-        <div class="book">
+        <div class="book" id="book">
+          <a class="book-x" href="#zapis" aria-label="Закрыть">×</a>
           <div class="t">Запись онлайн <span class="demo">ДЕМО</span></div>
           <div class="lbl">Клиника</div>
           <div class="seg">
