@@ -1,0 +1,147 @@
+/* Demo of online booking + a Telegram/MAX bot, shown to clinic owners.
+   Not part of the portfolio design system: this page is a product demo, so it has its own
+   calm medical palette. style.css is never loaded here. */
+:root{
+  --ink:#10243d; --ink-2:#44586f; --muted:#7b8a9c;
+  --line:#e3e9f0; --bg:#f5f8fb; --card:#fff;
+  --brand:#0a6ec4; --brand-dark:#07558f; --brand-soft:#e8f2fc;
+  --ok:#128a5a; --ok-soft:#e6f5ee; --warn:#b9761b; --warn-soft:#fdf3e4;
+  --r:14px; --r-sm:10px; --r-pill:999px;
+  --shadow:0 1px 2px rgba(16,36,61,.06), 0 8px 24px rgba(16,36,61,.07);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1060px; margin:0 auto; padding:0 16px}
+h1,h2,h3{line-height:1.2; margin:0; letter-spacing:-.015em}
+h1{font-size:clamp(25px,5.4vw,40px); font-weight:800}
+h2{font-size:clamp(20px,3.6vw,27px); font-weight:750}
+h3{font-size:17px; font-weight:700}
+p{margin:0}
+a{color:var(--brand-dark)}
+
+/* the page must say what it is, before anything else */
+.ribbon{background:var(--warn-soft); border-bottom:1px solid #f0e0c4; color:#6b4a12;
+  font-size:13.5px; padding:9px 0; text-align:center}
+.ribbon b{font-weight:700}
+
+header.top{padding:34px 0 10px}
+.eyebrow{color:var(--brand-dark); font-weight:700; font-size:12.5px; letter-spacing:.09em;
+  text-transform:uppercase; margin-bottom:10px}
+header.top p.lead{color:var(--ink-2); font-size:17px; margin-top:12px; max-width:62ch}
+
+section{padding:30px 0}
+.sec-head{margin-bottom:16px}
+.sec-head .n{display:inline-block; min-width:26px; height:26px; line-height:26px; text-align:center;
+  background:var(--brand); color:#fff; border-radius:var(--r-pill); font-size:13px;
+  font-weight:700; margin-right:9px}
+.sec-head p{color:var(--ink-2); margin-top:7px; max-width:64ch; font-size:15px}
+
+.grid{display:grid; gap:18px; grid-template-columns:1fr}
+@media (min-width:900px){ .grid.two{grid-template-columns:1.05fr .95fr; align-items:start} }
+
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--shadow); padding:18px}
+.card > h3{margin-bottom:4px}
+.card .sub{color:var(--muted); font-size:13.5px; margin-bottom:14px}
+
+/* ---- the booking widget ---- */
+.steps{display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap}
+.steps li{list-style:none; font-size:12px; color:var(--muted); display:flex; align-items:center; gap:6px}
+.steps li .dot{width:21px; height:21px; border-radius:var(--r-pill); background:#eef2f7;
+  color:var(--muted); display:grid; place-items:center; font-weight:700; font-size:11.5px}
+.steps li[data-on] {color:var(--ink)}
+.steps li[data-on] .dot{background:var(--brand); color:#fff}
+.steps li[data-done] .dot{background:var(--ok); color:#fff}
+
+fieldset{border:0; padding:0; margin:0 0 4px}
+legend{font-weight:700; font-size:14.5px; padding:0; margin-bottom:9px}
+.opts{display:flex; flex-wrap:wrap; gap:8px}
+.opt{appearance:none; -webkit-appearance:none; background:#fff; border:1.5px solid var(--line);
+  color:var(--ink); border-radius:var(--r-pill); padding:11px 15px; font:inherit; font-size:14.5px;
+  cursor:pointer; min-height:44px; transition:border-color .25s ease, background-color .25s ease}
+.opt:hover{border-color:#c3d4e6}
+.opt[aria-pressed="true"]{background:var(--brand); border-color:var(--brand); color:#fff; font-weight:600}
+.opt .meta{display:block; font-size:12px; opacity:.72; font-weight:400}
+.opt:disabled{opacity:.42; cursor:not-allowed; text-decoration:line-through}
+.opt:focus-visible{outline:3px solid #9ec8ee; outline-offset:2px}
+
+fieldset.gap{margin-top:16px}
+.hint{color:var(--muted); font-size:14px; margin:2px 0}
+.under-phone{color:var(--muted); font-size:13px; text-align:center; margin-top:12px}
+.slots{display:grid; grid-template-columns:repeat(auto-fill,minmax(84px,1fr)); gap:8px}
+.slots .opt{padding:11px 6px; text-align:center; justify-content:center}
+
+.summary{margin-top:16px; border-top:1px dashed var(--line); padding-top:14px;
+  display:flex; flex-wrap:wrap; gap:8px 18px; font-size:14px; color:var(--ink-2)}
+.summary b{color:var(--ink)}
+
+.go{margin-top:16px; width:100%; min-height:50px; border:0; border-radius:var(--r-pill);
+  background:var(--brand); color:#fff; font:inherit; font-weight:700; font-size:16px;
+  cursor:pointer; transition:background-color .25s ease}
+.go:hover:not(:disabled){background:var(--brand-dark)}
+.go:disabled{background:#c6d3e0; cursor:not-allowed}
+
+.done{display:none; text-align:center; padding:8px 4px 2px}
+.done.on{display:block}
+.done .tick{width:52px; height:52px; margin:0 auto 12px; border-radius:var(--r-pill);
+  background:var(--ok-soft); color:var(--ok); display:grid; place-items:center; font-size:27px}
+.done h3{margin-bottom:6px}
+.done p{color:var(--ink-2); font-size:14.5px}
+.done .note{margin-top:12px; background:var(--warn-soft); color:#6b4a12; border-radius:var(--r-sm);
+  padding:10px 12px; font-size:13.5px}
+.again{margin-top:14px; background:none; border:1.5px solid var(--line); border-radius:var(--r-pill);
+  padding:10px 16px; font:inherit; font-size:14px; cursor:pointer; min-height:44px; color:var(--ink-2)}
+
+/* ---- phone with the bot ---- */
+.phone{background:#0e2135; border-radius:26px; padding:11px; box-shadow:var(--shadow); max-width:330px; margin:0 auto}
+.phone .screen{background:#e9eef3; border-radius:17px; overflow:hidden}
+.phone .bar{background:#0a6ec4; color:#fff; padding:11px 14px}
+.phone .bar b{display:block; font-size:14.5px}
+.phone .bar span{font-size:11.5px; opacity:.85}
+.chat{padding:12px; display:flex; flex-direction:column; gap:9px; min-height:330px}
+.msg{max-width:84%; padding:9px 12px; border-radius:14px; font-size:13.5px; line-height:1.45;
+  background:#fff; border-bottom-left-radius:4px; box-shadow:0 1px 1px rgba(16,36,61,.08)}
+.msg.me{align-self:flex-end; background:#d6ebfb; border-bottom-left-radius:14px; border-bottom-right-radius:4px}
+.msg .t{display:block; font-size:10.5px; color:var(--muted); margin-top:4px}
+.msg .btn-row{display:flex; gap:6px; margin-top:8px; flex-wrap:wrap}
+.msg .btn-row span{background:#eef4fa; color:var(--brand-dark); border-radius:var(--r-pill);
+  padding:5px 10px; font-size:12px; font-weight:600}
+.chat .tag{align-self:center; background:#dbe3ec; color:#5c6b7d; font-size:11px;
+  padding:3px 10px; border-radius:var(--r-pill)}
+.phone .foot{text-align:center; color:#8fa3b8; font-size:11px; padding:7px}
+
+/* ---- admin card ---- */
+.admin .row{display:flex; justify-content:space-between; gap:12px; padding:10px 0;
+  border-bottom:1px solid var(--line); font-size:14px}
+.admin .row:last-of-type{border-bottom:0}
+.admin .row span{color:var(--muted)}
+.admin .actions{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap}
+.admin .actions button{border-radius:var(--r-pill); border:1.5px solid var(--line); background:#fff;
+  padding:10px 15px; font:inherit; font-size:14px; cursor:pointer; min-height:44px}
+.admin .actions button.main{background:var(--ok); border-color:var(--ok); color:#fff; font-weight:600}
+.admin .state{margin-top:12px; font-size:13.5px; color:var(--ok); font-weight:600; display:none}
+.admin .state.on{display:block}
+
+/* ---- list of what step 1 includes ---- */
+.ticks{display:grid; gap:9px; margin:0; padding:0; list-style:none}
+.ticks li{display:flex; gap:10px; font-size:14.5px; color:var(--ink-2)}
+.ticks li::before{content:"✓"; color:var(--ok); font-weight:700; flex:none}
+
+footer{border-top:1px solid var(--line); margin-top:26px; padding:24px 0 40px; background:#fff}
+footer p{color:var(--ink-2); font-size:14px; max-width:68ch}
+footer .cta{display:inline-flex; align-items:center; min-height:48px; margin-top:14px;
+  background:var(--brand); color:#fff; text-decoration:none; font-weight:650;
+  padding:0 20px; border-radius:var(--r-pill); transition:background-color .25s ease}
+footer .cta:hover{background:var(--brand-dark)}
+footer .small{color:var(--muted); font-size:12.5px; margin-top:16px}
+
+/* Once the demo is booked the left card collapses to a short confirmation while the phone beside
+   it stays tall, which left a big hole on a laptop. Hold the height so the page does not jump. */
+@media (min-width:900px){ #booking-card{min-height:700px} }
+
+@media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important} }
