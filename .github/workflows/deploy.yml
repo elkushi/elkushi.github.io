@@ -44,6 +44,9 @@ jobs:
           # is missing from it is pushed to the Pages repo and then silently dropped at deploy —
           # which is exactly how /clinics/ once returned 404 (commit 871abf3).
           if [ -d demo ]; then cp -r demo _site/; fi
+          # /zapis/ is the live booking demo linked from page 1 of every emailed pitch. Same
+          # allowlist trap as demo/ above: leave it out and the link in a sent PDF 404s.
+          if [ -d zapis ]; then cp -r zapis _site/; fi
           echo "published:" && find _site -name '*.html' | sort
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
