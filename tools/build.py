@@ -207,7 +207,7 @@ LOCALES = {
         "font_preload": ["Outfit.woff2"],
         "titles": {
             "index.html": ("Moustafa Elkoushy · AI Product Engineer",
-                           "AI product engineer. I turn bold AI ideas into real-world products, and I make the AI check its own work."),
+                           "AI product engineer in Moscow. I build AI automation, websites and online booking for businesses and clinics, and AI that checks its own work."),
             "work/index.html": ("All work · Moustafa Elkoushy",
                                 "Every project, grouped: AI products, web development, design and security."),
             "work/ritorica.html": ("ritorica.com: rebuilt alone, and still running · Moustafa Elkoushy",
@@ -262,7 +262,7 @@ LOCALES = {
         "font_preload": ["Cairo-arabic.woff2", "Cairo-latin.woff2"],
         "titles": {
             "index.html": ("مصطفى القوشي · مهندس منتجات ذكاء اصطناعي",
-                           "مهندس منتجات ذكاء اصطناعي. أحوّل الأفكار الجريئة في الذكاء الاصطناعي إلى منتجات تعمل في الواقع، وتتحقق من عملها بنفسها."),
+                           "مهندس منتجات ذكاء اصطناعي في موسكو. أبني أتمتة بالذكاء الاصطناعي ومواقع وحجزًا إلكترونيًا للشركات والعيادات، مع ذكاء اصطناعي يتحقق من عمله بنفسه."),
             "work/index.html": ("كل الأعمال · مصطفى القوشي",
                                 "كل المشاريع مصنّفة حسب المجال: منتجات ذكاء اصطناعي، وتطوير الويب، والتصميم، والأمان."),
             "work/ritorica.html": ("ritorica.com: أعدت بناءه بمفردي، وما زلت أديره · مصطفى القوشي",
@@ -316,7 +316,7 @@ LOCALES = {
         "font_preload": ["Manrope-cyrillic.woff2", "Manrope-latin.woff2"],
         "titles": {
             "index.html": ("Мустафа Элькуши · AI Product Engineer",
-                           "AI Product Engineer. Довожу ИИ-идеи до работающих продуктов, в которых ИИ сам проверяет свою работу."),
+                           "AI Product Engineer в Москве. Делаю ИИ-автоматизацию, сайты и онлайн-запись для бизнеса и частных клиник. ИИ в моих продуктах сам проверяет свою работу."),
             "work/index.html": ("Все работы · Мустафа Элькуши",
                                 "Все проекты по группам: ИИ-продукты, веб-разработка, дизайн и безопасность."),
             "work/ritorica.html": ("ritorica.com: пересобрал в одиночку и до сих пор веду · Мустафа Элькуши",
@@ -620,6 +620,8 @@ def page(code: str, page_path: str, body: str) -> str:
         f'<a href="{home}#{anchor}">{label}</a>'
         for anchor, label in zip(["work", "services", "skills", "security", "about", "blog", "contact"], loc["nav"]))
 
+    og_type = "article" if page_path.startswith("blog/") and not page_path.endswith("index.html") else "website"
+    og_locale = {"en": "en_US", "ar": "ar_AR", "ru": "ru_RU"}.get(code, "en_US")
     yandex = f'\n<meta name="yandex-verification" content="{YANDEX_VERIFICATION}">' if YANDEX_VERIFICATION else ""
     return f"""<!doctype html>
 <html lang="{loc['lang']}"{dir_attr}>
@@ -633,6 +635,10 @@ def page(code: str, page_path: str, body: str) -> str:
 <meta property="og:image" content="{ORIGIN}/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:type" content="{og_type}">
+<meta property="og:url" content="{canonical(rel)}">
+<meta property="og:site_name" content="{loc['home_name']}">
+<meta property="og:locale" content="{og_locale}">
 <meta name="twitter:card" content="summary_large_image">{person}
 <meta name="color-scheme" content="dark light">
 {alts}

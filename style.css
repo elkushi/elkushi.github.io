@@ -442,9 +442,85 @@ footer a { color: var(--ink-muted); display: inline-block; padding-block: 11px; 
 }
 /* Rule 5 again: under reduced motion the rotation and the tilt stop; the glow
    stays, because it is colour rather than movement. */
+
+/* ---- Talon case study, "The problem": text left, a looping scene right -----
+   One 14 s clock: a page that looks perfectly fine in a browser while a stray
+   noindex appears, the crawler turns away, a script nobody added shows up and
+   traffic slides. Ambient motion, so it keeps looping; the stopped state (every
+   mark visible) is the default, which is also what reduced motion gets. */
+.problem-split { display: grid; gap: var(--space-8); align-items: center; }
+@media (min-width: 1040px) { .problem-split { grid-template-columns: minmax(0, 1fr) minmax(0, 520px); } }
+.problem-split > div > p:first-child { margin-top: 0; }
+.problem-anim { margin: 0; }
+.problem-anim svg { width: 100%; height: auto; display: block; }
+.problem-anim figcaption { margin-top: var(--space-3); font-size: 14px; color: var(--ink-muted); }
+
+.pa { --pa-bad: #fb7185; --pa-ok: #34d399; }
+:root[data-theme="light"] .pa { --pa-bad: #be123c; --pa-ok: #047857; }
+.pa-win { fill: var(--surface-200); stroke: var(--line); stroke-width: 1.5; }
+.pa-bar { stroke: var(--line); stroke-width: 1.5; }
+.pa-dot { fill: var(--line); }
+.pa-pill { fill: var(--surface-300); }
+.pa-head { fill: var(--ink); opacity: .78; }
+.pa-text { fill: var(--ink-muted); opacity: .3; }
+.pa-block { fill: var(--surface-300); }
+.pa-mono { font: 11px var(--mono); }
+.pa-ok-text { fill: var(--pa-ok); }
+.pa-ok-box { fill: none; stroke: var(--pa-ok); stroke-width: 1.5; }
+.pa-bad-text { fill: var(--pa-bad); }
+.pa-bad-box { fill: var(--surface-100); stroke: var(--pa-bad); stroke-width: 1.5; }
+.pa-bad-dash { fill: none; stroke: var(--pa-bad); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.pa-bad-x { fill: none; stroke: var(--pa-bad); stroke-width: 2.5; stroke-linecap: round; }
+.pa-bot-body { fill: var(--surface-300); stroke: var(--line); stroke-width: 1.5; }
+.pa-bot-eye { fill: var(--ink-muted); }
+.pa-bot-wire { stroke: var(--line); stroke-width: 1.5; }
+.pa-axis { stroke: var(--line); stroke-width: 1; }
+.pa-line { fill: none; stroke: var(--pa-bad); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.pa-flat { fill: none; stroke: var(--ink-muted); stroke-width: 2.5; opacity: .45; stroke-linecap: round; }
+.pa-mark { transform-box: fill-box; transform-origin: center; }
+.pa-bot { opacity: 0; }
+.pa-barrier { opacity: 0; }
+.pa-line { stroke-dasharray: 100; stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pa-ok-chip { animation: pa-ok-pulse 14s linear infinite; }
+  .pa-noindex { animation: pa-noindex-pulse 14s linear infinite; }
+  .pa-script { animation: pa-script-pulse 14s linear infinite; }
+  .pa-bot { animation: pa-bot-drift 14s linear infinite; }
+  .pa-barrier { animation: pa-barrier-pulse 14s linear infinite; }
+  .pa-line { animation: pa-traffic-drift 14s linear infinite; }
+}
+@keyframes pa-ok-pulse { 0%, 10% { opacity: .55; } 14%, 100% { opacity: 1; } }
+@keyframes pa-noindex-pulse {
+  0%, 12% { opacity: 0; transform: scale(.92); }
+  17%, 92% { opacity: 1; transform: none; }
+  97%, 100% { opacity: 0; transform: scale(.92); }
+}
+@keyframes pa-script-pulse {
+  0%, 50% { opacity: 0; transform: scale(.94); }
+  56%, 92% { opacity: 1; transform: none; }
+  97%, 100% { opacity: 0; transform: scale(.94); }
+}
+@keyframes pa-bot-drift {
+  0%, 19% { opacity: 0; transform: translateX(80px); }
+  23% { opacity: 1; transform: translateX(44px); }
+  30% { opacity: 1; transform: translateX(0); }
+  33% { transform: translateX(10px); }
+  36% { transform: translateX(3px); }
+  44% { opacity: 1; transform: translateX(80px); }
+  47%, 100% { opacity: 0; transform: translateX(80px); }
+}
+@keyframes pa-barrier-pulse { 0%, 28% { opacity: 0; } 32%, 42% { opacity: 1; } 47%, 100% { opacity: 0; } }
+@keyframes pa-traffic-drift {
+  0%, 58% { stroke-dashoffset: 100; }
+  84%, 94% { stroke-dashoffset: 0; }
+  98%, 100% { stroke-dashoffset: 100; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .post-feature:hover, .post-card:hover { transform: none; }
   .stack-track, [dir="rtl"] .stack-track, .dot::after { animation: none; }
+  .problem-anim * { animation: none; }
   .nav::before { transition: none; }
   .pcard, .btn { transition: none; }
   .pcard:hover { transform: none; }

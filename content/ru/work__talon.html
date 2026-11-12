@@ -20,12 +20,61 @@
   <article>
     <div class="note"><b>Что это доказывает:</b> я умею превратить тревогу, за которую никто не отвечает&nbsp;— «с нашими сайтами сейчас всё в порядке?»&nbsp;— в скучный ответ по расписанию, который нетехническая команда читает за десять секунд.</div>
 
-    <section class="reveal">
-      <h2>Задача</h2>
-      <p>С сайтом случаются две разные беды, и ни одна о себе не сообщает.</p>
-      <p><b>Поломка.</b> В релиз уехал случайный <code>noindex</code>, правило в <code>robots.txt</code> закрыло краулер, редирект превратился в цепочку или петлю, карта сайта ведёт на удалённые страницы. В браузере всё выглядит нормально. Трафик падает через несколько недель.</p>
-      <p><b>Изменение, о котором не предупредили.</b> DNS-запись сегодня другая. На странице появился новый скрипт. У сертификата сменился издатель. Возможно, у кого-то была веская причина&nbsp;— но команда должна узнать об этом в тот же день, а не через квартал.</p>
-      <p>Мониторинг доступности отвечает на другой вопрос. Он говорит, что сервер ответил. Он не говорит, что сервер ответил страницей, которую поисковики теперь проигнорируют.</p>
+    <section class="reveal problem-split">
+      <div>
+        <h2>Задача</h2>
+  <p>С сайтом случаются две разные беды, и ни одна о себе не сообщает.</p>
+        <p><b>Поломка.</b> В релиз уехал случайный <code>noindex</code>, правило в <code>robots.txt</code> закрыло краулер, редирект превратился в цепочку или петлю, карта сайта ведёт на удалённые страницы. В браузере всё выглядит нормально. Трафик падает через несколько недель.</p>
+        <p><b>Изменение, о котором не предупредили.</b> DNS-запись сегодня другая. На странице появился новый скрипт. У сертификата сменился издатель. Возможно, у кого-то была веская причина&nbsp;— но команда должна узнать об этом в тот же день, а не через квартал.</p>
+        <p>Мониторинг доступности отвечает на другой вопрос. Он говорит, что сервер ответил. Он не говорит, что сервер ответил страницей, которую поисковики теперь проигнорируют.</p>
+      </div>
+      <figure class="problem-anim">
+    <svg class="pa" viewBox="0 0 520 420" role="img" aria-labelledby="pa-title-ru">
+      <title id="pa-title-ru">Окно браузера со страницей, которая выглядит совершенно нормально, пока на ней появляются случайный тег noindex и скрипт, которого никто не добавлял, поисковый робот разворачивается на границе, а линия трафика внизу идёт вниз.</title>
+      <rect class="pa-win" x="28" y="24" width="420" height="268" rx="16"/>
+      <line class="pa-bar" x1="28" y1="62" x2="448" y2="62"/>
+      <circle class="pa-dot" cx="50" cy="43" r="4.5"/>
+      <circle class="pa-dot" cx="66" cy="43" r="4.5"/>
+      <circle class="pa-dot" cx="82" cy="43" r="4.5"/>
+      <rect class="pa-pill" x="100" y="35" width="214" height="16" rx="8"/>
+      <g class="pa-ok-chip">
+        <rect class="pa-ok-box" x="344" y="33" width="78" height="20" rx="10"/>
+        <text class="pa-mono pa-ok-text" x="383" y="47" text-anchor="middle">200 OK</text>
+      </g>
+      <rect class="pa-head" x="52" y="86" width="176" height="16" rx="5"/>
+      <rect class="pa-text" x="52" y="118" width="248" height="9" rx="4"/>
+      <rect class="pa-text" x="52" y="138" width="228" height="9" rx="4"/>
+      <rect class="pa-text" x="52" y="158" width="190" height="9" rx="4"/>
+      <rect class="pa-block" x="316" y="86" width="112" height="86" rx="8"/>
+      <rect class="pa-text" x="52" y="196" width="330" height="9" rx="4"/>
+      <rect class="pa-text" x="52" y="216" width="296" height="9" rx="4"/>
+      <g class="pa-noindex pa-mark">
+        <rect class="pa-bad-box" x="316" y="188" width="112" height="26" rx="7"/>
+        <text class="pa-mono pa-bad-text" x="372" y="205" text-anchor="middle">noindex</text>
+      </g>
+      <g class="pa-script pa-mark">
+        <rect class="pa-bad-box" x="52" y="240" width="196" height="26" rx="7" stroke-dasharray="5 5"/>
+        <text class="pa-mono pa-bad-text" x="150" y="257" text-anchor="middle">&lt;script src=&quot;…&quot;&gt;</text>
+      </g>
+      <g class="pa-barrier">
+        <line class="pa-bad-dash" x1="462" y1="108" x2="462" y2="208"/>
+        <path class="pa-bad-x" d="M454 150 l16 16 M470 150 l-16 16"/>
+      </g>
+      <g transform="translate(466,176)">
+        <g class="pa-bot">
+          <line class="pa-bot-wire" x1="0" y1="-16" x2="0" y2="-26"/>
+          <circle class="pa-dot" cx="0" cy="-29" r="3"/>
+          <rect class="pa-bot-body" x="-20" y="-16" width="40" height="32" rx="11"/>
+          <circle class="pa-bot-eye" cx="-7" cy="0" r="3.5"/>
+          <circle class="pa-bot-eye" cx="7" cy="0" r="3.5"/>
+        </g>
+      </g>
+      <line class="pa-axis" x1="28" y1="396" x2="448" y2="396"/>
+      <path class="pa-flat" d="M28 336 L150 332 L236 336"/>
+      <path class="pa-line" pathLength="100" d="M236 336 C300 338 330 356 366 370 C396 382 420 388 448 392"/>
+    </svg>
+        <figcaption>В окне ничего не сломано. Робот всё равно уходит, а линия трафика отвечает через несколько недель.</figcaption>
+      </figure>
     </section>
 
     <section class="reveal">

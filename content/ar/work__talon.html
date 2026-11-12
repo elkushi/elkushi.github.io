@@ -20,12 +20,61 @@
   <article>
     <div class="note"><b>ما يثبته هذا العمل:</b> أستطيع تحويل قلق لا يملكه أحد&nbsp;— «هل في مواقعنا خلل الآن؟»&nbsp;— إلى إجابة مجدولة ومملّة يقرأها فريق غير تقني في عشر ثوانٍ.</div>
 
-    <section class="reveal">
-      <h2>المشكلة</h2>
-      <p>يصيب المواقعَ نوعان مختلفان من الأعطال، ولا يعلن أيٌّ منهما عن نفسه.</p>
-      <p><b>العطل.</b> يخرج في الإصدار وسم <code>noindex</code> في غير موضعه، أو تحجب قاعدة في <code>robots.txt</code> زاحفًا، أو يتحوّل التحويل إلى سلسلة أو حلقة مفرغة، أو تشير خريطة الموقع إلى صفحات لم تعد موجودة. لا يبدو شيء معطلًا في المتصفّح، ثم تهبط الزيارات بعد أسابيع.</p>
-      <p><b>تغيير لم يعلنه أحد.</b> سجل DNS مختلف اليوم. سكربت جديد ظهر في صفحة. جهة إصدار الشهادة تغيّرت. ربما كان لأحدهم سبب وجيه&nbsp;— لكن على الفريق أن يعرف في اليوم نفسه، لا بعد ثلاثة أشهر.</p>
-      <p>مراقبة التوفّر تجيب عن سؤال آخر: أن الخادم قد ردّ. لكنها لا تقول إن الخادم ردّ بصفحة ستتجاهلها محركات البحث من الآن.</p>
+    <section class="reveal problem-split">
+      <div>
+        <h2>المشكلة</h2>
+  <p>يصيب المواقعَ نوعان مختلفان من الأعطال، ولا يعلن أيٌّ منهما عن نفسه.</p>
+        <p><b>العطل.</b> يخرج في الإصدار وسم <code>noindex</code> في غير موضعه، أو تحجب قاعدة في <code>robots.txt</code> زاحفًا، أو يتحوّل التحويل إلى سلسلة أو حلقة مفرغة، أو تشير خريطة الموقع إلى صفحات لم تعد موجودة. لا يبدو شيء معطلًا في المتصفّح، ثم تهبط الزيارات بعد أسابيع.</p>
+        <p><b>تغيير لم يعلنه أحد.</b> سجل DNS مختلف اليوم. سكربت جديد ظهر في صفحة. جهة إصدار الشهادة تغيّرت. ربما كان لأحدهم سبب وجيه&nbsp;— لكن على الفريق أن يعرف في اليوم نفسه، لا بعد ثلاثة أشهر.</p>
+        <p>مراقبة التوفّر تجيب عن سؤال آخر: أن الخادم قد ردّ. لكنها لا تقول إن الخادم ردّ بصفحة ستتجاهلها محركات البحث من الآن.</p>
+      </div>
+      <figure class="problem-anim">
+    <svg class="pa" viewBox="0 0 520 420" role="img" aria-labelledby="pa-title-ar">
+      <title id="pa-title-ar">نافذة متصفّح تعرض صفحة تبدو طبيعية تمامًا، بينما يظهر فيها وسم noindex شارد وسكربت لم يضفه أحد، ويستدير زاحف محرك البحث عند الحافة، ويهبط خط الزيارات في الأسفل.</title>
+      <rect class="pa-win" x="28" y="24" width="420" height="268" rx="16"/>
+      <line class="pa-bar" x1="28" y1="62" x2="448" y2="62"/>
+      <circle class="pa-dot" cx="50" cy="43" r="4.5"/>
+      <circle class="pa-dot" cx="66" cy="43" r="4.5"/>
+      <circle class="pa-dot" cx="82" cy="43" r="4.5"/>
+      <rect class="pa-pill" x="100" y="35" width="214" height="16" rx="8"/>
+      <g class="pa-ok-chip">
+        <rect class="pa-ok-box" x="344" y="33" width="78" height="20" rx="10"/>
+        <text class="pa-mono pa-ok-text" x="383" y="47" text-anchor="middle">200 OK</text>
+      </g>
+      <rect class="pa-head" x="52" y="86" width="176" height="16" rx="5"/>
+      <rect class="pa-text" x="52" y="118" width="248" height="9" rx="4"/>
+      <rect class="pa-text" x="52" y="138" width="228" height="9" rx="4"/>
+      <rect class="pa-text" x="52" y="158" width="190" height="9" rx="4"/>
+      <rect class="pa-block" x="316" y="86" width="112" height="86" rx="8"/>
+      <rect class="pa-text" x="52" y="196" width="330" height="9" rx="4"/>
+      <rect class="pa-text" x="52" y="216" width="296" height="9" rx="4"/>
+      <g class="pa-noindex pa-mark">
+        <rect class="pa-bad-box" x="316" y="188" width="112" height="26" rx="7"/>
+        <text class="pa-mono pa-bad-text" x="372" y="205" text-anchor="middle">noindex</text>
+      </g>
+      <g class="pa-script pa-mark">
+        <rect class="pa-bad-box" x="52" y="240" width="196" height="26" rx="7" stroke-dasharray="5 5"/>
+        <text class="pa-mono pa-bad-text" x="150" y="257" text-anchor="middle">&lt;script src=&quot;…&quot;&gt;</text>
+      </g>
+      <g class="pa-barrier">
+        <line class="pa-bad-dash" x1="462" y1="108" x2="462" y2="208"/>
+        <path class="pa-bad-x" d="M454 150 l16 16 M470 150 l-16 16"/>
+      </g>
+      <g transform="translate(466,176)">
+        <g class="pa-bot">
+          <line class="pa-bot-wire" x1="0" y1="-16" x2="0" y2="-26"/>
+          <circle class="pa-dot" cx="0" cy="-29" r="3"/>
+          <rect class="pa-bot-body" x="-20" y="-16" width="40" height="32" rx="11"/>
+          <circle class="pa-bot-eye" cx="-7" cy="0" r="3.5"/>
+          <circle class="pa-bot-eye" cx="7" cy="0" r="3.5"/>
+        </g>
+      </g>
+      <line class="pa-axis" x1="28" y1="396" x2="448" y2="396"/>
+      <path class="pa-flat" d="M28 336 L150 332 L236 336"/>
+      <path class="pa-line" pathLength="100" d="M236 336 C300 338 330 356 366 370 C396 382 420 388 448 392"/>
+    </svg>
+        <figcaption>لا شيء في النافذة يبدو معطلًا. ومع ذلك ينصرف الزاحف، ويأتي جواب خط الزيارات بعد أسابيع.</figcaption>
+      </figure>
     </section>
 
     <section class="reveal">
