@@ -31,6 +31,12 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/work/seo-audit.html"/>
   </url>
   <url>
+    <loc>https://elkushi.github.io/work/talon.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/work/talon.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/work/talon.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/work/talon.html"/>
+  </url>
+  <url>
     <loc>https://elkushi.github.io/work/research-workflow.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/work/research-workflow.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/work/research-workflow.html"/>
@@ -139,6 +145,12 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/work/seo-audit.html"/>
   </url>
   <url>
+    <loc>https://elkushi.github.io/ar/work/talon.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/work/talon.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/work/talon.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/work/talon.html"/>
+  </url>
+  <url>
     <loc>https://elkushi.github.io/ar/work/research-workflow.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/work/research-workflow.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/work/research-workflow.html"/>
@@ -245,6 +257,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/work/seo-audit.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/work/seo-audit.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/work/seo-audit.html"/>
+  </url>
+  <url>
+    <loc>https://elkushi.github.io/ru/work/talon.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/work/talon.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/work/talon.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/work/talon.html"/>
   </url>
   <url>
     <loc>https://elkushi.github.io/ru/work/research-workflow.html</loc>

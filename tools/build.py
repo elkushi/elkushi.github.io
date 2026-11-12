@@ -190,7 +190,7 @@ ANALYTICS_V = version("assets/analytics.js")
 # scene and the worker), so one hash covers all four.
 DRONE_V = version("assets/drone-escort.js", "assets/drone-model.js", "assets/drone-scene.js", "assets/drone-worker.js")
 
-WORK = ["ritorica", "video-generator", "seo-audit", "research-workflow", "design-system", "whitepapers", "drone"]
+WORK = ["ritorica", "video-generator", "seo-audit", "talon", "research-workflow", "design-system", "whitepapers", "drone"]
 
 LOCALES = {
     "en": {
@@ -216,6 +216,8 @@ LOCALES = {
                                           "One brief in; a finished video or image post out, in English, Arabic or Russian. Every paid API has a free or local fallback."),
             "work/seo-audit.html": ("Audits a 25-page site in under a minute, for Google and AI search · Moustafa Elkoushy",
                                     "Three scores, a to-do list ranked by impact, and code to paste in. A real run: 25 pages in 57 seconds, scored 76 out of 100."),
+            "work/talon.html": ("A monitor that tells you what broke on your website · Moustafa Elkoushy",
+                                "Eight read-only checks - redirects, robots.txt, sitemaps, pages, certificates, DNS, content and headers - in one Telegram message a day. Open source, 64 tests."),
             "work/research-workflow.html": ("A 61-page competitor report with a source behind every claim · Moustafa Elkoushy",
                                             "Nine research agents in parallel, about 190 sources, 400+ cited claims, and a validator that blocks the rest."),
             "work/design-system.html": ("One brand system, replacing three blues and four button shapes · Moustafa Elkoushy",
@@ -269,6 +271,8 @@ LOCALES = {
                                           "تُدخل طلبًا واحدًا، فتحصل على فيديو أو منشور مصوّر جاهز بالإنجليزية أو العربية أو الروسية. ولكل واجهة API مدفوعة بديل مجاني أو محلي."),
             "work/seo-audit.html": ("فحص موقع من 25 صفحة في أقل من دقيقة، لـ Google وللبحث بالذكاء الاصطناعي · مصطفى القوشي",
                                     "ثلاث درجات تقييم، وقائمة مهام مرتّبة حسب الأثر، وكود جاهز للّصق. في تشغيل حقيقي: 25 صفحة في 57 ثانية، بدرجة 76 من 100."),
+            "work/talon.html": ("أداة مراقبة تخبرك بما تعطّل في موقعك · مصطفى القوشي",
+                                "ثماني فحوصات للقراءة فقط — التحويلات وrobots.txt وخريطة الموقع والصفحات والشهادات وDNS والمحتوى والترويسات — في رسالة واحدة على Telegram كل يوم. مفتوحة المصدر، و64 اختبارًا."),
             "work/research-workflow.html": ("تقرير عن المنافسين من 61 صفحة، لكل ادعاء فيه مصدر · مصطفى القوشي",
                                             "تسعة وكلاء بحث بالتوازي، ونحو 190 مصدرًا، وأكثر من 400 ادعاء موثّق، ومدقّق يوقف كل ما عدا ذلك."),
             "work/design-system.html": ("نظام هوية واحد يحلّ محلّ ثلاث درجات من الأزرق وأربعة أشكال للأزرار · مصطفى القوشي",
@@ -321,6 +325,8 @@ LOCALES = {
                                           "На входе один бриф, на выходе готовое видео или пост с изображением на английском, арабском или русском. У каждого платного API есть бесплатная или локальная замена."),
             "work/seo-audit.html": ("Аудит сайта из 25 страниц меньше чем за минуту — для Google и ИИ-поиска · Мустафа Элькуши",
                                     "Три оценки, список задач по степени влияния и готовый код для вставки. Реальный запуск: 25 страниц за 57 секунд, оценка 76 из 100."),
+            "work/talon.html": ("Монитор, который сообщает, что сломалось на сайте · Мустафа Элькуши",
+                                "Восемь проверок только на чтение — редиректы, robots.txt, карта сайта, страницы, сертификаты, DNS, контент и заголовки — одним сообщением в Telegram в день. Открытый код, 64 теста."),
             "work/research-workflow.html": ("Отчёт о конкурентах на 61 страницу с источником за каждым утверждением · Мустафа Элькуши",
                                             "Девять исследовательских агентов параллельно, около 190 источников, больше 400 утверждений со ссылками на источники и валидатор, который отсекает всё остальное."),
             "work/design-system.html": ("Одна бренд-система вместо трёх оттенков синего и четырёх форм кнопок · Мустафа Элькуши",

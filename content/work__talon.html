@@ -1,0 +1,105 @@
+<div class="wrap">
+  <header class="case-hero">
+    <p class="eyebrow">Case study · Development</p>
+    <h1>A monitor that tells you what broke on your website, in one message a day</h1>
+    <p class="lead">A deploy can quietly add <code>noindex</code>, block Googlebot, break a redirect or let a certificate lapse, and search engines drop the pages before anyone notices. Talon checks sites from the outside every morning and posts one short report to Telegram, plus an alert the moment something changes that nobody announced. It is read-only: it never logs in and never submits a form.</p>
+    <ul class="meta">
+      <li><b>Role:</b> sole developer</li>
+      <li><b>Stack:</b> Python 3.12, httpx, lxml, dnspython, protego, Telegram Bot API, cron or GitHub Actions</li>
+      <li><b>Checks:</b> 8, over sites and their registrable domains</li>
+      <li><b>Tests:</b> 64, all against fixtures and mocked HTTP, never the live internet</li>
+      <li><b>Code:</b> <a href="https://github.com/elkushi/talon">github.com/elkushi/talon</a> &middot; MIT</li>
+    </ul>
+  </header>
+
+  <figure class="bleed">
+    <img src="../assets/talon-how.webp" width="1600" height="849" alt="How Talon works: a schedule runs eight read-only checks, the results are compared against a saved baseline, and a short report goes to Telegram with the full evidence kept in a JSON log.">
+    <figcaption>One scheduled run, eight read-only checks, one message.</figcaption>
+  </figure>
+
+  <article>
+    <div class="note"><b>What this proves:</b> I can take a worry nobody owns &mdash; "is anything wrong with our sites right now?" &mdash; and turn it into a boring, scheduled answer that a non-technical team reads in ten seconds.</div>
+
+    <section class="reveal">
+      <h2>The problem</h2>
+      <p>Two different things go wrong with a website, and neither one announces itself.</p>
+      <p><b>Breakage.</b> A release ships a stray <code>noindex</code>, a <code>robots.txt</code> rule blocks a crawler, a redirect turns into a chain or a loop, a sitemap starts pointing at pages that are gone. Nothing looks broken in a browser. Traffic falls weeks later.</p>
+      <p><b>Change nobody announced.</b> A DNS record is different today. A new script appears on a page. The certificate has a new issuer. Somebody may have had a good reason &mdash; but the team should hear about it the same day, not next quarter.</p>
+      <p>Uptime monitors answer a different question. They tell you the server replied. They do not tell you the server replied with a page that search engines will now ignore.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>What arrives in the morning</h2>
+      <p>One message. Sites with nothing wrong are folded into a single line, so the length of the report is the size of the problem.</p>
+      <pre><code>🧾 Талон — 4 сайта · 1 домен
+12.11.2026 · 09:00 MSK
+
+login.example.com
+❌ Redirects: http://login.example.com отдаёт 200 без перехода на https
+⚠️ Pages: вход https://login.example.com/auth открыт для индексации
+
+example.com
+⚠️ Redirects: http://example.com — 2 перехода вместо одного
+⚠️ SSL: осталось 12 дней (www.example.com)
+⚠️ Headers: нет Strict-Transport-Security
+
+✅ Без замечаний (2): shop.example.com, status.example.com
+
+Итог: 2 ✅ · 1 ⚠️ · 1 ❌</code></pre>
+      <p>Example output. The report is written in Russian, because the team it was built for works in Russian; every string lives in one file, so another language is a translation, not a rewrite. Four statuses, and only two of them are problems: <b>fail</b> hurts indexing, users or security right now, <b>warn</b> needs fixing but not today, <b>ok</b>, and <b>info</b> for anything the tool did not judge &mdash; a baseline it has just saved, or a registry that publishes no data. Info is never counted as a problem, so the summary line can be trusted.</p>
+      <p>The chat gets the short version. Every redirect chain, text diff and DNS record set goes to a JSON log next to the run.</p>
+    </section>
+
+    <figure class="bleed reveal">
+      <img src="../assets/talon-catches.webp" width="1600" height="837" alt="Two kinds of problem Talon catches: breakage, where a deploy quietly broke something, and unannounced change, where something about the site or its domain changed without the team." loading="lazy">
+      <figcaption>Breakage and unannounced change: two different failures, one report.</figcaption>
+    </figure>
+
+    <section class="reveal">
+      <h2>The eight checks</h2>
+      <ul>
+        <li><b>Redirects.</b> Every way into the site &mdash; with and without <code>www</code>, http and https &mdash; should make exactly one permanent hop to the canonical address. The tool walks each chain by hand and records every hop, so "two redirects instead of one" and "a temporary 302 where a permanent 301 belongs" are separate findings.</li>
+        <li><b>robots.txt.</b> Parsed with the same matching rules Google uses, not the standard library's older parser. It fails if a key page is closed to Googlebot or YandexBot, warns when an AI crawler is newly blocked, and shows a diff whenever the file changes.</li>
+        <li><b>Sitemap.</b> Follows sitemap index files, checks that the URLs answer directly, and warns when the URL count collapses.</li>
+        <li><b>Pages.</b> Status, <code>noindex</code> in a meta tag or in the <code>X-Robots-Tag</code> header, canonical, title, description, response time.</li>
+        <li><b>Login portals get the opposite rules.</b> A customer login page should <em>not</em> be indexable, must not be reachable over plain http, and its form must post to its own host. A form that quietly starts posting somewhere else is how credentials get stolen.</li>
+        <li><b>Certificates.</b> Covers the host, 21 days to warn, 7 to fail &mdash; and the issuer is compared with yesterday's, because traffic reaching a different server shows up there first.</li>
+        <li><b>DNS.</b> Every record type, asked of public resolvers and of the authoritative nameserver, compared against records you pin in the config or against yesterday's answer. Address and nameserver changes fail, text records warn, and resolvers disagreeing with the authoritative answer is its own warning.</li>
+        <li><b>Content and headers.</b> The visible text of each key page is normalised and hashed, so a change produces a diff rather than a vague alarm; a new external script, iframe or stylesheet domain fails on sight. Headers cover HSTS and a <code>Server</code> string that gives away its version.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>The decisions that make it trustworthy</h2>
+      <p>A monitor that cries wolf gets muted, and a muted monitor is worse than none. Most of the work went into that.</p>
+      <ul class="checks">
+        <li><b>Read-only, and provably so.</b> GET and HEAD requests and DNS queries. The request helper refuses any other method, so there is no path through the code that posts anything to a watched site. Login pages are opened and read, never submitted to.</li>
+        <li><b>A failed check never becomes the new truth.</b> Baselines are written only after a check succeeds. A network blip cannot silently redefine "normal", which is the classic way a change detector goes blind.</li>
+        <li><b>One retry before anything is called dead,</b> and a host that does not answer is reported as unreachable rather than as a broken certificate. They are different problems and they go to different people.</li>
+        <li><b>A crashing check is one failed line,</b> caught with its traceback and reported as itself. The other seven still run.</li>
+        <li><b>It refuses to guess.</b> Anything the tool cannot know &mdash; which host is canonical, which pages matter, which external scripts are expected &mdash; stays an open question in the config, and the tool refuses to run for real until a human fills it in.</li>
+        <li><b>Secrets never touch the config.</b> It names the environment variables to read; the bot token and chat id live outside the repository.</li>
+        <li><b>Quiet by default.</b> The hourly watch sends nothing unless something changed or failed. Noisy per-URL findings are aggregated into one line, with the full list in the log.</li>
+        <li><b>64 tests, no live traffic.</b> Redirect loops, a blocked crawler, a certificate five days from expiry, an issuer swap, a DNS record change, a new external script, a report over Telegram's length limit &mdash; all reproduced from fixtures, so the suite runs in seconds and never knocks on a real server.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>What it will not tell you</h2>
+      <p>It says <b>what</b> changed and <b>when</b>. It cannot say <b>who</b>: that needs per-user accounts and audit logs at the registrar, the DNS provider and the hosting. I wrote that into the README rather than leaving a monitoring tool to imply more certainty than it has. A change alert is a question to go and ask, not an answer.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Running it</h2>
+      <p>It was built for a real estate of 14 sites and 7 domains, and the public version ships with an example configuration instead. Nothing about any site is hard-coded.</p>
+      <pre><code>git clone https://github.com/elkushi/talon.git &amp;&amp; cd talon
+python3.12 -m venv .venv
+.venv/bin/pip install httpx lxml dnspython protego PyYAML
+cp config.example.yaml config.yaml
+.venv/bin/python -m talon --mode daily --dry-run</code></pre>
+      <p><code>--dry-run</code> prints the report instead of sending it, so you can see what it would say before any bot exists. In production it is two cron lines: the daily report in the morning, the change watch every hour &mdash; on a machine that does not host the sites it watches, so an outage cannot take the monitor down with them.</p>
+    </section>
+
+    <p class="back"><a href="../index.html#work">&larr; All work</a></p>
+  </article>
+</div>
