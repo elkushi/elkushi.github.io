@@ -1,0 +1,174 @@
+<div class="wrap post">
+  <header class="case-hero post-head">
+    <p class="eyebrow">Blog &middot; 9 min read</p>
+    <h1>B2B vs B2C in UI/UX: what changes when the buyer isn't the user</h1>
+    <p class="lead">The usability rules are the same. The reader is not. In B2C one person decides in minutes, with their own money. In B2B a group decides over weeks, with the company's money, and the person who signs often never uses the product. Here is what that changes in research, page structure, product screens and testing, with examples from both kinds of work I do.</p>
+  </header>
+  <figure class="post-cover"><img class="only-dark" src="../assets/blog/b2b-vs-b2c-ux-dark.svg" width="1200" height="630" alt="One person on one side, a group of roles on the other: a user, a manager, IT, finance and security"><img class="only-light" src="../assets/blog/b2b-vs-b2c-ux-light.svg" width="1200" height="630" alt="One person on one side, a group of roles on the other: a user, a manager, IT, finance and security"></figure>
+
+  <article>
+    <section class="reveal">
+      <h2>First, the two words</h2>
+      <ul>
+        <li><b>B2C (business to consumer):</b> a company sells to a person. A food delivery app, an online shop, a clinic's booking page for patients.</li>
+        <li><b>B2B (business to business):</b> a company sells to another company. Accounting software, a CRM, an SMS platform for banks, a website built for a clinic.</li>
+      </ul>
+      <p>I work on both sides. I design and run <b>ritorica.com</b>, the website of a B2B messaging company whose clients are banks, online shops and other businesses. And I build booking pages for private clinics, where the person on the screen is a patient. The same clinic is also a good example of both at once: the patient's booking page is B2C, but my proposal to the clinic owner is B2B. I'll come back to that.</p>
+      <p><b>Tip:</b> on a phone, tap any sketch to open it full size.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>The one difference that explains the rest: who decides</h2>
+      <figure class="sketch"><a href="../assets/blog/b2b-vs-b2c-ux/who-decides-en.webp" target="_blank" rel="noopener"><img src="../assets/blog/b2b-vs-b2c-ux/who-decides-en.webp" width="1600" height="675" alt="Two columns. B2C: one person uses it, pays and decides, in minutes, with their own money; wants it easy and trusted. B2B: users, managers, IT and finance decide together over weeks or months, with company money and career risk; they want proof, safety and a good fit." loading="lazy" decoding="async"></a><figcaption>In B2C the user is the buyer. In B2B, usually not.</figcaption></figure>
+      <p>In B2C, if the page is clear and the price feels fair, the person buys. If not, they close the tab. The whole decision happens in one head, often in one visit.</p>
+      <p>In B2B, Gartner's research says a typical buying group for a complex purchase has <b>six to ten people</b>, and that buyers spend only about <b>17% of the buying process</b> talking to potential suppliers. The rest of the time they research on their own and argue among themselves. So your site, your documents and your demo have to work while you're not in the room.</p>
+      <p>The fear is different too. A bad B2C purchase costs someone a few thousand rubles and an annoyed evening. A bad B2B purchase can cost someone their job. B2B design is largely about <b>reducing the risk of saying yes</b>.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>One B2B page, six readers</h2>
+      <figure class="sketch"><a href="../assets/blog/b2b-vs-b2c-ux/buying-group-en.webp" target="_blank" rel="noopener"><img src="../assets/blog/b2b-vs-b2c-ux/buying-group-en.webp" width="1600" height="1127" alt="A hub. In the centre, one B2B purchase. Around it six roles, each with a question: the daily user (is it easy?), the manager (will it hit the goal?), IT (does it integrate?), finance (cost and return?), security and legal (is our data safe?), procurement (is the vendor reliable?)." loading="lazy" decoding="async"></a><figcaption>Each role opens your site looking for a different answer.</figcaption></figure>
+      <p>Each person in the group opens your site with a different question, and leaves if they can't find their answer:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Who</th><th>Asks</th><th>Looks for on your site</th></tr></thead>
+          <tbody>
+            <tr><td><b>Daily user</b></td><td>Will this make my day easier?</td><td>Screenshots, a demo, a free trial, how it works</td></tr>
+            <tr><td><b>Manager</b></td><td>Will it hit our numbers?</td><td>Case studies with results, use cases for their industry</td></tr>
+            <tr><td><b>IT / developer</b></td><td>Does it fit our systems?</td><td>API docs, integrations, technical specs, uptime</td></tr>
+            <tr><td><b>Finance</b></td><td>What does it cost, and when does it pay back?</td><td>A pricing model, a calculator, what's included</td></tr>
+            <tr><td><b>Security and legal</b></td><td>Is our data safe? Is it legal?</td><td>Where data is stored, certificates, licences, contract terms</td></tr>
+            <tr><td><b>Procurement</b></td><td>Is this vendor real and stable?</td><td>Company details, years in business, client logos, contacts</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A B2C page talks to one person. A B2B site needs a clear path for each of these readers: a "for developers" page, a "security" page, a pricing page, case studies by industry. Not all on the home page, but all one click away.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Two journeys, two timelines</h2>
+      <figure class="sketch"><a href="../assets/blog/b2b-vs-b2c-ux/journey-en.webp" target="_blank" rel="noopener"><img src="../assets/blog/b2b-vs-b2c-ux/journey-en.webp" width="1600" height="437" alt="Two rows. B2C, minutes: sees it, wants it, buys, uses it. B2B, weeks or months: has a problem, researches alone, shortlist and demo, pilot, approvals and contract, onboarding and renewal." loading="lazy" decoding="async"></a><figcaption>B2C is a short funnel. B2B is a long process with several hand-offs, and design has a job at every step.</figcaption></figure>
+      <p>In B2C, design mostly serves one moment: the decision. Remove friction, show the price, make the button obvious.</p>
+      <p>In B2B, there are many moments, and each needs its own material:</p>
+      <ul>
+        <li><b>Research alone:</b> pages that answer questions without a call. If the only answer is "contact us", many buyers simply move to the next vendor on their list.</li>
+        <li><b>Shortlist and demo:</b> something the champion can forward to colleagues: a one-page PDF, a short video, a comparison table.</li>
+        <li><b>Pilot:</b> a small, safe first step with a clear success measure. "Try it on one scenario for 30 days" is easier to approve than "move everything to us".</li>
+        <li><b>Approvals:</b> the security, legal and finance answers, ready before they're asked.</li>
+        <li><b>Onboarding and renewal:</b> the product itself. In B2B the sale isn't over at the contract. If the team doesn't adopt it, they don't renew.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>The landing page: same goal, different page</h2>
+      <figure class="sketch"><a href="../assets/blog/b2b-vs-b2c-ux/landing-pages-en.webp" target="_blank" rel="noopener"><img src="../assets/blog/b2b-vs-b2c-ux/landing-pages-en.webp" width="1600" height="940" alt="Two page outlines side by side. The B2C page has five blocks: photo and benefit, a Book now button, stars and reviews, prices, a three-field form. The B2B page has nine: problem and audience, two actions, client logos, use cases by industry, integration and API, security, a case study with numbers, a pricing model, and a form with a few qualifying fields." loading="lazy" decoding="async"></a><figcaption>A B2C page can be short. A B2B page has more readers to serve, so it's longer, but each block still answers one question.</figcaption></figure>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Element</th><th>B2C</th><th>B2B</th></tr></thead>
+          <tbody>
+            <tr><td><b>Headline</b></td><td>The benefit, in everyday words</td><td>The problem you solve, and for whom (industry, size, role)</td></tr>
+            <tr><td><b>Main action</b></td><td>Buy, book, sign up: now</td><td>See a demo, see pricing, start a pilot, calculate savings. Offer two: one for "talk to a person", one for "let me look myself"</td></tr>
+            <tr><td><b>Proof</b></td><td>Star ratings, reviews, real photos</td><td>Client logos, case studies with numbers, licences, certificates, uptime</td></tr>
+            <tr><td><b>Price</b></td><td>Shown, simple, final</td><td>Often depends on volume, but show the model, the tiers or a "from" price. "Price on request" alone loses people</td></tr>
+            <tr><td><b>Depth</b></td><td>Short. Every extra line costs attention</td><td>Long is fine if it's organised: specs, docs, security, FAQ, PDFs to forward</td></tr>
+            <tr><td><b>Form</b></td><td>As short as possible: often name and phone</td><td>A few qualifying fields are fine (company, volume), but only the ones sales actually uses</td></tr>
+            <tr><td><b>Navigation</b></td><td>By product or category</td><td>By industry, by role, by use case, plus a clear "for developers" path</td></tr>
+            <tr><td><b>Tone</b></td><td>Warm, personal, sometimes playful</td><td>Precise and calm. No hype: buyers have to repeat your claims to their boss</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>One B2B rule I follow on ritorica.com: <b>every claim should survive being forwarded.</b> A marketing manager will paste your sentence into a message to their director. "The best platform" dies there. "Direct connections to mobile operators" survives, because it's a fact someone can check.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Inside the product: consumer app vs work tool</h2>
+      <figure class="sketch"><a href="../assets/blog/b2b-vs-b2c-ux/product-ui-en.webp" target="_blank" rel="noopener"><img src="../assets/blog/b2b-vs-b2c-ux/product-ui-en.webp" width="1600" height="727" alt="Two columns. A consumer app: one task per screen, learned in seconds, phone first, delight matters, few settings. A work tool: dense tables with filters and saved views, bulk actions and shortcuts, roles and permissions, audit log and export, and a learning curve that's fine if it saves hours." loading="lazy" decoding="async"></a><figcaption>Different users, different idea of "simple".</figcaption></figure>
+      <p>For a consumer app, "simple" means anyone can use it the first time, on a phone, in a hurry. For a work tool, "simple" means a person who uses it eight hours a day can do their job with the fewest clicks. Those lead to very different screens.</p>
+      <ul>
+        <li><b>Density is a feature in B2B.</b> An operator comparing 200 orders wants a table with many columns, filters, sorting and saved views, not one big card per screen. Make dense screens readable with spacing, alignment and clear column headers, not by hiding data.</li>
+        <li><b>Speed for experts:</b> keyboard shortcuts, bulk actions ("mark 50 as paid"), search everywhere, remembered filters.</li>
+        <li><b>Roles and permissions:</b> who can see prices, who can export, who can delete. Design the admin screens too; they're part of the product.</li>
+        <li><b>Trust features:</b> an audit log (who changed what, when), exports, clear error messages that say what to do. In B2B, an unclear error becomes a support ticket, and a support ticket costs money.</li>
+        <li><b>Onboarding:</b> B2C onboarding has seconds. B2B onboarding can be a checklist over the first week, with sample data, so the team reaches the first real result quickly.</li>
+      </ul>
+      <p>One warning: "it's for work, so it can be ugly" is wrong. People at work use banking and taxi apps at home, and they compare. Jakob's law applies here too: users expect your tool to work like the tools they already know.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>Research is different too</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>B2C</th><th>B2B</th></tr></thead>
+          <tbody>
+            <tr><td><b>Users</b></td><td>Many, easy to find</td><td>Few, busy, hard to reach</td></tr>
+            <tr><td><b>Who to interview</b></td><td>People who match the persona</td><td>One person per role: user, manager, IT, finance</td></tr>
+            <tr><td><b>How to recruit</b></td><td>Social media, friends of friends, a small reward</td><td>Through sales and support, with the client's permission</td></tr>
+            <tr><td><b>Best free data</b></td><td>Analytics, reviews, app store comments</td><td>Sales call notes, lost-deal reasons, support tickets</td></tr>
+            <tr><td><b>Test sessions</b></td><td>Quick tasks with strangers</td><td>Real tasks with real (or realistic) data, ideally at their desk</td></tr>
+            <tr><td><b>What you measure</b></td><td>Conversion, bookings, cart abandonment, retention</td><td>Qualified leads, demo-to-pilot, pilot-to-contract, time to first result, task time, renewals</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Two B2B-specific habits pay off fast. Ask sales for the <b>three questions every prospect asks</b>, and put the answers on the site. And read the reasons for <b>lost deals</b>: they're usually a design brief in disguise ("couldn't find the API docs", "security team said no").</p>
+    </section>
+
+    <section class="reveal">
+      <h2>One clinic, both sides</h2>
+      <p>Here is how this plays out in my clinic work.</p>
+      <p><b>The patient's booking page is B2C.</b> One person, usually on a phone, often in pain or worried. So: a booking button on the first screen, three fields, no captcha, prices next to services, real reviews. They decide in a minute.</p>
+      <p><b>My proposal to the clinic owner is B2B.</b> The owner is the buyer, but the administrator will use the system every day, and sometimes a partner or a manager has a say. So the proposal is designed to reduce the risk of saying yes:</p>
+      <ul>
+        <li>It starts with <b>their own site</b>: what I found on it, with screenshots, not a generic pitch.</li>
+        <li>It shows the value as <b>an estimate in rubles on their own prices</b>, clearly labelled as an estimate.</li>
+        <li>It includes <b>a demo they can tap</b>, so the owner and the administrator can both try it.</li>
+        <li>It offers <b>a small first step</b> (online booking and a messenger bot on the current site) before a big one (a new website).</li>
+        <li>It states <b>the price</b>, so nobody has to ask.</li>
+      </ul>
+      <p>Same clinic, same goal (more patients booked), two completely different designs, because the person deciding is different.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>What never changes</h2>
+      <figure class="sketch"><a href="../assets/blog/b2b-vs-b2c-ux/never-changes-en.webp" target="_blank" rel="noopener"><img src="../assets/blog/b2b-vs-b2c-ux/never-changes-en.webp" width="1600" height="1051" alt="Six rows: a clear first screen, few steps, readable text, honest proof, a fast page, and testing with real people." loading="lazy" decoding="async"></a><figcaption>B2B is not an excuse for a confusing screen, and B2C is not an excuse for a shallow one.</figcaption></figure>
+      <p>Under all the differences, the basics from my <a href="ui-ux-from-zero.html">UI/UX from zero</a> post apply to both: a first screen that says what it is, few steps to the main action, readable text and contrast, real proof instead of claims, a fast page, and a test with five real people before you call it done.</p>
+    </section>
+
+    <section class="reveal">
+      <h2>The mistakes I see most</h2>
+      <h3>On B2B sites</h3>
+      <ul>
+        <li><b>"Contact us" as the only answer.</b> No prices, no docs, no screenshots. Buyers who research alone skip you.</li>
+        <li><b>Marketing words, no facts.</b> "Innovative", "best in class", "seamless". None of it can be forwarded to a director or checked by IT.</li>
+        <li><b>Designing only for the buyer.</b> The director signs, but if the daily user hates the tool, the contract isn't renewed.</li>
+        <li><b>A ten-field form</b> for a demo, half of which nobody at the company reads.</li>
+        <li><b>No path for developers.</b> The technical person is often the one who says no, quietly.</li>
+      </ul>
+      <h3>On B2C sites</h3>
+      <ul>
+        <li><b>Copying B2B depth.</b> Walls of text and spec tables where a person wanted a price and a button.</li>
+        <li><b>Asking for an account before showing any value.</b></li>
+        <li><b>Fake urgency.</b> Countdown timers and "only 2 left" that are always there. People notice, and trust drops.</li>
+        <li><b>Hidden prices.</b> In consumer services, a price learned only at the end is a classic reason for a bad review.</li>
+      </ul>
+    </section>
+
+    <section class="reveal">
+      <h2>A 5-minute check for your own site</h2>
+      <ol>
+        <li><b>Who decides?</b> One person, or a group? If a group, list the roles.</li>
+        <li><b>For each role,</b> open your site and try to find their answer in two clicks. Note where you get stuck.</li>
+        <li><b>Look at your main button.</b> Does it match how ready your visitor is? "Buy now" for a 6-month B2B decision is too early; "Request a quote" for a 500-ruble product is too slow.</li>
+        <li><b>Read your headline aloud</b> as if forwarding it to a boss (B2B) or saying it to a friend (B2C). Does it survive?</li>
+        <li><b>Check the price.</b> Can a visitor at least understand how you charge?</li>
+      </ol>
+    </section>
+
+    <aside class="post-cta reveal">
+      <h2>Not sure which side your product is on?</h2>
+      <p>Send me your site. I'll tell you who your page is talking to, who it's ignoring, and the three changes that would help most.</p>
+      <p class="cta-row"><a class="btn btn-primary" href="@@TG@@?text=Hi%20Moustafa%2C%20please%20look%20at%20my%20site%3A%20">Write to me on Telegram</a></p>
+    </aside>
+
+    <p class="back"><a href="index.html">&larr; All posts</a></p>
+  </article>
+</div>

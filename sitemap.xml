@@ -109,6 +109,12 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/ui-ux-from-zero.html"/>
   </url>
   <url>
+    <loc>https://elkushi.github.io/blog/b2b-vs-b2c-ux.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/blog/b2b-vs-b2c-ux.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/blog/b2b-vs-b2c-ux.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/b2b-vs-b2c-ux.html"/>
+  </url>
+  <url>
     <loc>https://elkushi.github.io/clinics/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/clinics/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/clinics/"/>
@@ -223,6 +229,12 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/ui-ux-from-zero.html"/>
   </url>
   <url>
+    <loc>https://elkushi.github.io/ar/blog/b2b-vs-b2c-ux.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/blog/b2b-vs-b2c-ux.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/blog/b2b-vs-b2c-ux.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/b2b-vs-b2c-ux.html"/>
+  </url>
+  <url>
     <loc>https://elkushi.github.io/ar/clinics/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/clinics/"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/clinics/"/>
@@ -335,6 +347,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/blog/ui-ux-from-zero.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/blog/ui-ux-from-zero.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/ui-ux-from-zero.html"/>
+  </url>
+  <url>
+    <loc>https://elkushi.github.io/ru/blog/b2b-vs-b2c-ux.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://elkushi.github.io/blog/b2b-vs-b2c-ux.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://elkushi.github.io/ar/blog/b2b-vs-b2c-ux.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://elkushi.github.io/ru/blog/b2b-vs-b2c-ux.html"/>
   </url>
   <url>
     <loc>https://elkushi.github.io/ru/clinics/</loc>
