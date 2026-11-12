@@ -238,6 +238,8 @@ LOCALES = {
                                    "A done-for-you package for private clinics: a phone-first website, online booking, a messenger bot with reminders, reviews, analytics and design. A free concept for your clinic."),
             "blog/maps-ranking-google-yandex.html": ("Get higher on Google Maps and Yandex Maps: what decides the order, and the photos that help · Moustafa Elkoushy",
                                                      "What Google and Yandex say decides the order on the map, the photos a card needs, honest reviews, and a 15-minute check, with examples from about 40 Moscow clinics."),
+            "blog/ui-ux-from-zero.html": ('UI/UX from zero: how to start a new project with design thinking · Moustafa Elkoushy',
+                                          'The order I use from an empty folder to a tested first version: research, the problem, ideas, user flow, wireframes, UI rules with numbers and a 5-person test, with a sketch for every step.'),
             "blog/php-october-2026-django-cms.html": ("PHP in October 2026: what happened, and when a Django CMS is the safer choice · Moustafa Elkoushy",
                                                       "php2shell, an exploited WordPress plugin and a self-rebuilding backdoor: what to do this week if your site runs on PHP, and when moving to Django CMS is worth it."),
             "404.html": ("Page not found · Moustafa Elkoushy",
@@ -289,6 +291,8 @@ LOCALES = {
                                    "حل متكامل للعيادات الخاصة: موقع مصمَّم للهاتف، وحجز إلكتروني، وروبوت على WhatsApp أو Telegram مع تذكير بالمواعيد، وتقييمات، وتحليلات، وتصميم. تصوّر مجاني لعيادتك."),
             "blog/maps-ranking-google-yandex.html": ("كيف ترتفع في خرائط Google وخرائط Yandex: ما الذي يحدّد الترتيب، وأي صور تساعد · مصطفى القوشي",
                                                      "ما تقوله Google وYandex عن ترتيب النتائج على الخريطة، والصور التي تحتاجها البطاقة، والمراجعات النزيهة، وفحص في 15 دقيقة، مع أمثلة من نحو 40 عيادة في موسكو."),
+            "blog/ui-ux-from-zero.html": ('UI/UX من الصفر: كيف تبدأ مشروعًا جديدًا بالتفكير التصميمي · مصطفى القوشي',
+                                          'الترتيب الذي أتبعه من مجلد فارغ إلى نسخة أولى مُختبَرة: البحث، والمشكلة، والأفكار، ومسار المستخدم، والمخططات، وقواعد الواجهة بالأرقام، واختبار مع 5 أشخاص، مع رسم لكل خطوة.'),
             "blog/php-october-2026-django-cms.html": ("PHP في أكتوبر 2026: ماذا حدث، ومتى يكون Django CMS الخيار الأكثر أمانًا · مصطفى القوشي",
                                                       "ثغرات PHP في أكتوبر 2026، وإضافة WordPress سمحت بتشغيل كود دون تسجيل دخول، وباب خلفي يعيد بناء نفسه. ما تفعله هذا الأسبوع، ومتى يستحق الانتقال إلى Django CMS."),
         },
@@ -339,6 +343,8 @@ LOCALES = {
                                    "Сайт для стоматологии и частной клиники в Москве: онлайн-запись, бот в Telegram и MAX с напоминаниями, отзывы на Картах. Бесплатный концепт."),
             "blog/maps-ranking-google-yandex.html": ("Как подняться выше в Яндекс Картах и Google Картах: что решает порядок и какие фото помогают · Мустафа Элькуши",
                                                      "Что Яндекс и Google говорят о порядке на картах, какие фото нужны карточке, честные отзывы и проверка за 15 минут. С примерами из примерно 40 московских клиник."),
+            "blog/ui-ux-from-zero.html": ('UI/UX с нуля: как начать новый проект с дизайн-мышлением · Мустафа Элькуши',
+                                          'Порядок от пустой папки до проверенной первой версии: исследование, проблема, идеи, пользовательский путь, вайрфреймы, правила UI с цифрами и тест на 5 людях. Со схемой к каждому шагу.'),
             "blog/php-october-2026-django-cms.html": ("PHP в октябре 2026 года: что произошло и когда Django CMS — более безопасный выбор · Мустафа Элькуши",
                                                       "Срочное обновление для всех PHP-сайтов, атакованный плагин WordPress и бэкдор, который восстанавливает себя: что сделать на этой неделе и когда стоит переехать на Django CMS."),
         },
@@ -346,7 +352,7 @@ LOCALES = {
 }
 
 BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agents-python", "php-october-2026-django-cms",
-        "maps-ranking-google-yandex"]
+        "maps-ranking-google-yandex", "ui-ux-from-zero"]
 
 PAGE_PATHS = (["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
               + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG]

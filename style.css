@@ -736,6 +736,15 @@ article pre code { background: none; border: 0; padding: 0; font: 13.5px/1.65 va
 .post-cta p { color: var(--ink-muted); margin: 0 0 var(--space-6); }
 .post-cta .cta-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0; }
 @media (max-width: 700px) { .post-cta { padding: var(--space-6); } .post-cta .btn { width: 100%; justify-content: center; } }
+/* UI/UX post: hand-drawn sketches (free-sketch skill) on white paper. They run
+   wider than the text column so the small labels stay readable, centred on the
+   column with negative margins (works LTR and RTL); a tap opens the full-size image. */
+.post .sketch { margin-block: var(--space-8); margin-inline: calc(50% - min(520px, 50vw - 16px)); }
+.post .sketch a { display: block; }
+/* content-visibility on article sections clips paint to the section box, which would cut the wide sketch */
+.post article > section:has(.sketch) { content-visibility: visible; }
+.post .sketch img { width: 100%; background: #fff; box-shadow: var(--shadow-card); }
+.post .sketch figcaption { max-width: 760px; margin-inline: auto; }
 /* Maps post: a weak and a strong map card side by side, and the photo shot
    list. Drawn in HTML so the text translates with the page; the cards are an
    illustration in the site's own style, not a copy of Google's or Yandex's UI. */
