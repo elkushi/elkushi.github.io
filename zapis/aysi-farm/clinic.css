@@ -1,0 +1,2 @@
+/* Only this clinic's accent colour. The CSP forbids inline styles, so it lives in a file. */
+:root{--brand:#1763a6; --brand-dark:#0f4a7e; --brand-soft:#e9f2fa;}

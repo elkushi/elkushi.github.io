@@ -167,3 +167,24 @@ footer .small{color:var(--muted); font-size:12.5px; margin-top:16px}
 @media (min-width:900px){ #booking-card{min-height:700px} }
 
 @media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important} }
+
+/* ---- real phone frame (Moustafa, 2026-11-13) ----
+   The bot thread sits inside Moustafa's own device frame, templates/mockups/iphone.svg, the same
+   one the PDFs use (tools/phone_shot.py). phone-back.svg is the whole frame; the live chat is placed
+   over its screen (x 15, y 12, 385 x 819 of 415 x 843, radius 50 — the centred screen mockup.py uses);
+   phone-front.svg is only the dynamic island and the status-bar icons, laid on top. Regenerate both
+   from the template if it changes. Keep this block last so it overrides the drawn CSS phone above. */
+.phone{background:url(phone-back.svg) center/100% 100% no-repeat; aspect-ratio:415/843; width:100%;
+  max-width:336px; padding:0; border-radius:0; box-shadow:none;
+  filter:drop-shadow(0 18px 28px rgba(16,36,61,.22))}
+.phone::before{content:none}
+.phone .side{display:none}
+.phone::after{content:""; position:absolute; inset:0; width:auto; height:auto; border-radius:0;
+  background:url(phone-front.svg) center/100% 100% no-repeat; pointer-events:none; z-index:2}
+.phone .screen{position:absolute; left:3.6145%; top:1.4235%; width:92.771%; height:97.153%;
+  border-radius:12.99% / 6.105%; display:flex; flex-direction:column}
+.phone .status{flex:none; height:5.62%; padding:0}
+.phone .status > *{visibility:hidden}
+.phone .chat{flex:1; min-height:0; overflow-y:auto; scrollbar-width:none}
+.phone .chat::-webkit-scrollbar{display:none}
+.phone .foot{flex:none}

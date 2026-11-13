@@ -6,80 +6,134 @@
 <!-- Own scripts and styles only; no third-party anything, no network calls, no data leaves the page. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="robots" content="noindex, nofollow">
-<title>Стоматология № 1: как могла бы работать онлайн-запись — демонстрация</title>
-<meta name="description" content="Демонстрация онлайн-записи и бота для клиники «Стоматология № 1», подготовил Мустафа Элькуши. Настоящая запись не создаётся.">
-<link rel="stylesheet" href="../page.css">
+<title>Стоматология № 1: главная страница с онлайн-записью — демонстрация</title>
+<meta name="description" content="Демонстрация: как могла бы выглядеть главная страница клиники «Стоматология № 1» с онлайн-записью на свободное время. Подготовил Мустафа Элькуши. Запись не создаётся.">
+<link rel="stylesheet" href="../concept.css">
+<link rel="stylesheet" href="clinic.css">
 </head>
 <body>
 
-<div class="ribbon">
-  <b>Это демонстрация, а не сайт клиники.</b> Страницу подготовил Мустафа Элькуши, чтобы показать, как могла бы работать онлайн-запись у «Стоматология № 1». Запись не создаётся, данные никуда не отправляются.
-</div>
+<div class="ribbon"><div class="wrap"><b>Это демонстрация, а не сайт клиники.</b> Страницу подготовил Мустафа Элькуши,
+  чтобы показать, как могла бы выглядеть главная страница «Стоматология № 1» с онлайн-записью. Запись не создаётся, данные никуда не отправляются.</div></div>
 
 <header class="top">
-  <div class="wrap">
-    <p class="eyebrow">Запись и бот · шаг 1</p>
-    <h1>Пациент записывается сам — вечером, в выходной и с телефона</h1>
-    <p class="lead">Ниже то же самое, что я предлагаю поставить на ваш нынешний сайт: выбор свободного
-      времени в четыре касания, подтверждение и напоминания в Telegram и MAX, заявка администратору
-      в один клик. Попробуйте — это займёт минуту.</p>
+  <div class="wrap hdr">
+    <div class="brand"><i>С</i>Стоматология № 1</div>
+    <nav class="main">
+      <a href="#uslugi">Услуги и цены</a><a href="#vrachi">Врачи</a><a href="#otzyvy">Отзывы</a><a href="#kontakty">Контакты</a>
+    </nav>
+    <span class="spacer"></span>
+    <a class="tel" href="tel:+74997097495">+7 (499) 709-74-95</a>
+    <a class="btn btn-p" href="#zapis">Записаться</a>
   </div>
 </header>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <h2><span class="n">1</span>Как записывается пациент</h2>
-      <p>Свободное время видно сразу. Ни звонка, ни ожидания ответа, ни капчи.</p>
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="metro"><i></i>Москва и область · круглосуточные клиники</div>
+      <h1>Стоматология № 1: <em>приём круглосуточно, без выходных</em></h1>
+      <p class="lead">Острая боль ночью, лечение, удаление и протезирование. Цены на сайте и в клинике совпадают.</p>
+      <div class="cta">
+        <a class="btn btn-p" href="#zapis">Записаться онлайн</a>
+        <a class="btn btn-s" href="#uslugi">Услуги и цены</a>
+      </div>
+      <div class="rating"><span class="stars">★★★★★</span><span><b>4,8</b> · 101 отзыв на Яндексе</span></div>
     </div>
 
-    <div class="grid two">
-      <div class="card" id="booking-card">
-        <h3>Стоматология № 1</h3>
-        <p class="sub">Круглосуточно, без выходных</p>
+    <div class="book" id="zapis">
+      <h3>Запись онлайн</h3>
+      <p class="sub">Круглосуточно, без выходных</p>
 
-        <ul class="steps" id="steps">
-          <li data-step="1"><span class="dot">1</span>Услуга</li>
-          <li data-step="2"><span class="dot">2</span>Врач</li>
-          <li data-step="3"><span class="dot">3</span>День</li>
-          <li data-step="4"><span class="dot">4</span>Время</li>
-        </ul>
+      <ul class="steps" id="steps">
+        <li data-step="1"><span class="dot">1</span>Услуга</li>
+        <li data-step="2"><span class="dot">2</span>Врач</li>
+        <li data-step="3"><span class="dot">3</span>День</li>
+        <li data-step="4"><span class="dot">4</span>Время</li>
+      </ul>
 
-        <div id="form">
-          <fieldset>
-            <legend>Что беспокоит</legend>
-            <div class="opts" id="services"></div>
-          </fieldset>
-
-          <fieldset class="gap">
-            <legend>Врач</legend>
-            <div class="opts" id="doctors"></div>
-          </fieldset>
-
-          <fieldset class="gap">
-            <legend>День</legend>
-            <div class="opts" id="days"></div>
-          </fieldset>
-
-          <fieldset class="gap">
-            <legend>Свободное время</legend>
-            <div class="slots" id="slots"></div>
-          </fieldset>
-
-          <div class="summary" id="summary"></div>
-          <button class="go" id="go" disabled>Выберите время</button>
-        </div>
-
-        <div class="done" id="done">
-          <div class="tick">✓</div>
-          <h3>Записано</h3>
-          <p id="done-text"></p>
-          <div class="note">Это демонстрация: приём не назначен, имя и телефон не спрашивались
-            и никуда не ушли. У вас на сайте здесь будут два поля и согласие — без капчи.</div>
-          <button class="again" id="again">Попробовать ещё раз</button>
-        </div>
+      <div id="form">
+        <fieldset><legend>Что беспокоит</legend><div class="opts" id="services"></div></fieldset>
+        <fieldset class="gap"><legend>Врач</legend><div class="opts" id="doctors"></div></fieldset>
+        <fieldset class="gap"><legend>День</legend><div class="opts" id="days"></div></fieldset>
+        <fieldset class="gap"><legend>Свободное время</legend><div class="slots" id="slots"></div></fieldset>
+        <div class="summary" id="summary"></div>
+        <button class="go-btn" id="go" disabled>Выберите время</button>
       </div>
 
+      <div class="done" id="done">
+        <div class="tick">✓</div>
+        <h3>Записано</h3>
+        <p id="done-text"></p>
+        <div class="note">Это демонстрация: приём не назначен, имя и телефон не спрашивались и никуда не ушли.
+          У вас здесь будут два поля и согласие — без капчи.</div>
+        <button class="again" id="again">Попробовать ещё раз</button>
+      </div>
+      <p class="tagline">Подтверждение и напоминания придут в Telegram или MAX</p>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap"><div class="trust-grid"><div><b>Круглосуточно</b><span>каждый день, включая праздники</span></div>
+      <div><b>4,8 · 101</b><span>отзыв на Яндексе</span></div>
+      <div><b>Цены на виду</b><span>прайс из 28 позиций открыт до визита</span></div>
+      <div><b>Острая боль</b><span>принимаем в день обращения</span></div></div></div>
+</section>
+
+<section id="uslugi">
+  <div class="wrap">
+    <div class="eyebrow">Услуги и цены</div>
+    <h2>Цены из вашей таблицы</h2>
+    <p class="lead">Точная сумма — после осмотра.</p>
+    <div class="cards"><div class="card"><h3>Пломба</h3><div class="price">2 500 ₽</div><p>материал Россия; Германия — 3 500 ₽</p><div class="go"><a href="#zapis">Записаться →</a></div></div>
+      <div class="card"><h3>Лечение пульпита</h3><div class="price">6 020 ₽</div><p>один канал</p><div class="go"><a href="#zapis">Записаться →</a></div></div>
+      <div class="card"><h3>Удаление зуба</h3><div class="price">2 500 ₽</div><p>сложное — 3 900 ₽</p><div class="go"><a href="#zapis">Записаться →</a></div></div>
+      <div class="card"><h3>Коронка из диоксида циркония</h3><div class="price">10 900 ₽</div><p></p><div class="go"><a href="#zapis">Записаться →</a></div></div>
+      <div class="card"><h3>Съёмный протез</h3><div class="price">по прайсу</div><p></p><div class="go"><a href="#zapis">Записаться →</a></div></div>
+      <div class="card"><h3>Осмотр при острой боли</h3><div class="price">по прайсу</div><p>приём круглосуточно</p><div class="go"><a href="#zapis">Записаться →</a></div></div></div>
+  </div>
+</section>
+
+<section id="vrachi">
+  <div class="wrap">
+    <div class="eyebrow">Врачи</div>
+    <h2>Специалисты клиники</h2>
+    <p class="lead">В демо показаны специальности: имена врачей подставим из вашего сайта.</p>
+    <div class="docs"><div class="doc"><div class="av">С</div><b>Стоматолог-терапевт</b><span>лечение, гигиена</span></div>
+      <div class="doc"><div class="av">Х</div><b>Хирург-имплантолог</b><span>удаление, импланты</span></div>
+      <div class="doc"><div class="av">О</div><b>Ортопед</b><span>коронки и протезы</span></div>
+      <div class="doc"><div class="av">О</div><b>Ортодонт</b><span>брекеты и элайнеры</span></div></div>
+  </div>
+</section>
+
+<section id="otzyvy">
+  <div class="wrap">
+    <div class="eyebrow">Отзывы</div>
+    <h2>Что говорят пациенты</h2>
+    <div class="quotes"><div class="quote">«Приняли ночью с острой болью»<span>Яндекс Карты</span></div>
+      <div class="quote">«Цена совпала с прайсом»<span>Яндекс Карты</span></div>
+      <div class="quote">«Записали сразу»<span>Яндекс Карты</span></div></div>
+  </div>
+</section>
+
+<section class="after">
+  <div class="wrap">
+    <div class="eyebrow">После записи</div>
+    <h2>Пациент не забудет о визите</h2>
+    <div class="after-grid">
+      <div>
+        <p class="lead">Запись, подтверждение и напоминания приходят в Telegram или MAX — в том, что у пациента
+          уже стоит в телефоне. Устанавливать ничего не нужно, SMS остаётся запасным каналом.</p>
+        <ul class="ticks">
+          <li>Подтверждение с датой, врачом и адресом — сразу после записи</li>
+          <li>Напоминание накануне и за 2 часа, с кнопками «Приду» и «Перенести»</li>
+          <li>Освободилось окно — предложение уходит тем, кто ждал, без обзвона</li>
+          <li>Просьба об отзыве после визита — ссылкой на вашу карточку в Яндекс Картах</li>
+          <li>Ответ на пропущенный звонок, чтобы пациент не ушёл искать дальше</li>
+        </ul>
+      </div>
       <div>
         <div class="phone">
           <span class="side" aria-hidden="true"></span>
@@ -87,14 +141,10 @@
             <div class="status" aria-hidden="true"><b>9:41</b><span class="island"></span>
               <span class="right"><span class="sig"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
             <div class="bar"><b>Стоматология № 1</b><span>бот в Telegram и MAX</span></div>
-            <div class="chat" id="chat">
-              <div class="tag">здесь появятся сообщения пациенту</div>
-            </div>
+            <div class="chat" id="chat"><div class="tag">запишитесь выше — сообщения появятся здесь</div></div>
             <div class="foot">демо, пример переписки</div>
           </div>
         </div>
-        <p class="under-phone">
-          Запишитесь слева — подтверждение и напоминания придут сюда.</p>
       </div>
     </div>
   </div>
@@ -102,54 +152,55 @@
 
 <section>
   <div class="wrap">
-    <div class="sec-head">
-      <h2><span class="n">2</span>Что видит администратор</h2>
-      <p>Заявка приходит в тот же Telegram или MAX. Подтверждение — одна кнопка, без звонка.</p>
-    </div>
-    <div class="grid two">
+    <div class="eyebrow">Администратор</div>
+    <h2>Заявка приходит в один экран</h2>
+    <div class="after-grid">
       <div class="card admin">
         <h3>Новая запись с сайта</h3>
-        <p class="sub" id="admin-when">ждёт записи слева</p>
+        <p class="sub" id="admin-when">ждёт записи выше</p>
         <div class="row"><span>Услуга</span><b id="admin-service">—</b></div>
         <div class="row"><span>Врач</span><b id="admin-doctor">—</b></div>
         <div class="row"><span>Время</span><b id="admin-time">—</b></div>
         <div class="row"><span>Пациент</span><b>первичный</b></div>
         <div class="actions">
-          <button class="main" id="confirm">Подтвердить</button>
-          <button>Предложить другое время</button>
+          <button class="btn btn-p" id="confirm">Подтвердить</button>
+          <button class="btn btn-s">Предложить другое время</button>
         </div>
         <p class="state" id="admin-state">Подтверждено. Пациенту ушло сообщение, напоминания поставлены автоматически.</p>
       </div>
-      <div class="card">
-        <h3>Что входит в шаг 1</h3>
-        <p class="sub">Ставится на ваш нынешний сайт — дизайн и тексты не меняются</p>
-        <ul class="ticks">
-          <li>Онлайн-запись на свободное время врача, круглосуточно</li>
-          <li>Бот клиники в Telegram и MAX: запись, перенос, частые вопросы</li>
-          <li>Напоминания накануне и за 2 часа, с кнопками «Приду» и «Перенести»</li>
-          <li>Лист ожидания: освободилось окно — рассылка уходит сама, без обзвона</li>
-          <li>Просьба об отзыве после визита — ссылкой прямо на вашу карточку в Яндекс Картах</li>
-          <li>Ответ на пропущенный звонок, чтобы пациент не ушёл искать дальше</li>
-          <li>SMS остаётся запасным каналом</li>
-        </ul>
+      <div>
+        <p class="lead">Подтверждение — одна кнопка, без звонка. Расписание видно в том же окне,
+          а перенос и отмена меняют время у пациента сами.</p>
       </div>
     </div>
   </div>
 </section>
 
+<section id="kontakty">
+  <div class="wrap">
+    <div class="eyebrow">Контакты</div>
+    <h2>круглосуточные клиники в Москве и области</h2>
+    <div class="contacts-grid">
+      <div class="kv">
+        <div><b>Часы</b>Круглосуточно, без выходных</div>
+        <div><b>Телефон</b><a href="tel:+74997097495">+7 (499) 709-74-95</a></div>
+        <div><b>Как добраться</b>Москва и область · круглосуточные клиники</div>
+      </div>
+      <div><a class="btn btn-p" href="#zapis">Записаться онлайн</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
 <footer>
   <div class="wrap">
-    <h2>Так это может работать у вас</h2>
-    <p>Здесь показаны услуги, врачи и часы «Стоматология № 1» с вашего же сайта, чтобы было видно, как это
-      выглядело бы у вас. Расписание на этой странице придумано для примера: свободное время берётся
-      не из вашей базы. Нынешний сайт остаётся прежним — запись и кнопки бота это небольшая вставка кода.</p>
-    <a class="cta" href="https://elkushi.github.io/ru/clinics/">Что входит и сколько стоит</a>
-    <p class="small">Мустафа Элькуши, веб-разработчик и специалист по автоматизации, Москва ·
-      <a href="https://t.me/Elkushi99">Telegram @Elkushi99</a> ·
+    <p>Так могла бы выглядеть ваша главная страница с онлайн-записью. Услуги, врачи, цены и часы взяты
+      с вашего открытого сайта и карточки на Яндексе; свободное время на этой странице придумано для примера.</p>
+    <p class="small">Демонстрационная страница, подготовил Мустафа Элькуши, веб-разработчик и специалист
+      по автоматизации, Москва · <a href="https://t.me/Elkushi99">Telegram @Elkushi99</a> ·
       <a href="https://elkushi.github.io/ru/">мои работы</a><br>
-      Демонстрационная страница, подготовил Мустафа Элькуши. Это не официальный сайт «Стоматология № 1»
-      и не связанная с клиникой страница. Имена врачей и услуги взяты с её открытого сайта,
-      свободное время показано для примера. Запись ничего не сохраняет и никуда не отправляет.</p>
+      Это не официальный сайт «Стоматология № 1» и не связанная с клиникой страница. Запись ничего не сохраняет
+      и никуда не отправляет.</p>
   </div>
 </footer>
 
