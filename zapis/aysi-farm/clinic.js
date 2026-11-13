@@ -73,7 +73,8 @@ window.CLINIC = {
         "udal",
         "ortoped",
         "impl"
-      ]
+      ],
+      "any": true
     }
   ],
   "open": 9,

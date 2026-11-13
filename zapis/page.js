@@ -25,12 +25,23 @@
   var OPEN = C.open === undefined ? 9 : C.open;
   var CLOSE = C.close === undefined ? 21 : C.close;
   var CLOSED_DAYS = C.closed || [0];      // 0 = воскресенье
+  /* Some clinics work different hours at the weekend (пн–пт 10:00–21:00, сб–вс 11:00–18:00).
+     hours_by_day: { "0": [11, 18], "6": [11, 18] } overrides open/close for those weekdays. */
+  var BY_DAY = C.hours_by_day || {};
+  function hoursOf(date) {
+    var h = BY_DAY[String(date.getDay())];
+    return h ? { open: h[0], close: h[1] } : { open: OPEN, close: CLOSE };
+  }
   var ADDRESS = C.address || "";
   var WD = ["воскресенье","понедельник","вторник","среда","четверг","пятница","суббота"];
   var WD_SHORT = ["вс","пн","вт","ср","чт","пт","сб"];
   var MON = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
 
-  var ANY = DOCTORS[DOCTORS.length - 1].id;   // «Любой свободный» is a choice, not a doctor
+  /* «Любой свободный» is a choice, not a doctor. A clinic with ONE doctor has no such choice —
+     Денталия is a single-doctor practice, and treating its only doctor as "any" left the day with
+     zero free slots, because freeDoctor() skips the "any" entry when looking for a real one. */
+  var ANY = (DOCTORS.filter(function (d) { return d.any; })[0] ||
+             (C.doctors ? {} : DOCTORS[DOCTORS.length - 1])).id || "";
   var state = { service: null, doctor: null, day: null, slot: null, assigned: null };
   var $ = function (id) { return document.getElementById(id); };
 
@@ -64,8 +75,8 @@
   }
 
   function slotsFor(day, doctorId) {
-    var out = [], now = new Date(), h, half;
-    for (h = OPEN; h < CLOSE; h++) {
+    var out = [], now = new Date(), h, half, hrs = hoursOf(day.date);
+    for (h = hrs.open; h < hrs.close; h++) {
       for (half = 0; half < 2; half++) {
         var when = new Date(day.date.getTime());
         when.setHours(h, half ? 30 : 0, 0, 0);
