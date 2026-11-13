@@ -41,7 +41,7 @@ PHONE_SHOWN = ""
 # Russian clinic owners search on Yandex, so the site has to be in Webmaster to be
 # indexed fast, get a region and show up for «сайт для стоматологии». Empty until
 # Moustafa sends the code; the tag is left out while it is empty.
-YANDEX_VERIFICATION = ""
+YANDEX_VERIFICATION = "a76192be7ccf1b10"
 
 # One chat app is the call to action: hero, nav, services and contact all open
 # a chat, with the username or number written out so it works even when the

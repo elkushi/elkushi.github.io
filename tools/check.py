@@ -17,7 +17,9 @@ SITE = Path(__file__).resolve().parent.parent
 errors = []
 
 PAGES = [p for p in sorted(SITE.glob("**/*.html"))
-         if "content" not in p.parts and ".git" not in p.parts]
+         if "content" not in p.parts and ".git" not in p.parts
+         # search-engine ownership files (Yandex Webmaster): plain text pages Yandex reads, not site pages
+         and not p.name.startswith("yandex_")]
 
 for page in PAGES:
     html = page.read_text(encoding="utf-8")
