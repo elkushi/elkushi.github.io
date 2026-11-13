@@ -22,7 +22,8 @@
   var WD_SHORT = ["вс","пн","вт","ср","чт","пт","сб"];
   var MON = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
 
-  var state = { service: null, doctor: null, day: null, slot: null };
+  var ANY = "d4";                    // «Любой свободный» is a choice, not a doctor
+  var state = { service: null, doctor: null, day: null, slot: null, assigned: null };
   var $ = function (id) { return document.getElementById(id); };
 
   /* A slot is "taken" by a stable pseudo-random rule rather than Math.random, so the grid does
@@ -43,6 +44,17 @@
     return out;
   }
 
+  /* «Любой свободный»: a slot is free when any real doctor who does the chosen service is free
+     then, and the booking goes to that doctor. The bot and the admin card name them, because a
+     patient told "you are booked with Любой свободный" would think the page is broken. */
+  function freeDoctor(dayIndex, h, half) {
+    var c = DOCTORS.filter(function (d) {
+      return d.id !== ANY && (!state.service || d.does.indexOf(state.service) >= 0) &&
+             !taken(dayIndex, h, half, d.id);
+    });
+    return c.length ? c[0].id : null;
+  }
+
   function slotsFor(day, doctorId) {
     var out = [], now = new Date(), h, half;
     for (h = OPEN; h < CLOSE; h++) {
@@ -50,9 +62,12 @@
         var when = new Date(day.date.getTime());
         when.setHours(h, half ? 30 : 0, 0, 0);
         if (when.getTime() < now.getTime() + 2 * 3600000) continue;  // не раньше чем через 2 часа
+        var doc = doctorId === ANY ? freeDoctor(day.offset, h, half)
+                                   : (taken(day.offset, h, half, doctorId) ? null : doctorId);
         out.push({
           label: ("0" + h).slice(-2) + ":" + (half ? "30" : "00"),
-          free: !taken(day.offset, h, half, doctorId),
+          free: !!doc,
+          doc: doc,
           when: when
         });
       }
@@ -92,6 +107,7 @@
           var d = DOCTORS.filter(function (x) { return x.id === state.doctor; })[0];
           if (d && d.does.indexOf(s.id) < 0) { state.doctor = null; state.slot = null; }
         }
+        if (state.doctor === ANY) { state.slot = null; }   // who is free depends on the service
         render();
       };
       box.appendChild(b);
@@ -103,7 +119,7 @@
     DOCTORS.forEach(function (d) {
       var can = !state.service || d.does.indexOf(state.service) >= 0;
       var b = button(d.name, can ? d.role : "не ведёт эту услугу", state.doctor === d.id, !can);
-      b.onclick = function () { state.doctor = d.id; state.slot = null; render(); };
+      b.onclick = function () { state.doctor = d.id; state.slot = null; state.assigned = null; render(); };
       box.appendChild(b);
     });
 
@@ -114,7 +130,7 @@
       var label = day.offset === 0 ? "сегодня" : day.offset === 1 ? "завтра" : fmtDay(day.date);
       var b = button(label, day.offset <= 1 ? fmtDay(day.date) : WD[day.date.getDay()],
                      state.day === day.offset, false);
-      b.onclick = function () { state.day = day.offset; state.slot = null; render(); };
+      b.onclick = function () { state.day = day.offset; state.slot = null; state.assigned = null; render(); };
       box.appendChild(b);
     });
 
@@ -133,7 +149,7 @@
         if (!s.free) { return; }
         free++;
         var b = button(s.label, null, state.slot === s.label, false);
-        b.onclick = function () { state.slot = s.label; state.when = s.when; render(); };
+        b.onclick = function () { state.slot = s.label; state.when = s.when; state.assigned = s.doc; render(); };
         box.appendChild(b);
       });
       if (!free) {
@@ -155,7 +171,7 @@
 
     var parts = [];
     if (state.service) { parts.push(["Услуга", name(SERVICES, state.service)]); }
-    if (state.doctor)  { parts.push(["Врач", name(DOCTORS, state.doctor)]); }
+    if (state.doctor)  { parts.push(["Врач", doctorLabel()]); }
     if (state.day !== null) {
       parts.push(["День", fmtDay(days().filter(function (d) { return d.offset === state.day; })[0].date)]);
     }
@@ -172,8 +188,22 @@
     });
 
     var go = $("go");
-    go.disabled = !state.slot;
-    go.textContent = state.slot ? "Записаться на " + state.slot : "Выберите время";
+    go.disabled = !(state.slot && state.service);
+    go.textContent = !state.slot ? "Выберите время"
+                   : !state.service ? "Выберите услугу"
+                   : "Записаться на " + state.slot;
+  }
+
+  // The doctor the patient is actually booked with: for «Любой свободный», the one we assigned.
+  function bookedDoctor() {
+    return name(DOCTORS, state.doctor === ANY ? state.assigned : state.doctor);
+  }
+
+  function doctorLabel() {
+    if (state.doctor !== ANY) { return name(DOCTORS, state.doctor); }
+    if (!(state.slot && state.assigned)) { return "любой свободный"; }
+    var free = state.assigned === "d2" ? "свободен" : "свободна";   // Игорь Павлович
+    return bookedDoctor() + " (" + free + " в это время)";
   }
 
   function name(list, id) {
@@ -214,7 +244,7 @@
 
   function book() {
     var svc = name(SERVICES, state.service),
-        doc = name(DOCTORS, state.doctor),
+        doc = bookedDoctor(),
         day = fmtDay(days().filter(function (d) { return d.offset === state.day; })[0].date);
 
     $("form").style.display = "none";
@@ -245,7 +275,7 @@
   }
 
   function reset() {
-    state = { service: null, doctor: null, day: null, slot: null };
+    state = { service: null, doctor: null, day: null, slot: null, assigned: null };
     $("form").style.display = "";
     $("done").classList.remove("on");
     var chat = $("chat");
