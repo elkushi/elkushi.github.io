@@ -4,25 +4,33 @@
 (function () {
   "use strict";
 
-  var SERVICES = [
+  /* The fictional clinic below is the fallback. A per-clinic page (/zapis/<slug>/) loads its own
+     clinic.js first, which sets window.CLINIC with that clinic's real services, doctors and hours,
+     taken from its study.md. Nothing else in this file knows which clinic it is. */
+  var C = window.CLINIC || {};
+
+  var SERVICES = C.services || [
     { id: "cons",  name: "Консультация",        mins: 30 },
     { id: "karies",name: "Лечение кариеса",     mins: 60 },
     { id: "gig",   name: "Профгигиена",         mins: 60 },
     { id: "impl",  name: "Имплантация",         mins: 90, note: "консультация хирурга" },
     { id: "ortho", name: "Брекеты и элайнеры",  mins: 45, note: "консультация ортодонта" }
   ];
-  var DOCTORS = [
+  var DOCTORS = C.doctors || [
     { id: "d1", name: "Анна Сергеевна",  role: "стоматолог-терапевт", does: ["cons","karies","gig"] },
     { id: "d2", name: "Игорь Павлович",  role: "хирург-имплантолог",  does: ["cons","impl"] },
     { id: "d3", name: "Мария Олеговна",  role: "ортодонт",            does: ["cons","ortho"] },
     { id: "d4", name: "Любой свободный", role: "подберём врача",      does: ["cons","karies","gig","impl","ortho"] }
   ];
-  var OPEN = 9, CLOSE = 21;          // Пн–Сб 09:00–21:00
+  var OPEN = C.open === undefined ? 9 : C.open;
+  var CLOSE = C.close === undefined ? 21 : C.close;
+  var CLOSED_DAYS = C.closed || [0];      // 0 = воскресенье
+  var ADDRESS = C.address || "";
   var WD = ["воскресенье","понедельник","вторник","среда","четверг","пятница","суббота"];
   var WD_SHORT = ["вс","пн","вт","ср","чт","пт","сб"];
   var MON = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
 
-  var ANY = "d4";                    // «Любой свободный» is a choice, not a doctor
+  var ANY = DOCTORS[DOCTORS.length - 1].id;   // «Любой свободный» is a choice, not a doctor
   var state = { service: null, doctor: null, day: null, slot: null, assigned: null };
   var $ = function (id) { return document.getElementById(id); };
 
@@ -38,7 +46,7 @@
     d.setHours(0, 0, 0, 0);
     for (i = 0; out.length < 6 && i < 14; i++) {
       var x = new Date(d.getTime() + i * 86400000);
-      if (x.getDay() === 0) continue;                 // воскресенье выходной
+      if (CLOSED_DAYS.indexOf(x.getDay()) >= 0) continue;   // выходной клиники
       out.push({ date: x, offset: i });
     }
     return out;
@@ -254,7 +262,8 @@
     var chat = $("chat");
     chat.textContent = "";
     chat.appendChild(msg("Здравствуйте! Записал вас:\n" + svc + "\n" + doc + "\n" + day +
-                         ", " + state.slot + "\nАдрес и как пройти — в закреплённом сообщении.",
+                         ", " + state.slot +
+                         (ADDRESS ? "\n" + ADDRESS : "\nАдрес и как пройти — в закреплённом сообщении."),
                          false, "сейчас"));
     chat.appendChild(tag("накануне визита"));
     chat.appendChild(msg("Напоминаю: завтра в " + state.slot + ", " + doc + ".", false,

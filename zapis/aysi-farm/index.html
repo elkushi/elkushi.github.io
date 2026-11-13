@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Own scripts and styles only; no third-party anything, no network calls, no data leaves the page. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="robots" content="noindex, nofollow">
+<title>Айси-Фарм: как могла бы работать онлайн-запись — демонстрация</title>
+<meta name="description" content="Демонстрация онлайн-записи и бота для клиники «Айси-Фарм», подготовил Мустафа Элькуши. Настоящая запись не создаётся.">
+<link rel="stylesheet" href="../page.css">
+</head>
+<body>
+
+<div class="ribbon">
+  <b>Это демонстрация, а не сайт клиники.</b> Страницу подготовил Мустафа Элькуши, чтобы показать, как могла бы работать онлайн-запись у «Айси-Фарм». Запись не создаётся, данные никуда не отправляются.
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Запись и бот · шаг 1</p>
+    <h1>Пациент записывается сам — вечером, в выходной и с телефона</h1>
+    <p class="lead">Ниже то же самое, что я предлагаю поставить на ваш нынешний сайт: выбор свободного
+      времени в четыре касания, подтверждение и напоминания в Telegram и MAX, заявка администратору
+      в один клик. Попробуйте — это займёт минуту.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="n">1</span>Как записывается пациент</h2>
+      <p>Свободное время видно сразу. Ни звонка, ни ожидания ответа, ни капчи.</p>
+    </div>
+
+    <div class="grid two">
+      <div class="card" id="booking-card">
+        <h3>Айси-Фарм</h3>
+        <p class="sub">Пн–Сб 09:00–21:00 · воскресенье выходной</p>
+
+        <ul class="steps" id="steps">
+          <li data-step="1"><span class="dot">1</span>Услуга</li>
+          <li data-step="2"><span class="dot">2</span>Врач</li>
+          <li data-step="3"><span class="dot">3</span>День</li>
+          <li data-step="4"><span class="dot">4</span>Время</li>
+        </ul>
+
+        <div id="form">
+          <fieldset>
+            <legend>Что беспокоит</legend>
+            <div class="opts" id="services"></div>
+          </fieldset>
+
+          <fieldset class="gap">
+            <legend>Врач</legend>
+            <div class="opts" id="doctors"></div>
+          </fieldset>
+
+          <fieldset class="gap">
+            <legend>День</legend>
+            <div class="opts" id="days"></div>
+          </fieldset>
+
+          <fieldset class="gap">
+            <legend>Свободное время</legend>
+            <div class="slots" id="slots"></div>
+          </fieldset>
+
+          <div class="summary" id="summary"></div>
+          <button class="go" id="go" disabled>Выберите время</button>
+        </div>
+
+        <div class="done" id="done">
+          <div class="tick">✓</div>
+          <h3>Записано</h3>
+          <p id="done-text"></p>
+          <div class="note">Это демонстрация: приём не назначен, имя и телефон не спрашивались
+            и никуда не ушли. У вас на сайте здесь будут два поля и согласие — без капчи.</div>
+          <button class="again" id="again">Попробовать ещё раз</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="phone">
+          <span class="side" aria-hidden="true"></span>
+          <div class="screen">
+            <div class="status" aria-hidden="true"><b>9:41</b><span class="island"></span>
+              <span class="right"><span class="sig"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+            <div class="bar"><b>Айси-Фарм</b><span>бот в Telegram и MAX</span></div>
+            <div class="chat" id="chat">
+              <div class="tag">здесь появятся сообщения пациенту</div>
+            </div>
+            <div class="foot">демо, пример переписки</div>
+          </div>
+        </div>
+        <p class="under-phone">
+          Запишитесь слева — подтверждение и напоминания придут сюда.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="n">2</span>Что видит администратор</h2>
+      <p>Заявка приходит в тот же Telegram или MAX. Подтверждение — одна кнопка, без звонка.</p>
+    </div>
+    <div class="grid two">
+      <div class="card admin">
+        <h3>Новая запись с сайта</h3>
+        <p class="sub" id="admin-when">ждёт записи слева</p>
+        <div class="row"><span>Услуга</span><b id="admin-service">—</b></div>
+        <div class="row"><span>Врач</span><b id="admin-doctor">—</b></div>
+        <div class="row"><span>Время</span><b id="admin-time">—</b></div>
+        <div class="row"><span>Пациент</span><b>первичный</b></div>
+        <div class="actions">
+          <button class="main" id="confirm">Подтвердить</button>
+          <button>Предложить другое время</button>
+        </div>
+        <p class="state" id="admin-state">Подтверждено. Пациенту ушло сообщение, напоминания поставлены автоматически.</p>
+      </div>
+      <div class="card">
+        <h3>Что входит в шаг 1</h3>
+        <p class="sub">Ставится на ваш нынешний сайт — дизайн и тексты не меняются</p>
+        <ul class="ticks">
+          <li>Онлайн-запись на свободное время врача, круглосуточно</li>
+          <li>Бот клиники в Telegram и MAX: запись, перенос, частые вопросы</li>
+          <li>Напоминания накануне и за 2 часа, с кнопками «Приду» и «Перенести»</li>
+          <li>Лист ожидания: освободилось окно — рассылка уходит сама, без обзвона</li>
+          <li>Просьба об отзыве после визита — ссылкой прямо на вашу карточку в Яндекс Картах</li>
+          <li>Ответ на пропущенный звонок, чтобы пациент не ушёл искать дальше</li>
+          <li>SMS остаётся запасным каналом</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h2>Так это может работать у вас</h2>
+    <p>Здесь показаны услуги, врачи и часы «Айси-Фарм» с вашего же сайта, чтобы было видно, как это
+      выглядело бы у вас. Расписание на этой странице придумано для примера: свободное время берётся
+      не из вашей базы. Нынешний сайт остаётся прежним — запись и кнопки бота это небольшая вставка кода.</p>
+    <a class="cta" href="https://elkushi.github.io/ru/clinics/">Что входит и сколько стоит</a>
+    <p class="small">Мустафа Элькуши, веб-разработчик и специалист по автоматизации, Москва ·
+      <a href="https://t.me/Elkushi99">Telegram @Elkushi99</a> ·
+      <a href="https://elkushi.github.io/ru/">мои работы</a><br>
+      Демонстрационная страница, подготовил Мустафа Элькуши. Это не официальный сайт «Айси-Фарм»
+      и не связанная с клиникой страница. Имена врачей и услуги взяты с её открытого сайта,
+      свободное время показано для примера. Запись ничего не сохраняет и никуда не отправляет.</p>
+  </div>
+</footer>
+
+<script src="clinic.js"></script>
+<script src="../page.js"></script>
+</body>
+</html>
