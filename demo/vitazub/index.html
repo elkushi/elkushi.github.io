@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Стоматология на Страстном — демо-концепт, не официальный сайт клиники</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a1d17; --muted:#6f625a; --line:#e7ddd5;
+    --bg:#ffffff; --warm:#faf6f2; --sand:#f2ebe4;
+    --accent:#552515; --accent-2:#7a3d26; --accent-soft:#f3e7df;
+    --ok:#2f6b4f; --star:#c98a1b;
+    --r:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{font-family:Manrope,system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:Lora,Georgia,serif;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+  h2{font-size:28px;margin-bottom:8px}
+  .lead{color:var(--muted);max-width:620px}
+  section{padding:56px 0}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);margin-bottom:10px}
+
+  /* concept banner */
+  .banner{background:#2a1d17;color:#f2ebe4;font-size:11.5px;line-height:1.4;text-align:center;padding:7px 16px}
+  .banner b{color:#fff}
+
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .hdr{display:flex;align-items:center;gap:24px;height:68px}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo img{height:52px;width:auto}
+  .logo span{font-family:Lora,serif;font-size:17px;line-height:1.1;color:var(--accent)}
+  .logo small{display:block;font-family:Manrope,sans-serif;font-size:11.5px;color:var(--muted)}
+  nav.main{display:none;gap:22px;font-size:15px;font-weight:500;margin-left:auto}
+  nav.main a:hover{color:var(--accent)}
+  .hdr .tel{display:none;font-weight:700;white-space:nowrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:600;font-size:15px;padding:13px 22px;border:1.5px solid var(--accent);transition:.15s;cursor:pointer;font-family:inherit}
+  .btn-p{background:var(--accent);color:#fff}
+  .btn-p:hover{background:var(--accent-2)}
+  .btn-s{background:#fff;color:var(--accent)}
+  .btn-s:hover{background:var(--accent-soft)}
+  .hdr .btn{margin-left:auto;padding:10px 16px;font-size:14px}
+  .demo{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:#fff3d6;color:#8a5a00;border-radius:6px;padding:2px 6px;vertical-align:middle}
+
+  /* hero */
+  .hero{background:var(--warm);padding:36px 0 48px}
+  .hero-grid{display:grid;gap:28px}
+  .metro{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:18px}
+  .metro i{width:9px;height:9px;border-radius:50%;background:#4fb04f;display:inline-block}
+  .metro i+i{background:#8b8b8b;margin-left:-4px}
+  .hero h1{font-size:31px;margin-bottom:14px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{color:var(--muted);font-size:17px;max-width:540px;margin-bottom:22px}
+  .hero .cta{display:flex;flex-wrap:wrap;gap:10px}
+  .rating{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:14px;color:var(--muted)}
+  .stars{color:var(--star);letter-spacing:2px;font-size:16px}
+  .rating b{color:var(--ink);font-size:16px}
+
+  /* booking demo card */
+  .book{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(85,37,21,.07)}
+  .book h3{font-family:Manrope,sans-serif;font-size:17px;font-weight:700;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .doc-pick{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px}
+  .doc-pick img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:top}
+  .doc-pick b{display:block;font-size:14.5px}
+  .doc-pick span{font-size:13px;color:var(--muted)}
+  .doc-pick .chev{margin-left:auto;color:var(--muted)}
+  .days{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+  .day{border:1px solid var(--line);border-radius:10px;text-align:center;padding:7px 0;font-size:13px;color:var(--muted)}
+  .day b{display:block;color:var(--ink);font-size:15px}
+  .day.on{border-color:var(--accent);background:var(--accent-soft)}
+  .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+  .slot{border:1px solid var(--line);border-radius:9px;text-align:center;padding:8px 0;font-size:14px;font-weight:600}
+  .slot.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .slot.off{color:#c3b8b0;text-decoration:line-through;font-weight:500}
+  .book .btn{width:100%}
+  .book .note{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
+
+  /* trust */
+  .trust{padding:0;margin-top:-1px;background:var(--warm)}
+  .trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding-bottom:48px}
+  .t{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+  .t b{display:block;font-family:Lora,serif;font-size:28px;color:var(--accent);line-height:1.1}
+  .t span{font-size:15px;color:var(--muted)}
+  .t.lic b{font-family:Manrope,sans-serif;font-size:15px;color:var(--ink);margin-bottom:2px}
+  .ph{background:#fff7e0;border:1px dashed #d6a93a;border-radius:4px;padding:0 4px;color:#7a5600}
+
+  /* services */
+  .svc-grid{display:grid;gap:12px;margin-top:24px}
+  .svc{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--r);padding:18px;transition:.15s}
+  .svc:hover{border-color:var(--accent);background:var(--warm)}
+  .svc h3{font-family:Manrope,sans-serif;font-size:17px;font-weight:700;margin-bottom:4px}
+  .svc p{font-size:15.5px;color:var(--muted)}
+  .price{white-space:nowrap;font-weight:700;font-size:15px;color:var(--accent)}
+  .price small{display:block;font-weight:500;font-size:12px;color:var(--muted);text-align:right}
+  .all{display:inline-block;margin-top:18px;font-weight:600;color:var(--accent);border-bottom:1.5px solid currentColor}
+
+  /* doctors */
+  .docs{background:var(--warm)}
+  .doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
+  .doc{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+  .doc img{aspect-ratio:285/300;object-fit:cover;object-position:top;width:100%}
+  .doc div{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
+  .doc b{font-size:15px;line-height:1.3}
+  .doc span{font-size:14.5px;color:var(--muted);margin:4px 0 10px;flex:1}
+  .doc a{font-size:15px;font-weight:700;color:var(--accent);min-height:44px;display:inline-flex;align-items:center}
+  .facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-size:15.5px;color:var(--muted)}
+  .facts b{color:var(--ink)}
+
+  /* reviews */
+  .rev-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+  .yx{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:var(--r);padding:12px 16px}
+  .yx b{font-family:Lora,serif;font-size:30px;color:var(--accent);line-height:1}
+  .yx span{font-size:13px;color:var(--muted)}
+  .rev-grid{display:grid;gap:14px;margin-top:24px}
+  .rev{border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px}
+  .rev q{quotes:none;font-size:15px}
+  .rev .who{font-size:14px;color:var(--muted);margin-top:auto}
+  .rev .who b{color:var(--ink);font-weight:600}
+
+  /* how booking works */
+  .how{background:var(--accent);color:#f6eee8}
+  .how h2{color:#fff}
+  .how .lead{color:#e3cfc3}
+  .steps{display:grid;gap:12px;margin-top:26px;counter-reset:s}
+  .step{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:var(--r);padding:18px}
+  .step h3{font-family:Manrope,sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
+  .step h3::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#fff;color:var(--accent);font-size:13px;margin-right:10px}
+  .step p{font-size:15.5px;color:#e3cfc3}
+  .chan{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .chan span{font-size:13px;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:5px 12px}
+
+  /* contacts */
+  .ct-grid{display:grid;gap:20px}
+  .ct dl{display:grid;gap:14px;margin:18px 0 22px}
+  .ct dt{font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+  .ct dd{font-size:16px;font-weight:500}
+  .ct dd a{display:inline-block;padding:10px 0;font-weight:700}
+  .ct dd small{display:block;font-size:14px;color:var(--muted)}
+  .ct .cta{display:flex;flex-wrap:wrap;gap:10px}
+  .map{border-radius:var(--r);min-height:260px;background:
+      linear-gradient(90deg,transparent 48%,#e2d6cc 48%,#e2d6cc 52%,transparent 52%) 0 0/120px 120px,
+      linear-gradient(0deg,transparent 48%,#e2d6cc 48%,#e2d6cc 52%,transparent 52%) 0 0/120px 120px,
+      #efe7df;position:relative;border:1px solid var(--line)}
+  .map .pin{position:absolute;left:50%;top:46%;transform:translate(-50%,-100%);background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:7px 12px;border-radius:10px;white-space:nowrap}
+  .map .pin::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--accent);border-bottom:0}
+  .map small{position:absolute;right:10px;bottom:8px;font-size:11px;color:var(--muted)}
+
+  /* footer */
+  footer{background:#21160f;color:#cbbdb3;font-size:13.5px;padding:36px 0 110px}
+  footer .f-grid{display:grid;gap:18px}
+  footer b{color:#fff}
+  footer a{border-bottom:1px solid rgba(255,255,255,.25)}
+  .warn{margin-top:22px;padding:14px 16px;border:1px solid rgba(255,255,255,.2);border-radius:10px;font-weight:700;letter-spacing:.03em;color:#fff;text-align:center;font-size:14px}
+
+  /* sticky mobile bar */
+  .mbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(0,0,0,.06)}
+  .mbar .btn{flex:1;padding:12px 10px;font-size:15px}
+  .mbar .btn-s{flex:0 0 auto}
+
+  @media (min-width:720px){
+    .trust-grid{grid-template-columns:repeat(4,1fr)}
+    .svc-grid{grid-template-columns:repeat(2,1fr)}
+    .doc-grid{grid-template-columns:repeat(4,1fr)}
+    .rev-grid{grid-template-columns:repeat(3,1fr)}
+    .steps{grid-template-columns:repeat(3,1fr)}
+    footer .f-grid{grid-template-columns:2fr 1fr 1fr}
+    h2{font-size:34px}
+  }
+  @media (min-width:1000px){
+    .logo img{height:60px}
+    nav.main{display:flex}
+    .hdr .tel{display:block}
+    .hdr .btn{margin-left:0}
+    .hero{padding:64px 0 56px}
+    .hero-grid{grid-template-columns:1.15fr .85fr;align-items:center;gap:56px}
+    .hero h1{font-size:50px}
+    .svc-grid{grid-template-columns:repeat(3,1fr)}
+    .ct-grid{grid-template-columns:1fr 1.2fr;align-items:stretch}
+    section{padding:80px 0}
+    .mbar{display:none}
+    footer{padding-bottom:36px}
+  }
+
+  /* live hero card (demo) */
+  a.doc-pick{color:inherit;transition:border-color .15s}
+  a.doc-pick:hover{border-color:var(--accent)}
+  .hday{font-size:13px;color:var(--muted);margin:0 0 8px}
+  #hero-times .slot{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:52px;color:var(--ink);transition:.15s}
+  #hero-times .slot small{font-size:11.5px;font-weight:500;color:var(--muted)}
+  #hero-times .slot:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .eb-light{color:#e9c9b6}
+  .btn-light{background:#fff;color:var(--accent);border-color:#fff;margin-top:22px}
+  .btn-light:hover{background:var(--accent-soft)}
+  .svc,.doc a,.slot,.btn{touch-action:manipulation}
+  .btn:focus-visible,.svc:focus-visible,a:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
+  @media (max-width:999px){ .hero .book{display:none} }
+
+  /* booking window «C · три поля» (from the Вилла Дентос template) */
+  body.zp-open{overflow:hidden}
+  .zp-scrim{position:fixed;inset:0;background:rgba(42,29,23,.5);z-index:50}
+  .zp-pop{position:fixed;z-index:51;left:50%;top:50%;transform:translate(-50%,-50%);width:min(500px,calc(100% - 32px));max-height:calc(100vh - 32px);overflow:auto;overscroll-behavior:contain;background:#fff;border-radius:18px;padding:22px 22px 18px;box-shadow:0 30px 70px rgba(42,29,23,.32);animation:zpIn .2s ease-out}
+  @keyframes zpIn{from{opacity:0;transform:translate(-50%,-47%)}to{opacity:1;transform:translate(-50%,-50%)}}
+  .zp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+  .zp-head h3{font-family:Lora,Georgia,serif;font-size:25px;font-weight:600;color:var(--accent);line-height:1.15}
+  .zp-head p{font-size:13px;color:var(--muted);margin-top:4px;display:flex;align-items:center;gap:8px}
+  .zp-x{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--sand);color:var(--ink);font:inherit;font-size:24px;line-height:1;cursor:pointer}
+  .zp-form{display:grid;gap:10px}
+  .zp-f{display:grid;gap:4px;min-width:0}
+  .zp-form label,.zp-l{font-size:13px;font-weight:700;color:var(--ink)}
+  .zp-l{margin-top:4px}
+  .zp-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .zp-form select{appearance:none;-webkit-appearance:none;width:100%;min-height:52px;border:1.5px solid var(--line);border-radius:10px;background-color:var(--warm);color:var(--ink);font:inherit;font-size:16px;font-weight:600;padding:0 34px 0 12px;cursor:pointer;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;
+    background-image:linear-gradient(45deg,transparent 50%,var(--accent) 50%),linear-gradient(135deg,var(--accent) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+  .zp-form select:hover{border-color:#cdb5a4}
+  .zp-times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .zp-t{min-height:48px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px;font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums;transition:background-color .18s ease-out,border-color .18s ease-out}
+  .zp-t:hover{border-color:var(--accent)}
+  .zp-t[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .zp-more{grid-column:1/-1;background:none;border:0;color:var(--accent);font:inherit;font-weight:700;font-size:14.5px;min-height:44px;cursor:pointer}
+  .zp-none{grid-column:1/-1;background:var(--warm);color:var(--ink);border-radius:10px;padding:12px;font-size:14px;text-align:center}
+  .zp-go{width:100%;height:54px;margin-top:4px;font-size:16px}
+  .zp-go:disabled{opacity:.45;cursor:default}
+  .zp-note{font-size:12.5px;color:var(--muted);text-align:center;line-height:1.45}
+  .zp-done{display:grid;gap:12px;justify-items:center;text-align:center;padding:4px 0}
+  .zp-tick{width:56px;height:56px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:28px;font-weight:800}
+  .zp-done h4{font-family:Lora,Georgia,serif;font-size:23px;font-weight:600;color:var(--accent)}
+  .zp-done #zp-done-text{font-size:15.5px;font-weight:600;line-height:1.5}
+  .zp-again{background:#fff;color:var(--accent)}
+  .zp-pop :focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
+  @media (max-width:760px){
+    .zp-pop{left:0;right:0;top:auto;bottom:0;transform:none;width:auto;max-height:92vh;max-height:92dvh;border-radius:20px 20px 0 0;padding:20px 16px calc(18px + env(safe-area-inset-bottom,0px));animation:zpUp .24s ease-out}
+    @keyframes zpUp{from{opacity:.6;transform:translateY(40px)}to{opacity:1;transform:none}}
+  }
+  @media (max-width:520px){ .zp-2{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .zp-pop{animation:none} }
+</style>
+</head>
+<body>
+
+<div class="banner"><b>Концепт нового сайта</b> · подготовил Мустафа Элькуши · это не официальный сайт клиники · запись и бот — демо</div>
+
+<header>
+  <div class="wrap hdr">
+    <a class="logo" href="#"><img src="img/logo.png" alt="Стоматология на Страстном"></a>
+    <nav class="main">
+      <a href="#uslugi">Услуги</a><a href="#uslugi">Цены</a><a href="#vrachi">Врачи</a><a href="#otzyvy">Отзывы</a><a href="#kontakty">О клинике</a><a href="#kontakty">Контакты</a>
+    </nav>
+    <a class="tel" href="tel:+74956999708">+7 495 699-97-08</a>
+    <a class="btn btn-p" href="#zapis">Записаться</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="zapis">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="metro"><i></i><i></i> м. Чеховская, Пушкинская · 3 минуты пешком</div>
+      <h1>Стоматология в центре Москвы, <em>где лечат только то, что нужно</em></h1>
+      <p>Более 20 лет на Страстном бульваре. Лечение, имплантация, протезирование и гигиена у врачей — выпускников МГМСУ им. Семашко. Без навязанных процедур.</p>
+      <div class="cta">
+        <a class="btn btn-p" href="#zapis">Записаться онлайн</a>
+        <a class="btn btn-s" href="tel:+74956999708">+7 495 699-97-08</a>
+      </div>
+      <div class="rating"><span class="stars">★★★★★</span><span><b>5,0</b> · 153 отзыва на Яндексе</span></div>
+    </div>
+
+    <div class="book" aria-label="Онлайн-запись (демо)">
+      <h3>Свободное время <span class="demo">демо</span></h3>
+      <a class="doc-pick" href="#zapis" data-svc="ter" data-doc="shad">
+        <img src="img/doc-76.jpg" alt="">
+        <div><b>Шадунц Андрей Генрихович</b><span>Терапевт · в клинике с 2007 года</span></div>
+        <span class="chev">▾</span>
+      </a>
+      <p class="hday" id="hero-day">Ближайшее свободное время</p>
+      <div class="slots" id="hero-times"></div>
+      <a class="btn btn-p" href="#zapis">Выбрать врача и время</a>
+      <p class="note">Подтверждение и напоминание придут в Telegram или MAX</p>
+    </div>
+  </div>
+</section>
+
+<section class="trust" aria-label="Почему нам доверяют">
+  <div class="wrap trust-grid">
+    <div class="t"><b>5,0</b><span>рейтинг, 153 отзыва на Яндексе</span></div>
+    <div class="t"><b>20+ лет</b><span>на Страстном бульваре</span></div>
+    <div class="t"><b>14 500+</b><span>пациентов за это время</span></div>
+    <div class="t"><b>19 лет</b><span>средний стаж врачей</span></div>
+  </div>
+</section>
+
+<section id="uslugi">
+  <div class="wrap">
+    <div class="eyebrow">Услуги и цены</div>
+    <h2>С чем вы к нам пришли</h2>
+    <p class="lead">Цены из прайс-листа клиники. Точную стоимость лечения врач назовёт после осмотра.</p>
+    <div class="svc-grid">
+      <a class="svc" href="#zapis" data-svc="ter"><div><h3>Лечение зубов</h3><p>Кариес, пульпит, художественная реставрация</p></div><div class="price">от 3 000 ₽<small>консультация</small></div></a>
+      <a class="svc" href="#zapis" data-svc="impl"><div><h3>Имплантация</h3><p>Straumann, Astra Tech, Nobel Biocare</p></div><div class="price">78 000 ₽<small>имплантат</small></div></a>
+      <a class="svc" href="#zapis" data-svc="prot"><div><h3>Протезирование</h3><p>Коронки: металлокерамика, E.MAX, цирконий; виниры</p></div><div class="price">от 27 600 ₽<small>коронка</small></div></a>
+      <a class="svc" href="#zapis" data-svc="gig"><div><h3>Гигиена</h3><p>Профессиональная чистка AIR-FLOW</p></div><div class="price">2 200 ₽<small>1 сегмент</small></div></a>
+      <a class="svc" href="#zapis" data-svc="otb"><div><h3>Отбеливание</h3><p>Экспресс, плазменное, ZOOM</p></div><div class="price">от 8 000 ₽<small>экспресс</small></div></a>
+      <a class="svc" href="#zapis" data-svc="par"><div><h3>Пародонтология</h3><p>Лечение пародонтита аппаратом Vector</p></div><div class="price">24 000 ₽<small>Vector</small></div></a>
+    </div>
+    <a class="all" href="https://www.vitazub.ru/prays.html" target="_blank" rel="noopener">Весь прайс-лист →</a>
+  </div>
+</section>
+
+<section class="docs" id="vrachi">
+  <div class="wrap">
+    <div class="eyebrow">Врачи</div>
+    <h2>Небольшая команда, которая не меняется</h2>
+    <p class="lead">Средний стаж наших стоматологов — 19 лет. В клинике врачи работают в среднем около 11 лет.</p>
+    <div class="doc-grid">
+      <div class="doc"><img src="img/doc-74.jpg" alt="Лопаева Ольга Жоржевна"><div><b>Лопаева Ольга Жоржевна</b><span>Главный врач · ортопед, гнатолог, виниры</span><a href="#zapis" data-svc="prot" data-doc="lop">Записаться →</a></div></div>
+      <div class="doc"><img src="img/doc-285.jpg" alt="Рузняев Андрей Владимирович"><div><b>Рузняев Андрей Владимирович</b><span>Хирург, имплантолог, пародонтолог</span><a href="#zapis" data-svc="impl" data-doc="ruz">Записаться →</a></div></div>
+      <div class="doc"><img src="img/doc-76.jpg" alt="Шадунц Андрей Генрихович"><div><b>Шадунц Андрей Генрихович</b><span>Терапевт, эндодонтист, пародонтолог · с 2007 года в клинике</span><a href="#zapis" data-svc="ter" data-doc="shad">Записаться →</a></div></div>
+      <div class="doc"><img src="img/doc-322.jpg" alt="Бусурова Татьяна"><div><b>Бусурова Татьяна</b><span>Гигиена, отбеливание, КТ / ОПТГ</span><a href="#zapis" data-svc="gig" data-doc="bus">Записаться →</a></div></div>
+    </div>
+    <div class="facts"><span><b>Оборудование:</b> аппарат Vector, лазер Opus Duo, КТ (3D-снимок), плазменное отбеливание</span></div>
+  </div>
+</section>
+
+<section id="otzyvy">
+  <div class="wrap">
+    <div class="rev-head">
+      <div><div class="eyebrow">Отзывы</div><h2>Что говорят пациенты</h2></div>
+      <div class="yx"><b>5,0</b><div><span class="stars">★★★★★</span><br><span>153 отзыва на Яндексе</span></div></div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev"><q>Хочу порекомендовать замечательного хирурга-имплантолога Андрея Владимировича. Он удалял мне зуб и ставил имплант — всё прошло просто идеально.</q><div class="who"><b>Николай Т.</b> · о враче Рузняеве А. В. · 08.02.2026</div></div>
+      <div class="rev"><q>Ходила на чистку зубов Аир Фло к Татьяне Васильевне. Врач внимательный, чуткий, всё подробно объяснила по ходу процедуры и после неё.</q><div class="who"><b>Елизавета П.</b> · о враче Бусуровой Т. · 22.01.2026</div></div>
+      <div class="rev"><q>Была в этой клинике по полной программе: и имплант ставила, и зубы лечила. Все очень заботливые и внимательные, даже девушки на ресепшене.</q><div class="who"><b>Анна П.</b> · о клинике · 19.12.2025</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <div class="eyebrow eb-light">Запись</div>
+    <h2>Записаться можно за минуту, даже ночью</h2>
+    <p class="lead">Свободное время берётся из расписания клиники. Администратору не нужно перезванивать. <span class="demo">демо</span></p>
+    <div class="steps">
+      <div class="step"><h3>Выберите время</h3><p>Врач, день и свободное окно — на сайте или в боте</p></div>
+      <div class="step"><h3>Получите подтверждение</h3><p>Сообщение в Telegram или MAX, перенос и отмена в два нажатия</p></div>
+      <div class="step"><h3>Мы напомним</h3><p>За сутки и за 2 часа до приёма. Если нет мессенджера — по SMS</p></div>
+    </div>
+    <div class="chan"><span>Сайт</span><span>Telegram</span><span>MAX</span><span>Телефон</span><span>SMS</span></div>
+    <a class="btn btn-light" href="#zapis">Попробовать запись</a>
+  </div>
+</section>
+
+<section id="kontakty">
+  <div class="wrap ct-grid">
+    <div class="ct">
+      <div class="eyebrow">Контакты</div>
+      <h2>Страстной бульвар, 13А, стр. 1</h2>
+      <dl>
+        <div><dt>Метро</dt><dd>Чеховская, Пушкинская, Тверская — 3 минуты пешком</dd></div>
+        <div><dt>Режим работы</dt><dd>Пн–Пт 9:00–20:00</dd></div>
+        <div><dt>Лицензия</dt><dd>Медицинская лицензия Департамента здравоохранения Москвы<small>номер и дата будут на рабочем сайте — на демо-странице реквизиты клиники не показываем</small></dd></div>
+        <div><dt>Телефоны</dt><dd><a href="tel:+74956999708">+7 495 699-97-08</a> · <a href="tel:+79252035555">+7 925 203-55-55</a></dd></div>
+      </dl>
+      <div class="cta"><a class="btn btn-p" href="tel:+74956999708">Позвонить</a><a class="btn btn-s" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A1%D1%82%D1%80%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9%20%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80%2C%2013%D0%90%D1%811" target="_blank" rel="noopener">Построить маршрут</a></div>
+    </div>
+    <div class="map" role="img" aria-label="Карта: Страстной бульвар, 13А"><span class="pin">Страстной б-р, 13А</span><small>в рабочей версии — Яндекс Карта</small></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Демонстрационная страница. Автор — Мустафа Элькуши, веб-разработчик, Москва · <a href="https://t.me/Elkushi99" style="color:inherit">Telegram @Elkushi99</a><br>Клиника к созданию этой страницы отношения не имеет и за неё не отвечает. Тексты и цены взяты с сайта клиники и её карточки на Яндексе и приведены как пример. Онлайн-запись и бот на этой странице — демонстрация: запись не создаётся, данные никуда не отправляются.
+    <div class="warn">ИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ. НЕОБХОДИМА КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА</div>
+  </div>
+</footer>
+
+<div class="mbar"><a class="btn btn-p" href="#zapis">Записаться</a><a class="btn btn-s" href="tel:+74956999708" aria-label="Позвонить">Позвонить</a></div>
+<div class="zp-scrim" id="zp-scrim" hidden></div>
+<div class="zp-pop" id="zp-pop" role="dialog" aria-modal="true" aria-labelledby="zp-title" hidden>
+  <div class="zp-head">
+    <div><h3 id="zp-title">Запись на приём</h3><p>Пн–Пт 9:00–20:00 <span class="demo">демо</span></p></div>
+    <button class="zp-x" id="zp-x" type="button" aria-label="Закрыть">×</button>
+  </div>
+  <div class="zp-form" id="zp-form">
+    <div class="zp-f"><label for="zp-svc">Услуга</label><select id="zp-svc"></select></div>
+    <div class="zp-2">
+      <div class="zp-f"><label for="zp-doc">Врач</label><select id="zp-doc"></select></div>
+      <div class="zp-f"><label for="zp-day">День</label><select id="zp-day"></select></div>
+    </div>
+    <p class="zp-l" id="zp-tl">Свободное время</p>
+    <div class="zp-times" id="zp-times" role="group" aria-labelledby="zp-tl"></div>
+    <button class="btn btn-p zp-go" id="zp-go" type="button">Записаться</button>
+    <p class="zp-note">Подтверждение и напоминание придут в Telegram или MAX</p>
+  </div>
+  <div class="zp-done" id="zp-done" role="status" hidden>
+    <div class="zp-tick">✓</div>
+    <h4>Вы записаны</h4>
+    <p id="zp-done-text"></p>
+    <p class="zp-note">Это демонстрация: приём не назначен, данные никуда не отправлены. В рабочей версии пациент сразу получает подтверждение в Telegram или MAX, а администратор — заявку.</p>
+    <button class="btn zp-again" id="zp-again" type="button">Записаться ещё раз</button>
+  </div>
+</div>
+<script src="booking.js"></script>
+</body>
+</html>
