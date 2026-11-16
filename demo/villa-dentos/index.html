@@ -5,7 +5,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <meta name="description" content="Стоматология «Вилла Дентос» у м. Войковская: лечение, хирургия, имплантация, протезирование, рентген и детская стоматология. Ежедневно 09:00–21:00, Ленинградское шоссе, 15.">
@@ -164,6 +164,50 @@
     .sticky{display:flex;position:fixed;left:0;right:0;bottom:0;gap:8px;padding:10px 12px;background:var(--white);border-top:1px solid var(--line);z-index:5}
     .sticky .btn{flex:1;height:46px}
   }
+
+  /* ---- онлайн-запись: окно «C · три поля» (Moustafa, 2026-11-16); на телефоне — панель снизу ---- */
+  [hidden]{display:none!important}
+  a.slot{display:block;color:inherit;cursor:pointer;transition:transform .18s ease-out,box-shadow .18s ease-out}
+  a.slot:hover{transform:translateY(-2px);box-shadow:0 22px 50px rgba(36,26,29,.24)}
+  .zp-link{font-size:14.5px;font-weight:700;color:var(--wine);display:inline-flex;align-items:center;min-height:44px;margin-top:6px}
+  body.zp-open{overflow:hidden}
+  .zp-scrim{position:fixed;inset:0;background:rgba(36,26,29,.5);z-index:50}
+  .zp-pop{position:fixed;z-index:51;left:50%;top:50%;transform:translate(-50%,-50%);width:min(460px,calc(100% - 32px));max-height:calc(100vh - 32px);overflow:auto;overscroll-behavior:contain;background:var(--white);border-radius:18px;padding:22px 22px 18px;box-shadow:0 30px 70px rgba(36,26,29,.32);animation:zpIn .2s ease-out}
+  @keyframes zpIn{from{opacity:0;transform:translate(-50%,-47%)}to{opacity:1;transform:translate(-50%,-50%)}}
+  .zp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+  .zp-head h3{font-family:"Playfair Display",Georgia,serif;font-size:25px;font-weight:600;color:var(--wine-d);line-height:1.15}
+  .zp-head p{font-size:13px;color:var(--muted);margin-top:4px;display:flex;align-items:center;gap:8px}
+  .zp-demo{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--wine);background:var(--sand);border-radius:6px;padding:2px 7px}
+  .zp-x{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--paper2);color:var(--ink);font:inherit;font-size:24px;line-height:1;cursor:pointer}
+  .zp-form{display:grid;gap:10px}
+  .zp-f{display:grid;gap:4px;min-width:0}
+  .zp-form label,.zp-l{font-size:13px;font-weight:700;color:var(--ink2)}
+  .zp-l{margin-top:4px}
+  .zp-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .zp-form select{appearance:none;-webkit-appearance:none;width:100%;min-height:52px;border:1.5px solid var(--line);border-radius:10px;background-color:var(--paper);color:var(--ink);font:inherit;font-size:16px;font-weight:600;padding:0 34px 0 12px;cursor:pointer;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;
+    background-image:linear-gradient(45deg,transparent 50%,var(--wine) 50%),linear-gradient(135deg,var(--wine) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+  .zp-form select:hover{border-color:#cdb9a2}
+  .zp-times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .zp-t{min-height:48px;border:1.5px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);font:inherit;font-size:16px;font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums;transition:background-color .18s ease-out,border-color .18s ease-out}
+  .zp-t:hover{border-color:var(--wine)}
+  .zp-t[aria-pressed="true"]{background:var(--wine);border-color:var(--wine);color:#fff}
+  .zp-more{grid-column:1/-1;background:none;border:0;color:var(--wine);font:inherit;font-weight:700;font-size:14.5px;min-height:44px;cursor:pointer}
+  .zp-none{grid-column:1/-1;background:var(--paper);color:var(--ink2);border-radius:10px;padding:12px;font-size:14px;text-align:center}
+  .zp-go{width:100%;height:54px;margin-top:4px;font-family:inherit;font-size:16px;cursor:pointer}
+  .zp-go:disabled{opacity:.45;cursor:default}
+  .zp-note{font-size:12.5px;color:var(--muted);text-align:center;line-height:1.45}
+  .zp-done{display:grid;gap:12px;justify-items:center;text-align:center;padding:4px 0}
+  .zp-tick{width:56px;height:56px;border-radius:50%;background:var(--sand);color:var(--wine);display:grid;place-items:center;font-size:28px;font-weight:800}
+  .zp-done h4{font-family:"Playfair Display",Georgia,serif;font-size:23px;font-weight:600;color:var(--wine-d)}
+  .zp-done #zp-done-text{font-size:15.5px;font-weight:600;line-height:1.5}
+  .zp-done .zp-again{border:1.5px solid var(--line);background:var(--white);font-family:inherit;cursor:pointer}
+  .zp-pop :focus-visible,a.slot:focus-visible,.cta-row a:focus-visible{outline:3px solid var(--wine);outline-offset:2px}
+  @media (max-width:760px){
+    .zp-pop{left:0;right:0;top:auto;bottom:0;transform:none;width:auto;max-height:92vh;max-height:92dvh;border-radius:20px 20px 0 0;padding:20px 16px calc(18px + env(safe-area-inset-bottom,0px));animation:zpUp .24s ease-out}
+    @keyframes zpUp{from{opacity:.6;transform:translateY(40px)}to{opacity:1;transform:none}}
+  }
+  @media (max-width:520px){ .zp-2{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion:reduce){ .zp-pop,a.slot{animation:none;transition:none} }
 </style>
 </head>
 <body>
@@ -200,11 +244,11 @@
     <div class="media">
       <img class="ph1" src="img/cab1.jpg" alt="Лечебный кабинет клиники «Вилла Дентос» с микроскопом">
       <div class="since"><span>работаем</span><b>с 2011</b></div>
-      <div class="slot">
+      <a class="slot" href="#zapis" data-doc="tv" aria-label="Выбрать время у Татьяны Викторовны">
         <div class="t">Ближайшее свободное время <span class="demo">демо</span></div>
         <div class="doc"><div class="av">ТВ</div><div><b>Татьяна Викторовна</b><span>врач-хирург</span></div></div>
         <div class="times"><span>Сегодня 19:30</span><span class="on">Завтра 10:00</span><span>Завтра 20:00</span></div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -280,7 +324,7 @@
   <div class="wrap">
     <div class="sh"><h2>Как записаться</h2><p>Выбирайте удобный способ — запись работает и вечером, и ночью, когда администратор уже не на линии.</p></div>
     <div class="book">
-      <div class="bk"><div class="n">1</div><h3>Онлайн, за минуту</h3><p>Выберите врача и свободное время. Администратор подтверждает запись, а накануне и за 2 часа приходит напоминание.</p><small>демо</small></div>
+      <div class="bk"><div class="n">1</div><h3>Онлайн, за минуту</h3><p>Выберите врача и свободное время. Администратор подтверждает запись, а накануне и за 2 часа приходит напоминание.</p><a class="zp-link" href="#zapis">Выбрать время →</a> <small>демо</small></div>
       <div class="bk"><div class="n">2</div><h3>В Telegram</h3><p>Бот клиники запишет, перенесёт визит и ответит на частые вопросы: адрес и вход, часы работы, цены, рассрочка.</p><small>демо</small></div>
       <div class="bk"><div class="n">3</div><h3>По телефону</h3><p>Ежедневно с 9:00 до 21:00: <span class="nw">+7 (925) 424-30-05</span>, <span class="nw">+7 (499) 150-28-03</span>, <span class="nw">+7 (499) 150-26-75</span>.</p></div>
     </div>
@@ -301,10 +345,37 @@
 
 <footer>
   <div class="wrap">
-    Демонстрационная страница. Автор — Мустафа Элькуши, веб-разработчик, Москва · <a href="https://t.me/Elkushi99" style="color:inherit">Telegram @Elkushi99</a><br>Клиника к созданию этой страницы отношения не имеет и за неё не отвечает. Тексты, цены и фотографии взяты с сайта клиники и её карточки на Яндексе и приведены как пример. Онлайн-запись и бот на этой странице не работают — это демонстрация.
+    Демонстрационная страница. Автор — Мустафа Элькуши, веб-разработчик, Москва · <a href="https://t.me/Elkushi99" style="color:inherit">Telegram @Elkushi99</a><br>Клиника к созданию этой страницы отношения не имеет и за неё не отвечает. Тексты и цены взяты с сайта клиники и её карточки на Яндексе и приведены как пример. Онлайн-запись и бот на этой странице — демонстрация: запись не создаётся, данные никуда не отправляются.
     <div class="warn">Имеются противопоказания, необходима консультация специалиста</div>
   </div>
 </footer>
 <div class="sticky"><a class="btn btn-wine" href="#zapis">Записаться</a><a class="btn btn-line" href="tel:+79254243005">Позвонить</a></div>
+
+<div class="zp-scrim" id="zp-scrim" hidden></div>
+<div class="zp-pop" id="zp-pop" role="dialog" aria-modal="true" aria-labelledby="zp-title" hidden>
+  <div class="zp-head">
+    <div><h3 id="zp-title">Запись на приём</h3><p>ежедневно 09:00–21:00 <span class="zp-demo">демо</span></p></div>
+    <button class="zp-x" id="zp-x" type="button" aria-label="Закрыть">×</button>
+  </div>
+  <div class="zp-form" id="zp-form">
+    <div class="zp-f"><label for="zp-svc">Услуга</label><select id="zp-svc"></select></div>
+    <div class="zp-2">
+      <div class="zp-f"><label for="zp-doc">Врач</label><select id="zp-doc"></select></div>
+      <div class="zp-f"><label for="zp-day">День</label><select id="zp-day"></select></div>
+    </div>
+    <p class="zp-l" id="zp-tl">Свободное время</p>
+    <div class="zp-times" id="zp-times" role="group" aria-labelledby="zp-tl"></div>
+    <button class="btn btn-wine zp-go" id="zp-go" type="button">Записаться</button>
+    <p class="zp-note">Подтверждение и напоминание придут в Telegram</p>
+  </div>
+  <div class="zp-done" id="zp-done" role="status" hidden>
+    <div class="zp-tick">✓</div>
+    <h4>Вы записаны</h4>
+    <p id="zp-done-text"></p>
+    <p class="zp-note">Это демонстрация: приём не назначен, данные никуда не отправлены. В рабочей версии пациент сразу получает подтверждение в Telegram, а администратор — заявку.</p>
+    <button class="btn zp-again" id="zp-again" type="button">Записаться ещё раз</button>
+  </div>
+</div>
+<script src="booking.js"></script>
 </body>
 </html>
