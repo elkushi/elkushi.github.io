@@ -284,3 +284,25 @@ footer a{color:var(--brand-dark); text-decoration:underline}
 .fields .go-btn{margin-top:4px}
 /* phone: doctor names and dates are too long for two columns, so the fields stack */
 @media (max-width:520px){ .fields .f2{grid-template-columns:1fr} }
+
+/* ---- phone / tablet: the booking card opens as a bottom panel from any «Записаться» button
+   (Moustafa, 2026-11-16). Below 980 px the hero is one column, so an always-open card pushed the
+   clinic's own message and the trust numbers a whole screen down. ---- */
+.book-x, .book-scrim{display:none}
+@media (max-width:979px){
+  .book{position:fixed; left:0; right:0; bottom:0; z-index:60; margin:0 auto; max-width:560px;
+    max-height:92vh; max-height:92dvh; overflow-y:auto; overscroll-behavior:contain;
+    border-radius:20px 20px 0 0; border-bottom:0;
+    padding:20px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+    box-shadow:0 -12px 40px rgba(14,34,53,.22);
+    transform:translateY(105%); visibility:hidden;
+    transition:transform .26s ease-out, visibility 0s linear .26s}
+  .book.open{transform:none; visibility:visible; transition:transform .26s ease-out}
+  .book > h3{padding-right:52px}
+  .book-x{display:grid; place-items:center; position:absolute; top:12px; right:12px; width:44px; height:44px;
+    border:0; border-radius:50%; background:var(--soft); color:var(--ink); font:inherit; font-size:24px;
+    line-height:1; cursor:pointer}
+  .book-x:focus-visible{outline:3px solid var(--brand); outline-offset:2px}
+  .book-scrim.open{display:block; position:fixed; inset:0; z-index:59; background:rgba(14,34,53,.45)}
+  body.sheet-open{overflow:hidden}
+}

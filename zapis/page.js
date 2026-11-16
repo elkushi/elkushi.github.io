@@ -213,6 +213,39 @@
     $("day-sel").onchange = function () { state.day = +this.value; state.slot = null; showAll = false; render(); };
   }
 
+  /* Phone / tablet: the card is a bottom panel, opened by any «Записаться» link (#zapis).
+     Only on per-clinic pages (they carry #book-x); the generic /zapis/ keeps its card in place. */
+  (function () {
+    var card = $("zapis"), x = $("book-x"), scrim = $("book-scrim"), opener = null;
+    if (!card || !x || !scrim || !window.matchMedia) { return; }
+    var mq = window.matchMedia("(max-width: 979px)");
+    function open(from) {
+      opener = from;
+      card.classList.add("open"); scrim.classList.add("open"); document.body.classList.add("sheet-open");
+      card.setAttribute("role", "dialog"); card.setAttribute("aria-modal", "true");
+      card.setAttribute("aria-label", "Запись на приём");
+      x.focus();
+    }
+    function close(back) {
+      if (!card.classList.contains("open")) { return; }
+      card.classList.remove("open"); scrim.classList.remove("open"); document.body.classList.remove("sheet-open");
+      card.removeAttribute("role"); card.removeAttribute("aria-modal"); card.removeAttribute("aria-label");
+      if (back && opener) { opener.focus(); }
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('a[href="#zapis"]'), function (a) {
+      a.addEventListener("click", function (e) {
+        if (!mq.matches) { return; }
+        e.preventDefault();
+        open(a);
+      });
+    });
+    x.onclick = function () { close(true); };
+    scrim.onclick = function () { close(true); };
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { close(true); } });
+    var onChange = function () { if (!mq.matches) { close(false); } };
+    if (mq.addEventListener) { mq.addEventListener("change", onChange); } else if (mq.addListener) { mq.addListener(onChange); }
+  }());
+
   function render() {
     if (FIELDS) { renderFields(); return; }
     // services
