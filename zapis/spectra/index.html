@@ -46,11 +46,16 @@
       <h3>Свободное время <span class="badge">демо</span></h3>
       <p class="sub">Ежедневно 10:00–21:00</p>
 
-      <div id="form">
-        <fieldset><legend>Что беспокоит</legend><div class="opts" id="services"></div></fieldset>
-        <fieldset class="gap"><legend>Врач</legend><div class="opts" id="doctors"></div></fieldset>
-        <fieldset class="gap"><legend>День</legend><div class="opts" id="days"></div></fieldset>
-        <fieldset class="gap"><legend>Свободное время</legend><div class="slots" id="slots"></div></fieldset>
+      <!-- Booking card «C · три поля» (Moustafa, 2026-11-16): three ordinary drop-down lists, already
+           filled in, one row of free times, one button. page.js switches to this mode when #svc-sel exists. -->
+      <div id="form" class="fields">
+        <div class="f"><label for="svc-sel">Услуга</label><select id="svc-sel"></select></div>
+        <div class="f2">
+          <div class="f"><label for="doc-sel">Врач</label><select id="doc-sel"></select></div>
+          <div class="f"><label for="day-sel">День</label><select id="day-sel"></select></div>
+        </div>
+        <p class="lbl" id="times-lbl">Свободное время</p>
+        <div class="times" id="times" role="group" aria-labelledby="times-lbl"></div>
         <button class="go-btn" id="go" disabled>Выберите время</button>
       </div>
 

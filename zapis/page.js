@@ -130,7 +130,91 @@
     return b;
   }
 
+  /* ---- Mode «C · три поля» (Moustafa, 2026-11-16) ----
+     Per-clinic pages (/zapis/<slug>/) carry three <select>s instead of rows of chips: the card was
+     1 196 px tall on a phone with 19 buttons at once. Everything is pre-filled (first service, «любой
+     свободный», the first day with a free time, its first free time), so a patient who accepts it
+     books with two taps. The generic /zapis/ keeps the chip card: sent PDFs show that one. */
+  var FIELDS = !!$("svc-sel"), showAll = false;
+
+  function canDo(d) { return d.any || d.id === ANY || !d.does || d.does.indexOf(state.service) >= 0; }
+  function dayLabel(day) {
+    return day.offset === 0 ? "сегодня, " + day.date.getDate() + " " + MON[day.date.getMonth()] : fmtDay(day.date);
+  }
+  function freeSlots(day) { return slotsFor(day, state.doctor).filter(function (s) { return s.free; }); }
+  function fill(sel, items, value) {
+    sel.textContent = "";
+    items.forEach(function (it) {
+      var o = document.createElement("option");
+      o.value = it[0]; o.textContent = it[1];
+      sel.appendChild(o);
+    });
+    sel.value = value;
+  }
+
+  function renderFields() {
+    if (!state.service) { state.service = SERVICES[0].id; }
+    var docs = DOCTORS.filter(canDo);
+    if (!docs.some(function (d) { return d.id === state.doctor; })) {
+      state.doctor = (docs.filter(function (d) { return d.id === ANY; })[0] || docs[0] || {}).id || null;
+      state.slot = null;
+    }
+    var ds = days();
+    if (state.day === null || !ds.some(function (d) { return d.offset === state.day; })) {
+      var first = ds.filter(function (d) { return freeSlots(d).length; })[0] || ds[0];
+      state.day = first ? first.offset : null;
+      state.slot = null;
+    }
+    var day = ds.filter(function (d) { return d.offset === state.day; })[0];
+    var free = day ? freeSlots(day) : [];
+    if (!free.some(function (s) { return s.label === state.slot; })) {
+      var s0 = free[0];
+      state.slot = s0 ? s0.label : null; state.when = s0 ? s0.when : null; state.assigned = s0 ? s0.doc : null;
+    }
+
+    fill($("svc-sel"), SERVICES.map(function (s) { return [s.id, s.name + (s.note ? " · " + s.note : "")]; }), state.service);
+    fill($("doc-sel"), docs.map(function (d) { return [d.id, d.name]; }), state.doctor);
+    fill($("day-sel"), ds.map(function (d) {
+      return [String(d.offset), dayLabel(d) + (freeSlots(d).length ? "" : " · мест нет")];
+    }), String(state.day));
+
+    var box = $("times");
+    box.textContent = "";
+    if (!free.length) {
+      var none = document.createElement("p");
+      none.className = "hint";
+      none.textContent = "В этот день свободного времени нет — выберите другой день.";
+      box.appendChild(none);
+    }
+    (showAll ? free : free.slice(0, 4)).forEach(function (s) {
+      var b = button(s.label, null, state.slot === s.label, false);
+      b.onclick = function () { state.slot = s.label; state.when = s.when; state.assigned = s.doc; render(); };
+      box.appendChild(b);
+    });
+    if (free.length > 4) {
+      var more = document.createElement("button");
+      more.type = "button";
+      more.className = "more-t";
+      more.textContent = showAll ? "Показать меньше" : "Другое время · ещё " + (free.length - 4);
+      more.onclick = function () { showAll = !showAll; render(); };
+      box.appendChild(more);
+    }
+
+    var go = $("go");
+    go.disabled = !state.slot;
+    // short day in the button so it stays on one line on a phone
+    go.textContent = state.slot ? "Записаться на " + (day.offset === 0 ? "сегодня" : fmtDay(day.date)) + ", " + state.slot
+                                : "Выберите другой день";
+  }
+
+  if (FIELDS) {
+    $("svc-sel").onchange = function () { state.service = this.value; state.slot = null; showAll = false; render(); };
+    $("doc-sel").onchange = function () { state.doctor = this.value; state.slot = null; showAll = false; render(); };
+    $("day-sel").onchange = function () { state.day = +this.value; state.slot = null; showAll = false; render(); };
+  }
+
   function render() {
+    if (FIELDS) { renderFields(); return; }
     // services
     var box = $("services");
     box.textContent = "";

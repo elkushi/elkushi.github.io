@@ -256,3 +256,31 @@ footer a{color:var(--brand-dark); text-decoration:underline}
 .badge { display: inline-block; vertical-align: 3px; margin-left: 7px; background: var(--brand-soft);
   color: var(--brand-dark); font-size: 10.5px; font-weight: 800; letter-spacing: .08em;
   text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+
+/* ---- booking card «C · три поля» (Moustafa, 2026-11-16; replaces the chip card above on per-clinic
+   pages). Three native drop-down lists, pre-filled, then one row of four free times and one button.
+   Native <select> opens the phone's own picker, which older patients already know. ---- */
+.fields{display:grid; gap:10px}
+.fields .f{display:grid; gap:4px; min-width:0}
+.fields label, .fields .lbl{font-size:13px; font-weight:600; color:var(--ink-2); margin:0}
+.fields .lbl{margin-top:4px}
+.fields .f2{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px}
+.fields select{appearance:none; -webkit-appearance:none; width:100%; min-height:52px; margin:0;
+  border:1.5px solid var(--line); border-radius:var(--r-sm); background-color:var(--soft); color:var(--ink);
+  font:inherit; font-size:16px; font-weight:500; padding:0 34px 0 12px; cursor:pointer;
+  text-overflow:ellipsis; white-space:nowrap; overflow:hidden;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink-2) 50%),linear-gradient(135deg,var(--ink-2) 50%,transparent 50%);
+  background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%; background-size:5px 5px; background-repeat:no-repeat;
+  transition:border-color .2s ease}
+.fields select:hover{border-color:#c3d4e6}
+.fields select:focus-visible, .times .opt:focus-visible, .more-t:focus-visible, .go-btn:focus-visible{outline:3px solid var(--brand); outline-offset:2px}
+.times{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px}
+.times .opt{border-radius:var(--r-sm); padding:8px 4px; min-height:48px; text-align:center; font-size:16px;
+  font-weight:600; font-variant-numeric:tabular-nums}
+.times .hint{grid-column:1/-1; margin:0; background:var(--soft); color:var(--ink-2); border-radius:var(--r-sm);
+  padding:12px; font-size:14px; text-align:center}
+.more-t{grid-column:1/-1; background:none; border:0; color:var(--brand-dark); font:inherit; font-weight:600;
+  font-size:14.5px; min-height:44px; cursor:pointer; padding:0}
+.fields .go-btn{margin-top:4px}
+/* phone: doctor names and dates are too long for two columns, so the fields stack */
+@media (max-width:520px){ .fields .f2{grid-template-columns:1fr} }
