@@ -188,3 +188,19 @@ footer .small{color:var(--muted); font-size:12.5px; margin-top:16px}
 .phone .chat{flex:1; min-height:0; overflow-y:auto; scrollbar-width:none}
 .phone .chat::-webkit-scrollbar{display:none}
 .phone .foot{flex:none}
+
+/* ---- booking card, the pattern Moustafa approved on 2026-11-16 (vitazub's «Свободное время») ----
+   Compact rows instead of a form: doctor with an initials avatar, day as weekday-over-date,
+   the taken hours struck through so the grid reads as a real schedule, and one wide button that
+   names the whole slot. */
+.opt.doc { align-items: center; gap: 9px; padding-left: 9px; }
+.opt.doc .av { width: 28px; height: 28px; border-radius: 50%; background: #e8f2fc;
+  color: var(--brand-dark); font-style: normal; font-size: 11.5px; font-weight: 800;
+  display: inline-grid; place-items: center; flex: none; }
+.opt.doc[aria-pressed="true"] .av { background: rgba(255,255,255,.22); color: #fff; }
+.opt.day { flex-direction: column; gap: 1px; padding: 7px 10px; min-width: 60px; align-items: center; }
+.opt.day .wd { font-size: 11px; color: var(--muted); font-weight: 600; }
+.opt.day b { font-size: 18px; font-weight: 700; line-height: 1.15; }
+.opt.day[aria-pressed="true"] .wd { color: rgba(255,255,255,.85); }
+.slots .opt.taken { color: #b6c1cc; border-color: #edf1f5; text-decoration: line-through; background: #fafbfc; }
+.slots .opt.taken:hover { border-color: #edf1f5; }

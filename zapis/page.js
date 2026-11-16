@@ -114,12 +114,28 @@
     return WD_SHORT[d.getDay()] + ", " + d.getDate() + " " + MON[d.getMonth()];
   }
 
+  /* The day chip Moustafa picked (2026-11-16, vitazub's card): weekday small on top, date big under
+     it. Six full dates in a row ate half the card and read like a form. */
+  function dayButton(day, on) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "opt day";
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    var wd = document.createElement("span");
+    wd.className = "wd";
+    wd.textContent = day.offset === 0 ? "сегодня" : WD_SHORT[day.date.getDay()];
+    var n = document.createElement("b");
+    n.textContent = day.date.getDate();
+    b.appendChild(wd); b.appendChild(n);
+    return b;
+  }
+
   function render() {
     // services
     var box = $("services");
     box.textContent = "";
     SERVICES.forEach(function (s) {
-      var b = button(s.name, s.note || (s.mins + " мин"), state.service === s.id, false);
+      var b = button(s.name, s.note || "", state.service === s.id, false);
       b.onclick = function () {
         state.service = s.id;
         if (state.doctor) {
@@ -138,6 +154,13 @@
     DOCTORS.forEach(function (d) {
       var can = !state.service || d.does.indexOf(state.service) >= 0;
       var b = button(d.name, can ? d.role : "не ведёт эту услугу", state.doctor === d.id, !can);
+      b.className = "opt doc";
+      if (!d.any) {
+        var av = document.createElement("i");
+        av.className = "av";
+        av.textContent = d.name.replace("«", "").split(" ").slice(0, 2).map(function (w) { return w[0]; }).join("").toUpperCase();
+        b.insertBefore(av, b.firstChild);
+      }
       b.onclick = function () { state.doctor = d.id; state.slot = null; state.assigned = null; render(); };
       box.appendChild(b);
     });
@@ -146,9 +169,7 @@
     box = $("days");
     box.textContent = "";
     days().forEach(function (day) {
-      var label = day.offset === 0 ? "сегодня" : day.offset === 1 ? "завтра" : fmtDay(day.date);
-      var b = button(label, day.offset <= 1 ? fmtDay(day.date) : WD[day.date.getDay()],
-                     state.day === day.offset, false);
+      var b = dayButton(day, state.day === day.offset);
       b.onclick = function () { state.day = day.offset; state.slot = null; state.assigned = null; render(); };
       box.appendChild(b);
     });
@@ -165,9 +186,8 @@
       var day = days().filter(function (d) { return d.offset === state.day; })[0];
       var list = slotsFor(day, state.doctor), free = 0;
       list.forEach(function (s) {
-        if (!s.free) { return; }
-        free++;
-        var b = button(s.label, null, state.slot === s.label, false);
+        var b = button(s.label, null, state.slot === s.label, !s.free);
+        if (!s.free) { b.className = "opt taken"; } else { free++; }
         b.onclick = function () { state.slot = s.label; state.when = s.when; state.assigned = s.doc; render(); };
         box.appendChild(b);
       });
@@ -181,7 +201,7 @@
 
     // progress + summary + button
     var done = { 1: !!state.service, 2: !!state.doctor, 3: state.day !== null, 4: !!state.slot };
-    Array.prototype.forEach.call($("steps").children, function (li) {
+    Array.prototype.forEach.call($("steps") ? $("steps").children : [], function (li) {
       var n = li.getAttribute("data-step");
       li.removeAttribute("data-on"); li.removeAttribute("data-done");
       if (done[n]) { li.setAttribute("data-done", "1"); }
@@ -196,6 +216,7 @@
     }
     if (state.slot) { parts.push(["Время", state.slot]); }
     var sum = $("summary");
+    if (!sum) { sum = document.createElement("div"); }
     sum.textContent = "";
     parts.forEach(function (p) {
       var el = document.createElement("div");
@@ -210,7 +231,8 @@
     go.disabled = !(state.slot && state.service);
     go.textContent = !state.slot ? "Выберите время"
                    : !state.service ? "Выберите услугу"
-                   : "Записаться на " + state.slot;
+                   : "Записаться на " + fmtDay(days().filter(function (d) { return d.offset === state.day; })[0].date) +
+                     ", " + state.slot;
   }
 
   // The doctor the patient is actually booked with: for «Любой свободный», the one we assigned.
