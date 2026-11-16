@@ -83,14 +83,18 @@ SPEC_HASH = "sha256-" + base64.b64encode(hashlib.sha256(SPEC_RULES.encode()).dig
 # because a few elements carry a style attribute; scripts do not.
 CSP = (
     "default-src 'none'; "
-    f"script-src 'self' '{BOOT_HASH}' 'inline-speculation-rules' '{SPEC_HASH}' https://www.googletagmanager.com; "
-    # Google Analytics (assets/analytics.js): the hosts Google lists for GA4.
-    "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; "
+    f"script-src 'self' '{BOOT_HASH}' 'inline-speculation-rules' '{SPEC_HASH}' https://www.googletagmanager.com https://mc.yandex.ru https://mc.yandex.com https://yastatic.net; "
+    # Google Analytics and Яндекс Метрика (assets/analytics.js): the hosts each one lists for its tag
+    # (Метрика: mc.yandex.ru / .com, yastatic.net; Вебвизор also needs wss and blob frames).
+    "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://mc.yandex.ru https://mc.yandex.com wss://mc.yandex.ru wss://mc.yandex.com; "
     "style-src 'self' 'unsafe-inline'; "
-    "img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; "
+    "img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://mc.yandex.ru https://mc.yandex.com; "
     "font-src 'self'; "
     "media-src 'self'; "
-    "frame-src 'self'; "
+    "frame-src 'self' blob: https://mc.yandex.ru https://mc.yandex.com; "
+    # child-src also governs workers when worker-src is absent: keep 'self' for sw.js.
+    "child-src 'self' blob: https://mc.yandex.ru https://mc.yandex.com; "
+    "worker-src 'self' blob:; "
     "base-uri 'none'; "
     "form-action 'none'"
 )
