@@ -363,12 +363,17 @@ LOCALES = {
                                         'Кто решает, кто читает вашу страницу, два разных пути к покупке, сравнение лендингов и экранов продукта, исследование и метрики, с примером клиники с обеих сторон.'),
             "blog/php-october-2026-django-cms.html": ("PHP в октябре 2026 года: что произошло и когда Django CMS — более безопасный выбор · Мустафа Элькуши",
                                                       "Срочное обновление для всех PHP-сайтов, атакованный плагин WordPress и бэкдор, который восстанавливает себя: что сделать на этой неделе и когда стоит переехать на Django CMS."),
+            "blog/dental-clinic-website-cost-moscow.html": ("Сколько стоит сайт для стоматологии в Москве в 2026 году · Мустафа Элькуши",
+                                                            "Цены на сайт клиники, онлайн-запись, бота с напоминаниями и поддержку: открытые прайсы студий, агентств и фрилансеров на ноябрь 2026, со ссылкой на каждый источник."),
+            "blog/clinic-site-mobile-booking.html": ("Почему пациенты не записываются с сайта клиники с телефона · Мустафа Элькуши",
+                                                     "Я прошёл запись с телефона на сайтах 45 частных клиник: где путь обрывается, шесть самых частых причин с цифрами и проверка за 10 минут."),
         },
     },
 }
 
 BLOG = ["wat-framework", "secure-vibe-coded-apps", "seo-geo-aeo-audit", "ai-agents-python", "php-october-2026-django-cms",
-        "maps-ranking-google-yandex", "ui-ux-from-zero", "b2b-vs-b2c-ux"]
+        "maps-ranking-google-yandex", "ui-ux-from-zero", "b2b-vs-b2c-ux",
+        "dental-clinic-website-cost-moscow", "clinic-site-mobile-booking"]
 
 PAGE_PATHS = (["index.html", "work/index.html"] + [f"work/{w}.html" for w in WORK]
               + ["blog/index.html"] + [f"blog/{b}.html" for b in BLOG]
